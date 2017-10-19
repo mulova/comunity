@@ -1,0 +1,7 @@
+#! /bin/sh
+
+REPO=$(git rev-parse HEAD)
+COMMONS_FILE=commons/AssemblyInfo.cs
+CORE_FILE=core/Assets/AssemblyInfo.cs
+sed -e "s/REPO[[:space:]]*=[[:space:]]*\"[0-9a-z]*\"/REPO=\"$REPO\"/g" -i "" "$COMMONS_FILE"
+sed -e "s/REPO[[:space:]]*=[[:space:]]*\"[0-9a-z]*\"/REPO=\"$REPO\"/g" -i "" "$CORE_FILE"

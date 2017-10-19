@@ -1,0 +1,86 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "core", "Assembly-CSharp.csproj", "{C12BA0FB-3CB0-46C0-7FF2-C57C3FEC990B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "core", "Assembly-CSharp-Editor.csproj", "{B59577CF-4CDE-E246-CF65-291609A9FFEF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C12BA0FB-3CB0-46C0-7FF2-C57C3FEC990B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C12BA0FB-3CB0-46C0-7FF2-C57C3FEC990B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C12BA0FB-3CB0-46C0-7FF2-C57C3FEC990B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C12BA0FB-3CB0-46C0-7FF2-C57C3FEC990B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B59577CF-4CDE-E246-CF65-291609A9FFEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B59577CF-4CDE-E246-CF65-291609A9FFEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B59577CF-4CDE-E246-CF65-291609A9FFEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B59577CF-4CDE-E246-CF65-291609A9FFEF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+		Policies = $0
+		$0.TextStylePolicy = $1
+		$1.FileWidth = 120
+		$1.inheritsSet = VisualStudio
+		$1.inheritsScope = text/plain
+		$1.scope = text/x-csharp
+		$0.CSharpFormattingPolicy = $2
+		$2.IndentSwitchBody = True
+		$2.AnonymousMethodBraceStyle = NextLine
+		$2.PropertyBraceStyle = NextLine
+		$2.PropertyGetBraceStyle = NextLine
+		$2.PropertySetBraceStyle = NextLine
+		$2.EventBraceStyle = NextLine
+		$2.StatementBraceStyle = NextLine
+		$2.BeforeMethodDeclarationParentheses = False
+		$2.BeforeMethodCallParentheses = False
+		$2.BeforeConstructorDeclarationParentheses = False
+		$2.BeforeIndexerDeclarationBracket = False
+		$2.BeforeDelegateDeclarationParentheses = False
+		$2.NewParentheses = False
+		$2.LockParentheses = False
+		$2.AroundLogicalOperatorParentheses = False
+		$2.AroundBitwiseOperatorParentheses = False
+		$2.AroundAdditiveOperatorParentheses = False
+		$2.AroundShiftOperatorParentheses = False
+		$2.ConditionalOperatorBeforeConditionSpace = False
+		$2.SpacesBeforeBrackets = False
+		$2.inheritsSet = Mono
+		$2.inheritsScope = text/x-csharp
+		$2.scope = text/x-csharp
+		$0.TextStylePolicy = $3
+		$3.FileWidth = 120
+		$3.TabsToSpaces = False
+		$3.EolMarker = Unix
+		$3.inheritsSet = VisualStudio
+		$3.inheritsScope = text/plain
+		$3.scope = text/plain
+		$0.TextStylePolicy = $4
+		$4.inheritsSet = null
+		$4.scope = text/x-shader
+		$0.TextStylePolicy = $5
+		$5.inheritsSet = null
+		$5.scope = text/x-unitytxt
+		$0.TextStylePolicy = $6
+		$6.FileWidth = 120
+		$6.TabsToSpaces = False
+		$6.EolMarker = Unix
+		$6.inheritsSet = VisualStudio
+		$6.inheritsScope = text/plain
+		$6.scope = application/xml
+		$0.XmlFormattingPolicy = $7
+		$7.inheritsSet = Mono
+		$7.inheritsScope = application/xml
+		$7.scope = application/xml
+		$0.TextStylePolicy = $8
+		$8.inheritsSet = null
+		$8.scope = application/javascript
+	EndGlobalSection
+EndGlobal

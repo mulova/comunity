@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+	<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+	<ProductVersion>10.0.20506</ProductVersion>
+	<SchemaVersion>2.0</SchemaVersion>
+	<ProjectGuid>{B59577CF-4CDE-E246-CF65-291609A9FFEF}</ProjectGuid>
+	<OutputType>Library</OutputType>
+	<AppDesignerFolder>Properties</AppDesignerFolder>
+	<RootNamespace></RootNamespace>
+	<AssemblyName>Assembly-CSharp-Editor</AssemblyName>
+	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+	<FileAlignment>512</FileAlignment>
+	<BaseDirectory>Assets</BaseDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+	<DebugSymbols>true</DebugSymbols>
+	<DebugType>full</DebugType>
+	<Optimize>false</Optimize>
+	<OutputPath>Temp\bin\Debug\</OutputPath>
+	<DefineConstants>DEBUG;TRACE;UNITY_5_1_5;UNITY_5_1;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_2D_PHYSICS;ENABLE_4_6_FEATURES;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PHYSICS_PHYSX3;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_LICENSE;ENABLE_AUDIOMIXER_SUSPEND;ENABLE_EDITOR_METRICS;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_LOCALIZATION;UNITY_STANDALONE_OSX;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_GAMECENTER;ENABLE_TEXTUREID_MAP;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_OSX;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+	<DebugType>pdbonly</DebugType>
+	<Optimize>true</Optimize>
+	<OutputPath>Temp\bin\Release\</OutputPath>
+	<DefineConstants>TRACE</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+	<Reference Include="System" />
+    <Reference Include="System.XML" />
+	<Reference Include="System.Core" />
+	<Reference Include="System.Xml.Linq" />
+	<Reference Include="UnityEngine">
+	  <HintPath>/Applications/Unity51/Unity.app/Contents/Frameworks/Managed/UnityEngine.dll</HintPath>
+	</Reference>
+	<Reference Include="UnityEditor">
+	  <HintPath>/Applications/Unity51/Unity.app/Contents/Frameworks/Managed/UnityEditor.dll</HintPath>
+	</Reference>
+  </ItemGroup>
+  <ItemGroup>
+     <Compile Include="Assets\Core\di\Editor\DiMenu.cs" />
+     <Compile Include="Assets\Editor\Build\AndroidManifest.cs" />
+     <Compile Include="Assets\Editor\Build\AssetLabel.cs" />
+     <Compile Include="Assets\Editor\Build\BuildProcess\AssetBuildProcess.cs" />
+     <Compile Include="Assets\Editor\Build\BuildProcess\BrokenAssetVerifier.cs" />
+     <Compile Include="Assets\Editor\Build\BuildProcess\ComponentBuildProcess.cs" />
+     <Compile Include="Assets\Editor\Build\BuildProcess\RendererBuildProcess.cs" />
+     <Compile Include="Assets\Editor\Build\BuildProcess\SceneBuildProcess.cs" />
+     <Compile Include="Assets\Editor\Build\BuildProcess\TextureAssetBuildProcess.cs" />
+     <Compile Include="Assets\Editor\Build\BuildScript.cs" />
+     <Compile Include="Assets\Editor\Build\BuildSettingTab.cs" />
+     <Compile Include="Assets\Editor\Build\BuildSettingWindow.cs" />
+     <Compile Include="Assets\Editor\Build\BuildTargetEx.cs" />
+     <Compile Include="Assets\Editor\Build\CommandLineReader.cs" />
+     <Compile Include="Assets\Editor\Build\IosPostprocessor.cs" />
+     <Compile Include="Assets\Editor\CompatibilityEditor.cs" />
+     <Compile Include="Assets\Editor\Core\EditorTab.cs" />
+     <Compile Include="Assets\Editor\Core\FileTypeFilter.cs" />
+     <Compile Include="Assets\Editor\Core\LibManager.cs" />
+     <Compile Include="Assets\Editor\Core\ObjListFilter.cs" />
+     <Compile Include="Assets\Editor\Core\TabbedEditorWindow.cs" />
+     <Compile Include="Assets\Editor\Core\anim\AnimTriggerInspector.cs" />
+     <Compile Include="Assets\Editor\Core\anim\AnimationClipDrawer.cs" />
+     <Compile Include="Assets\Editor\Core\anim\EditorAnimUtil.cs" />
+     <Compile Include="Assets\Editor\Core\asset\AssetBuilder.cs" />
+     <Compile Include="Assets\Editor\Core\asset\AssetBuilderTab.cs" />
+     <Compile Include="Assets\Editor\Core\asset\AssetDataInspector.cs" />
+     <Compile Include="Assets\Editor\Core\asset\AssetRefDrawer.cs" />
+     <Compile Include="Assets\Editor\Core\asset\AssetRefEditorEx.cs" />
+     <Compile Include="Assets\Editor\Core\asset\AudioGroupBuildProcessor.cs" />
+     <Compile Include="Assets\Editor\Core\asset\AudioGroupInspector.cs" />
+     <Compile Include="Assets\Editor\Core\asset\AudioKeyInspector.cs" />
+     <Compile Include="Assets\Editor\Core\asset\AudioTriggerInspector.cs" />
+     <Compile Include="Assets\Editor\Core\asset\AudioTriggerInspectorImpl.cs" />
+     <Compile Include="Assets\Editor\Core\asset\EditorAssetCache.cs" />
+     <Compile Include="Assets\Editor\Core\asset\EditorAssetLoader.cs" />
+     <Compile Include="Assets\Editor\Core\asset\EditorAssetUtil.cs" />
+     <Compile Include="Assets\Editor\Core\asset\MaterialTexDataDrawer.cs" />
+     <Compile Include="Assets\Editor\Core\asset\MaterialTexLoaderBuildProcessor.cs" />
+     <Compile Include="Assets\Editor\Core\asset\MaterialTexLoaderInspector.cs" />
+     <Compile Include="Assets\Editor\Core\asset\NestedPrefabInspector.cs" />
+     <Compile Include="Assets\Editor\Core\asset\TexFormatGroupData.cs" />
+     <Compile Include="Assets\Editor\Core\asset\TexFormatGroupEx.cs" />
+     <Compile Include="Assets\Editor\Core\asset\TextureImporterFormatEx.cs" />
+     <Compile Include="Assets\Editor\Core\asset\TextureTrimmer.cs" />
+     <Compile Include="Assets\Editor\Core\config\PlatformEditorEx.cs" />
+     <Compile Include="Assets\Editor\Core\drawer\ArrayDrawer.cs" />
+     <Compile Include="Assets\Editor\Core\drawer\IItemDrawer.cs" />
+     <Compile Include="Assets\Editor\Core\drawer\ItemDrawer.cs" />
+     <Compile Include="Assets\Editor\Core\drawer\ListDrawer.cs" />
+     <Compile Include="Assets\Editor\Core\drawer\StrEnumItemDrawer.cs" />
+     <Compile Include="Assets\Editor\Core\event\EventListDrawer.cs" />
+     <Compile Include="Assets\Editor\Core\i18n\LangSwitchInspector.cs" />
+     <Compile Include="Assets\Editor\Core\inspector\CreateNewLine.cs" />
+     <Compile Include="Assets\Editor\Core\inspector\EditorGUIUtil.cs" />
+     <Compile Include="Assets\Editor\Core\inspector\EditorUtil.cs" />
+     <Compile Include="Assets\Editor\Core\inspector\ExecOutput.cs" />
+     <Compile Include="Assets\Editor\Core\inspector\FieldInspector.cs" />
+     <Compile Include="Assets\Editor\Core\inspector\MeshFilterInspector.cs" />
+     <Compile Include="Assets\Editor\Core\inspector\MethodCallInspector.cs" />
+     <Compile Include="Assets\Editor\Core\inspector\MethodInspector.cs" />
+     <Compile Include="Assets\Editor\Core\inspector\ObjToString.cs" />
+     <Compile Include="Assets\Editor\Core\inspector\PrefabTypeEx.cs" />
+     <Compile Include="Assets\Editor\Core\inspector\PropertyDrawerBase.cs" />
+     <Compile Include="Assets\Editor\Core\inspector\PropertyUI.cs" />
+     <Compile Include="Assets\Editor\Core\inspector\ScriptableObjectGen.cs" />
+     <Compile Include="Assets\Editor\Core\inspector\TimerControlInspector.cs" />
+     <Compile Include="Assets\Editor\Core\inspector\ToStringFilter.cs" />
+     <Compile Include="Assets\Editor\Core\logger\LogInitializerInspector.cs" />
+     <Compile Include="Assets\Editor\Core\scene\EditorSceneBridge.cs" />
+     <Compile Include="Assets\Editor\Core\scene\MeshRendererSortingLayersEditor.cs" />
+     <Compile Include="Assets\Editor\Core\scene\ObjSwitchInspector.cs" />
+     <Compile Include="Assets\Editor\Core\scene\RendererLayerEditor.cs" />
+     <Compile Include="Assets\Editor\Core\scene\SixWayCamInspector.cs" />
+     <Compile Include="Assets\Editor\Core\scene\SortLayerRenderExtension.cs" />
+     <Compile Include="Assets\Editor\Core\scene\SortingLayerExposedEditor.cs" />
+     <Compile Include="Assets\Editor\Core\type\ArrInspector.cs" />
+     <Compile Include="Assets\Editor\Core\type\ArrayInspector.cs" />
+     <Compile Include="Assets\Editor\Core\type\ArrayInspectorRow.cs" />
+     <Compile Include="Assets\Editor\Core\type\EnumArrayInspector.cs" />
+     <Compile Include="Assets\Editor\Core\type\EnumClassDrawer.cs" />
+     <Compile Include="Assets\Editor\Core\type\EnumParser.cs" />
+     <Compile Include="Assets\Editor\Core\type\EnumRefArray.cs" />
+     <Compile Include="Assets\Editor\Core\type\EnumWrapperRefArray.cs" />
+     <Compile Include="Assets\Editor\Core\type\ObjArrInspector.cs" />
+     <Compile Include="Assets\Editor\Core\type\ObjWrapper.cs" />
+     <Compile Include="Assets\Editor\Core\type\ObjectRefArray.cs" />
+     <Compile Include="Assets\Editor\Core\type\PartialEnumObjArrInspector.cs" />
+     <Compile Include="Assets\Editor\Core\type\ReflectionArray.cs" />
+     <Compile Include="Assets\Editor\Core\type\SerializedInspector.cs" />
+     <Compile Include="Assets\Editor\Core\type\StrArrInspector.cs" />
+     <Compile Include="Assets\Editor\Core\type\StrObjArrInspector.cs" />
+     <Compile Include="Assets\Editor\Core\type\StrStrArrInspector.cs" />
+     <Compile Include="Assets\Editor\Core\type\TypeSelector.cs" />
+     <Compile Include="Assets\Editor\Core\type\Vec2RefArray.cs" />
+     <Compile Include="Assets\Editor\Core\type\Vec3RefArray.cs" />
+     <Compile Include="Assets\Editor\Distance Map Generator\CCDistanceMapGenerator.cs" />
+     <Compile Include="Assets\Editor\Distance Map Generator\CCDistanceMapGeneratorWindow.cs" />
+     <Compile Include="Assets\Editor\EditorUI.cs" />
+     <Compile Include="Assets\Editor\PropertyReferenceDrawer.cs" />
+     <Compile Include="Assets\Editor\Tool\AnimationTargetRenamer.cs" />
+     <Compile Include="Assets\Editor\Tool\AssetBundleAnalyzer.cs" />
+     <Compile Include="Assets\Editor\Tool\Checker\BackupRef.cs" />
+     <Compile Include="Assets\Editor\Tool\Checker\BackupTab.cs" />
+     <Compile Include="Assets\Editor\Tool\Checker\CheckerWindow.cs" />
+     <Compile Include="Assets\Editor\Tool\Checker\CompRefs.cs" />
+     <Compile Include="Assets\Editor\Tool\Checker\GameObjectRefs.cs" />
+     <Compile Include="Assets\Editor\Tool\Checker\PerformanceTab.cs" />
+     <Compile Include="Assets\Editor\Tool\Checker\VisibilityCheckTab.cs" />
+     <Compile Include="Assets\Editor\Tool\ComponentCopy.cs" />
+     <Compile Include="Assets\Editor\Tool\ImageMenu.cs" />
+     <Compile Include="Assets\Editor\Tool\LZFWindow.cs" />
+     <Compile Include="Assets\Editor\Tool\RealtimeInspector\RealtimeInspectorMenu.cs" />
+     <Compile Include="Assets\Editor\Tool\RenderCubemapWizard.cs" />
+     <Compile Include="Assets\Editor\Tool\ResourceChecker.cs" />
+     <Compile Include="Assets\Editor\Tool\SceneAnalyzer\ComponentSearchTab.cs" />
+     <Compile Include="Assets\Editor\Tool\SceneAnalyzer\FieldInfoRegistryEx.cs" />
+     <Compile Include="Assets\Editor\Tool\SceneAnalyzer\LayerSearchTab.cs" />
+     <Compile Include="Assets\Editor\Tool\SceneAnalyzer\NullRefTab.cs" />
+     <Compile Include="Assets\Editor\Tool\SceneAnalyzer\RefSearchTab.cs" />
+     <Compile Include="Assets\Editor\Tool\SceneAnalyzer\SceneAnalyzerWindow.cs" />
+     <Compile Include="Assets\Editor\Tool\SceneAnalyzer\SetterTab.cs" />
+     <Compile Include="Assets\Editor\Tool\Searcher\AssetSearchWindow.cs" />
+     <Compile Include="Assets\Editor\Tool\Searcher\AudioSearchTab.cs" />
+     <Compile Include="Assets\Editor\Tool\Searcher\ColliderSearchTab.cs" />
+     <Compile Include="Assets\Editor\Tool\Searcher\SearchTab.cs" />
+     <Compile Include="Assets\Editor\Tool\Searcher\ShaderSearchTab.cs" />
+     <Compile Include="Assets\Editor\Tool\Searcher\TexSearchTab.cs" />
+     <Compile Include="Assets\Editor\Tool\Shortcut\SceneHistoryTab.cs" />
+     <Compile Include="Assets\Editor\Tool\Shortcut\ShortcutSection.cs" />
+     <Compile Include="Assets\Editor\Tool\Shortcut\ShortcutTab.cs" />
+     <Compile Include="Assets\Editor\Tool\Shortcut\ShortcutWindow.cs" />
+     <Compile Include="Assets\Editor\Tool\importer\AudioImport.cs" />
+     <Compile Include="Assets\Editor\Tool\importer\AudioImporterTab.cs" />
+     <Compile Include="Assets\Editor\Tool\importer\CustomAssetPostprocessor.cs" />
+     <Compile Include="Assets\Editor\Tool\importer\ModelImport.cs" />
+     <Compile Include="Assets\Editor\Tool\importer\ModelImporterTab.cs" />
+     <Compile Include="Assets\Editor\Tool\importer\TexImport.cs" />
+     <Compile Include="Assets\Editor\Tool\importer\TexImporterTab.cs" />
+     <Compile Include="Assets\Editor\image\TextureUtil.cs" />
+     <Compile Include="Assets\Editor\input\InputAxisMapDataInspectorRow.cs" />
+     <Compile Include="Assets\Editor\input\InputEventSystemInspector.cs" />
+ <Reference Include="UnityEngine.UI">
+ <HintPath>/Applications/Unity51/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.UI">
+ <HintPath>/Applications/Unity51/Unity.app/Contents/UnityExtensions/Unity/GUISystem/Editor/UnityEditor.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Networking">
+ <HintPath>/Applications/Unity51/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.Networking">
+ <HintPath>/Applications/Unity51/Unity.app/Contents/UnityExtensions/Unity/Networking/Editor/UnityEditor.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>/Applications/Unity51/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
+ </Reference>
+ <Reference Include="Editor.ReorderableList">
+ <HintPath>/Users/dryadmac/workspace/libs/core/Assets/Editor/lib/Editor.ReorderableList.dll</HintPath>
+ </Reference>
+ <Reference Include="Editor.ReorderableList">
+ <HintPath>/Users/dryadmac/workspace/libs/core/Assets/Plugins/Editor/lib/Editor.ReorderableList.dll</HintPath>
+ </Reference>
+ <Reference Include="commons">
+ <HintPath>/Users/dryadmac/workspace/libs/core/Assets/Plugins/lib/commons.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.Graphs">
+ <HintPath>/Applications/Unity51/Unity.app/Contents/Frameworks/Managed/UnityEditor.Graphs.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.Android.Extensions">
+ <HintPath>/Applications/Unity51/Unity.app/Contents/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.iOS.Extensions">
+ <HintPath>/Applications/Unity51/Unity.app/Contents/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.BB10.Extensions">
+ <HintPath>/Applications/Unity51/Unity.app/Contents/PlaybackEngines/BlackBerryPlayer/UnityEditor.BB10.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.Tizen.Extensions">
+ <HintPath>/Applications/Unity51/Unity.app/Contents/PlaybackEngines/TizenPlayer/UnityEditor.Tizen.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.SamsungTV.Extensions">
+ <HintPath>/Applications/Unity51/Unity.app/Contents/PlaybackEngines/STVPlayer/UnityEditor.SamsungTV.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.WebGL.Extensions">
+ <HintPath>/Applications/Unity51/Unity.app/Contents/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.LinuxStandalone.Extensions">
+ <HintPath>/Applications/Unity51/Unity.app/Contents/PlaybackEngines/LinuxStandaloneSupport/UnityEditor.LinuxStandalone.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.WindowsStandalone.Extensions">
+ <HintPath>/Applications/Unity51/Unity.app/Contents/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.OSXStandalone.Extensions">
+ <HintPath>/Applications/Unity51/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+ <HintPath>/Applications/Unity51/Unity.app/Contents/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+ </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+	   Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  
+</Project>
