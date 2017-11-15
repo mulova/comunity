@@ -222,7 +222,11 @@ namespace core
                     case BuildTarget.iOS:
                     case BuildTarget.StandaloneOSXIntel:
                     case BuildTarget.StandaloneOSXIntel64:
+                    #if UNITY_2017_3_OR_NEWER
+                    case BuildTarget.StandaloneOSX:
+                    #else
                     case BuildTarget.StandaloneOSXUniversal:
+                    #endif
                         buildPath = EditorUtility.OpenFolderPanel("Build Folder", PathUtil.GetDirectory(buildPath), PathUtil.GetLastDirectory(buildPath));
                         break;
                     default:

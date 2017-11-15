@@ -13,7 +13,11 @@ public static class BuildTargetEx
         {
             case UnityEditor.BuildTarget.StandaloneOSXIntel:
             case UnityEditor.BuildTarget.StandaloneOSXIntel64:
-            case UnityEditor.BuildTarget.StandaloneOSXUniversal:
+            #if UNITY_2017_3_OR_NEWER
+            case UnityEditor.BuildTarget.StandaloneOSX:
+            #else
+            case BuildTarget.StandaloneOSXUniversal:
+            #endif
                 return RuntimePlatform.OSXPlayer;
             case UnityEditor.BuildTarget.StandaloneWindows:
             case UnityEditor.BuildTarget.StandaloneWindows64:

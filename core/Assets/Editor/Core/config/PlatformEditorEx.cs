@@ -7,7 +7,12 @@ public static class PlatformEditorEx
 		switch (UnityEditor.EditorUserBuildSettings.activeBuildTarget) {
 			case UnityEditor.BuildTarget.StandaloneOSXIntel:
 			case UnityEditor.BuildTarget.StandaloneOSXIntel64:
-			case UnityEditor.BuildTarget.StandaloneOSXUniversal:
+            #if UNITY_2017_3_OR_NEWER
+            case UnityEditor.BuildTarget.StandaloneOSX:
+            #else
+            case BuildTarget.StandaloneOSXUniversal:
+            #endif
+			case UnityEditor.BuildTarget.StandaloneOSX:
 				return RuntimePlatform.OSXPlayer;
 			case UnityEditor.BuildTarget.StandaloneWindows:
 			case UnityEditor.BuildTarget.StandaloneWindows64:
