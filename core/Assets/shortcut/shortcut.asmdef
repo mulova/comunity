@@ -1,0 +1,9 @@
+{
+    "name": "shortcut",
+    "references": [
+        "commons",
+        "comunity"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": []
+}

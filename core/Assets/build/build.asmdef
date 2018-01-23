@@ -1,0 +1,9 @@
+{
+    "name": "build",
+    "references": [
+        "commons",
+        "comunity"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": []
+}

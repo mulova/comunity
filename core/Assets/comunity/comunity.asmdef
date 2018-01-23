@@ -1,0 +1,8 @@
+{
+    "name": "comunity",
+    "references": [
+        "commons"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": []
+}
