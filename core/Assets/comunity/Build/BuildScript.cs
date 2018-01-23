@@ -422,7 +422,9 @@ namespace core
         /// <param name="options">Options.</param>
         public static string PrebuildAll(params object[] options)
         {
+            #if !UNITY_2017_3_OR_NEWER
             LibManager.CopyLibs();
+            #endif
             BuildScript.LoadEditorDll();
             BuildScript.InitEditorLog();
             ResetPrebuilder();
