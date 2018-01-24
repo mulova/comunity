@@ -110,6 +110,7 @@
      <Compile Include="Assets\comunity\asset\TexPrerenderer.cs" />
      <Compile Include="Assets\comunity\asset\TextureEx.cs" />
      <Compile Include="Assets\comunity\asset\TextureFormatEx.cs" />
+     <Compile Include="Assets\comunity\asset\UnzipQueue.cs" />
      <Compile Include="Assets\comunity\asset\Web.cs" />
      <Compile Include="Assets\comunity\asset\WebAssetLoader.cs" />
      <Compile Include="Assets\comunity\asset\WebDownloader.cs" />
@@ -125,6 +126,7 @@
      <Compile Include="Assets\comunity\config\Platform.cs" />
      <Compile Include="Assets\comunity\config\PlatformMethods.cs" />
      <Compile Include="Assets\comunity\config\SimulationMode.cs" />
+     <Compile Include="Assets\comunity\config\SystemLanguageEx.cs" />
      <Compile Include="Assets\comunity\config\TestConfig.cs" />
      <Compile Include="Assets\comunity\Core\anim\AnimationClipDrawer.cs" />
      <Compile Include="Assets\comunity\Core\anim\AnimTriggerInspector.cs" />
@@ -318,7 +320,6 @@
      <Compile Include="Assets\comunity\scene\SixWayCam.cs" />
      <Compile Include="Assets\comunity\scene\SortingLayer.cs" />
      <Compile Include="Assets\comunity\scene\SyncTrans.cs" />
-     <Compile Include="Assets\comunity\scene\SystemLanguageEx.cs" />
      <Compile Include="Assets\comunity\scene\SystemMenu.cs" />
      <Compile Include="Assets\comunity\thread\ActionDelayEx.cs" />
      <Compile Include="Assets\comunity\thread\ActionQueue.cs" />
@@ -350,7 +351,6 @@
      <Compile Include="Assets\comunity\util\TimerData.cs" />
      <Compile Include="Assets\comunity\util\TransformUtil.cs" />
      <Compile Include="Assets\comunity\util\VectorUtil.cs" />
-     <Compile Include="Assets\comunity\zip\UnzipQueue.cs" />
      <None Include="Assets\comunity\comunity.asmdef" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity2017.3/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
@@ -449,7 +449,7 @@
  <HintPath>/Users/user/workspace/unity-commons/core/Assets/Plugins/lib/commons.dll</HintPath>
  </Reference>
  <Reference Include="Editor.ReorderableList">
- <HintPath>/Users/user/workspace/unity-commons/core/Assets/comunity/lib/Editor.ReorderableList.dll</HintPath>
+ <HintPath>/Users/user/workspace/unity-commons/core/Assets/comunity/Editor/lib/Editor.ReorderableList.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

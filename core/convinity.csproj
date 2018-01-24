@@ -184,7 +184,7 @@
  <HintPath>/Users/user/workspace/unity-commons/core/Assets/Plugins/lib/commons.dll</HintPath>
  </Reference>
  <Reference Include="Editor.ReorderableList">
- <HintPath>/Users/user/workspace/unity-commons/core/Assets/comunity/lib/Editor.ReorderableList.dll</HintPath>
+ <HintPath>/Users/user/workspace/unity-commons/core/Assets/comunity/Editor/lib/Editor.ReorderableList.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
