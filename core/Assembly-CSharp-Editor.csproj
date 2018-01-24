@@ -51,7 +51,61 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Editor\PropertyReferenceDrawer.cs" />
+     <Compile Include="Assets\comunity\di\Editor\DiMenu.cs" />
+     <Compile Include="Assets\comunity\Editor\AndroidManifest.cs" />
+     <Compile Include="Assets\comunity\Editor\Build\AssetBuildProcess.cs" />
+     <Compile Include="Assets\comunity\Editor\Build\AssetLabel.cs" />
+     <Compile Include="Assets\comunity\Editor\Build\BrokenAssetVerifier.cs" />
+     <Compile Include="Assets\comunity\Editor\Build\BuildConfig.cs" />
+     <Compile Include="Assets\comunity\Editor\Build\BuildScript.cs" />
+     <Compile Include="Assets\comunity\Editor\Build\BuildSettingTab.cs" />
+     <Compile Include="Assets\comunity\Editor\Build\BuildSettingWindow.cs" />
+     <Compile Include="Assets\comunity\Editor\Build\BuildTargetEx.cs" />
+     <Compile Include="Assets\comunity\Editor\Build\ComponentBuildProcess.cs" />
+     <Compile Include="Assets\comunity\Editor\Build\IosPostprocessor.cs" />
+     <Compile Include="Assets\comunity\Editor\Build\LexiconRegistryBuildProcessor.cs" />
+     <Compile Include="Assets\comunity\Editor\Build\Plist.cs" />
+     <Compile Include="Assets\comunity\Editor\Build\PlistDict.cs" />
+     <Compile Include="Assets\comunity\Editor\Build\RendererBuildProcess.cs" />
+     <Compile Include="Assets\comunity\Editor\Build\SceneBuildProcess.cs" />
+     <Compile Include="Assets\comunity\Editor\Build\TextureAssetBuildProcess.cs" />
+     <Compile Include="Assets\comunity\Editor\CommandLineReader.cs" />
+     <Compile Include="Assets\comunity\Editor\PropertyReferenceDrawer.cs" />
+     <Compile Include="Assets\convinity\Editor\Checker\BackupRef.cs" />
+     <Compile Include="Assets\convinity\Editor\Checker\BackupTab.cs" />
+     <Compile Include="Assets\convinity\Editor\Checker\CheckerWindow.cs" />
+     <Compile Include="Assets\convinity\Editor\Checker\CompRefs.cs" />
+     <Compile Include="Assets\convinity\Editor\Checker\GameObjectRefs.cs" />
+     <Compile Include="Assets\convinity\Editor\Checker\PerformanceTab.cs" />
+     <Compile Include="Assets\convinity\Editor\Checker\VisibilityCheckTab.cs" />
+     <Compile Include="Assets\convinity\Editor\importer\AudioImport.cs" />
+     <Compile Include="Assets\convinity\Editor\importer\AudioImporterTab.cs" />
+     <Compile Include="Assets\convinity\Editor\importer\CustomAssetPostprocessor.cs" />
+     <Compile Include="Assets\convinity\Editor\importer\ModelImport.cs" />
+     <Compile Include="Assets\convinity\Editor\importer\ModelImporterTab.cs" />
+     <Compile Include="Assets\convinity\Editor\importer\TexImport.cs" />
+     <Compile Include="Assets\convinity\Editor\importer\TexImporterTab.cs" />
+     <Compile Include="Assets\convinity\Editor\SceneAnalyzer\ComponentSearchTab.cs" />
+     <Compile Include="Assets\convinity\Editor\SceneAnalyzer\FieldRefDrawer.cs" />
+     <Compile Include="Assets\convinity\Editor\SceneAnalyzer\LayerSearchTab.cs" />
+     <Compile Include="Assets\convinity\Editor\SceneAnalyzer\MemberInfoRegistryEx.cs" />
+     <Compile Include="Assets\convinity\Editor\SceneAnalyzer\NullRefTab.cs" />
+     <Compile Include="Assets\convinity\Editor\SceneAnalyzer\RefSearchData.cs" />
+     <Compile Include="Assets\convinity\Editor\SceneAnalyzer\RefSearcher.cs" />
+     <Compile Include="Assets\convinity\Editor\SceneAnalyzer\RefSearchTab.cs" />
+     <Compile Include="Assets\convinity\Editor\SceneAnalyzer\SceneAnalyzerWindow.cs" />
+     <Compile Include="Assets\convinity\Editor\SceneAnalyzer\ScenePath.cs" />
+     <Compile Include="Assets\convinity\Editor\SceneAnalyzer\SetterTab.cs" />
+     <Compile Include="Assets\convinity\Editor\Searcher\AssetSearchWindow.cs" />
+     <Compile Include="Assets\convinity\Editor\Searcher\AudioSearchTab.cs" />
+     <Compile Include="Assets\convinity\Editor\Searcher\ColliderSearchTab.cs" />
+     <Compile Include="Assets\convinity\Editor\Searcher\SearchTab.cs" />
+     <Compile Include="Assets\convinity\Editor\Searcher\ShaderSearchTab.cs" />
+     <Compile Include="Assets\convinity\Editor\Searcher\TexSearchTab.cs" />
+     <Compile Include="Assets\convinity\Editor\shortcut\SceneHistoryTab.cs" />
+     <Compile Include="Assets\convinity\Editor\shortcut\ShortcutSection.cs" />
+     <Compile Include="Assets\convinity\Editor\shortcut\ShortcutTab.cs" />
+     <Compile Include="Assets\convinity\Editor\shortcut\ShortcutWindow.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity2017.3/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -122,7 +176,10 @@
  <HintPath>/Applications/Unity2017.3/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="Editor.ReorderableList">
- <HintPath>/Users/user/workspace/unity-commons/core/Assets/Plugins/Editor/Lib/Editor.ReorderableList.dll</HintPath>
+ <HintPath>/Users/user/workspace/comunity/core/Assets/comunity/Editor/lib/Editor.ReorderableList.dll</HintPath>
+ </Reference>
+ <Reference Include="Editor.ReorderableList">
+ <HintPath>/Users/user/workspace/comunity/core/Assets/Plugins/Editor/Lib/Editor.ReorderableList.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Advertisements">
  <HintPath>/Users/user/Library/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>
@@ -145,12 +202,6 @@
  <Reference Include="UnityEngine.StandardEvents">
  <HintPath>/Users/user/Library/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
  </Reference>
- <Reference Include="commons">
- <HintPath>/Users/user/workspace/unity-commons/core/Assets/Plugins/lib/commons.dll</HintPath>
- </Reference>
- <Reference Include="Editor.ReorderableList">
- <HintPath>/Users/user/workspace/unity-commons/core/Assets/Core/lib/Editor.ReorderableList.dll</HintPath>
- </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>/Applications/Unity2017.3/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
  </Reference>
@@ -161,10 +212,6 @@
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp.csproj">
       <Project>{C12BA0FB-3CB0-46C0-7FF2-C57C3FEC990B}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
-    <ProjectReference Include="shortcut.csproj">
-      <Project>{D7D2AC18-3B13-0220-CB5C-166ED7950743}</Project>      <Name>shortcut</Name>    </ProjectReference>
-    <ProjectReference Include="comunity.csproj">
-      <Project>{1C98CB76-9F1B-4088-FF31-61D5AC04E3E7}</Project>      <Name>comunity</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,8 +1,8 @@
 {
     "name": "convinity",
     "references": [
-        "commons",
-        "comunity"
+        "comunity",
+        "commons"
     ],
     "includePlatforms": [],
     "excludePlatforms": []

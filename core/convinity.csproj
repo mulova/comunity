@@ -157,7 +157,10 @@
  <HintPath>/Applications/Unity2017.3/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="Editor.ReorderableList">
- <HintPath>/Users/user/workspace/unity-commons/core/Assets/Plugins/Editor/Lib/Editor.ReorderableList.dll</HintPath>
+ <HintPath>/Users/user/workspace/comunity/core/Assets/comunity/Editor/lib/Editor.ReorderableList.dll</HintPath>
+ </Reference>
+ <Reference Include="Editor.ReorderableList">
+ <HintPath>/Users/user/workspace/comunity/core/Assets/Plugins/Editor/Lib/Editor.ReorderableList.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Advertisements">
  <HintPath>/Users/user/Library/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>
@@ -179,12 +182,6 @@
  </Reference>
  <Reference Include="UnityEngine.StandardEvents">
  <HintPath>/Users/user/Library/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
- </Reference>
- <Reference Include="commons">
- <HintPath>/Users/user/workspace/unity-commons/core/Assets/Plugins/lib/commons.dll</HintPath>
- </Reference>
- <Reference Include="Editor.ReorderableList">
- <HintPath>/Users/user/workspace/unity-commons/core/Assets/comunity/Editor/lib/Editor.ReorderableList.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

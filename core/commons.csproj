@@ -9,10 +9,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{C12BA0FB-3CB0-46C0-7FF2-C57C3FEC990B}</ProjectGuid>
+    <ProjectGuid>{C7C8D5F3-87E5-BBEA-F41A-0F2AC8FC8CAC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <AssemblyName>commons</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>Assets</BaseDirectory>
@@ -51,28 +51,112 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\AssemblyInfo.cs" />
-     <Compile Include="Assets\etc\Distance Map Generator\CCDistanceMapGenerator.cs" />
-     <Compile Include="Assets\etc\Distance Map Generator\CCDistanceMapGeneratorWindow.cs" />
-     <Compile Include="Assets\etc\Tool\AnimationTargetRenamer.cs" />
-     <Compile Include="Assets\etc\Tool\AssetBundleAnalyzer.cs" />
-     <Compile Include="Assets\etc\Tool\ComponentCopy.cs" />
-     <Compile Include="Assets\etc\Tool\ImageMenu.cs" />
-     <Compile Include="Assets\etc\Tool\LZFWindow.cs" />
-     <Compile Include="Assets\etc\Tool\RealtimeInspector\AttributeInspector.cs" />
-     <Compile Include="Assets\etc\Tool\RealtimeInspector\Descriptor.cs" />
-     <Compile Include="Assets\etc\Tool\RealtimeInspector\GameInspectorManager.cs" />
-     <Compile Include="Assets\etc\Tool\RealtimeInspector\InspectableAttribute.cs" />
-     <Compile Include="Assets\etc\Tool\RealtimeInspector\Inspector.cs" />
-     <Compile Include="Assets\etc\Tool\RealtimeInspector\InspectorPlugin.cs" />
-     <Compile Include="Assets\etc\Tool\RealtimeInspector\NameInspector.cs" />
-     <Compile Include="Assets\etc\Tool\RealtimeInspector\RealtimeInspectorMenu.cs" />
-     <Compile Include="Assets\etc\Tool\RealtimeInspector\TransformInspector.cs" />
-     <Compile Include="Assets\etc\Tool\RenderCubemapWizard.cs" />
-     <Compile Include="Assets\etc\Tool\ResourceChecker.cs" />
-     <Compile Include="Assets\platform\android\Android.cs" />
-     <Compile Include="Assets\platform\android\AndroidActivity.cs" />
-     <Compile Include="Assets\platform\android\AndroidAudioManager.cs" />
+     <Compile Include="Assets\commons\asset\CsvParser.cs" />
+     <Compile Include="Assets\commons\asset\LineParser.cs" />
+     <Compile Include="Assets\commons\asset\SpreadSheet.cs" />
+     <Compile Include="Assets\commons\asset\SpreadSheetColumnAttribute.cs" />
+     <Compile Include="Assets\commons\asset\SpreadSheetCsvParser.cs" />
+     <Compile Include="Assets\commons\asset\SpreadSheetParser.cs" />
+     <Compile Include="Assets\commons\asset\SpreadSheetSourceType.cs" />
+     <Compile Include="Assets\commons\asset\SpreadSheetXMLParser.cs" />
+     <Compile Include="Assets\commons\asset\SSColumnType.cs" />
+     <Compile Include="Assets\commons\asset\TextRowParser.cs" />
+     <Compile Include="Assets\commons\collection\ArrayPool.cs" />
+     <Compile Include="Assets\commons\collection\CompositeComparer.cs" />
+     <Compile Include="Assets\commons\collection\ConvertedKeyMap.cs" />
+     <Compile Include="Assets\commons\collection\Deque.cs" />
+     <Compile Include="Assets\commons\collection\DualKeyHashMap.cs" />
+     <Compile Include="Assets\commons\collection\FixedSizeList.cs" />
+     <Compile Include="Assets\commons\collection\FixedSizeQueue.cs" />
+     <Compile Include="Assets\commons\collection\HashSet.cs" />
+     <Compile Include="Assets\commons\collection\HashSetEx.cs" />
+     <Compile Include="Assets\commons\collection\ICollectionEx.cs" />
+     <Compile Include="Assets\commons\collection\IntWrapper.cs" />
+     <Compile Include="Assets\commons\collection\ListDictionary.cs" />
+     <Compile Include="Assets\commons\collection\LongWrapper.cs" />
+     <Compile Include="Assets\commons\collection\LRUCache.cs" />
+     <Compile Include="Assets\commons\collection\MultiKey.cs" />
+     <Compile Include="Assets\commons\collection\MultiKeyMap.cs" />
+     <Compile Include="Assets\commons\collection\MultiMap.cs" />
+     <Compile Include="Assets\commons\collection\SafeBuffer.cs" />
+     <Compile Include="Assets\commons\collection\SortedMultiMap.cs" />
+     <Compile Include="Assets\commons\collection\WeakDictionary.cs" />
+     <Compile Include="Assets\commons\collection\WeakHashSet.cs" />
+     <Compile Include="Assets\commons\collection\WeakKeyDictionary.cs" />
+     <Compile Include="Assets\commons\collection\WeakQueue.cs" />
+     <Compile Include="Assets\commons\collection\WeakStack.cs" />
+     <Compile Include="Assets\commons\collection\WeakValueDictionary.cs" />
+     <Compile Include="Assets\commons\i18n\LexPage.cs" />
+     <Compile Include="Assets\commons\i18n\LexPages.cs" />
+     <Compile Include="Assets\commons\io\DirUtil.cs" />
+     <Compile Include="Assets\commons\io\FileType.cs" />
+     <Compile Include="Assets\commons\io\LZF.cs" />
+     <Compile Include="Assets\commons\io\StreamEx.cs" />
+     <Compile Include="Assets\commons\lang\ActionEx.cs" />
+     <Compile Include="Assets\commons\lang\ArrayEx.cs" />
+     <Compile Include="Assets\commons\lang\ComparerComposite.cs" />
+     <Compile Include="Assets\commons\lang\DelegateSupport.cs" />
+     <Compile Include="Assets\commons\lang\DirectoryInfoEx.cs" />
+     <Compile Include="Assets\commons\lang\Dispatcher.cs" />
+     <Compile Include="Assets\commons\lang\EnumEx.cs" />
+     <Compile Include="Assets\commons\lang\EventDispatcher.cs" />
+     <Compile Include="Assets\commons\lang\GCNotification.cs" />
+     <Compile Include="Assets\commons\lang\I18N.cs" />
+     <Compile Include="Assets\commons\lang\IDictionaryEx.cs" />
+     <Compile Include="Assets\commons\lang\IEnumerableEx.cs" />
+     <Compile Include="Assets\commons\lang\ListEx.cs" />
+     <Compile Include="Assets\commons\lang\ObjectEx.cs" />
+     <Compile Include="Assets\commons\lang\PredicateEx.cs" />
+     <Compile Include="Assets\commons\lang\QueueEx.cs" />
+     <Compile Include="Assets\commons\lang\SpecialCoroutines.cs" />
+     <Compile Include="Assets\commons\lang\StringBuilderEx.cs" />
+     <Compile Include="Assets\commons\lang\StringEx.cs" />
+     <Compile Include="Assets\commons\lang\WeakReference.cs" />
+     <Compile Include="Assets\commons\logger\core\Assert.cs" />
+     <Compile Include="Assets\commons\logger\core\LogAppender.cs" />
+     <Compile Include="Assets\commons\logger\core\LogColor.cs" />
+     <Compile Include="Assets\commons\logger\core\LogFormatter.cs" />
+     <Compile Include="Assets\commons\logger\core\Loggable.cs" />
+     <Compile Include="Assets\commons\logger\core\LoggerData.cs" />
+     <Compile Include="Assets\commons\logger\core\LoggerImpl.cs" />
+     <Compile Include="Assets\commons\logger\core\Loggerx.cs" />
+     <Compile Include="Assets\commons\logger\core\LogManager.cs" />
+     <Compile Include="Assets\commons\logger\formatter\SimpleLogFormatter.cs" />
+     <Compile Include="Assets\commons\reflect\AttributeRegistry.cs" />
+     <Compile Include="Assets\commons\reflect\DepInjector.cs" />
+     <Compile Include="Assets\commons\reflect\Inject.cs" />
+     <Compile Include="Assets\commons\reflect\InjectionSourceAttribute.cs" />
+     <Compile Include="Assets\commons\reflect\ReflectionUtil.cs" />
+     <Compile Include="Assets\commons\type\BoolType.cs" />
+     <Compile Include="Assets\commons\type\ConstructorAttribute.cs" />
+     <Compile Include="Assets\commons\type\EnumClass.cs" />
+     <Compile Include="Assets\commons\type\EnumData.cs" />
+     <Compile Include="Assets\commons\type\EnumWrapper.cs" />
+     <Compile Include="Assets\commons\type\EventListener.cs" />
+     <Compile Include="Assets\commons\type\Grouping.cs" />
+     <Compile Include="Assets\commons\type\NoObfuscate.cs" />
+     <Compile Include="Assets\commons\type\NullableAttribute.cs" />
+     <Compile Include="Assets\commons\type\StrStr.cs" />
+     <Compile Include="Assets\commons\type\TypeEx.cs" />
+     <Compile Include="Assets\commons\util\Apply.cs" />
+     <Compile Include="Assets\commons\util\ArrayEnumerator.cs" />
+     <Compile Include="Assets\commons\util\ArrayUtil.cs" />
+     <Compile Include="Assets\commons\util\AssetUtil.cs" />
+     <Compile Include="Assets\commons\util\Axis.cs" />
+     <Compile Include="Assets\commons\util\BreadthFirstTraversal.cs" />
+     <Compile Include="Assets\commons\util\CollectionUtil.cs" />
+     <Compile Include="Assets\commons\util\DateTimeEx.cs" />
+     <Compile Include="Assets\commons\util\DepthFirstTraversal.cs" />
+     <Compile Include="Assets\commons\util\EncodingUtil.cs" />
+     <Compile Include="Assets\commons\util\EnumUtil.cs" />
+     <Compile Include="Assets\commons\util\IPredicate.cs" />
+     <Compile Include="Assets\commons\util\NamePredicate.cs" />
+     <Compile Include="Assets\commons\util\PathUtil.cs" />
+     <Compile Include="Assets\commons\util\RegexMgr.cs" />
+     <Compile Include="Assets\commons\util\Singleton.cs" />
+     <Compile Include="Assets\commons\util\StringUtil.cs" />
+     <Compile Include="Assets\commons\util\TextReplacer.cs" />
+     <None Include="Assets\commons\commons.asmdef" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity2017.3/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -169,14 +253,6 @@
  <Reference Include="UnityEngine.StandardEvents">
  <HintPath>/Users/user/Library/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
  </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="convinity.csproj">
-      <Project>{0F34279B-5757-4224-A404-CE52F73F714D}</Project>      <Name>convinity</Name>    </ProjectReference>
-    <ProjectReference Include="comunity.csproj">
-      <Project>{1C98CB76-9F1B-4088-FF31-61D5AC04E3E7}</Project>      <Name>comunity</Name>    </ProjectReference>
-    <ProjectReference Include="commons.csproj">
-      <Project>{C7C8D5F3-87E5-BBEA-F41A-0F2AC8FC8CAC}</Project>      <Name>commons</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
