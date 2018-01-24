@@ -70,6 +70,7 @@
      <Compile Include="Assets\comunity\anim\SequenceFactory.cs" />
      <Compile Include="Assets\comunity\anim\TimeOutTurn.cs" />
      <Compile Include="Assets\comunity\asset\AssetCache.cs" />
+     <Compile Include="Assets\comunity\asset\AssetConfig.cs" />
      <Compile Include="Assets\comunity\asset\AssetGuid.cs" />
      <Compile Include="Assets\comunity\asset\AssetInstancePool.cs" />
      <Compile Include="Assets\comunity\asset\AssetPool.cs" />
@@ -80,6 +81,7 @@
      <Compile Include="Assets\comunity\asset\audio\AudioGroup.cs" />
      <Compile Include="Assets\comunity\asset\audio\AudioPlayer.cs" />
      <Compile Include="Assets\comunity\asset\audio\AudioTrigger.cs" />
+     <Compile Include="Assets\comunity\asset\Cdn.cs" />
      <Compile Include="Assets\comunity\asset\CdnDownloader.cs" />
      <Compile Include="Assets\comunity\asset\Downloader.cs" />
      <Compile Include="Assets\comunity\asset\DummyAssetLoader.cs" />
@@ -113,10 +115,6 @@
      <Compile Include="Assets\comunity\asset\WebDownloader.cs" />
      <Compile Include="Assets\comunity\asset\WebGLDownloader.cs" />
      <Compile Include="Assets\comunity\asset\WWWEx.cs" />
-     <Compile Include="Assets\comunity\Build\AndroidManifest.cs" />
-     <Compile Include="Assets\comunity\Build\AssetConfig.cs" />
-     <Compile Include="Assets\comunity\Build\Cdn.cs" />
-     <Compile Include="Assets\comunity\Build\CommandLineReader.cs" />
      <Compile Include="Assets\comunity\comp\Lifecycle.cs" />
      <Compile Include="Assets\comunity\CompatibilityEditor.cs" />
      <Compile Include="Assets\comunity\config\AndroidPlatformMethods.cs" />
@@ -224,6 +222,7 @@
      <Compile Include="Assets\comunity\di\DepData.cs" />
      <Compile Include="Assets\comunity\di\DiService.cs" />
      <Compile Include="Assets\comunity\di\Editor\DiMenu.cs" />
+     <Compile Include="Assets\comunity\Editor\AndroidManifest.cs" />
      <Compile Include="Assets\comunity\Editor\Build\AssetBuildProcess.cs" />
      <Compile Include="Assets\comunity\Editor\Build\AssetLabel.cs" />
      <Compile Include="Assets\comunity\Editor\Build\BrokenAssetVerifier.cs" />
@@ -240,6 +239,7 @@
      <Compile Include="Assets\comunity\Editor\Build\RendererBuildProcess.cs" />
      <Compile Include="Assets\comunity\Editor\Build\SceneBuildProcess.cs" />
      <Compile Include="Assets\comunity\Editor\Build\TextureAssetBuildProcess.cs" />
+     <Compile Include="Assets\comunity\Editor\CommandLineReader.cs" />
      <Compile Include="Assets\comunity\Editor\PropertyReferenceDrawer.cs" />
      <Compile Include="Assets\comunity\EditorUI.cs" />
      <Compile Include="Assets\comunity\event\EventListAttribute.cs" />
