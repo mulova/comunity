@@ -51,24 +51,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\comunity\anim\ActionTurn.cs" />
-     <Compile Include="Assets\comunity\anim\AnimationClipEx.cs" />
-     <Compile Include="Assets\comunity\anim\AnimationClipListingAttribute.cs" />
-     <Compile Include="Assets\comunity\anim\AnimationEx.cs" />
-     <Compile Include="Assets\comunity\anim\AnimatorEx.cs" />
-     <Compile Include="Assets\comunity\anim\AnimEventReceiver.cs" />
-     <Compile Include="Assets\comunity\anim\AnimState.cs" />
-     <Compile Include="Assets\comunity\anim\AnimTrigger.cs" />
-     <Compile Include="Assets\comunity\anim\AnimTriggerElement.cs" />
-     <Compile Include="Assets\comunity\anim\AnimTurn.cs" />
-     <Compile Include="Assets\comunity\anim\AnimUtil.cs" />
-     <Compile Include="Assets\comunity\anim\ConcurrentTurn.cs" />
-     <Compile Include="Assets\comunity\anim\IAnimStateListener.cs" />
-     <Compile Include="Assets\comunity\anim\IgnoreTimeScale.cs" />
-     <Compile Include="Assets\comunity\anim\PhyxTurn.cs" />
-     <Compile Include="Assets\comunity\anim\Seq.cs" />
-     <Compile Include="Assets\comunity\anim\SequenceFactory.cs" />
-     <Compile Include="Assets\comunity\anim\TimeOutTurn.cs" />
      <Compile Include="Assets\comunity\asset\AssetCache.cs" />
      <Compile Include="Assets\comunity\asset\AssetConfig.cs" />
      <Compile Include="Assets\comunity\asset\AssetGuid.cs" />
@@ -127,8 +109,6 @@
      <Compile Include="Assets\comunity\config\PlatformMethods.cs" />
      <Compile Include="Assets\comunity\config\SimulationMode.cs" />
      <Compile Include="Assets\comunity\config\TestConfig.cs" />
-     <Compile Include="Assets\comunity\Core\anim\AnimationClipDrawer.cs" />
-     <Compile Include="Assets\comunity\Core\anim\AnimTriggerInspector.cs" />
      <Compile Include="Assets\comunity\Core\anim\EditorAnimUtil.cs" />
      <Compile Include="Assets\comunity\Core\asset\AssetBuilder.cs" />
      <Compile Include="Assets\comunity\Core\asset\AssetBuilderTab.cs" />
@@ -321,6 +301,10 @@
      <Compile Include="Assets\comunity\scene\SortingLayer.cs" />
      <Compile Include="Assets\comunity\scene\SyncTrans.cs" />
      <Compile Include="Assets\comunity\scene\SystemMenu.cs" />
+     <Compile Include="Assets\comunity\seq\ActionTurn.cs" />
+     <Compile Include="Assets\comunity\seq\ConcurrentTurn.cs" />
+     <Compile Include="Assets\comunity\seq\Seq.cs" />
+     <Compile Include="Assets\comunity\seq\SequenceFactory.cs" />
      <Compile Include="Assets\comunity\thread\ActionDelayEx.cs" />
      <Compile Include="Assets\comunity\thread\ActionQueue.cs" />
      <Compile Include="Assets\comunity\thread\AsyncCall.cs" />

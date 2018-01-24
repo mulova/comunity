@@ -12,7 +12,7 @@ namespace core {
 		private ConcurrentTurn current;
 		private bool skip;
 		private int animLayer;
-		private readonly ConcurrentTurn NO_SKIP = new ConcurrentTurn(new AnimTurn());
+        private readonly ConcurrentTurn NO_SKIP = new ConcurrentTurn(new ActionTurn(null));
         public static readonly Loggerx log = LogManager.GetLogger(typeof(Seq));
         private TimerControl timer;
 		private bool errorTolerant;
@@ -36,14 +36,6 @@ namespace core {
 			}
 		}
 
-		public void Add(Action act) {
-			if (act != null) {
-				Add(new ActionTurn(act));
-			} else {
-				log.Info("Null argument");
-			}
-		}
-		
 		public void AddConcurrent(SeqTurn turn) {
 			if (tail == null) {
 				Next();
@@ -59,10 +51,6 @@ namespace core {
 			AddConcurrent(new ActionTurn(act));
 		}
 		
-		public void AddConcurrent(Action act) {
-			AddConcurrent(new ActionTurn(act));
-		}
-
 		public void Delay(float delay)
 		{
 			if (delay <= 0)
