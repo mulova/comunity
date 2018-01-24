@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\shortcut\Editor\SceneHistoryTab.cs" />
      <Compile Include="Assets\shortcut\Editor\ShortcutSection.cs" />
      <Compile Include="Assets\shortcut\Editor\ShortcutTab.cs" />
      <Compile Include="Assets\shortcut\Editor\ShortcutWindow.cs" />
