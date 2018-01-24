@@ -126,7 +126,6 @@
      <Compile Include="Assets\comunity\config\Platform.cs" />
      <Compile Include="Assets\comunity\config\PlatformMethods.cs" />
      <Compile Include="Assets\comunity\config\SimulationMode.cs" />
-     <Compile Include="Assets\comunity\config\SystemLanguageEx.cs" />
      <Compile Include="Assets\comunity\config\TestConfig.cs" />
      <Compile Include="Assets\comunity\Core\anim\AnimationClipDrawer.cs" />
      <Compile Include="Assets\comunity\Core\anim\AnimTriggerInspector.cs" />
@@ -251,6 +250,7 @@
      <Compile Include="Assets\comunity\event\SceneEvent.cs" />
      <Compile Include="Assets\comunity\event\UIEventGen.cs" />
      <Compile Include="Assets\comunity\i18n\LangSwitch.cs" />
+     <Compile Include="Assets\comunity\i18n\SystemLanguageEx.cs" />
      <Compile Include="Assets\comunity\i18n\Translator.cs" />
      <Compile Include="Assets\comunity\image\TextureImporterEx.cs" />
      <Compile Include="Assets\comunity\image\TextureUtil.cs" />
