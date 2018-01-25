@@ -71,6 +71,19 @@ namespace core
             return false;
         }
 
+        public static bool IsModified(string filePath, ref DateTime time)
+        {
+            DateTime modTime = File.GetLastWriteTime(filePath);
+            if (modTime != time)
+            {
+                time = modTime;
+                return true;
+            } else
+            {
+                return false;
+            }
+        }
+
 
         private DateTime assetDirTime;
         private DateTime rawAssetDirTime;
@@ -81,11 +94,11 @@ namespace core
         
         private void UpdatePaths()
         {
-            if (_cdnDirs == null||AssetBuilder.IsModified(ASSET_DIR_LIST, ref assetDirTime))
+            if (_cdnDirs == null||IsModified(ASSET_DIR_LIST, ref assetDirTime))
             {
                 _cdnDirs = LoadCdnPaths(ASSET_DIR_LIST);
             }
-            if (_rawCdnDirs == null||AssetBuilder.IsModified(RAW_ASSET_DIR_LIST, ref rawAssetDirTime))
+            if (_rawCdnDirs == null||IsModified(RAW_ASSET_DIR_LIST, ref rawAssetDirTime))
             {
                 _rawCdnDirs = LoadCdnPaths(RAW_ASSET_DIR_LIST);
             }
@@ -207,24 +220,6 @@ namespace core
                     SaveAuto();
                 }
                 EditorUI.EndContents();
-            }
-        }
-
-        public void Verify(List<Object> list, TexFormatGroup texFormat)
-        {
-            if (list.IsNotEmpty())
-            {
-                AssetBuildProcess.Reset();
-                foreach (var o in list)
-                {
-                    AssetBuildProcess.PreprocessAssets(AssetDatabase.GetAssetPath(o), o, BuildScript.VERIFY_ONLY, texFormat);
-                }
-                string verifyError = AssetBuildProcess.GetErrorMessages();
-                if (verifyError.IsNotEmpty())
-                {
-                    Debug.LogError(verifyError);
-                    EditorUtility.DisplayDialog("Verify Fails", verifyError, "OK");
-                }
             }
         }
 

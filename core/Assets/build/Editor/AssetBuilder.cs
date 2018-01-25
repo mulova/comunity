@@ -106,19 +106,6 @@ namespace core
 			return ver;
 		}
 
-        public static bool IsModified(string filePath, ref DateTime time)
-        {
-            DateTime modTime = File.GetLastWriteTime(filePath);
-            if (modTime != time)
-            {
-                time = modTime;
-                return true;
-            } else
-            {
-                return false;
-            }
-        }
-
 
 		/// <summary>
 		/// Build the specified snapshotPath and outputDir.

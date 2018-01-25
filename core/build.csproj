@@ -9,10 +9,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{C12BA0FB-3CB0-46C0-7FF2-C57C3FEC990B}</ProjectGuid>
+    <ProjectGuid>{04E8117F-1702-F6D5-DF41-8DA5E3F0849C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <AssemblyName>build</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>Assets</BaseDirectory>
@@ -51,7 +51,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\AssemblyInfo.cs" />
+     <Compile Include="Assets\build\Editor\AssetBuilder.cs" />
+     <Compile Include="Assets\build\Editor\AssetBuilderTab.cs" />
+     <Compile Include="Assets\build\Editor\AssetBuildProcess.cs" />
+     <Compile Include="Assets\build\Editor\AudioGroupBuildProcessor.cs" />
+     <Compile Include="Assets\build\Editor\BrokenAssetVerifier.cs" />
+     <Compile Include="Assets\build\Editor\BuildScript.cs" />
+     <Compile Include="Assets\build\Editor\BuildSettingTab.cs" />
+     <Compile Include="Assets\build\Editor\BuildSettingWindow.cs" />
+     <Compile Include="Assets\build\Editor\ComponentBuildProcess.cs" />
+     <Compile Include="Assets\build\Editor\IosPostprocessor.cs" />
+     <Compile Include="Assets\build\Editor\LexiconRegistryBuildProcessor.cs" />
+     <Compile Include="Assets\build\Editor\MaterialTexLoaderBuildProcessor.cs" />
+     <Compile Include="Assets\build\Editor\Plist.cs" />
+     <Compile Include="Assets\build\Editor\PlistDict.cs" />
+     <Compile Include="Assets\build\Editor\RendererBuildProcess.cs" />
+     <Compile Include="Assets\build\Editor\SceneBuildProcess.cs" />
+     <Compile Include="Assets\build\Editor\TextureAssetBuildProcess.cs" />
+     <None Include="Assets\build\build.asmdef" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity2017.3/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -147,18 +164,10 @@
  </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="convinity.csproj">
-      <Project>{0F34279B-5757-4224-A404-CE52F73F714D}</Project>      <Name>convinity</Name>    </ProjectReference>
-    <ProjectReference Include="build.csproj">
-      <Project>{04E8117F-1702-F6D5-DF41-8DA5E3F0849C}</Project>      <Name>build</Name>    </ProjectReference>
-    <ProjectReference Include="comunity.csproj">
-      <Project>{1C98CB76-9F1B-4088-FF31-61D5AC04E3E7}</Project>      <Name>comunity</Name>    </ProjectReference>
     <ProjectReference Include="commons.csproj">
       <Project>{C7C8D5F3-87E5-BBEA-F41A-0F2AC8FC8CAC}</Project>      <Name>commons</Name>    </ProjectReference>
-    <ProjectReference Include="etc.csproj">
-      <Project>{6A989513-84FC-882B-05C4-06A8CC22DACD}</Project>      <Name>etc</Name>    </ProjectReference>
-    <ProjectReference Include="ani.csproj">
-      <Project>{98573266-4709-9996-95D8-DBAA699873B9}</Project>      <Name>ani</Name>    </ProjectReference>
+    <ProjectReference Include="comunity.csproj">
+      <Project>{1C98CB76-9F1B-4088-FF31-61D5AC04E3E7}</Project>      <Name>comunity</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

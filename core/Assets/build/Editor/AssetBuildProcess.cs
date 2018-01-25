@@ -207,5 +207,23 @@ namespace core
         {
             pool = null;
         }
+
+        public void Verify(List<Object> list, TexFormatGroup texFormat)
+        {
+            if (list.IsNotEmpty())
+            {
+                AssetBuildProcess.Reset();
+                foreach (var o in list)
+                {
+                    AssetBuildProcess.PreprocessAssets(AssetDatabase.GetAssetPath(o), o, BuildScript.VERIFY_ONLY, texFormat);
+                }
+                string verifyError = AssetBuildProcess.GetErrorMessages();
+                if (verifyError.IsNotEmpty())
+                {
+                    Debug.LogError(verifyError);
+                    EditorUtility.DisplayDialog("Verify Fails", verifyError, "OK");
+                }
+            }
+        }
     }
 }

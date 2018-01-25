@@ -229,9 +229,6 @@
  <Reference Include="Editor.ReorderableList">
  <HintPath>/Users/user/workspace/comunity/core/Assets/comunity/Editor/lib/Editor.ReorderableList.dll</HintPath>
  </Reference>
- <Reference Include="Editor.ReorderableList">
- <HintPath>/Users/user/workspace/comunity/core/Assets/Plugins/Editor/Lib/Editor.ReorderableList.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.Advertisements">
  <HintPath>/Users/user/Library/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>
  </Reference>

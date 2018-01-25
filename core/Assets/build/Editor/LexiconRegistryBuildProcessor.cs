@@ -40,7 +40,7 @@ namespace core
                 }
             }
             reg.assets = list.ToArray();
-            BuildScript.SetDirty(reg);
+            EditorTraversal.SetDirty(reg);
         }
         
         protected override void VerifyAsset(string path, UnityEngine.Object obj)

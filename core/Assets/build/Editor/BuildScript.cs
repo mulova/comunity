@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 using commons;
 using UnityEditor.Callbacks;
 using UnityEditor.SceneManagement;
+using comunity;
 
 namespace core
 {
@@ -17,153 +18,8 @@ namespace core
     {
         public const string VERIFY_ONLY = "verify_only";
         public const string EXCLUDE_CDN = "exclude_cdn";
-        private static Regex ignoreRegex;
-        public static string ignorePattern = ".meta$|.fbx$|.FBX$|/Editor/|Assets/Plugins/";
-        
-        private static Regex ignorePath
-        {
-            get
-            {
-                if (ignoreRegex == null)
-                {
-                    ignoreRegex = new Regex(ignorePattern);
-                }
-                return ignoreRegex;
-            }
-        }
-        
-        public static void AddIgnorePattern(string regexPattern)
-        {
-            ignorePattern = string.Format("{0}|{1}", ignorePattern, regexPattern);
-            ignoreRegex = null;
-        }
         
         public static readonly Loggerx log = LogManager.GetLogger(typeof(BuildScript));
-        
-        private static bool DisplayProgressBar(string title, string info, float progress)
-        {
-            if (SystemInfo.graphicsDeviceID != 0)
-            {
-                return EditorUtility.DisplayCancelableProgressBar(title, info, progress);
-            }
-            log.Debug("{0} ({1:P2})", info, progress);
-            return false;
-        }
-        
-        /// <summary>
-        /// Fors the each scene.
-        /// </summary>
-        /// <returns>The each scene.</returns>
-        /// <param name="func">[param] scene roots,  [return] error string</param>
-        public static string ForEachScene(Func<IEnumerable<Transform>, string> func)
-        {
-//      string current = EditorSceneBridge.currentScene;
-            List<string> errors = new List<string>();
-            EditorBuildSettingsScene[] scenes = EditorBuildSettings.scenes;
-            for (int i=0; i<scenes.Length; ++i)
-            {
-                errors.AddRange(ProcessScene(scenes[i], func));
-            }
-            return StringUtil.Join("\n", errors);
-        }
-
-        public static List<string> ProcessScene(EditorBuildSettingsScene s, Func<IEnumerable<Transform>, string> func)
-        {
-            List<string> errors = new List<string>(); 
-            sceneProcessing = true;
-
-            try
-            {
-                EditorSceneBridge.OpenScene(s.path);
-                log.Debug("Processing Scene '{0}'", s.path);
-                string error = func(EditorSceneManager.GetActiveScene().GetRootGameObjects().Convert(o=>o.transform));
-                if (error.IsNotEmpty())
-                {
-                    errors.Add(error);
-                }
-                SaveScene();
-            } catch (Exception ex)
-            {
-                log.Error(ex);
-                EditorUtility.ClearProgressBar();
-                EditorUtility.DisplayDialog("Error", "See editor log for details", "OK");
-                throw ex;
-            }
-            
-            sceneProcessing = false;
-            return errors;
-        }
-        
-        /// <summary>
-        /// Fors the each prefab.
-        /// </summary>
-        /// <returns>The each prefab.</returns>
-        /// <param name="func">error_string Func(assetPath, asset)</param>
-        public static string ForEachPrefab(Func<string, GameObject, string> func)
-        {
-            return ForEachAsset<GameObject>(func, FileType.Prefab);
-        }
-        
-        public static string ForEachAssetPath(Func<string, string> func, FileType fileType)
-        {
-            try
-            {
-                StringBuilder err = new StringBuilder();
-                string[] paths = EditorAssetUtil.ListAssetPaths("Assets", fileType, true);
-                log.Info("Prebuild {0:D0} assets", paths.Length);
-                for (int i = 0; i < paths.Length; ++i)
-                {
-                    string p = "Assets/"+paths[i];
-                    if (ignorePath.IsMatch(p))
-                    {
-                        continue;
-                    }
-                    if (DisplayProgressBar("Assets", p, i / (float)paths.Length))
-                    {
-                        return "canceled by user";
-                    }
-                    try {
-                        string error = func(p);
-                        if (error.IsNotEmpty())
-                        {
-                            err.Append(error).Append("\n");
-                        }
-                    } catch (Exception ex)
-                    {
-                        log.Error(ex);
-                        EditorUtility.ClearProgressBar();
-                        EditorUtility.DisplayDialog("Error", "See editor log for details", "OK");
-                        throw ex;
-                    }
-                }
-                EditorUtility.ClearProgressBar();
-                if (err.Length > 0)
-                {
-                    return err.ToString();
-                } else
-                {
-                    AssetDatabase.SaveAssets();
-                    return null;
-                }
-            } catch (Exception ex)
-            {
-                return ex.Message+"\n"+ex.StackTrace;
-            }
-        }
-        
-        /// <summary>
-        /// Fors the each resource.
-        /// </summary>
-        /// <returns>The each resource.</returns>
-        /// <param name="func">Func returns error message if occurs.</param>
-        public static string ForEachAsset<T>(Func<string, T, string> func, FileType fileType)  where T:Object
-        {
-            return ForEachAssetPath(p =>
-            {
-                T asset = AssetDatabase.LoadAssetAtPath<T>(p);
-                return func(p, asset);
-            }, fileType);
-        }
         
         public static void Configure()
         {
@@ -378,28 +234,6 @@ namespace core
         {
         }
         
-        private static bool sceneProcessing;
-        
-        public static void SetDirty(Object o)
-        {
-            CompatibilityEditor.SetDirty(o);
-            if (sceneProcessing)
-            {
-                EditorSceneBridge.MarkSceneDirty();
-            }
-        }
-        
-        public static void SaveScene()
-        {
-            if (!EditorSceneBridge.currentScene.IsEmpty()&&EditorSceneBridge.currentScene != "Untitled")
-            {
-                if (EditorSceneBridge.isSceneDirty)
-                {
-                    EditorSceneBridge.SaveScene();
-                }
-            }
-        }
-        
         public static void ConvertAssetBundleToText(string path)
         {
             #if UNITY_5_3
@@ -433,7 +267,7 @@ namespace core
                 log.Info("Prebuild options: ", StringUtil.Join(", ", options));
             }
             bool withoutCdn = ArrayUtility.Contains(options, EXCLUDE_CDN);
-            ForEachAssetPath(path =>
+            EditorTraversal.ForEachAssetPath(path =>
             {
                 // Cdn assets are pre-processed in asset build time 
                 if (withoutCdn&&AssetBundlePath.inst.IsCdnPath(path))
@@ -444,7 +278,7 @@ namespace core
                 ComponentBuildProcess.VerifyComponents(obj, options);
                 return null;
             }, FileTypeEx.UNITY_SUPPORTED);
-            ForEachAssetPath(path =>
+            EditorTraversal.ForEachAssetPath(path =>
             {
                 // Cdn assets are pre-processed in asset build time 
                 if (withoutCdn&&AssetBundlePath.inst.IsCdnPath(path))
@@ -456,7 +290,7 @@ namespace core
                 AssetBuildProcess.PreprocessAssets(path, obj, options);
                 return null;
             }, FileTypeEx.UNITY_SUPPORTED);
-            ForEachAssetPath(path =>
+            EditorTraversal.ForEachAssetPath(path =>
             {
                 // Cdn assets are pre-processed in asset build time 
                 if (withoutCdn&&AssetBundlePath.inst.IsCdnPath(path))
@@ -468,7 +302,7 @@ namespace core
                 return null;
             }, FileTypeEx.UNITY_SUPPORTED);
             
-            ForEachScene(roots=> PreprocessScene(roots, options));
+            EditorTraversal.ForEachScene(roots=> PreprocessScene(roots, options));
             AssetDatabase.SaveAssets();
             
             return GetPrebuildMessage();
@@ -506,26 +340,6 @@ namespace core
             return null;
         }
 
-        private static void PreprocessAsset(string[] allPaths, string progressTitle, Action<Object, string> preprocess)
-        {
-            for (int i = 0; i < allPaths.Length; ++i)
-            {
-                string path = allPaths[i];
-                if (ignorePath.IsMatch(path))
-                {
-                    continue;
-                }
-                if (DisplayProgressBar(progressTitle, path, i / (float)allPaths.Length))
-                {
-                    EditorUtility.ClearProgressBar();
-                    throw new Exception("canceled by user");
-                }
-                Object asset = AssetDatabase.LoadAssetAtPath<Object>(path);
-                preprocess(asset, path);
-            }
-            EditorUtility.ClearProgressBar();
-        }
-        
         /// <summary>
         /// Verification is ignored
         /// </summary>
@@ -534,15 +348,15 @@ namespace core
         public static void PrebuildAssets(string[] assetPaths, params object[] options)
         {
             string[] allPaths = AssetDatabase.GetDependencies(assetPaths);
-            PreprocessAsset(allPaths, "Verify Asset (1/3)", (a, path)=>
+            EditorTraversal.PreprocessAsset(allPaths, "Verify Asset (1/3)", (a, path)=>
             {
                 ComponentBuildProcess.VerifyComponents(a, options);
             });
-            PreprocessAsset(allPaths, "Prebuild (2/3)", (a, path)=> {
+            EditorTraversal.PreprocessAsset(allPaths, "Prebuild (2/3)", (a, path)=> {
                 ComponentBuildProcess.PreprocessComponents(a, options);
                 AssetBuildProcess.PreprocessAssets(path, a, options);
             });
-            PreprocessAsset(allPaths, "Prebuild Over (3/3)", (a, path)=> {
+            EditorTraversal.PreprocessAsset(allPaths, "Prebuild Over (3/3)", (a, path)=> {
                 ComponentBuildProcess.PreprocessOver(a, options);
             });
            

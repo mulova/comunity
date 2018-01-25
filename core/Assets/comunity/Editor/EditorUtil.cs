@@ -103,6 +103,27 @@ namespace core
                 return new ExecOutput(e);
             }
         }
+
+        public static bool DisplayProgressBar(string title, string info, float progress)
+        {
+            if (SystemInfo.graphicsDeviceID != 0)
+            {
+                return EditorUtility.DisplayCancelableProgressBar(title, info, progress);
+            }
+//            log.Debug("{0} ({1:P2})", info, progress);
+            return false;
+        }
+
+        public static void SaveScene()
+        {
+            if (!EditorSceneBridge.currentScene.IsEmpty()&&EditorSceneBridge.currentScene != "Untitled")
+            {
+                if (EditorSceneBridge.isSceneDirty)
+                {
+                    EditorSceneBridge.SaveScene();
+                }
+            }
+        }
     }
 }
 

@@ -9,6 +9,7 @@ using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
 using core;
 using System;
+using comunity;
 
 namespace core
 {
@@ -156,7 +157,7 @@ namespace core
                 }
             } else
             {
-                BuildScript.ForEachScene(roots => {
+                EditorTraversal.ForEachScene(roots => {
                     SearchTransforms(searchObj, roots, store);
                     if (searchObj is GameObject)
                     {

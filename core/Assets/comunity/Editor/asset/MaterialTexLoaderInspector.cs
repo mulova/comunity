@@ -20,10 +20,10 @@ namespace core {
 			DrawDefaultInspector ();
 			EditorGUILayout.BeginHorizontal();
 			if (GUILayout.Button("Set")) {
-				MaterialTexLoaderBuildProcessor.SetMatTexture(loader);
+				SetMatTexture(loader);
 			}
 			if (GUILayout.Button("Clear")) {
-				MaterialTexLoaderBuildProcessor.ClearMatTexture(loader);
+				ClearMatTexture(loader);
 			}
 			if (GUILayout.Button("Scan")) {
 				EditorAssetUtil.ScanFolder("MaterialTexLoader_ScanFolder_"+loader.name, FileType.Material, files=> {
@@ -55,5 +55,25 @@ namespace core {
 			}
 			EditorGUILayout.EndHorizontal();
 		}
+
+        public static void SetMatTexture(MaterialTexLoader l)
+        {
+            foreach (MaterialTexData d in l.materials)
+            {
+                d.material.SetTexture(MaterialTexLoader.TEX1, AssetDatabase.LoadAssetAtPath<Texture>(d.tex1.GetEditorPath()));
+                d.material.SetTexture(MaterialTexLoader.TEX2, AssetDatabase.LoadAssetAtPath<Texture>(d.tex2.GetEditorPath()));
+                CompatibilityEditor.SetDirty(d.material);
+            }
+        }
+
+        public static void ClearMatTexture(MaterialTexLoader l)
+        {
+            foreach (MaterialTexData d in l.materials)
+            {
+                d.material.SetTexture(MaterialTexLoader.TEX1, null);
+                d.material.SetTexture(MaterialTexLoader.TEX2, null);
+                CompatibilityEditor.SetDirty(d.material);
+            }
+        }
 	}
 }
