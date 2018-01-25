@@ -4,6 +4,7 @@ using System;
 using UnityEngine;
 using UnityEditor;
 using commons;
+using comunity;
 
 namespace core
 {
@@ -261,6 +262,11 @@ namespace core
 				return null;
 			}
 		}
+
+        protected void SetDirty(Object o)
+        {
+            EditorTraversal.SetDirty(o);
+        }
 
 		public static void Reset()
 		{

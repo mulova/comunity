@@ -5,6 +5,7 @@ using System;
 using Object = UnityEngine.Object;
 using System.Text.RegularExpressions;
 using commons;
+using comunity;
 
 namespace core
 {
@@ -224,6 +225,11 @@ namespace core
                     EditorUtility.DisplayDialog("Verify Fails", verifyError, "OK");
                 }
             }
+        }
+
+        protected void SetDirty(Object o)
+        {
+            EditorTraversal.SetDirty(o);
         }
     }
 }

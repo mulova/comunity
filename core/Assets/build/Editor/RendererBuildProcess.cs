@@ -28,9 +28,9 @@ namespace core
                     aref.SetPath(tex);
                     setter.textures.Clear();
                     setter.textures.Add(aref);
-                    BuildScript.SetDirty(r.gameObject);
-                    BuildScript.SetDirty(loader);
-                    BuildScript.SetDirty(setter);
+                    SetDirty(r.gameObject);
+                    SetDirty(loader);
+                    SetDirty(setter);
                 }
             }
         }
