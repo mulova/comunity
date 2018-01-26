@@ -9,10 +9,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{98573266-4709-9996-95D8-DBAA699873B9}</ProjectGuid>
+    <ProjectGuid>{532953DA-F4D1-93F5-C270-222EF5227187}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>ani</AssemblyName>
+    <AssemblyName>ani-editor</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>Assets</BaseDirectory>
@@ -51,21 +51,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\ani\AnimationClipEx.cs" />
-     <Compile Include="Assets\ani\AnimationClipListingAttribute.cs" />
-     <Compile Include="Assets\ani\AnimationEx.cs" />
-     <Compile Include="Assets\ani\AnimatorEx.cs" />
-     <Compile Include="Assets\ani\AnimEventReceiver.cs" />
-     <Compile Include="Assets\ani\AnimState.cs" />
-     <Compile Include="Assets\ani\AnimTrigger.cs" />
-     <Compile Include="Assets\ani\AnimTriggerElement.cs" />
-     <Compile Include="Assets\ani\AnimTurn.cs" />
-     <Compile Include="Assets\ani\AnimUtil.cs" />
-     <Compile Include="Assets\ani\IAnimStateListener.cs" />
-     <Compile Include="Assets\ani\IgnoreTimeScale.cs" />
-     <Compile Include="Assets\ani\PhyxTurn.cs" />
-     <Compile Include="Assets\ani\TimeOutTurn.cs" />
-     <None Include="Assets\ani\ani.asmdef" />
+     <Compile Include="Assets\ani\Editor\AnimationClipDrawer.cs" />
+     <Compile Include="Assets\ani\Editor\AnimationTargetRenamer.cs" />
+     <Compile Include="Assets\ani\Editor\AnimTriggerInspector.cs" />
+     <None Include="Assets\ani\Editor\ani-editor.asmdef" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity2017.3/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -165,6 +154,10 @@
       <Project>{C7C8D5F3-87E5-BBEA-F41A-0F2AC8FC8CAC}</Project>      <Name>commons</Name>    </ProjectReference>
     <ProjectReference Include="comunity.csproj">
       <Project>{1C98CB76-9F1B-4088-FF31-61D5AC04E3E7}</Project>      <Name>comunity</Name>    </ProjectReference>
+    <ProjectReference Include="comunity-editor.csproj">
+      <Project>{28BE8144-87AC-BC11-8591-0CC6079F9470}</Project>      <Name>comunity-editor</Name>    </ProjectReference>
+    <ProjectReference Include="ani.csproj">
+      <Project>{98573266-4709-9996-95D8-DBAA699873B9}</Project>      <Name>ani</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

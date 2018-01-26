@@ -1,0 +1,11 @@
+{
+    "name": "ani-editor",
+    "references": [
+        "commons",
+        "comunity",
+        "comunity-editor",
+        "ani"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": []
+}

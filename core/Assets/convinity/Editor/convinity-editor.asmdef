@@ -1,0 +1,13 @@
+{
+    "name": "convinity-editor",
+    "references": [
+        "commons",
+        "comunity",
+        "comunity-editor",
+        "convinity"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": []
+}

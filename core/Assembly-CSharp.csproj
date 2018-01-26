@@ -149,14 +149,14 @@
   <ItemGroup>
     <ProjectReference Include="commons.csproj">
       <Project>{C7C8D5F3-87E5-BBEA-F41A-0F2AC8FC8CAC}</Project>      <Name>commons</Name>    </ProjectReference>
-    <ProjectReference Include="convinity.csproj">
-      <Project>{0F34279B-5757-4224-A404-CE52F73F714D}</Project>      <Name>convinity</Name>    </ProjectReference>
+    <ProjectReference Include="convinity-editor.csproj">
+      <Project>{616ECEC5-E30B-9619-BEFA-7053F76B93D9}</Project>      <Name>convinity-editor</Name>    </ProjectReference>
     <ProjectReference Include="build.csproj">
       <Project>{04E8117F-1702-F6D5-DF41-8DA5E3F0849C}</Project>      <Name>build</Name>    </ProjectReference>
     <ProjectReference Include="etc.csproj">
       <Project>{6A989513-84FC-882B-05C4-06A8CC22DACD}</Project>      <Name>etc</Name>    </ProjectReference>
-    <ProjectReference Include="ani.csproj">
-      <Project>{98573266-4709-9996-95D8-DBAA699873B9}</Project>      <Name>ani</Name>    </ProjectReference>
+    <ProjectReference Include="comunity-editor.csproj">
+      <Project>{28BE8144-87AC-BC11-8591-0CC6079F9470}</Project>      <Name>comunity-editor</Name>    </ProjectReference>
     <ProjectReference Include="comunity.csproj">
       <Project>{1C98CB76-9F1B-4088-FF31-61D5AC04E3E7}</Project>      <Name>comunity</Name>    </ProjectReference>
   </ItemGroup>

@@ -56,10 +56,8 @@
      <Compile Include="Assets\etc\platform\android\Android.cs" />
      <Compile Include="Assets\etc\platform\android\AndroidActivity.cs" />
      <Compile Include="Assets\etc\platform\android\AndroidAudioManager.cs" />
-     <Compile Include="Assets\etc\Tool\AnimationTargetRenamer.cs" />
      <Compile Include="Assets\etc\Tool\AssetBundleAnalyzer.cs" />
      <Compile Include="Assets\etc\Tool\ComponentCopy.cs" />
-     <Compile Include="Assets\etc\Tool\ImageMenu.cs" />
      <Compile Include="Assets\etc\Tool\LZFWindow.cs" />
      <Compile Include="Assets\etc\Tool\RealtimeInspector\AttributeInspector.cs" />
      <Compile Include="Assets\etc\Tool\RealtimeInspector\Descriptor.cs" />
