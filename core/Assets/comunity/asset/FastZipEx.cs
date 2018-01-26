@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-using crypto.ex;
 
 #if SHARPZIPLIB
+using crypto.ex;
 
 namespace ICSharpCode.SharpZipLib.Zip {
 	public static class FastZipEx {

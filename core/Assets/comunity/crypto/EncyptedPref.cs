@@ -13,7 +13,7 @@ using crypto.ex;
 namespace core
 {
 	
-    public static class Game
+    public static class EncryptedPref
     {
         private static string privateKey = "9ETrEsWaFRach3gexaDr";
         // Add some values to this array before using EncryptedPlayerPrefs

@@ -17,6 +17,16 @@ namespace core
         
         private int newResVer;
         private DownloadStep step = DownloadStep.Null;
+        private GamePref _pref;
+        private GamePref pref {
+            get {
+                if (_pref == null)
+                {
+                    _pref = new GamePref("_cdn_pref_", true);
+                }
+                return _pref;
+            }
+        }
         
         private void InitDownloader()
         {
@@ -55,8 +65,8 @@ namespace core
             newResVer = 0;
             if (int.TryParse(verStr.Trim(), out newResVer))
             {
-                int savedResVer = Game.pref.GetInt(PREF_CDN_RES_VER, 0); 
-                string savedClientVer = Game.pref.GetString(PREF_CLIENT_RES_VER, string.Empty); 
+                int savedResVer = pref.GetInt(PREF_CDN_RES_VER, 0); 
+                string savedClientVer = pref.GetString(PREF_CLIENT_RES_VER, string.Empty); 
 #if !UNITY_WEBGL
                 if (savedResVer == 0&&StreamingAssetLoader.version > 0)
                 {
@@ -102,8 +112,8 @@ namespace core
                 if (e == null)
                 {
                     step = DownloadStep.Done;
-                    Game.pref.SetInt(PREF_CDN_RES_VER, newResVer);
-                    Game.pref.SetString(PREF_CLIENT_RES_VER, BuildConfig.RES_VERSION);
+                    pref.SetInt(PREF_CDN_RES_VER, newResVer);
+                    pref.SetString(PREF_CLIENT_RES_VER, BuildConfig.RES_VERSION);
                 } else
                 {
                     step = DownloadStep.Canceled;

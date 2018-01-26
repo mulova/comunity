@@ -11,6 +11,20 @@ namespace core
         public TextAsset initial;
         public AssetRef[] assets;
 
+        private static readonly GamePref _pref = new GamePref("_lexreg", true);
+        private const string LANG = "LANG";
+        public static SystemLanguage lang
+        { 
+            get 
+            {
+                return _pref.GetEnum<SystemLanguage>(LANG, SystemLanguage.English);
+            }
+            set
+            {
+                _pref.SetEnum(LANG, value);
+            }
+        }
+
         public void LoadLexicons()
         {
             Lexicon.Clear();
@@ -35,16 +49,16 @@ namespace core
         public static SystemLanguage GetLanguage()
         {
             // 1. Stored language takes precedence.
-            SystemLanguage lang = Game.lang;
-            if (IsValidLanguage(lang.ToString()))
+            SystemLanguage l = LexiconRegistry.lang;
+            if (IsValidLanguage(l.ToString()))
             {
-                return lang;
+                return l;
             } else if (BuildConfig.LANGUAGE.IsNotEmpty())
             {
                 // return first language in 'lang' value in platform_data.bytes
                 return BuildConfig.LANGUAGE.SplitCSV()[0].ParseEnum<SystemLanguage>(SystemLanguage.English);
             }
-            return lang;
+            return l;
 
         }
 

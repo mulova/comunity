@@ -70,7 +70,6 @@
      <Compile Include="Assets\comunity\asset\FastZipEx.cs" />
      <Compile Include="Assets\comunity\asset\FileAssetLoader.cs" />
      <Compile Include="Assets\comunity\asset\GameObjectPool.cs" />
-     <Compile Include="Assets\comunity\asset\HashFunction.cs" />
      <Compile Include="Assets\comunity\asset\IAssetLoader.cs" />
      <Compile Include="Assets\comunity\asset\IdObject.cs" />
      <Compile Include="Assets\comunity\asset\IndexTable.cs" />
@@ -102,7 +101,6 @@
      <Compile Include="Assets\comunity\CompatibilityEditor.cs" />
      <Compile Include="Assets\comunity\config\AndroidPlatformMethods.cs" />
      <Compile Include="Assets\comunity\config\BuildConfig.cs" />
-     <Compile Include="Assets\comunity\config\Game.cs" />
      <Compile Include="Assets\comunity\config\GamePref.cs" />
      <Compile Include="Assets\comunity\config\IosPlatformMethods.cs" />
      <Compile Include="Assets\comunity\config\IPlatformMethods.cs" />
@@ -113,7 +111,9 @@
      <Compile Include="Assets\comunity\crypto\AES.cs" />
      <Compile Include="Assets\comunity\crypto\boolc.cs" />
      <Compile Include="Assets\comunity\crypto\doublec.cs" />
+     <Compile Include="Assets\comunity\crypto\EncyptedPref.cs" />
      <Compile Include="Assets\comunity\crypto\floatc.cs" />
+     <Compile Include="Assets\comunity\crypto\HashFunction.cs" />
      <Compile Include="Assets\comunity\crypto\intc.cs" />
      <Compile Include="Assets\comunity\crypto\longc.cs" />
      <Compile Include="Assets\comunity\crypto\MD5.cs" />
@@ -132,7 +132,6 @@
      <Compile Include="Assets\comunity\i18n\LangSwitch.cs" />
      <Compile Include="Assets\comunity\i18n\SystemLanguageEx.cs" />
      <Compile Include="Assets\comunity\i18n\Translator.cs" />
-     <Compile Include="Assets\comunity\image\TextureImporterEx.cs" />
      <Compile Include="Assets\comunity\input\InputAxis.cs" />
      <Compile Include="Assets\comunity\input\InputAxisListener.cs" />
      <Compile Include="Assets\comunity\input\InputAxisMapData.cs" />
