@@ -13,7 +13,7 @@ using System;
 /**
 * Draw Enum Popup UI if the enum class source is set correctly
 */
-namespace core
+namespace comunity
 {
     public sealed class EnumParser
     {

@@ -12,7 +12,7 @@ using UnityEditor.Callbacks;
 using UnityEditor.SceneManagement;
 using comunity;
 
-namespace core
+namespace build
 {
     public static class BuildScript
     {

@@ -6,7 +6,7 @@ using System.IO;
 
 using UnityEditor.SceneManagement;
 
-namespace core
+namespace comunity
 {
     [InitializeOnLoad]
     public class DiMenu : UnityEditor.AssetModificationProcessor

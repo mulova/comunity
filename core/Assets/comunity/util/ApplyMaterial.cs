@@ -7,7 +7,7 @@
 using UnityEngine;
 using commons;
 
-namespace core {
+namespace comunity {
 
     public class ApplyMaterialColor : Apply<Material> {
 		private string name;

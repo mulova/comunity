@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace core {
+namespace comunity {
 	public class ComponentUtil {
 		
 		/**

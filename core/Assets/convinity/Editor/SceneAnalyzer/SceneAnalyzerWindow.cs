@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
+using comunity;
 
-namespace core
+namespace convinity
 {
     public class SceneAnalyzerWindow : TabbedEditorWindow {
         

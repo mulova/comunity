@@ -3,8 +3,9 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEditor;
 using commons;
+using comunity;
 
-namespace core
+namespace build
 {
     public class LexiconRegistryBuildProcessor : AssetBuildProcess
     {

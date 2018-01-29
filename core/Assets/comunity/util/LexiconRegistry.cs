@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace core
+namespace comunity
 {
     [CreateAssetMenu(menuName="Scriptable Object/Lexicon Registry", fileName="Lexicon")]
     public class LexiconRegistry : ScriptableObject

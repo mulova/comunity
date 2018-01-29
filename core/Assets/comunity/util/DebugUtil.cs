@@ -9,7 +9,7 @@ using System.Text;
 using UnityEngine;
 
 
-namespace core {
+namespace comunity {
 	public class DebugUtil {
 		/**
 		 * @trim x, y, z 각 요소의 string 길이

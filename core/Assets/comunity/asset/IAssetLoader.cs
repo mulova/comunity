@@ -3,7 +3,7 @@ using UnityEngine;
 using Object = UnityEngine.Object;
 using System.Collections.Generic;
 
-namespace core {
+namespace comunity {
 
 	public interface IAssetLoader
 	{

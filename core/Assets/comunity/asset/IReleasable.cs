@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace core
+namespace comunity
 {
     public interface IReleasable
     {

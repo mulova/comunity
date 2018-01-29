@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System;
 using Object = System.Object;
 
-namespace core
+namespace comunity
 {
     [CustomEditor(typeof(MethodCall))]
     public class MethodCallInspector : Editor {

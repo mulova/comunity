@@ -8,7 +8,7 @@ using Object = UnityEngine.Object;
 using System.IO;
 using editor.ex;
 
-namespace core
+namespace comunity
 {
 	[CustomPropertyDrawer(typeof(MaterialTexData))]
 	public class MaterialTexDataDrawer : PropertyDrawerBase

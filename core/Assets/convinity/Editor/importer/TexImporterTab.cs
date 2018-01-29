@@ -4,8 +4,9 @@ using UnityEngine;
 using System.Collections.Generic;
 
 using math.ex;
+using comunity;
 
-namespace core {
+namespace convinity {
 
 	public class TexImporterTab : EditorTab {
 		private static List<TexImport> settings = new List<TexImport>();

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using commons;
 
-namespace core
+namespace comunity
 {
     /// <summary>
     /// Game preference.

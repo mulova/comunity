@@ -4,8 +4,9 @@ using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using commons;
+using comunity;
 
-namespace core {
+namespace convinity {
 	[System.Serializable]
 	public class ShortcutSection {
 		public static readonly string ASSET_EXT = ".asc";

@@ -1,5 +1,5 @@
 ﻿#if UNITY_ANDROID
-namespace core
+namespace comunity
 {
 	public class AndroidPlatformMethods : IPlatformMethods
 	{

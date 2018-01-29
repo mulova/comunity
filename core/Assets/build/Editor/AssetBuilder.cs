@@ -8,8 +8,9 @@ using System.Text;
 using commons;
 using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
+using comunity;
 
-namespace core
+namespace build
 {
 	public class AssetBuilder
 	{

@@ -2,7 +2,7 @@ using System;
 using commons;
 
 
-namespace core {
+namespace comunity {
 	[System.Serializable]
 	public class InputEventMapping
 	{

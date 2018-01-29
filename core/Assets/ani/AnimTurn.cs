@@ -2,8 +2,9 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 using commons;
+using comunity;
 
-namespace core {
+namespace ani {
 	public class AnimTurn : SeqTurn {
 		private Animation anim;
 		public List<string> clipNames = new List<string>();

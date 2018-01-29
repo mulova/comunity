@@ -9,7 +9,7 @@ using UnityEngine;
 using drawer.ex;
 using commons;
 
-namespace core
+namespace comunity
 {
     [CustomEditor(typeof(LogInitializer))]
     public class LogInitializerInspector : Editor

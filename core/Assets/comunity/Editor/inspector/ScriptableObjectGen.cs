@@ -2,7 +2,7 @@ using UnityEditor;
 using UnityEngine;
 using commons;
 
-namespace core
+namespace comunity
 {
     public class ScriptableObjectGen
     {

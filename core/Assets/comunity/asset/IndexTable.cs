@@ -3,7 +3,7 @@ using System.Collections;
 using System;
 using commons;
 
-namespace core
+namespace comunity
 {
     public abstract class IndexTable<R> : Loggable, IEnumerable<KeyValuePair<string, R>> where R:class, new()
     {

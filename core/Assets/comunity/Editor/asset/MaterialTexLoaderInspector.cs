@@ -6,7 +6,7 @@ using UnityEngine;
 using System.IO;
 using commons;
 
-namespace core {
+namespace comunity {
 	[CustomEditor(typeof(MaterialTexLoader))]
 	public class MaterialTexLoaderInspector : Editor {
 		

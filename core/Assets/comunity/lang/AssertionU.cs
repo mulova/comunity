@@ -10,7 +10,7 @@ using System.Diagnostics;
 using Object = UnityEngine.Object;
 using commons;
 
-namespace core
+namespace comunity
 {
 	public static class AssertionU
 	{

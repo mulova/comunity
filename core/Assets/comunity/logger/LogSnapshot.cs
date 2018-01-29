@@ -9,7 +9,7 @@ using System;
 using UnityEngine;
 using commons;
 
-namespace core {
+namespace comunity {
 	[Serializable]
 	public class LogSnapshot {
         public LogLevel logLevel = LogLevel.WARN;

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections.Generic;
-using core;
+using comunity;
 
 public static class Physics2DEx
 {

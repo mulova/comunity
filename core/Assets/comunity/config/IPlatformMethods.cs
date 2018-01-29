@@ -1,6 +1,6 @@
 using System;
 
-namespace core
+namespace comunity
 {
 	public interface IPlatformMethods
 	{

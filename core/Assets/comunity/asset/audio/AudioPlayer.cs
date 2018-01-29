@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 
-namespace core
+namespace comunity
 {
     /// <summary>
     /// if the downloader is set, assets are downloaded and loaded automatically.

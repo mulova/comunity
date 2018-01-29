@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 using System;
 using commons;
 
-namespace core {
+namespace comunity {
 	
 	/**
 	 * @author mulova

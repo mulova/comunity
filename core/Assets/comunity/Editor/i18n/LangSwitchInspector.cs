@@ -4,7 +4,7 @@ using Object = UnityEngine.Object;
 
 using System.Collections.Generic;
 
-namespace core
+namespace comunity
 {
     [CustomEditor(typeof(LangSwitch))]
     public class LangSwitchInspector : Editor

@@ -10,7 +10,7 @@ using System.Text;
 using UnityEngine;
 using commons;
 
-namespace core
+namespace comunity
 {
     public static class EditorUtil
     {

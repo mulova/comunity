@@ -1,7 +1,7 @@
 ﻿using System;
 using Object = UnityEngine.Object;
 
-namespace core
+namespace comunity
 {
 	public class IdObject
 	{

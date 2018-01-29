@@ -4,7 +4,7 @@ using System;
 using System.Runtime.Serialization;
 using commons;
 
-namespace core {
+namespace comunity {
 	[Serializable]
 	public class InputAxisMapData : EnumData {
 		public EnumWrapper[] axis = new EnumWrapper[0];

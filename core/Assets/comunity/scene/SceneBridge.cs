@@ -6,7 +6,7 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace core
+namespace comunity
 {
 	public static class SceneBridge
 	{

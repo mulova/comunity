@@ -9,7 +9,7 @@ using UnityEngine;
 using Object = UnityEngine.Object;
 using commons;
 
-namespace core
+namespace comunity
 {
     public class StrObjArrInspector<T, O> : ArrInspector<T> where T:ICloneable, new() where O : Object {
         private string stringVar;

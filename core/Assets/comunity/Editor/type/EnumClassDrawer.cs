@@ -11,7 +11,7 @@ using System.Collections;
 using UnityEditor.SceneManagement;
 using commons;
 
-namespace core
+namespace comunity
 {
 //	[CustomPropertyDrawer(typeof(EnumClass))]
 	public abstract class EnumClassDrawer<T> : PropertyDrawerBase where T: class

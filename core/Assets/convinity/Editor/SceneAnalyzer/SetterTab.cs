@@ -13,8 +13,9 @@ using Object = UnityEngine.Object;
 using System.Text;
 using System.Reflection;
 using commons;
+using comunity;
 
-namespace core {
+namespace convinity {
 	class SetterTab : EditorTab {
 		
 		public SetterTab(TabbedEditorWindow window) : base("Setter", window) {

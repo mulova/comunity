@@ -3,7 +3,7 @@ using System.Collections;
 using System.Reflection;
 using commons;
 
-namespace core {
+namespace comunity {
 
 	/// <summary>
 	/// Singleton should not be disabled

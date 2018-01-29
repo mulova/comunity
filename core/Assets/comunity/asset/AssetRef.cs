@@ -4,7 +4,7 @@ using Object = UnityEngine.Object;
 using UnityEngine.Serialization;
 using commons;
 
-namespace core
+namespace comunity
 {
     /// <summary>
     /// Assets in Resources/ directory is not strongly referenced.

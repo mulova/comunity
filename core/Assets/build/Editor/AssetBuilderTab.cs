@@ -5,8 +5,9 @@ using Object = UnityEngine.Object;
 using System.IO;
 using System.Text;
 using System;
+using comunity;
 
-namespace core
+namespace build
 {
 	public class AssetBuilderTab : EditorTab
 	{

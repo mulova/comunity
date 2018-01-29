@@ -4,8 +4,9 @@ using System.IO;
 using System.Collections.Generic;
 using System;
 using Object = UnityEngine.Object;
+using comunity;
 
-namespace core {
+namespace convinity {
 	public class CustomAssetPostprocessor : AssetPostprocessor {
 		public static List<TexImport> texSettings;
 		public static List<AudioImport> audioSettings;
@@ -36,7 +37,7 @@ namespace core {
 	}
 }
 
-namespace core {
+namespace convinity {
 	public class AssetImporterWindow : TabbedEditorWindow {
 		protected override void CreateTabs() {
 			AddTab(new TexImporterTab(this));

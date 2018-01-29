@@ -1,7 +1,8 @@
 using System;
 using UnityEngine;
+using comunity;
 
-namespace core {
+namespace ani {
 	public class PhyxTurn : SeqTurn {
 		private PhyxObj obj;
 		

@@ -1,10 +1,10 @@
 using UnityEngine;
-using core;
+using comunity;
 using UnityEngine.SceneManagement;
 using System;
 using System.Collections;
 
-namespace core
+namespace comunity
 {
     public class SystemMenu : MonoBehaviour {
         

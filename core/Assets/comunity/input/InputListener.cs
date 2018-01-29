@@ -1,7 +1,7 @@
 ﻿
 using UnityEngine;
 
-namespace core {
+namespace comunity {
 	public interface InputListener {
 		void OnButton(KeyCode button, ButtonState state);
 		/// <summary>

@@ -2,7 +2,7 @@ using System;
 using System.Security.Cryptography;
 using UnityEngine;
 
-namespace core
+namespace comunity
 {
     /// <summary>
     /// Get Build setting from 'Resources/build_configuration'

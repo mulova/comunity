@@ -12,7 +12,7 @@ using System.Text;
 using System;
 using UnityEngine.SceneManagement;
 
-namespace core
+namespace comunity
 {
     public static class TransformUtil
     {

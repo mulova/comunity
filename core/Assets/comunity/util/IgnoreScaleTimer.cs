@@ -2,7 +2,7 @@
 using System;
 using System.Collections;
 
-namespace core
+namespace comunity
 {
     public class IgnoreScaleTimer : MonoBehaviour
     {

@@ -2,7 +2,7 @@
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace core
+namespace ani
 {
     public class AnimState : StateMachineBehaviour
     {

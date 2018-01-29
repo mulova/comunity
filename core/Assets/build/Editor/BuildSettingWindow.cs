@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEditor;
 using System.Collections;
+using comunity;
 
-namespace core
+namespace build
 {
     public class BuildSettingWindow : TabbedEditorWindow
     {

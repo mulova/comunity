@@ -6,7 +6,7 @@ using math.ex;
 
 
 
-namespace core
+namespace comunity
 {
     [RequireComponent(typeof(MeshTexLoader))]
     public class MeshTexSetter : Script

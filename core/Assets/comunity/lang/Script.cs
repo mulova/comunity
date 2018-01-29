@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections;
 using commons;
 
-namespace core
+namespace comunity
 {
     public class Script : MonoBehaviour
     {

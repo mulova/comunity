@@ -5,7 +5,7 @@ using Object = UnityEngine.Object;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
-namespace core
+namespace convinity
 {
     public class ScenePath
     {

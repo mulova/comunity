@@ -7,8 +7,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Reflection;
 using System;
+using comunity;
 
-namespace core
+namespace etc
 {
     public class ComponentCopy
     {

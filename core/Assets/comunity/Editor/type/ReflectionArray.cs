@@ -12,7 +12,7 @@ using System.Collections;
 using commons;
 
 
-namespace core
+namespace comunity
 {
     /**
     * SerializedObject를 사용하지 않는 ArrayInspector

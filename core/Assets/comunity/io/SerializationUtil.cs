@@ -5,7 +5,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using commons;
 
-namespace core {
+namespace comunity {
 	public class SerializationUtil  {
 		public static Color ReadColor(string name, SerializationInfo info, StreamingContext context) {
 			Color c;

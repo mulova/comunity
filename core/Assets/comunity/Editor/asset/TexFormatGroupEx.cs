@@ -11,7 +11,7 @@ using System.Text.RegularExpressions;
 using Object = UnityEngine.Object;
 using commons;
 
-namespace core
+namespace comunity
 {
 	public static class TexFormatGroupEx
 	{

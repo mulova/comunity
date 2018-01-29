@@ -11,7 +11,7 @@ using Object = UnityEngine.Object;
 
 using System.Text;
 
-namespace core {
+namespace comunity {
 	[CustomEditor(typeof(AudioTrigger))]
 	public class AudioTriggerInspector : Editor {
 		private AudioTriggerInspectorImpl impl;

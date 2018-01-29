@@ -6,10 +6,10 @@
 
 using UnityEditor;
 using UnityEngine;
+using comunity;
 
 
-
-namespace core {
+namespace convinity {
 	public class CheckerWindow : TabbedEditorWindow
 	{
 		[MenuItem("Tools/unilova/Etc/Checker")]

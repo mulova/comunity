@@ -6,7 +6,7 @@
 using Object = UnityEngine.Object;
 using System.IO;
 
-namespace core
+namespace comunity
 {
 	public class Web
 	{

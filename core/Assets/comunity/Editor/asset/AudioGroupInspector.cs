@@ -6,7 +6,7 @@ using System.Text;
 using System.IO;
 using commons;
 
-namespace core
+namespace comunity
 {
     [CustomEditor(typeof(AudioGroup))]
     public class AudioGroupInspector : Editor

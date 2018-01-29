@@ -7,7 +7,7 @@ using System.Text;
 using commons;
 
 
-namespace core
+namespace comunity
 {
     public class AudioTriggerInspectorImpl
     {

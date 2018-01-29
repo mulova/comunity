@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace core
+namespace comunity
 {
     /// <summary>
     /// Track the scene changes

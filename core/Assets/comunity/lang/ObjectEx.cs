@@ -10,7 +10,7 @@ using Object = UnityEngine.Object;
 using UnityEngine;
 using System.Text;
 using commons;
-using core;
+using comunity;
 
 namespace UnityEngine
 {

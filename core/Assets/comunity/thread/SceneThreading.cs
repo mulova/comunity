@@ -8,7 +8,7 @@ using UnityEngine;
 using System.Collections;
 using System;
 
-namespace core {
+namespace comunity {
 	public class SceneThreading : SingletonBehaviour<SceneThreading> {
 		private ActionQueue queue = new ActionQueue();
 

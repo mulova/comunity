@@ -6,7 +6,7 @@
 
 using UnityEngine;
 
-namespace core {
+namespace comunity {
 	public class Dummy
 	{
 		private static GameObject dummyObject;

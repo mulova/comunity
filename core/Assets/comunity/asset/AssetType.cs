@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-namespace core {
+namespace comunity {
 
 	public enum AssetType {
 		Asset,

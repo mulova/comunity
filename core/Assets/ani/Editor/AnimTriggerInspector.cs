@@ -4,9 +4,9 @@ using Object = UnityEngine.Object;
 using System.Collections.Generic;
 using UnityEditorInternal;
 using AnimatorControllerParameterType = UnityEngine.AnimatorControllerParameterType;
-using type.ex;
+using comunity;
 
-namespace core
+namespace ani
 {
     [CustomEditor(typeof(AnimTrigger))]
     public class AnimTriggerInspector : Editor

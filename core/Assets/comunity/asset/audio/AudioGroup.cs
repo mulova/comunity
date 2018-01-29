@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Nullable = commons.Nullable;
 using Object = UnityEngine.Object;
 
-namespace core
+namespace comunity
 {
     /// <summary>
     /// if the downloader is set, assets are downloaded and loaded automatically.

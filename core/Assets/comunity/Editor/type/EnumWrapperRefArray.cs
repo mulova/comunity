@@ -10,7 +10,7 @@ using Object = UnityEngine.Object;
 using UnityEngine;
 using commons;
 
-namespace core
+namespace comunity
 {
     /**
     * @E enum type

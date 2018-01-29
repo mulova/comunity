@@ -23,8 +23,9 @@
 using System.IO;
 using UnityEditor;
 using UnityEngine;
+using comunity;
 
-namespace core
+namespace etc
 {
     public class CCDistanceMapGeneratorWindow : EditorWindow {
         

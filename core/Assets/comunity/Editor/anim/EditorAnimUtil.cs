@@ -9,7 +9,7 @@ using UnityEditor.Animations;
 using UnityEditor;
 using commons;
 
-namespace core {
+namespace comunity {
 	public static class EditorAnimUtil {
 		public static string[] GetAnimatorParameters(Animator anim, AnimatorControllerParameterType paramType) {
 			if (anim != null) {

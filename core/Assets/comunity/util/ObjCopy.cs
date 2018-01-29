@@ -10,7 +10,7 @@ using UnityEngine;
 using System;
 using commons;
 
-namespace core {
+namespace comunity {
 	/**
 	 * Copy object's property, field values.
 	 * Exclude() to exclude specific type's properties/fields

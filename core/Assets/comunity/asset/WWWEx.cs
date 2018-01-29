@@ -7,7 +7,7 @@ using UnityEngine;
 using System;
 using System.Collections;
 using Object = UnityEngine.Object;
-using core;
+using comunity;
 
 namespace UnityEngine
 {

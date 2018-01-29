@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Threading;
 using commons;
 
-namespace core
+namespace comunity
 {
 /// <summary>
 /// Download and unzip files

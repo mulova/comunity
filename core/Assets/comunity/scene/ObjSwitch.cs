@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System;
 using commons;
 
-namespace core
+namespace comunity
 {
     public class ObjSwitch : Script
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace core {
+namespace comunity {
 	public enum InputEvent {
 		Null = 0,
 		Skip = 1,

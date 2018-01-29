@@ -10,7 +10,7 @@ using UnityEngine;
 using commons;
 
 
-namespace core {
+namespace comunity {
 	public class InputEventSystem : SingletonBehaviour<InputEventSystem> {
 
 		public InputAxisMapData[] inputStateData = new InputAxisMapData[0];

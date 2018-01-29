@@ -10,7 +10,7 @@ using UnityEngine;
 using Object = UnityEngine.Object;
 using commons;
 
-namespace core
+namespace comunity
 {
     /**
     * Enum index를 기반으로 하는 배열에 사용되는 Inspector 확장

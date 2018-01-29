@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System;
 using commons;
+using comunity;
 
-namespace core {
+namespace ani {
 	public class AnimEventReceiver : MonoBehaviour {
         public const string END_CALLBACK = "OnClipEnd";
 

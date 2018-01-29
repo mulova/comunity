@@ -8,7 +8,7 @@ using UnityEngine;
 using System.Collections;
 using System;
 
-namespace core {
+namespace comunity {
 	/**
 	 * 지정된 시간후에 ShowType event를 수행한다.
 	 */

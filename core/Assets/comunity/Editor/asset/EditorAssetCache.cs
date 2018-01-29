@@ -5,7 +5,7 @@ using Object = UnityEngine.Object;
 using UnityEngine;
 
 
-namespace core
+namespace comunity
 {
 	/// <summary>
 	/// Editor 성능을 위해 가능하면 AssetDatabase를 사용하지 않고, Cache에서 가져온다.

@@ -5,7 +5,7 @@ using System;
 using System.Text;
 using commons;
 
-namespace core
+namespace comunity
 {
 	/// <summary>
 	/// text asset을 읽어 String -> String  map을 생성한다.

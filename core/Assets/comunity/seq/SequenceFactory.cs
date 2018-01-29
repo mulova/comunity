@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using commons;
 
-namespace core {
+namespace comunity {
 	public class SequenceFactory : SingletonBehaviour<SequenceFactory>
 	{
 		private MultiMap<string, Seq> seqs = new MultiMap<string, Seq>();

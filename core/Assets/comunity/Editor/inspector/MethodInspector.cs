@@ -5,7 +5,7 @@ using Object = UnityEngine.Object;
 using System.Reflection;
 using commons;
 
-namespace core
+namespace comunity
 {
     public class MethodInspector {
         private HashSet<Type> excludeCompTypes = new HashSet<Type>();

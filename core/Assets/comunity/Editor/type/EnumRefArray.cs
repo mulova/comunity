@@ -9,7 +9,7 @@ using UnityEditor;
 using Object = UnityEngine.Object;
 using UnityEngine;
 
-namespace core
+namespace comunity
 {
     /**
     * @T array item type

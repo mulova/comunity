@@ -6,7 +6,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using commons;
 
-namespace core
+namespace comunity
 {
 	
     /**

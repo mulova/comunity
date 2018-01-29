@@ -26,7 +26,7 @@ using System.Xml;
 using UnityEditor;
 using UnityEngine;
 
-namespace core
+namespace comunity
 {
     public class AndroidManifest
     {

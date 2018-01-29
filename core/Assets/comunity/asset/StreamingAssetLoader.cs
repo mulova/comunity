@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using Object = UnityEngine.Object;
 using commons;
 
-namespace core
+namespace comunity
 {
 
 	public class StreamingAssetLoader : IAssetLoader

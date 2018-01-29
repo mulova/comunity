@@ -1,11 +1,11 @@
 using System;
-using core;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using UnityEditor;
 using System.Text.RegularExpressions;
+using comunity;
 
-namespace core
+namespace build
 {
     public class TextureAssetBuildProcess : AssetBuildProcess
     {

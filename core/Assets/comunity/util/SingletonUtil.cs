@@ -9,7 +9,7 @@ using Object = UnityEngine.Object;
 using commons;
 
 
-namespace core {
+namespace comunity {
 	public static class SingletonUtil {
 		
 		public static void Awake<T>(ref T singleton, T instance) where T:Component {

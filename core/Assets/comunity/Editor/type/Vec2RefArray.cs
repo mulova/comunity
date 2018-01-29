@@ -8,7 +8,7 @@ using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace core
+namespace comunity
 {
     /**
     * @T array item type

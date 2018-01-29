@@ -5,7 +5,7 @@ using System.Reflection;
 using commons;
 using System.Collections;
 
-namespace core
+namespace comunity
 {
     /**
 	 * Search the member variable's value

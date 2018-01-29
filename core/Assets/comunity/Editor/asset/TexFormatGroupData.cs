@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 using UnityEditor;
 using commons;
 
-namespace core
+namespace comunity
 {
 	public class TexFormatGroupData : EnumClass<TexFormatGroupData>
 	{

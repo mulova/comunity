@@ -4,7 +4,7 @@ using System;
 using Object = UnityEngine.Object;
 using commons;
 
-namespace core
+namespace comunity
 {
 	public class InputListenerStack : SingletonBehaviour<InputListenerStack>
 	{

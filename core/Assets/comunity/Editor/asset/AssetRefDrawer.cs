@@ -7,7 +7,7 @@ using editor.ex;
 using UnityEngine.Assertions;
 using commons;
 
-namespace core
+namespace comunity
 {
 	[CustomPropertyDrawer(typeof(AssetRef))]
 	public class AssetRefDrawer : PropertyDrawerBase

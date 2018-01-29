@@ -1,7 +1,7 @@
 using UnityEngine;
 using commons;
 
-namespace core
+namespace build
 {
     public class BrokenAssetVerifier : AssetBuildProcess
     {

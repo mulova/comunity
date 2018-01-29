@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using commons;
 
-namespace core
+namespace comunity
 {
     [Serializable]
     public class DepData

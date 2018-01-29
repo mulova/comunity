@@ -4,7 +4,7 @@ using System.Collections;
 using System.IO;
 using System;
 
-namespace core
+namespace comunity
 {
     public class UniversalFileLogger : MonoBehaviour {
         public bool stackTrace;

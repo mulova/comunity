@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 using commons;
 
-namespace core {
+namespace comunity {
 	public class ConcurrentTurn : SeqTurn {
 		private List<SeqTurn> list = new List<SeqTurn>();
 		private Action callback;

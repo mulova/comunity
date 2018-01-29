@@ -4,10 +4,11 @@ using System.IO;
 using System.Collections.Generic;
 using System;
 using Object = UnityEngine.Object;
+using comunity;
 
 
 
-namespace core
+namespace convinity
 {
 	public class ModelImporterTab : EditorTab
 	{

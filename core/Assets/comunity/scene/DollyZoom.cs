@@ -12,7 +12,7 @@ using UnityEngine;
 /// From http://docs.unity3d.com/Documentation/Manual/DollyZoom.html
 /// </summary>
 
-namespace core
+namespace comunity
 {
 	public class DollyZoom : MonoBehaviour
 	{

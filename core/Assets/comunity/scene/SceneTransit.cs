@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-namespace core
+namespace comunity
 {
     public abstract class SceneTransit : Script
     {

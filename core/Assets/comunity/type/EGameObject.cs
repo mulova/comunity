@@ -8,7 +8,7 @@ using System;
 using UnityEngine;
 using commons;
 
-namespace core
+namespace comunity
 {
 /**
  * Enum index를 기반으로 하는 배열을 저장할 경우 사용하는 base class.

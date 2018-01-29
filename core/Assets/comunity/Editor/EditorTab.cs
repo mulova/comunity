@@ -7,7 +7,7 @@ using Rotorz.ReorderableList;
 using drawer.ex;
 using commons;
 
-namespace core {
+namespace comunity {
 	public abstract class EditorTab {
 		
 		public readonly object id;

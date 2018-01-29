@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Text;
 using crypto.ex;
 
-namespace core
+namespace comunity
 {
 	
     public static class EncryptedPref

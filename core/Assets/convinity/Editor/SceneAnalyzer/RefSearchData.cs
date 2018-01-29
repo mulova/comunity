@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEditor.SceneManagement;
 
 
-namespace core
+namespace convinity
 {
     public class RefSearchData
     {

@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEditor;
 using commons;
 
-namespace core
+namespace comunity
 {
     public class AssetLabel : EnumClass<AssetLabel> {
         public static readonly AssetLabel ALPHA_SD = new AssetLabel("Alpha_sd");

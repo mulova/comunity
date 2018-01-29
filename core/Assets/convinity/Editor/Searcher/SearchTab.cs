@@ -7,8 +7,9 @@ using Object = UnityEngine.Object;
 using System.Threading;
 using commons;
 using UnityEditor.SceneManagement;
+using comunity;
 
-namespace core
+namespace convinity
 {
     public abstract class SearchTab<T> : EditorTab where T:Object
     {

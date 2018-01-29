@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 
-namespace core
+namespace comunity
 {
     public class Lifecycle : MonoBehaviour
     {

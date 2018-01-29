@@ -6,7 +6,7 @@ using Object = UnityEngine.Object;
 using editor.ex;
 using System.Text;
 using commons;
-namespace core
+namespace comunity
 {
 	[CustomPropertyDrawer(typeof(EventListAttribute))]
 	public class EventListDrawer : PropertyDrawerBase

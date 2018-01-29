@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using commons;
 
-namespace core
+namespace comunity
 {
     public class AudioDataTable : IndexTable<AudioClipData>
     {

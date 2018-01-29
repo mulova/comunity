@@ -14,9 +14,10 @@ using UnityEngine;
 using Object = UnityEngine.Object;
 using System.Text;
 using commons;
+using comunity;
 
 
-namespace core {
+namespace convinity {
 	/// <summary>
 	/// path only: GameObject
 	/// path, comp: Component

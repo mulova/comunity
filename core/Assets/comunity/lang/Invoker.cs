@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System;
 
-namespace core
+namespace comunity
 {
     public class Invoker : MonoBehaviour
     {

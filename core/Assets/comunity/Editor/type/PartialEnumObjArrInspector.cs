@@ -10,7 +10,7 @@ using Object = UnityEngine.Object;
 using UnityEditor;
 using commons;
 
-namespace core
+namespace comunity
 {
     public class PartialEnumObjArrInspector<E, O> : ArrInspector<O> 
         where E:struct, IComparable, IConvertible, IFormattable

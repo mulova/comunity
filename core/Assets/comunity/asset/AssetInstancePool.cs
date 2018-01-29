@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using commons;
 
-namespace core {
+namespace comunity {
 	/// <summary>
 	/// instantiate or get asset from instance pool
 	/// </summary>

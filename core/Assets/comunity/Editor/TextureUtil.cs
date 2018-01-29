@@ -6,7 +6,7 @@ using System.IO;
 using commons;
 using System.Collections.Generic;
 
-namespace core
+namespace comunity
 {
     public static class TextureUtil
     {

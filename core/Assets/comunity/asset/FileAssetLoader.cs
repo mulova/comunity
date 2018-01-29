@@ -8,7 +8,7 @@ using System.Text;
 using Object = UnityEngine.Object;
 using commons;
 
-namespace core
+namespace comunity
 {
     public class FileAssetLoader : IAssetLoader
     {

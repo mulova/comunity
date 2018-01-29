@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace core
+namespace comunity
 {
     [System.Serializable]
     public class AssetGuid

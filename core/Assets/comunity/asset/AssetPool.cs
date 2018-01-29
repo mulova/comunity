@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Collections;
 using commons;
 
-namespace core {
+namespace comunity {
 	/// <summary>
 	/// Preload assets and pooling
 	/// </summary>

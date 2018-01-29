@@ -14,7 +14,7 @@ using System.Reflection;
 using commons;
 using UnityEditor.SceneManagement;
 
-namespace core
+namespace comunity
 {
 	
     /**

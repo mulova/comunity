@@ -8,7 +8,7 @@ using drawer.ex;
 using Object = UnityEngine.Object;
 using commons;
 
-namespace core
+namespace comunity
 {
 	[CustomEditor(typeof(ObjSwitch))]
 	public class ObjSwitchInspector : Editor

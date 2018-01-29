@@ -12,7 +12,7 @@ using Debug = UnityEngine.Debug;
 using System.Text;
 using commons;
 
-namespace core
+namespace comunity
 {
     public class UnityConsoleAppender : LogAppender {
         

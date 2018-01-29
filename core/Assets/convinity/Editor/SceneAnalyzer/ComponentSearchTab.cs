@@ -5,8 +5,9 @@ using Object = UnityEngine.Object;
 using System;
 using commons;
 using UnityEditor.SceneManagement;
+using comunity;
 
-namespace core
+namespace convinity
 {
     class ComponentSearchTab : SearchTab<Object>
     {

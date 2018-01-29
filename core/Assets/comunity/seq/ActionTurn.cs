@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace core {
+namespace comunity {
 	public class ActionTurn : SeqTurn {
 		private Seq.Act action;
 		private Action callback;

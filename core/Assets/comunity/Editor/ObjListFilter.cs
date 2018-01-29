@@ -5,7 +5,7 @@ using Object = UnityEngine.Object;
 using UnityEngine;
 using commons;
 
-namespace core {
+namespace comunity {
 	public class ObjListFilter<T> where T:class {
 
 		private string title;

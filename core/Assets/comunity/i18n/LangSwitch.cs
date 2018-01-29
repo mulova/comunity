@@ -9,7 +9,7 @@ using System.Collections;
 using System;
 using commons;
 
-namespace core
+namespace comunity
 {
     public class LangSwitch : MonoBehaviour {
         private static SystemLanguage lang;

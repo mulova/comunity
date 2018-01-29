@@ -2,8 +2,9 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
+using comunity;
 
-namespace core {
+namespace convinity {
 	class ColliderSearchTab : SearchTab<Collider>
 	{
 		private Camera cam;

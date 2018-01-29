@@ -3,7 +3,7 @@ using System.Net;
 using System;
 using commons;
 
-namespace core
+namespace comunity
 {
     public class WebDownloader : WebClient {
         

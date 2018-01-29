@@ -9,7 +9,7 @@ using System.Reflection;
 using Object = UnityEngine.Object;
 using UnityEngine;
 
-namespace core {
+namespace comunity {
 	public static class ObjectUtil {
 
 		public static bool EqualsEx(object o1, object o2) {

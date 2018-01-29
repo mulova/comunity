@@ -5,7 +5,7 @@
 //----------------------------------------------
 using UnityEngine;
 
-namespace core {
+namespace comunity {
 	public class SixWayCam : MonoBehaviour
 	{
 		public Camera front;

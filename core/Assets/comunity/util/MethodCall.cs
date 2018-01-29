@@ -10,7 +10,7 @@ using System.Reflection;
 using System;
 using commons;
 
-namespace core
+namespace comunity
 {
 	public class MethodCall : MonoBehaviour
 	{

@@ -3,7 +3,7 @@ using System;
 using commons;
 
 
-namespace core
+namespace comunity
 {
     public class LogInitializer : Lifecycle
     {

@@ -7,7 +7,7 @@
 using UnityEngine;
 using System;
 
-namespace core {
+namespace comunity {
 	public enum RectAlign{
 		CENTER,
 		LEFT,

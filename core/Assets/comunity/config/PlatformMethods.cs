@@ -8,7 +8,7 @@ using UnityEngine;
 using System.Collections;
 using System.Diagnostics;
 
-namespace core
+namespace comunity
 {
 	public static class PlatformMethods
 	{

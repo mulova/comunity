@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Collections;
 using Object = UnityEngine.Object;
 
-namespace core
+namespace comunity
 {
     /// <summary>
     /// TexListener is called after loaded texture is set to UITexture.

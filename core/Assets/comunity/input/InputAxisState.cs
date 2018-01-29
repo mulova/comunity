@@ -1,6 +1,6 @@
 
 
-namespace core {
+namespace comunity {
 	public enum InputAxisState
 	{
 		Null,

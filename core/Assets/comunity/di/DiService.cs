@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using commons;
 
-namespace core
+namespace comunity
 {
     [ExecuteInEditMode]
     public class DiService : MonoBehaviour

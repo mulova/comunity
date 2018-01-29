@@ -8,7 +8,7 @@ using System.ComponentModel;
 using System.Collections;
 using commons;
 
-namespace core
+namespace comunity
 {
 
     /// <summary>

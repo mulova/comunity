@@ -10,7 +10,7 @@ using System;
 
 
 
-namespace core {
+namespace comunity {
 	public class Threading : SingletonBehaviour<Threading> {
 		private ActionQueue queue = new ActionQueue();
 

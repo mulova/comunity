@@ -2,7 +2,7 @@
 using System.IO;
 using crypto.ex;
 
-namespace core
+namespace comunity
 {
 	public static class HashFunction
 	{

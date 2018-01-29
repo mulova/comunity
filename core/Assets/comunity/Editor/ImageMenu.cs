@@ -4,7 +4,7 @@ using Object = UnityEngine.Object;
 using UnityEngine;
 using System.IO;
 
-namespace core
+namespace comunity
 {
     public static class ImageMenu
     {

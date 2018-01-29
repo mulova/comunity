@@ -14,8 +14,9 @@ using System.Text;
 using System.Reflection;
 using Nullable = commons.Nullable;
 using commons;
+using comunity;
 
-namespace core {
+namespace convinity {
 	/// <summary>
 	/// Find the null Object references 
 	/// </summary>

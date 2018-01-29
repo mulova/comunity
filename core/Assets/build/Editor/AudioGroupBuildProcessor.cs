@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using commons;
+using comunity;
 
-namespace core
+namespace build
 {
     public class AudioGroupBuildProcessor : ComponentBuildProcess
     {

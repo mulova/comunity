@@ -6,11 +6,10 @@ using Object = UnityEngine.Object;
 using commons;
 using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
-using core;
 using System;
 using drawer.ex;
 
-namespace core
+namespace convinity
 {
     class FieldRefDrawer : ItemDrawer<FieldRefDrawer>
     {

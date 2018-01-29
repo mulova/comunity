@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Diagnostics;
 
 
-namespace core
+namespace comunity
 {
 	public class IosPlatformMethods : IPlatformMethods
 	{

@@ -1,10 +1,9 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using comunity;
 
-
-
-namespace core {
+namespace ani {
 	public class TimeOutTurn : SeqTurn {
 		private Action callback;
 		private float delay;

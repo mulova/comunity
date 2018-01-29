@@ -6,7 +6,7 @@ using System.IO;
 using System.Text;
 using System;
 
-namespace core
+namespace comunity
 {
     public class AssetBundlePath
     {

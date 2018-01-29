@@ -3,10 +3,11 @@ using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using commons;
+using comunity;
 
 
 
-namespace core {
+namespace convinity {
 	class AudioSearchTab : SearchTab<AudioClip>
 	{
 		private List<AudioFilter> filters = new List<AudioFilter>();

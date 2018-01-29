@@ -8,7 +8,7 @@ using commons;
 
 
 
-namespace core
+namespace comunity
 {
     public static class Cdn
     {

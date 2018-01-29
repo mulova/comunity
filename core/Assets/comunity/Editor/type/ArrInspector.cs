@@ -16,7 +16,7 @@ using Object = UnityEngine.Object;
 /**
 * - title이 null이면 folding을 하지 않는다.
 */
-namespace core
+namespace comunity
 {
     public abstract class ArrInspector<T> {
         

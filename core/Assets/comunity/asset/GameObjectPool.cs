@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace core
+namespace comunity
 {
     public class GOPoolElement 
     {

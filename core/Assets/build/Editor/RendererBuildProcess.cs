@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEditor;
+using comunity;
 
-namespace core
+namespace build
 {
     public class RendererBuildProcessor : ComponentBuildProcess
     {

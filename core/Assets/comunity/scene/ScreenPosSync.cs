@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-namespace core
+namespace comunity
 {
     [ExecuteInEditMode]
     public class ScreenPosSync : Script

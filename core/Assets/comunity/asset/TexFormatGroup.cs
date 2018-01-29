@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using commons;
 
-namespace core
+namespace comunity
 {
 	public class TexFormatGroup : EnumClass<TexFormatGroup>
 	{

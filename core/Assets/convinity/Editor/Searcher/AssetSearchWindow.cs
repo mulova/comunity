@@ -1,9 +1,10 @@
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
+using comunity;
 
-namespace core {
-	public class AssetSearchWindow : TabbedEditorWindow
+namespace convinity {
+    public class AssetSearchWindow : TabbedEditorWindow
 	{
 		protected override void CreateTabs() {
 			AddTab(new TexSearchTab(this));

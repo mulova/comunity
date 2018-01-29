@@ -7,7 +7,7 @@
 using UnityEngine;
 using System.Collections;
 
-namespace core
+namespace comunity
 {
     /**
     * 하위 노드들의 위치를 Gizmo로 표시한다.

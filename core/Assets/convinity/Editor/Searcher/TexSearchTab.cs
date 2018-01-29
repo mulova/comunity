@@ -3,8 +3,9 @@ using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using commons;
+using comunity;
 
-namespace core {
+namespace convinity {
 	class TexSearchTab : SearchTab<Texture>
 	{
 		private List<TexFilter> filters = new List<TexFilter>();

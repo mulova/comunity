@@ -5,7 +5,7 @@ using Object = UnityEngine.Object;
 using UnityEditor;
 using commons;
 
-namespace core
+namespace comunity
 {
     public class InputAxisMapDataInspectorRow : ArrayInspectorRow
     {

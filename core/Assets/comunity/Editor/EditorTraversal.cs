@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using commons;
 using System.Text;
-using core;
+using comunity;
 using System.Text.RegularExpressions;
 using Object = UnityEngine.Object;
 

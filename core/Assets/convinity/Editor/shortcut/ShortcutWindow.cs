@@ -7,8 +7,9 @@ using UnityEngine;
 using Object = UnityEngine.Object;
 
 using System;
+using comunity;
 
-namespace core {
+namespace convinity {
 	public class ShortcutWindow : TabbedEditorWindow {
 		private static int count = 0;
         private static bool showAllTabs;

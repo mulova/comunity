@@ -7,8 +7,9 @@
 
 using UnityEditor;
 using UnityEngine;
+using comunity;
 
-namespace core {
+namespace convinity {
 	class VisibilityCheckTab : EditorTab {
 		
 		public VisibilityCheckTab(TabbedEditorWindow window) : base("Visibility", window) {}

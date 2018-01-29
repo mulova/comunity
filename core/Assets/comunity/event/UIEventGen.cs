@@ -9,7 +9,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 
-namespace core
+namespace comunity
 {
     /// <summary>
     /// [Event Out] send event when the specified ui event is set.

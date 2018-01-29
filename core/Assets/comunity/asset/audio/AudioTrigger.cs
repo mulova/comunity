@@ -8,7 +8,7 @@ using Nullable = commons.Nullable;
 /// if the downloader is set, assets are downloaded and loaded automatically.
 /// else loaded by db at Start().
 /// </summary>
-namespace core {
+namespace comunity {
 	public class AudioTrigger : MonoBehaviour {
 
 		public enum Trigger

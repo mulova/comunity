@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace core {
+namespace etc {
 	class RenderCubemapWizard : ScriptableWizard {
 		public Transform renderFromPosition = null;
 		public string cubemapName = "cubemap";

@@ -8,8 +8,9 @@ using Rotorz.ReorderableList;
 using drawer.ex;
 using UnityEditorInternal;
 using commons;
+using comunity;
 
-namespace core {
+namespace convinity {
 
 	public class ShortcutTab : EditorTab {
 		

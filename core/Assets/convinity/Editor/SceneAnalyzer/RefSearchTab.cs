@@ -7,11 +7,10 @@ using drawer.ex;
 using commons;
 using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
-using core;
 using System;
 using comunity;
 
-namespace core
+namespace convinity
 {
     class RefSearchTab : SearchTab<Object>
     {

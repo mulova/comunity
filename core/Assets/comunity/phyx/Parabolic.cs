@@ -3,7 +3,7 @@ using System.Collections;
 using System;
 
 
-namespace core 
+namespace comunity 
 {
 	[RequireComponent(typeof(Rigidbody2D))]
 	public class Parabolic : PhyxObj {

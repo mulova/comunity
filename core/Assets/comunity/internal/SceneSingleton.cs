@@ -4,7 +4,7 @@ using System.Reflection;
 using UnityEngine.SceneManagement;
 using commons;
 
-namespace core
+namespace comunity
 {
 
     /// <summary>

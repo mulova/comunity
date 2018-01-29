@@ -9,7 +9,7 @@ using System.IO;
 using Object = UnityEngine.Object;
 using commons;
 
-namespace core
+namespace comunity
 {
 	/// <summary>
 	/// TODOM AssetBundle version is not used.

@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.Collections;
 
 using UnityEngine.SceneManagement;
-using core;
+using comunity;
 using commons;
 
-namespace core
+namespace comunity
 {
     public class SceneLoader : SingletonBehaviour<SceneLoader>
     {

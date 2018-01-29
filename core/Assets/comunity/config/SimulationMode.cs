@@ -1,5 +1,5 @@
 
-namespace core
+namespace comunity
 {
 	public enum SimulationMode {
 		ReleaseBuild, DebugBuild, Editor

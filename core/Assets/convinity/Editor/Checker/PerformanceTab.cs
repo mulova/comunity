@@ -9,8 +9,9 @@ using UnityEditor;
 using UnityEngine;
 
 using System.Collections.Generic;
+using comunity;
 
-namespace core {
+namespace convinity {
 	class PerformanceTab : EditorTab {
 		
 		public PerformanceTab(TabbedEditorWindow window) : base("Performance", window) {}

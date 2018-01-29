@@ -11,7 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using commons;
-using core;
+using ani;
 
 public static class AnimationEx {
 	private static WeakHashSet<AnimationClip> registeredClips = new WeakHashSet<AnimationClip>();

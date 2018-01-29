@@ -7,9 +7,8 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using type.ex;
 
-namespace core {
+namespace ani {
 	public class AnimTrigger : MonoBehaviour
 	{	
 		public Animator animator;

@@ -7,7 +7,7 @@
 using UnityEngine;
 using System.Collections;
 
-namespace type.ex {
+namespace ani {
 	[System.Serializable]
 	public class AnimTriggerElement {
 		public string key;

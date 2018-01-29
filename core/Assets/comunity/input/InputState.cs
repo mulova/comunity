@@ -1,5 +1,5 @@
 
-namespace core {
+namespace comunity {
 	public enum InputState {
 		Null=0,
 		UI = 1,

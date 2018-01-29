@@ -1,4 +1,4 @@
-namespace core
+namespace comunity
 {
     public enum AudioClipLoadType
     {

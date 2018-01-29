@@ -13,7 +13,7 @@ using System.Reflection;
 /// <summary>
 /// Generic property binding drawer.
 /// </summary>
-namespace core
+namespace comunity
 {
 
 [CustomPropertyDrawer(typeof(PropertyReference))]

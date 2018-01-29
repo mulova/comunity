@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections;
 
-namespace core
+namespace comunity
 {
     public class CreateNewLine : EditorWindow
     {

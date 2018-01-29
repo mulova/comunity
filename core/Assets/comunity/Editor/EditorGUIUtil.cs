@@ -13,7 +13,7 @@ using Rotorz.ReorderableList;
 using drawer.ex;
 using commons;
 
-namespace core
+namespace comunity
 {
     public class EditorGUIUtil {
         

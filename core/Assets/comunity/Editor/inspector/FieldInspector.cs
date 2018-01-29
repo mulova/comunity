@@ -5,7 +5,7 @@ using Object = UnityEngine.Object;
 using System.Reflection;
 using commons;
 
-namespace core
+namespace comunity
 {
     public class FieldInspector {
         private HashSet<Type> excludeDeclaringTypes = new HashSet<Type>();

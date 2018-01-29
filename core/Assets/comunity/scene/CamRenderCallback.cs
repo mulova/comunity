@@ -1,8 +1,8 @@
 ﻿using System;
 using UnityEngine;
-using core;
+using comunity;
 
-namespace core
+namespace comunity
 {
     [RequireComponent(typeof(Camera))]
     public class CamRenderCallback : Script

@@ -15,7 +15,7 @@ using System.Diagnostics;
 
 using UnityEngine;
 using System;
-namespace core {
+namespace comunity {
 /// <summary>
 /// Reference to a specific field or property that can be set via inspector.
 /// </summary>

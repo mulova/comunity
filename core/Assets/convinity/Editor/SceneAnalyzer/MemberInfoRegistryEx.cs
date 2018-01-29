@@ -3,7 +3,7 @@ using System.Reflection;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace core
+namespace convinity
 {
     public static class MemberInfoRegistryEx
     {

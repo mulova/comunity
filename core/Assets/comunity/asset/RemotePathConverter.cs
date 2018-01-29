@@ -1,7 +1,7 @@
 #if !UNITY_WEBGL
 using commons;
 
-namespace core {
+namespace comunity {
 	internal class RemotePathConverter
 	{
 		/// <summary>

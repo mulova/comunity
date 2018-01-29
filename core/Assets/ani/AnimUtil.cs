@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 using System;
 
-namespace core {
+namespace ani {
 	public class AnimUtil {
 		
 		/**

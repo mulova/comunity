@@ -4,7 +4,7 @@ using UnityEditor;
 using editor.ex;
 using Object = UnityEngine.Object;
 
-namespace core
+namespace comunity
 {
     [CustomPropertyDrawer(typeof(AssetGuid))]
     public class AssetGuidDrawer : PropertyDrawerBase

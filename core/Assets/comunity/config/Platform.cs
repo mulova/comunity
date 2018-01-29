@@ -9,7 +9,7 @@ using System.Collections;
 using System.IO;
 using commons;
 
-namespace core
+namespace comunity
 {
 	public static class Platform {
 		public static SimulationMode simulationMode = SimulationMode.Editor;

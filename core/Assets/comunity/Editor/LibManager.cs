@@ -7,7 +7,7 @@ using UnityEngine;
 using System.IO;
 using UnityEditor.Build;
 
-namespace core
+namespace comunity
 {
     [InitializeOnLoad]
     public class LibManager

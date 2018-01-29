@@ -9,7 +9,7 @@ using Object = UnityEngine.Object;
 using System;
 using UnityEditor;
 
-namespace core
+namespace comunity
 {
     public class StrArrInspector : ArrInspector<string>
     {

@@ -13,8 +13,9 @@ using System.IO;
 using System;
 using System.Text;
 using commons;
+using comunity;
 
-namespace core
+namespace build
 {
     public class BuildSettingTab : EditorTab
     {

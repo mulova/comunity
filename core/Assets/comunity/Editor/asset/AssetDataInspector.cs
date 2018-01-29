@@ -10,7 +10,7 @@ using System;
 
 
 
-namespace core {
+namespace comunity {
 	public class AssetDataInspector
 	{
 //		private AssetRefInspector cache = new AssetRefInspector();

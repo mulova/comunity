@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using core;
+using comunity;
 
 public static class RuntimePlatformEx
 {

@@ -4,7 +4,7 @@ using Object = UnityEngine.Object;
 using System;
 using System.IO;
 
-namespace core {
+namespace comunity {
 	public class TextureTrimmer {
 		
 		[MenuItem("Assets/Trim Texture")]

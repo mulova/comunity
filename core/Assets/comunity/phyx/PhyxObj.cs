@@ -3,7 +3,7 @@ using System.Collections;
 using System;
 using commons;
 
-namespace core 
+namespace comunity 
 {
 	/// <summary>
 	/// Phyx object.

@@ -3,9 +3,10 @@ using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using commons;
+using comunity;
 
 
-namespace core {
+namespace convinity {
 	class ShaderSearchTab : SearchTab<Material> {
 		
 		public ShaderSearchTab(TabbedEditorWindow window) : base("Shader", window) {

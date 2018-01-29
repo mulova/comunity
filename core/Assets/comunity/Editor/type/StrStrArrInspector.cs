@@ -9,7 +9,7 @@ using UnityEngine;
 using Object = UnityEngine.Object;
 using commons;
 
-namespace core
+namespace comunity
 {
     public class StrStrArrInspector<T> : ArrInspector<T> {
         private string keyVar;

@@ -19,9 +19,10 @@ using Object = UnityEngine.Object;
 ///     6) Press Apply.
 /// </summary>
 using commons;
+using comunity;
 
 
-namespace core
+namespace ani
 {
     public class AnimationTargetRenamer : EditorWindow
     {

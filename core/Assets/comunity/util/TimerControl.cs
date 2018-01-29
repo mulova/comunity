@@ -3,7 +3,7 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 
-namespace core
+namespace comunity
 {
     public class TimerControl : MonoBehaviour
     {

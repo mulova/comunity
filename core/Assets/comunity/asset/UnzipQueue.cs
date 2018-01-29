@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Threading;
 using commons;
 
-namespace core
+namespace comunity
 {
     public class UnzipQueue
     {

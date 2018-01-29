@@ -4,7 +4,7 @@ using System.Text;
 using System;
 using commons;
 
-namespace core
+namespace comunity
 {
     public static class Lexicon
     {

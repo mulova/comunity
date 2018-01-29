@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEditor;
 
-namespace core {
+namespace comunity {
 	public class AudioKeyInspector {
 		
 		private AudioGroup[] groups;

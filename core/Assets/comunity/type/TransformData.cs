@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace core
+namespace comunity
 {
     public struct TransformData
     {

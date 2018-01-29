@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using commons;
 using comunity;
 
-namespace core
+namespace build
 {
     public abstract class AssetBuildProcess : Loggable
     {

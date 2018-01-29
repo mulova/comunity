@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 using System.IO;
 
-namespace core {
+namespace comunity {
 	public abstract class TabbedEditorWindow : EditorWindow {
 		
 		private TabData selected;

@@ -3,7 +3,7 @@ using UnityEngine;
 using Object = UnityEngine.Object;
 using commons;
 
-namespace core
+namespace comunity
 {
     [CustomEditor(typeof(InputEventSystem))]
     public class InputEventSystemInspector : Editor

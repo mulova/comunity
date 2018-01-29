@@ -6,7 +6,7 @@ using UnityEditor;
 using commons;
 using comunity;
 
-namespace core
+namespace build
 {
 	public abstract class ComponentBuildProcess
 	{

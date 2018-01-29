@@ -6,7 +6,7 @@ using Object = UnityEngine.Object;
 using editor.ex;
 using commons;
 
-namespace core
+namespace ani
 {
 	[CustomPropertyDrawer(typeof(AnimationClipListingAttribute))]
 	public class AnimationClipDrawer : PropertyDrawerBase

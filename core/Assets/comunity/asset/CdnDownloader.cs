@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace core
+namespace comunity
 {
     public class CdnDownloader : Script
     {

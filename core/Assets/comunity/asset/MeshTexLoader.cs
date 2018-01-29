@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 
-namespace core
+namespace comunity
 {
     [RequireComponent(typeof(Renderer))]
     public class MeshTexLoader : Script, IReleasable

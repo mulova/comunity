@@ -11,7 +11,7 @@ using Object = UnityEngine.Object;
 using System.Collections.Generic;
 using commons;
 
-namespace core
+namespace comunity
 {
     /// <summary>
     /// </summary>

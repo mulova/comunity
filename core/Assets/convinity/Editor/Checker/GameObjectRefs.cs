@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using Object = UnityEngine.Object;
 
-namespace core {
+namespace convinity {
 
 	[System.Serializable]
 	public class GameObjectRefs {

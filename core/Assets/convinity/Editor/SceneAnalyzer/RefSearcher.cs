@@ -7,10 +7,9 @@ using drawer.ex;
 using commons;
 using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
-using core;
 using System;
 
-namespace core
+namespace convinity
 {
 //    public class RefSearcher
 //    {

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEditor;
 using commons;
 
-namespace core
+namespace build
 {
     public abstract class SceneBuildProcess
     {
