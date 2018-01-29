@@ -1,0 +1,9 @@
+{
+    "name": "effect",
+    "references": [
+        "commons",
+        "comunity"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": []
+}

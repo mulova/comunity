@@ -1,0 +1,13 @@
+{
+    "name": "uguiex-editor",
+    "references": [
+        "commons",
+        "comunity",
+        "uguiex",
+        "comunity-editor"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": []
+}

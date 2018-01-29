@@ -1,0 +1,11 @@
+{
+    "name": "effect-editor",
+    "references": [
+        "commons",
+        "comunity",
+        "comunity-editor",
+        "effect"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": []
+}
