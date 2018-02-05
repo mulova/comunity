@@ -7,7 +7,7 @@
 using System;
 using UnityEngine;
 
-namespace math.ex {
+namespace comunity {
 	public static class MathUtil {
 		public static bool IsBetween(float f, float min, float max) {
 			return f >= min && f <= max;

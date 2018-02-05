@@ -10,7 +10,7 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 
-namespace math.ex {
+namespace comunity {
 	public class Interpolation {
 		public const bool INCREASE = true;
 		public const bool DECREASE = false;

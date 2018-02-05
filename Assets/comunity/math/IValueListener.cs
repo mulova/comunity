@@ -7,7 +7,7 @@
 using UnityEngine;
 using System.Collections;
 
-namespace math.ex {
+namespace comunity {
 	public interface IValueListener
 	{
 		void TurnOver(bool end, float value);

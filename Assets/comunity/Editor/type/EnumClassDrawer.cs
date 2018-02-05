@@ -3,8 +3,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEditor;
 using Object = UnityEngine.Object;
-
-using editor.ex;
 using System.Reflection;
 using System.Linq;
 using System.Collections;

@@ -10,7 +10,7 @@ using System.Security.Cryptography;
 using System.Text;
 
 
-namespace crypto.ex {
+namespace comunity {
 	public class RSA : IDisposable
 	{
 		public static readonly Loggerx log = LogManager.GetLogger(typeof(RSA));

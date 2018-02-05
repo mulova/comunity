@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace i18n.ex {
+namespace comunity {
 	public class Translator
 	{
 		public static SystemLanguage lang;

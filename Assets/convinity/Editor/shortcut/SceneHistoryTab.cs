@@ -1,16 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-
-
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
-
 using System;
-
 using UnityEditorInternal;
 using Rotorz.ReorderableList;
-using drawer.ex;
 using comunity;
 
 namespace convinity

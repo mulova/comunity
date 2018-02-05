@@ -3,10 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEditor;
 using Object = UnityEngine.Object;
-
-
 using System.IO;
-using editor.ex;
 
 namespace comunity
 {

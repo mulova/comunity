@@ -7,7 +7,7 @@
 
 using System;
 
-namespace crypto.ex {
+namespace comunity {
 	public class intc
 	{
 		private byte[] encStore;

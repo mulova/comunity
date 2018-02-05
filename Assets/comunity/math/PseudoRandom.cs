@@ -7,7 +7,7 @@
 
 using System;
 
-namespace math.ex {
+namespace comunity {
 	/**
 	 * An instance of this class is used to generate a stream of
 	 * pseudorandom numbers. The class uses a 48-bit seed, which is

@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace math.ex {
+namespace comunity {
 	// (int)System.DateTime.Now.Ticks
 	/**
 	 * Generate random at every NextXXX() method call if the RandomRefreshInterval is EveryTime

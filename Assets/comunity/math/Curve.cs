@@ -8,7 +8,7 @@
 using UnityEngine;
 using System.Collections;
 
-namespace math.ex {
+namespace comunity {
 	[System.Serializable]
 	public class Curve {
 		public float min = 0;

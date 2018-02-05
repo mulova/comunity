@@ -8,7 +8,6 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 using System.Collections.Generic;
 using System.Text;
-using crypto.ex;
 
 namespace comunity
 {

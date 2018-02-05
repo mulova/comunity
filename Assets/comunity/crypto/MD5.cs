@@ -6,7 +6,7 @@ using System;
 using Random = UnityEngine.Random;
 using System.IO;
 
-namespace crypto.ex {
+namespace comunity {
 	public static class MD5
 	{
 		public static string Digest(string text) {

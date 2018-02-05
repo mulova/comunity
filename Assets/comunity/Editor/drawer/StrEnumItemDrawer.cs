@@ -5,7 +5,7 @@ using Object = UnityEngine.Object;
 using commons;
 
 
-namespace drawer.ex
+namespace comunity
 {
     public class StrEnumItemDrawer<T> : ItemDrawer<T> where T:class, new()
     {

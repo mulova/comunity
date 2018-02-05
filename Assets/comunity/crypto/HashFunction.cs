@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using crypto.ex;
 
 namespace comunity
 {

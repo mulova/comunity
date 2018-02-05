@@ -3,10 +3,9 @@ using UnityEngine;
 using UnityEditor;
 using Object = UnityEngine.Object;
 using System.Collections.Generic;
-using math.ex;
 using commons;
 
-namespace editor.ex
+namespace comunity
 {
     public abstract class PropertyDrawerBase : PropertyDrawer
     {

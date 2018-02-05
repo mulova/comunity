@@ -7,7 +7,7 @@
 using System;
 using UnityEngine;
 
-namespace math.ex {
+namespace comunity {
 	public static class Matrix4x4Ex {
 		public static Quaternion GetRotation(this Matrix4x4 m) {
 			// Adapted from: http://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToQuaternion/index.htm

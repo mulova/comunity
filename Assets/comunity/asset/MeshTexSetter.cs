@@ -2,10 +2,6 @@
 using System.Collections.Generic;
 
 
-using math.ex;
-
-
-
 namespace comunity
 {
     [RequireComponent(typeof(MeshTexLoader))]

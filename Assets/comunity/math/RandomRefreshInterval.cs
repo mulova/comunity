@@ -6,7 +6,7 @@
 
 using System;
 
-namespace math.ex
+namespace comunity
 {
 	public enum RandomRefreshInterval
 	{

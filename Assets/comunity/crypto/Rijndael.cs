@@ -11,7 +11,7 @@ using System.Text;
 
 using System.IO;
 
-namespace crypto.ex {
+namespace comunity {
 	public class Rijndael : IDisposable
 	{
 		public static readonly Loggerx log = LogManager.GetLogger(typeof(Rijndael));

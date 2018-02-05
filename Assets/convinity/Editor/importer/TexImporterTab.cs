@@ -1,9 +1,6 @@
 using UnityEditor;
 using UnityEngine;
-
 using System.Collections.Generic;
-
-using math.ex;
 using comunity;
 
 namespace convinity {

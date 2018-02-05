@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace drawer.ex
+namespace comunity
 {
     public interface IItemDrawer<T>
     {

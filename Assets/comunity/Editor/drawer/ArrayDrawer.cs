@@ -7,7 +7,7 @@ using UnityEngine;
 using commons;
 
 
-namespace drawer.ex
+namespace comunity
 {
     public class ArrayDrawer<T> : ListDrawer<T> where T:class
     {
