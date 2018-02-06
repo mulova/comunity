@@ -5,7 +5,10 @@
 //----------------------------------------------
 
 
-public interface AsyncCall {
-	bool IsOver();
-	void Begin();
+namespace comunity
+{
+	public interface AsyncCall {
+		bool IsOver();
+		void Begin();
+	}
 }

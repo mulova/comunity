@@ -14,8 +14,9 @@ using System.Text;
 using System.Reflection;
 using commons;
 using comunity;
+using convinity;
 
-namespace convinity {
+namespace comunity {
 	class BackupTab : EditorTab {
 		
 		private static string backupName = "";

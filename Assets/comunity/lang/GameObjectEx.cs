@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System;
 using commons;
 
-namespace UnityEngine {
+namespace comunity {
 	public static class GameObjectEx {
 		public static GameObject FindPath(string path) {
 			string[] paths = path.Split(new char[] {'/'}, StringSplitOptions.RemoveEmptyEntries);

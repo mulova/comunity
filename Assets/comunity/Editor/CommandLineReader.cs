@@ -44,99 +44,101 @@ Example:
 ************************************************************************************************************/
 #endregion
 
-#region Using
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-#endregion
+using commons;
 
-public class CommandLineReader
+namespace comunity
 {
-	//Config
-	private const string CUSTOM_ARGS_PREFIX = "-CustomArgs:";
-	private const char CUSTOM_ARGS_SEPARATOR = ';';
-    public static string[] args4test;
-	
-	public static string[] GetCommandLineArgs()
+	public class CommandLineReader
 	{
-        if (args4test != null)
-        {
-            return args4test;
-        }
-		return Environment.GetCommandLineArgs();
-	}
-	
-	public static string GetCommandLine()
-	{
-		string[] args = GetCommandLineArgs();
+		//Config
+		private const string CUSTOM_ARGS_PREFIX = "-CustomArgs:";
+		private const char CUSTOM_ARGS_SEPARATOR = ';';
+		public static string[] args4test;
 		
-		if (args.Length > 0)
+		public static string[] GetCommandLineArgs()
 		{
-			return string.Join(" ", args);
-		}
-		else
-		{
-			Debug.LogError("CommandLineReader.cs - GetCommandLine() - Can't find any command line arguments!");
-			return "";
-		}
-	}
-	
-	public static Dictionary<string,string> GetCustomArguments()
-	{
-		Dictionary<string, string> customArgsDict = new Dictionary<string, string>();
-		string[] commandLineArgs = GetCommandLineArgs();
-		if (commandLineArgs.IsNotEmpty())
-		{
-			
-			string[] customArgs = null;
-			string[] customArgBuffer = null;
-			string customArgsStr = "";
-			
-			try
+			if (args4test != null)
 			{
-				List<string> found = commandLineArgs.Filter(row => row.Contains(CUSTOM_ARGS_PREFIX));
-				if (found.IsNotEmpty())
+				return args4test;
+			}
+			return Environment.GetCommandLineArgs();
+		}
+		
+		public static string GetCommandLine()
+		{
+			string[] args = GetCommandLineArgs();
+			
+			if (args.Length > 0)
+			{
+				return string.Join(" ", args);
+			}
+			else
+			{
+				Debug.LogError("CommandLineReader.cs - GetCommandLine() - Can't find any command line arguments!");
+				return "";
+			}
+		}
+		
+		public static Dictionary<string,string> GetCustomArguments()
+		{
+			Dictionary<string, string> customArgsDict = new Dictionary<string, string>();
+			string[] commandLineArgs = GetCommandLineArgs();
+			if (commandLineArgs.IsNotEmpty())
+			{
+				
+				string[] customArgs = null;
+				string[] customArgBuffer = null;
+				string customArgsStr = "";
+				
+				try
 				{
-					customArgsStr = found.Single();
-					customArgsStr = customArgsStr.Replace(CUSTOM_ARGS_PREFIX, "");
-					customArgs = customArgsStr.Split(CUSTOM_ARGS_SEPARATOR);
-					
-					foreach (string customArg in customArgs)
+					List<string> found = commandLineArgs.Filter(row => row.Contains(CUSTOM_ARGS_PREFIX));
+					if (found.IsNotEmpty())
 					{
-						customArgBuffer = customArg.Split('=');
-						if (customArgBuffer.Length == 2)
+						customArgsStr = found.Single();
+						customArgsStr = customArgsStr.Replace(CUSTOM_ARGS_PREFIX, "");
+						customArgs = customArgsStr.Split(CUSTOM_ARGS_SEPARATOR);
+						
+						foreach (string customArg in customArgs)
 						{
-							customArgsDict.Add(customArgBuffer[0], customArgBuffer[1]);
-						}
-						else
-						{
-							Debug.LogWarning("CommandLineReader.cs - GetCustomArguments() - The custom argument [" + customArg + "] seem to be malformed.");
+							customArgBuffer = customArg.Split('=');
+							if (customArgBuffer.Length == 2)
+							{
+								customArgsDict.Add(customArgBuffer[0], customArgBuffer[1]);
+							}
+							else
+							{
+								Debug.LogWarning("CommandLineReader.cs - GetCustomArguments() - The custom argument [" + customArg + "] seem to be malformed.");
+							}
 						}
 					}
 				}
+				catch (Exception e)
+				{
+					Debug.LogError("CommandLineReader.cs - GetCustomArguments() - Can't retrieve any custom arguments in the command line [" + commandLineArgs + "]. Exception: " + e);
+					return customArgsDict;
+				}
+				
 			}
-			catch (Exception e)
-			{
-				Debug.LogError("CommandLineReader.cs - GetCustomArguments() - Can't retrieve any custom arguments in the command line [" + commandLineArgs + "]. Exception: " + e);
-				return customArgsDict;
-			}
-			
+			return customArgsDict;
 		}
-		return customArgsDict;
-	}
-	
-	public static string GetCustomArgument(string argumentName, string defValue = "")
-	{
-		Dictionary<string, string> customArgsDict = GetCustomArguments();
 		
-		if (customArgsDict.ContainsKey(argumentName))
+		public static string GetCustomArgument(string argumentName, string defValue = "")
 		{
-			return customArgsDict[argumentName];
-		}
-		else
-		{
-			return defValue;
+			Dictionary<string, string> customArgsDict = GetCustomArguments();
+			
+			if (customArgsDict.ContainsKey(argumentName))
+			{
+				return customArgsDict[argumentName];
+			}
+			else
+			{
+				return defValue;
+			}
 		}
 	}
 }

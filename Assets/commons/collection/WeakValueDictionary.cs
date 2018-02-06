@@ -9,166 +9,170 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 
-public class WeakValueDictionary<K, V> : IDictionary<K, V> where V : class {
-	private AssetRefType refType;
-	private readonly Dictionary<K, Reference<V>> dict;
-
-	public WeakValueDictionary(IEqualityComparer<K> comp) {
-		dict = new Dictionary<K, Reference<V>>(comp);
-	}
-
-	public WeakValueDictionary() {
-		dict = new Dictionary<K, Reference<V>>();
-	}
-	
-	
-	#region IDictionary<T,U> Members
-	
-	public IEnumerator<KeyValuePair<K, V>> GetEnumerator() {
-		return GetDictionary().GetEnumerator();
-	}
-	
-	IEnumerator IEnumerable.GetEnumerator() {
-		return GetDictionary().GetEnumerator();
-	}
-
-	private Dictionary<K, V> GetDictionary()
-	{
-		Dictionary<K, V> dic = new Dictionary<K, V>();
-		foreach (KeyValuePair<K, Reference<V>> p in dict)
+namespace commons
+{
+	public class WeakValueDictionary<K, V> : IDictionary<K, V> where V : class {
+		private AssetRefType refType;
+		private readonly Dictionary<K, Reference<V>> dict;
+		
+		public WeakValueDictionary(IEqualityComparer<K> comp) {
+			dict = new Dictionary<K, Reference<V>>(comp);
+		}
+		
+		public WeakValueDictionary() {
+			dict = new Dictionary<K, Reference<V>>();
+		}
+		
+		
+		#region IDictionary<T,U> Members
+		
+		public IEnumerator<KeyValuePair<K, V>> GetEnumerator() {
+			return GetDictionary().GetEnumerator();
+		}
+		
+		IEnumerator IEnumerable.GetEnumerator() {
+			return GetDictionary().GetEnumerator();
+		}
+		
+		private Dictionary<K, V> GetDictionary()
 		{
-			if (p.Value.IsAlive)
+			Dictionary<K, V> dic = new Dictionary<K, V>();
+			foreach (KeyValuePair<K, Reference<V>> p in dict)
 			{
-				dic[p.Key] = p.Value.Target;
+				if (p.Value.IsAlive)
+				{
+					dic[p.Key] = p.Value.Target;
+				}
+			}
+			return dic;
+		}
+		
+		public void Add(KeyValuePair<K, V> item) {
+			Add(item.Key, item.Value);
+		}
+		
+		public void Clear() {
+			dict.Clear();
+		}
+		
+		bool ICollection<KeyValuePair<K, V>>.Contains(KeyValuePair<K, V> item) {
+			return dict.Contains(WeakPairFrom(item));
+		}
+		
+		public void CopyTo(KeyValuePair<K, V>[] array, int arrayIndex) {
+			throw new NotImplementedException();
+		}
+		
+		public bool Remove(KeyValuePair<K, V> item) {
+			return ((ICollection<KeyValuePair<K, Reference<V>>>) dict).Remove(WeakPairFrom(item));
+		}
+		
+		public int Count {
+			get { return dict.Count; }
+		}
+		
+		public bool IsReadOnly {
+			get { return false; }
+		}
+		
+		public bool ContainsKey(K key) {
+			return dict.ContainsKey(key);
+		}
+		
+		public void CleanDeadReferences() {
+			foreach( var key in dict.Keys){
+				if (!dict[key].IsAlive)
+					dict.Remove(key);
 			}
 		}
-		return dic;
-	}
-	
-	public void Add(KeyValuePair<K, V> item) {
-		Add(item.Key, item.Value);
-	}
-	
-	public void Clear() {
-		dict.Clear();
-	}
-	
-	bool ICollection<KeyValuePair<K, V>>.Contains(KeyValuePair<K, V> item) {
-		return dict.Contains(WeakPairFrom(item));
-	}
-	
-	public void CopyTo(KeyValuePair<K, V>[] array, int arrayIndex) {
-		throw new NotImplementedException();
-	}
-	
-	public bool Remove(KeyValuePair<K, V> item) {
-		return ((ICollection<KeyValuePair<K, Reference<V>>>) dict).Remove(WeakPairFrom(item));
-	}
-	
-	public int Count {
-		get { return dict.Count; }
-	}
-	
-	public bool IsReadOnly {
-		get { return false; }
-	}
-	
-	public bool ContainsKey(K key) {
-		return dict.ContainsKey(key);
-	}
-	
-	public void CleanDeadReferences() {
-		foreach( var key in dict.Keys){
-			if (!dict[key].IsAlive)
-				dict.Remove(key);
+		
+		public void Add(K key, V value) {
+			Reference<V> r = new Reference<V>(value);
+			r.SetRefType(refType);
+			dict.Add(key, r);
 		}
-	}
-
-	public void Add(K key, V value) {
-		Reference<V> r = new Reference<V>(value);
-		r.SetRefType(refType);
-		dict.Add(key, r);
-	}
-	
-	public bool Remove(K key) {
-		var result = dict.Remove(key);
-		return result;
-	}
-	
-	public bool TryGetValue(K key, out V value) {
-		Reference<V> weakValue;
-		if (dict.TryGetValue(key, out weakValue)) {
-			if (weakValue != null && weakValue.IsAlive) {
-				value = weakValue.Target;
-			} else {
-				value = null;
+		
+		public bool Remove(K key) {
+			var result = dict.Remove(key);
+			return result;
+		}
+		
+		public bool TryGetValue(K key, out V value) {
+			Reference<V> weakValue;
+			if (dict.TryGetValue(key, out weakValue)) {
+				if (weakValue != null && weakValue.IsAlive) {
+					value = weakValue.Target;
+				} else {
+					value = null;
+				}
+				return true;
 			}
-			return true;
+			value = null;
+			return false;
 		}
-		value = null;
-		return false;
-	}
-	
-	public V this[K key] {
-		get {
-			Reference<V> r = dict.Get(key);
-			if (r == null) {
-				return null;
+		
+		public V this[K key] {
+			get {
+				Reference<V> r = dict.Get(key);
+				if (r == null) {
+					return null;
+				}
+				return r.Target;
 			}
-			return r.Target;
+			set {
+				Remove(key);
+				Add(key, value);
+			}
 		}
-		set {
-			Remove(key);
-			Add(key, value);
+		
+		public ICollection<K> Keys {
+			get { return dict.Keys; }
 		}
-	}
-	
-	public ICollection<K> Keys {
-		get { return dict.Keys; }
-	}
-	
-	public ICollection<V> Values {
-		get { return GetDictionary().Values; }
-	}
-	
-	#endregion
-
-	public V Get(K key) {
-		return Get(key, default(V));
-	}
-	
-	public V Get(K key, V defaultVal) {
-		V val = defaultVal;
-		if (TryGetValue(key, out val)) {
-			return val;
+		
+		public ICollection<V> Values {
+			get { return GetDictionary().Values; }
 		}
-		return defaultVal;
-	}
-
-	private static KeyValuePair<K, Reference<V>> WeakPairFrom(KeyValuePair<K, V> item) {
-		return new KeyValuePair<K, Reference<V>>(item.Key, new Reference<V>(item.Value));
-	}
-	
-	private IEnumerable<Reference<V>> GetStrongReferences() {
-		return dict.Values.Where(x => x!=null&&x.IsStrong);
-	}
-	
-	private IEnumerable<Reference<V>> GetWeakReferences() {
-		foreach (KeyValuePair<K, Reference<V>> pair in dict)
-		{
-//			x!=null&&x.IsWeak
-			if (pair.Value != null && pair.Value.IsWeak)
+		
+		#endregion
+		
+		public V Get(K key) {
+			return Get(key, default(V));
+		}
+		
+		public V Get(K key, V defaultVal) {
+			V val = defaultVal;
+			if (TryGetValue(key, out val)) {
+				return val;
+			}
+			return defaultVal;
+		}
+		
+		private static KeyValuePair<K, Reference<V>> WeakPairFrom(KeyValuePair<K, V> item) {
+			return new KeyValuePair<K, Reference<V>>(item.Key, new Reference<V>(item.Value));
+		}
+		
+		private IEnumerable<Reference<V>> GetStrongReferences() {
+			return dict.Values.Where(x => x!=null&&x.IsStrong);
+		}
+		
+		private IEnumerable<Reference<V>> GetWeakReferences() {
+			foreach (KeyValuePair<K, Reference<V>> pair in dict)
 			{
-				yield return pair.Value;
+				//			x!=null&&x.IsWeak
+				if (pair.Value != null && pair.Value.IsWeak)
+				{
+					yield return pair.Value;
+				}
 			}
 		}
-	}
-
-	public void SetRefType(AssetRefType refType) {
-		this.refType = refType;
-		dict.Values.ForEach((x) => x.SetRefType(refType));
+		
+		public void SetRefType(AssetRefType refType) {
+			this.refType = refType;
+			dict.Values.ForEach((x) => x.SetRefType(refType));
+		}
 	}
 }
+
 	
 
 public class Reference<T> where T : class {

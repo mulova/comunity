@@ -5,10 +5,8 @@
 //----------------------------------------------
 
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
-
-using System;
+using comunity;
 
 namespace ani {
 	public class AnimUtil {

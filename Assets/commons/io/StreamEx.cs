@@ -1,7 +1,8 @@
 using System.IO;
 using System;
 
-namespace System.IO {
+namespace commons
+{
 	public static class StreamEx
 	{
 		public static void CopyTo(this Stream src, Stream dest)

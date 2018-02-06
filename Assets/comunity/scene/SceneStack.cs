@@ -4,10 +4,9 @@
 // Copyright © 2013-2014 mulova@gmail.com
 //----------------------------------------------
 
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.SceneManagement;
+using commons;
 
 namespace comunity
 {

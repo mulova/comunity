@@ -61,16 +61,6 @@ namespace comunity
             Array.ConstrainedCopy(names, 1, dst, 0, names.Length-1);
             return t.Search(dst);
         }
-
-        public static Dictionary<string, Transform> CreateTransformMap(this Transform root)
-        {
-            Transform[] all = root.GetComponentsInChildren<Transform>(true);
-            Dictionary<string, Transform> map = new Dictionary<string, Transform>();
-            foreach (Transform t in all)
-            {
-                map[t.name] = t;
-            }
-            return map;
-        }
+        
     }
 }

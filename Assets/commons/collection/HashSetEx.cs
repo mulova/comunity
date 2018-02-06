@@ -4,9 +4,9 @@
 // Copyright © 2013- mulova@gmail.com
 //----------------------------------------------
 
-using System;
+using System.Collections.Generic;
 
-namespace System.Collections.Generic
+namespace commons
 {
 	public static class HashSetEx
 	{

@@ -1,8 +1,7 @@
-﻿using System;
-using UnityEngine;
-using commons;
+﻿using commons;
+using UnityEditor;
 
-namespace UnityEditor
+namespace comunity
 {
     public static class TextureImporterEx
     {

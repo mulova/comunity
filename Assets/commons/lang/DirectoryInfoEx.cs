@@ -7,7 +7,7 @@
 using System;
 using System.IO;
 
-namespace System.IO {
+namespace commons {
 	public static class DirectoryInfoEx
 	{
 		public static FileStream CreateUniqueFile( this DirectoryInfo dir , string rootName )

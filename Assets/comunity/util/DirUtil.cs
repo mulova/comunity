@@ -1,7 +1,7 @@
-﻿using System;
-using comunity;
+﻿using comunity;
+using System.IO;
 
-namespace System.IO
+namespace comunity
 {
     public static class DirUtil2
     {
