@@ -6,33 +6,36 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public static class ICollectionEx {
-	
-	public static bool IsEmpty<T>(this ICollection<T> col) {
-		if (col == null) {
-			return true;
+namespace commons
+{
+	public static class ICollectionEx {
+		
+		public static bool IsEmpty<T>(this ICollection<T> col) {
+			if (col == null) {
+				return true;
+			}
+			return col.Count <= 0;
 		}
-		return col.Count <= 0;
-	}
-
-	public static bool IsNotEmpty<T>(this ICollection<T> col) {
-		if (col == null) {
-			return false;
+		
+		public static bool IsNotEmpty<T>(this ICollection<T> col) {
+			if (col == null) {
+				return false;
+			}
+			return col.Count > 0;
 		}
-		return col.Count > 0;
-	}
-
-	public static bool Empty(this ICollection col) {
-		if (col == null) {
-			return true;
+		
+		public static bool Empty(this ICollection col) {
+			if (col == null) {
+				return true;
+			}
+			return col.Count <= 0;
 		}
-		return col.Count <= 0;
-	}
-	
-	public static bool NotEmpty(this ICollection col) {
-		if (col == null) {
-			return false;
+		
+		public static bool NotEmpty(this ICollection col) {
+			if (col == null) {
+				return false;
+			}
+			return col.Count > 0;
 		}
-		return col.Count > 0;
 	}
 }

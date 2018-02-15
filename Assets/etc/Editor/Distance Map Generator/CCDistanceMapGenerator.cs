@@ -28,6 +28,7 @@ using UnityEngine;
 /// Utility class for generating distance maps from anti-aliased alpha maps.
 /// </summary>
 using UnityEditor;
+using comunity;
 
 
 public static class CCDistanceMapGenerator {

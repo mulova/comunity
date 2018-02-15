@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Ideafixxxer.CsvParser
+namespace commons
 {
     public class CsvParser
     {

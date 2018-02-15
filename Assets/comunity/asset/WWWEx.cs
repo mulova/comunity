@@ -7,9 +7,9 @@ using UnityEngine;
 using System;
 using System.Collections;
 using Object = UnityEngine.Object;
-using comunity;
+using commons;
 
-namespace UnityEngine
+namespace comunity
 {
 	public static class WWWEx
 	{

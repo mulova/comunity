@@ -2,7 +2,7 @@
 using System;
 using System.IO;
 
-namespace System.IO
+namespace commons
 {
 	public static class DirUtil
 	{

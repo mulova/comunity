@@ -5,45 +5,50 @@
 // Copyright © 2013- mulova@gmail.com
 //----------------------------------------------
 
-using System;
-using System.Collections.Generic;
+namespace commons
+{
 
-using System.Text;
-
-public static class EnumEx {
-	private static Dictionary<Enum, string> names;
-	private static Dictionary<Enum, string> fullNames;
-
-	private static void Init()
-	{
-		if (names == null)
+	using System;
+	using System.Collections.Generic;
+	
+	using System.Text;
+	
+	public static class EnumEx {
+		private static Dictionary<Enum, string> names;
+		private static Dictionary<Enum, string> fullNames;
+		
+		private static void Init()
 		{
-			names = new Dictionary<Enum, string>();
-			fullNames = new Dictionary<Enum, string>();
+			if (names == null)
+			{
+				names = new Dictionary<Enum, string>();
+				fullNames = new Dictionary<Enum, string>();
+			}
 		}
-	}
-
-	public static string GetName(this Enum e) {
-		Init();
-		string s = null;
-		if (!names.TryGetValue(e, out s)) {
-			s = e.ToString();
-			names[e] = s;
+		
+		public static string GetName(this Enum e) {
+			Init();
+			string s = null;
+			if (!names.TryGetValue(e, out s)) {
+				s = e.ToString();
+				names[e] = s;
+			}
+			return s;
 		}
-		return s;
-	}
-
-	public static string GetFullName(this Enum e) {
-		Init();
-		string s = null;
-		if (!fullNames.TryGetValue(e, out s)) {
-			StringBuilder str = new StringBuilder(64);
-			str.Append(e.GetType().FullName);
-			str.Append(".");
-			str.Append(e.ToString());
-			fullNames[e] = str.ToString();
+		
+		public static string GetFullName(this Enum e) {
+			Init();
+			string s = null;
+			if (!fullNames.TryGetValue(e, out s)) {
+				StringBuilder str = new StringBuilder(64);
+				str.Append(e.GetType().FullName);
+				str.Append(".");
+				str.Append(e.ToString());
+				fullNames[e] = str.ToString();
+			}
+			return s;
 		}
-		return s;
 	}
 }
+
 #endif

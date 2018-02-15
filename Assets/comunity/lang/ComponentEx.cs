@@ -6,11 +6,7 @@
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-using System.Collections.Generic;
-using System;
-
-
-namespace UnityEngine
+namespace comunity
 {
 	public static class ComponentEx
 	{

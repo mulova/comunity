@@ -1,12 +1,12 @@
-/// <summary>
-/// From NGUIEditorTools
-/// </summary>
 using UnityEngine;
-using System.Collections.Generic;
 using UnityEditor;
+using commons;
 
 namespace comunity
 {
+	/// <summary>
+	/// From NGUIEditorTools
+	/// </summary>
     public class EditorUI {
         /// <summary>
         /// Draw a distinctly different looking header label

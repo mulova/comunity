@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using commons;
 
-namespace System
+namespace commons
 {
 	public static class TypeEx
 	{

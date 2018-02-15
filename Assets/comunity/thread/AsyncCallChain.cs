@@ -5,32 +5,34 @@
 //----------------------------------------------
 
 using UnityEngine;
-
-/// <summary>
-/// Queued Delegate Runner
-/// </summary>
 using System.Collections.Generic;
-using System;
 
-
-public class AsyncCallChain : MonoBehaviour
+namespace comunity
 {
-	private Queue<AsyncCall> queue = new Queue<AsyncCall>();
-	private AsyncCall current;
-
-	public void Enqueue(AsyncCall action) {
-		queue.Enqueue(action);
-	}
-
-	void Update() {
-		if (current != null) {
-			if (current.IsOver()) {
-				current = null;
-			}
+	/// <summary>
+	/// Queued Delegate Runner
+	/// </summary>
+	public class AsyncCallChain : MonoBehaviour
+	{
+		private Queue<AsyncCall> queue = new Queue<AsyncCall>();
+		private AsyncCall current;
+		
+		public void Enqueue(AsyncCall action) {
+			queue.Enqueue(action);
 		}
-		if (queue.Count > 0 && current == null) {
-			current = queue.Dequeue();
-			current.Begin();
+		
+		void Update() {
+			if (current != null) {
+				if (current.IsOver()) {
+					current = null;
+				}
+			}
+			if (queue.Count > 0 && current == null) {
+				current = queue.Dequeue();
+				current.Begin();
+			}
 		}
 	}
 }
+
+

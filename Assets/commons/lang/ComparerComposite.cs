@@ -6,60 +6,63 @@
 using System.Collections.Generic;
 using System.Collections;
 
-public class ComparerComposite<T> : IComparer<T> {
-	private IEnumerable<IComparer<T>> comparers;
-
-	public ComparerComposite(IEnumerable<IComparer<T>> comparers) {
-		this.comparers = comparers;
-	}
-
-	public ComparerComposite(params IComparer<T>[] comparers) {
-		this.comparers = comparers;
-	}
-
-	public int Compare(T x, T y)
-	{
-		if (x == null) {
-			return 1;
+namespace commons
+{
+	public class ComparerComposite<T> : IComparer<T> {
+		private IEnumerable<IComparer<T>> comparers;
+		
+		public ComparerComposite(IEnumerable<IComparer<T>> comparers) {
+			this.comparers = comparers;
 		}
-		if (y == null) {
-			return -1;
+		
+		public ComparerComposite(params IComparer<T>[] comparers) {
+			this.comparers = comparers;
 		}
-		foreach (IComparer<T> c in comparers) {
-			int i = c.Compare(x, y);
-			if (i != 0) {
-				return i;
+		
+		public int Compare(T x, T y)
+		{
+			if (x == null) {
+				return 1;
 			}
-		}
-		return 0;
-	}
-}
-
-public class ComparerComposite : IComparer {
-	private IEnumerable<IComparer> comparers;
-	
-	public ComparerComposite(IEnumerable<IComparer> comparers) {
-		this.comparers = comparers;
-	}
-	
-	public ComparerComposite(params IComparer[] comparers) {
-		this.comparers = comparers;
-	}
-	
-	public int Compare(object x, object y)
-	{
-		if (x == null) {
-			return 1;
-		}
-		if (y == null) {
-			return -1;
-		}
-		foreach (IComparer c in comparers) {
-			int i = c.Compare(x, y);
-			if (i != 0) {
-				return i;
+			if (y == null) {
+				return -1;
 			}
+			foreach (IComparer<T> c in comparers) {
+				int i = c.Compare(x, y);
+				if (i != 0) {
+					return i;
+				}
+			}
+			return 0;
 		}
-		return 0;
+	}
+	
+	public class ComparerComposite : IComparer {
+		private IEnumerable<IComparer> comparers;
+		
+		public ComparerComposite(IEnumerable<IComparer> comparers) {
+			this.comparers = comparers;
+		}
+		
+		public ComparerComposite(params IComparer[] comparers) {
+			this.comparers = comparers;
+		}
+		
+		public int Compare(object x, object y)
+		{
+			if (x == null) {
+				return 1;
+			}
+			if (y == null) {
+				return -1;
+			}
+			foreach (IComparer c in comparers) {
+				int i = c.Compare(x, y);
+				if (i != 0) {
+					return i;
+				}
+			}
+			return 0;
+		}
 	}
 }

@@ -1,10 +1,12 @@
 using UnityEngine;
-using System;
 
-public static class TextureEx
+namespace comunity
 {
-	public static bool IsPOT(this Texture tex)
+	public static class TextureEx
 	{
-		return Mathf.IsPowerOfTwo(tex.width) && Mathf.IsPowerOfTwo(tex.height);
+		public static bool IsPOT(this Texture tex)
+		{
+			return Mathf.IsPowerOfTwo(tex.width) && Mathf.IsPowerOfTwo(tex.height);
+		}
 	}
 }

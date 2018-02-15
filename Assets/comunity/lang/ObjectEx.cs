@@ -4,15 +4,12 @@
 // Copyright © 2013- mulova@gmail.com
 //----------------------------------------------
 
-using System;
-using System.Reflection;
 using Object = UnityEngine.Object;
 using UnityEngine;
-using System.Text;
 using commons;
 using comunity;
 
-namespace UnityEngine
+namespace comunity
 {
     public static class ObjectEx {
         

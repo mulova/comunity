@@ -1,14 +1,12 @@
 using UnityEngine;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Nullable = commons.Nullable;
+using commons;
 
-/// <summary>
-/// if the downloader is set, assets are downloaded and loaded automatically.
-/// else loaded by db at Start().
-/// </summary>
 namespace comunity {
+	/// <summary>
+	/// if the downloader is set, assets are downloaded and loaded automatically.
+	/// else loaded by db at Start().
+	/// </summary>
 	public class AudioTrigger : MonoBehaviour {
 
 		public enum Trigger

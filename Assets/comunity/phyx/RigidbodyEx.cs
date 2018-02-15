@@ -1,7 +1,7 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace UnityEngine {
+namespace comunity
+{
 	public static class RigidbodyEx
 	{
 		public static void MoveDelta(this Rigidbody body, Vector3 delta, Transform t) {

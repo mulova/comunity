@@ -4,10 +4,13 @@
 // Copyright © 2013- mulova@gmail.com
 //----------------------------------------------
 
-using System;
 using Object = UnityEngine.Object;
 
-public interface ObjWrapper {
-	Object Obj { get; }
-	string Name { get; }
+namespace comunity
+{
+	public interface ObjWrapper {
+		Object Obj { get; }
+		string Name { get; }
+	}
 }
+

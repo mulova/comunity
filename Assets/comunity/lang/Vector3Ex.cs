@@ -1,8 +1,8 @@
-﻿using System;
-using UnityEngine.Assertions;
+﻿using UnityEngine.Assertions;
 using comunity;
+using UnityEngine;
 
-namespace UnityEngine
+namespace comunity
 {
 	public static class Vector3Ex
 	{

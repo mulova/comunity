@@ -4,19 +4,22 @@
 // Copyright © 2013- mulova@gmail.com
 //----------------------------------------------
 
-using System.Linq;
 using System;
 
-public static class PredicateEx {
-	
-	public static bool Call<T> (this Predicate<T> handler, T t) {
-		if(handler != null) {
-			return handler(t);
+namespace commons
+{
+	public static class PredicateEx {
+		
+		public static bool Call<T> (this Predicate<T> handler, T t) {
+			if(handler != null) {
+				return handler(t);
+			}
+			return false;
 		}
-		return false;
-	}
-
-	public static bool FreePassPredicate<T>(T t) {
-		return true;
+		
+		public static bool FreePassPredicate<T>(T t) {
+			return true;
+		}
 	}
 }
+
