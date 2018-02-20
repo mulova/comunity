@@ -17,7 +17,14 @@ namespace comunity
                 return Environment.GetEnvironmentVariable("IMAGE_MAGICK");
             }
         }
-        
+
+		public const string FORCE_RESIZE=
+			#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
+			"!";
+			#else
+			@"\!";
+			#endif
+
         public static bool IsValid()
         {
             return IMAGE_MAGICK.IsNotEmpty();
@@ -39,8 +46,8 @@ namespace comunity
         
         public static ExecOutput Exec(string cmd, string[] src, string dst, string options)
         {
-            string srcStr = src.Convert(s=>s.Wrap("\"")).Join(" ");
-            string param = string.Format("{0} {1} \"{2}\"", options, srcStr, dst);
+			string srcStr = src.Convert(s=>s.WrapWhitespacePath()).Join(" ");
+			string param = string.Format("{0} {1} {2}", options, srcStr, dst.WrapWhitespacePath());
             var result = Exec(cmd, param);
             AssetDatabase.ImportAsset(dst, ImportAssetOptions.ForceUpdate);
             return result;
@@ -58,14 +65,13 @@ namespace comunity
                 throw new Exception("environment variable 'IMAGE_MAGICK' is not set");
             }
             string command = null;
-            if (File.Exists(IMAGE_MAGICK))
-            {
-                command = IMAGE_MAGICK;
-                param = string.Concat(cmd, " ", param);
-            } else
-            {
-                command = PathUtil.Combine(IMAGE_MAGICK, cmd);
-            }
+			#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
+			command = Path.Combine(IMAGE_MAGICK, cmd);
+			#else
+			command = IMAGE_MAGICK;
+			param = string.Concat(cmd, " ", param);
+			#endif
+            
             ExecOutput output = EditorUtil.ExecuteCommand(command, param, System.Text.Encoding.UTF8);
             if (output.IsError())
             {
@@ -369,7 +375,7 @@ namespace comunity
         public static void ScaleToImporterSize(Texture t)
         {
             string src = AssetDatabase.GetAssetPath(t);
-            Exec("convert", src, string.Format("-resize {0}x{1}\\!", t.width, t.height));
+			Exec("convert", src, string.Format(@"-resize {0}x{1}"+FORCE_RESIZE, t.width, t.height));
             AssetDatabase.ImportAsset(src, ImportAssetOptions.ForceUpdate);
         }
         
@@ -383,7 +389,7 @@ namespace comunity
         public static void Resize(Texture t, int width, int height)
         {
             string src = AssetDatabase.GetAssetPath(t);
-            Exec("convert", src, string.Format("-resize {0}x{1}\\!", width, height));
+			Exec("convert", src, string.Format(@"-resize {0}x{1}"+FORCE_RESIZE, width, height));
             AssetDatabase.ImportAsset(src, ImportAssetOptions.ForceUpdate);
         }
     }

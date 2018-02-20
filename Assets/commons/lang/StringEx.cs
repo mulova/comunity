@@ -72,6 +72,16 @@ namespace commons
 			}
 			return false;
 		}
+
+		public static string WrapWhitespacePath(this string str)
+		{
+			#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
+			return str.Replace(" ", @"\ ");
+			#elif UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX
+			return str.Wrap("\"");
+			#endif
+			return str;
+		}
 		
 		public static string ToUnixPath(this string str)
 		{

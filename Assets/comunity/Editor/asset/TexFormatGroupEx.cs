@@ -113,7 +113,9 @@ namespace comunity
 			} else if (newFormat == TexFormatGroup.PVRTC&&!tex.format.IsPVRTC())
 			{
 				if (EditorUserBuildSettings.activeBuildTarget.ToRuntimePlatform().IsIos() &&
+#pragma warning disable 0618
                     (im.GetFormat() == TextureImporterFormat.AutomaticCompressed || im.GetFormat() == TextureImporterFormat.AutomaticCrunched)) 
+#pragma warning restore 0618
 				{
 					// automatic is the same as PVRTC
 				} else if (tex.format.HasAlpha())
@@ -129,7 +131,9 @@ namespace comunity
 			} else if (newFormat == TexFormatGroup.ETC && !tex.format.IsETC())
 			{
 				if (EditorUserBuildSettings.activeBuildTarget == BuildTarget.Android &&
+#pragma warning disable 0618
 					(im.GetFormat() == TextureImporterFormat.AutomaticCompressed || im.GetFormat() == TextureImporterFormat.AutomaticCrunched)) 
+#pragma warning restore 0618
 				{
 					// automatic is the same as ETC
 				} else if (tex.format.HasAlpha())
@@ -140,7 +144,9 @@ namespace comunity
 					im.SetFormat(GetFormatFromLabel(tex, newFormat, tex.format.HasAlpha()));
 					changed = true;
 				}
+#pragma warning disable 0618
 			} else if (newFormat == TexFormatGroup.AUTO && (im.GetFormat() != TextureImporterFormat.AutomaticCompressed && im.GetFormat() != TextureImporterFormat.AutomaticCrunched))
+#pragma warning restore 0618
 			{
 				if (tex.format.HasAlpha())
 				{

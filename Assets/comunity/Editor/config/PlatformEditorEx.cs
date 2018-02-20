@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace comunity
 {
@@ -6,8 +6,10 @@ namespace comunity
 	{
 		public static RuntimePlatform GetPlatform() {
 			switch (UnityEditor.EditorUserBuildSettings.activeBuildTarget) {
+#pragma warning disable 0618
 				case UnityEditor.BuildTarget.StandaloneOSXIntel:
 				case UnityEditor.BuildTarget.StandaloneOSXIntel64:
+#pragma warning restore 0618
 					#if UNITY_2017_3_OR_NEWER
 					case UnityEditor.BuildTarget.StandaloneOSX:
 					#else

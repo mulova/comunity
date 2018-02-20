@@ -53,7 +53,9 @@ namespace comunity
             ) { rgba = TextureImporterFormat.Automatic, rgb = TextureImporterFormat.ETC2_RGB4 };
 		public static readonly TexFormatGroupData AUTO = new TexFormatGroupData("AUTO",
             TextureImporterFormat.Automatic
+#pragma warning disable 0618
             ) { rgba = TextureImporterFormat.AutomaticCrunched, rgb = TextureImporterFormat.AutomaticCrunched};
+#pragma warning restore 0618
 
 		public TextureImporterFormat rgb { get; private set; }
 		public TextureImporterFormat rgba { get; private set; }

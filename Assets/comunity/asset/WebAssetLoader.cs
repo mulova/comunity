@@ -64,7 +64,9 @@ namespace comunity
 
 		public bool IsCached(string url)
 		{
+#pragma warning disable 0618
 			return Caching.IsVersionCached(url, Cdn.GetFileVersion(url));
+#pragma warning restore 0618
 		}
 
 		public bool IsValid(string url, object version)
@@ -159,7 +161,9 @@ namespace comunity
 				string uri = PathUtil.Combine(parent, filename);
 				if (log.IsLoggable(LogLevel.DEBUG))
 				{
+#pragma warning disable 0618
 					log.Debug("{0} (ver {1}): {2}", uri, version, Caching.IsVersionCached(uri, version)? "Cached": "Download & Cache");
+#pragma warning restore 0618
 				}
 				return WWW.LoadFromCacheOrDownload(uri, version);
 			} else

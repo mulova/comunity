@@ -13,8 +13,12 @@ namespace comunity
 		{
 			switch (target)
 			{
+#pragma warning disable 0618
 				case UnityEditor.BuildTarget.StandaloneOSXIntel:
+#pragma warning restore 0618
+#pragma warning disable 0618
 				case UnityEditor.BuildTarget.StandaloneOSXIntel64:
+#pragma warning restore 0618
 					#if UNITY_2017_3_OR_NEWER
 					case UnityEditor.BuildTarget.StandaloneOSX:
 					#else

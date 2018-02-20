@@ -136,7 +136,9 @@ namespace convinity {
 			}
 		}
 		class TexFormatFilter: TexFilter {
+#pragma warning disable 0618
 			private TextureImporterFormat texImportFormat = TextureImporterFormat.AutomaticTruecolor;
+#pragma warning restore 0618
 			public TexFormatFilter(): base("ImporterFormat") {}
 			protected override bool FilterImpl (TextureImporter importer, Texture tex) {
 				return importer.GetFormat() == texImportFormat;
