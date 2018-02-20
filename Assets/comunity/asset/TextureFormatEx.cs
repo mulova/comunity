@@ -49,9 +49,7 @@ namespace comunity
 		
 		public static readonly TextureFormat[] DXT = new TextureFormat[] {
 			TextureFormat.DXT1,
-			TextureFormat.DXT1Crunched,
 			TextureFormat.DXT5,
-			TextureFormat.DXT5Crunched,
 		};
 		
 		public static readonly TextureFormat[] ETC = new TextureFormat[] {
@@ -134,7 +132,6 @@ namespace comunity
 				case TextureFormat.BGRA32:
 				case TextureFormat.RGBAHalf:
 				case TextureFormat.DXT5:
-				case TextureFormat.DXT5Crunched:
 				case TextureFormat.RGBAFloat:
 				case TextureFormat.ETC2_RGBA1:
 				case TextureFormat.ETC2_RGBA8:
@@ -158,7 +155,6 @@ namespace comunity
 				case TextureFormat.RFloat:
 				case TextureFormat.RGFloat:
 				case TextureFormat.YUY2:
-				case TextureFormat.DXT1Crunched:
 				case TextureFormat.EAC_R:
 				case TextureFormat.EAC_R_SIGNED:
 				case TextureFormat.EAC_RG:
