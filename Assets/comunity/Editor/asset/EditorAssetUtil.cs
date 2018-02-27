@@ -580,6 +580,10 @@ namespace comunity
                 FileInfo[] files = AssetUtil.ListFiles(fullPath, "*"+ext);
                 for (int i = 0; i < files.Length; i++)
                 {
+                    if (fileType == FileType.All && files[i].Name.EndsWith(".meta"))
+                    {
+                        continue;
+                    }
                     string srcPath = files[i].FullName.ToUnixPath();
                     int index = srcPath.IndexOf(Application.dataPath);
                     if (assetsRelative)
@@ -930,6 +934,37 @@ namespace comunity
             while (prop.Next(expanded))
             {
                 yield return prop.pptrValue as GameObject;
+            }
+        }
+
+        public static void MoveDirectory(string src, string dst)
+        {
+            string[] assets = ListAssetPaths(src, FileType.All);
+            try 
+            {
+                for (int i=0; i<assets.Length; ++i)
+                {
+                    var path = assets[i];
+                    if (EditorUtility.DisplayCancelableProgressBar("Move Directory", path, i/(float)assets.Length))
+                    {
+                        break;
+                    }
+                    string srcPath = path.Substring(src.Length+1); // skip '/' character
+                    string dir = Path.GetDirectoryName(srcPath);
+                    string dstDir = string.Concat(dst,"/",dir);
+                    string dstPath = string.Concat(dst,"/",srcPath);
+                    if (!Directory.Exists(dstDir))
+                    {
+                        Directory.CreateDirectory(dstDir);
+                        AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
+                    }
+                    AssetDatabase.MoveAsset(path, dstPath);
+                }
+                Directory.Delete(src);
+                Debug.LogFormat("Moving asset {0} to {1}", src, dst);
+            } finally
+            {
+                EditorUtility.ClearProgressBar();
             }
         }
     }
