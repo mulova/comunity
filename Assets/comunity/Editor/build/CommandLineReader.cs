@@ -58,7 +58,7 @@ namespace comunity
 		private const string CUSTOM_ARGS_PREFIX = "-CustomArgs:";
 		private const char CUSTOM_ARGS_SEPARATOR = ';';
 		public static string[] args4test;
-		
+
 		public static string[] GetCommandLineArgs()
 		{
 			if (args4test != null)
@@ -67,11 +67,11 @@ namespace comunity
 			}
 			return Environment.GetCommandLineArgs();
 		}
-		
+
 		public static string GetCommandLine()
 		{
 			string[] args = GetCommandLineArgs();
-			
+
 			if (args.Length > 0)
 			{
 				return string.Join(" ", args);
@@ -82,18 +82,18 @@ namespace comunity
 				return "";
 			}
 		}
-		
+
 		public static Dictionary<string,string> GetCustomArguments()
 		{
 			Dictionary<string, string> customArgsDict = new Dictionary<string, string>();
 			string[] commandLineArgs = GetCommandLineArgs();
 			if (commandLineArgs.IsNotEmpty())
 			{
-				
+
 				string[] customArgs = null;
 				string[] customArgBuffer = null;
 				string customArgsStr = "";
-				
+
 				try
 				{
 					List<string> found = commandLineArgs.Filter(row => row.Contains(CUSTOM_ARGS_PREFIX));
@@ -102,7 +102,7 @@ namespace comunity
 						customArgsStr = found.Single();
 						customArgsStr = customArgsStr.Replace(CUSTOM_ARGS_PREFIX, "");
 						customArgs = customArgsStr.Split(CUSTOM_ARGS_SEPARATOR);
-						
+
 						foreach (string customArg in customArgs)
 						{
 							customArgBuffer = customArg.Split('=');
@@ -122,15 +122,15 @@ namespace comunity
 					Debug.LogError("CommandLineReader.cs - GetCustomArguments() - Can't retrieve any custom arguments in the command line [" + commandLineArgs + "]. Exception: " + e);
 					return customArgsDict;
 				}
-				
+
 			}
 			return customArgsDict;
 		}
-		
+
 		public static string GetCustomArgument(string argumentName, string defValue = "")
 		{
 			Dictionary<string, string> customArgsDict = GetCustomArguments();
-			
+
 			if (customArgsDict.ContainsKey(argumentName))
 			{
 				return customArgsDict[argumentName];
