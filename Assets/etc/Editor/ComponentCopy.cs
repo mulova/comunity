@@ -1,5 +1,3 @@
-
-
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -8,7 +6,6 @@ using System.Text;
 using System.Reflection;
 using commons;
 using comunity;
-using commons;
 
 namespace etc
 {

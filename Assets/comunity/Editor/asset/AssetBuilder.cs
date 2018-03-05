@@ -9,7 +9,7 @@ using commons;
 using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
 
-namespace core
+namespace comunity
 {
 	public class AssetBuilder
 	{

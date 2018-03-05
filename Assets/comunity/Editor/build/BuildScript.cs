@@ -422,7 +422,7 @@ namespace comunity
         /// <param name="options">Options.</param>
         public static string PrebuildAll(params object[] options)
         {
-            LibManager.CopyLibs();
+//            LibManager.CopyLibs();
             BuildScript.LoadEditorDll();
             BuildScript.InitEditorLog();
             ResetPrebuilder();

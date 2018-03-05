@@ -220,8 +220,6 @@ namespace comunity
                 switch (EditorUserBuildSettings.activeBuildTarget)
                 {
                     case BuildTarget.iOS:
-                    case BuildTarget.StandaloneOSXIntel:
-                    case BuildTarget.StandaloneOSXIntel64:
                     case BuildTarget.StandaloneOSX:
                         buildPath = EditorUtility.OpenFolderPanel("Build Folder", PathUtil.GetDirectory(buildPath), PathUtil.GetLastDirectory(buildPath));
                         break;
