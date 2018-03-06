@@ -6,6 +6,8 @@
         "comunity-editor",
         "ani"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": []
 }

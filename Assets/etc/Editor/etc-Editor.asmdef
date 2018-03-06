@@ -5,6 +5,8 @@
         "comunity",
         "comunity-editor"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": []
 }
