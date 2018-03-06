@@ -27,22 +27,39 @@ namespace convinity {
 		
 		protected override List<Material> SearchResource(Object root) {
 			List<Material> list = new List<Material>();
-			foreach (Object o in SearchAssets(typeof(Material), FileType.Prefab, FileType.Material)) {
-				Material mat = o as Material;
-				if (mat != null && mat.shader.name.Contains(shaderName)) {
-					list.Add(mat);
-				}
-			}
-			foreach (Object o in SearchAssets(typeof(Renderer), FileType.Prefab, FileType.Material)) {
-				Renderer r = o as Renderer;
-				if (r != null && r.sharedMaterial != null && r.sharedMaterial.shader != null 
-				    && r.sharedMaterial.shader.name.Contains(shaderName)) {
-					list.Add(r.sharedMaterial);
-				}
-			}
+            if (root is GameObject)
+            {
+                var rends = (root as GameObject).GetComponentsInChildren<Renderer>(true);
+                foreach (var r in rends)
+                {
+                    if (IsMatch(r))
+                    {
+                        list.Add(r.sharedMaterial);
+                    }
+                }
+            } else
+            {
+                foreach (Object o in SearchAssets(typeof(Material), FileType.Prefab, FileType.Material)) {
+                    Material mat = o as Material;
+                    if (mat != null && mat.shader.name.Contains(shaderName)) {
+                        list.Add(mat);
+                    }
+                }
+                foreach (Object o in SearchAssets(typeof(Renderer), FileType.Prefab, FileType.Material)) {
+                    Renderer r = o as Renderer;
+                    if (IsMatch(r)) {
+                        list.Add(r.sharedMaterial);
+                    }
+                }
+            }
 			list.Sort(new MaterialSorter());
 			return list;
 		}
+
+        private bool IsMatch(Renderer r)
+        {
+            return r != null && r.sharedMaterial != null && r.sharedMaterial.shader != null && r.sharedMaterial.shader.name.Contains(shaderName);
+        }
 		
 		protected override void OnInspectorGUI(List<Material> found) {
 			EditorGUI.indentLevel += 2;
