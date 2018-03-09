@@ -123,11 +123,9 @@ namespace convinity
                     }
                 } else
                 {
-                    List<Object> assets = SearchAssets(typeof(Object), FileType.All);
-                    for (int i=0; i<assets.Count; ++i)
+                    foreach (var o in SearchAssets(typeof(Object), FileType.All))
                     {
-                        Object o = assets[i];
-                        if (EditorUtility.DisplayCancelableProgressBar("Assets", o.name, i/(float)assets.Count))
+                        if (EditorUtility.DisplayCancelableProgressBar("Assets", o.name, 0.5f))
                         {
                             break;
                         }

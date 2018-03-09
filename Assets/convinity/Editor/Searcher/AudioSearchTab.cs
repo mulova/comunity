@@ -66,9 +66,7 @@ namespace convinity {
 			SetProgress(0);
 			List<AudioClip> list = new List<AudioClip>();
 
-			List<Object> clips = SearchAssets(typeof(AudioClip), FileType.Audio);
-			float progress = 0;
-			foreach (Object o in clips) {
+            foreach (Object o in SearchAssets(typeof(AudioClip), FileType.Audio)) {
 				string path = AssetDatabase.GetAssetPath(o);
 				if (!string.IsNullOrEmpty(path)) {
 					AudioImporter importer = AssetImporter.GetAtPath(path) as AudioImporter;
@@ -82,10 +80,8 @@ namespace convinity {
 						}
 					}
 				}
-				progress += 1f/clips.Count;
-				SetProgress(progress);
 			}
-			SetProgress(1);
+//			SetProgress(1);
 			return list;
 		}
 
