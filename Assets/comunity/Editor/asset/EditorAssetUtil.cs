@@ -13,6 +13,7 @@ using Object = UnityEngine.Object;
 using System.Reflection;
 using commons;
 using UnityEditor.SceneManagement;
+using System.Collections;
 
 namespace comunity
 {
@@ -668,10 +669,12 @@ namespace comunity
             return list;
         }
 
-        public static List<T> SearchAssetObjects<T>(Object root, FileType fileType) where T: Object
+        public static IEnumerable<T> SearchAssetObjects<T>(Object root, FileType fileType) where T: Object
         {
-            List<Object> found = SearchAssetObjects(root, typeof(T), fileType);
-            return found.ConvertAll(o => o as T);
+            foreach (var o in  SearchAssetObjects(root, typeof(T), fileType))
+            {
+                yield return o as T;
+            }
         }
 
         /// <summary>
@@ -686,23 +689,34 @@ namespace comunity
         /// <param name='wildcard'>
         /// Wildcard to filter assets
         /// </param>
-        public static List<Object> SearchAssetObjects(Object root, Type type, FileType fileType)
+        public static IEnumerable<Object> SearchAssetObjects(Object root, Type type, FileType fileType)
         {
-            List<Object> list = new List<Object>();
-            string rootPath = ".";
-            if (root != null)
-            {
-                rootPath = AssetDatabase.GetAssetPath(root);
-            }
-            if (!string.IsNullOrEmpty(rootPath))
-            {
-                string[] assetFiles = EditorAssetUtil.ListAssetPaths(rootPath, fileType);
-                foreach (string path in assetFiles)
+            try {
+                int count = 0;
+                string rootPath = ".";
+                if (root != null)
                 {
-                    list.AddRange(SearchTypeInAsset(path, type));
+                    rootPath = AssetDatabase.GetAssetPath(root);
                 }
+                if (!string.IsNullOrEmpty(rootPath))
+                {
+                    string[] assetFiles = EditorAssetUtil.ListAssetPaths(rootPath, fileType);
+                    foreach (string path in assetFiles)
+                    {
+                        foreach (var o in SearchTypeInAsset(path, type))
+                        {
+                            count++;
+                            if (EditorUtility.DisplayCancelableProgressBar("Search", "Searching asset "+path, (count%100)/100f))
+                            {
+                                yield break;
+                            }
+                            yield return o;
+                        }
+                    }
+                }
+            } finally {
+                EditorUtility.ClearProgressBar();
             }
-            return list;
         }
 
         public static string GetCurrentScene()
@@ -961,6 +975,50 @@ namespace comunity
                     AssetDatabase.MoveAsset(path, dstPath);
                 }
                 Directory.Delete(src);
+                Debug.LogFormat("Moving asset {0} to {1}", src, dst);
+            } finally
+            {
+                EditorUtility.ClearProgressBar();
+            }
+        }
+
+        private static void CopyAssets(string src, string dst, bool move = false)
+        {
+            string[] assets = ListAssetPaths(src, FileType.All);
+            try 
+            {
+                for (int i=0; i<assets.Length; ++i)
+                {
+                    var path = assets[i];
+                    if (EditorUtility.DisplayCancelableProgressBar("Move Directory", path, i/(float)assets.Length))
+                    {
+                        break;
+                    }
+                    string srcPath = path.Substring(src.Length+1); // skip '/' character
+                    string dir = Path.GetDirectoryName(srcPath);
+                    string dstDir = string.Concat(dst,"/",dir);
+                    string dstPath = string.Concat(dst,"/",srcPath);
+                    if (!Directory.Exists(dstDir))
+                    {
+                        Directory.CreateDirectory(dstDir);
+                        AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
+                    }
+                    if (File.Exists(dstPath))
+                    {
+                        AssetDatabase.DeleteAsset(dstPath);
+                    }
+                    if (move)
+                    {
+                        AssetDatabase.MoveAsset(path, dstPath);
+                    } else
+                    {
+                        AssetDatabase.CopyAsset(path, dstPath);
+                    }
+                }
+                if (move && Directory.Exists(src))
+                {
+                    Directory.Delete(src, true);
+                }
                 Debug.LogFormat("Moving asset {0} to {1}", src, dst);
             } finally
             {

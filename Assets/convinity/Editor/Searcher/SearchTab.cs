@@ -29,9 +29,8 @@ namespace convinity
         }
 
         // TODOM use IEnumerator to save memory
-        protected List<Object> SearchAssets(Type type, params FileType[] fileTypes)
+        protected IEnumerable<Object> SearchAssets(Type type, params FileType[] fileTypes)
         {
-            List<Object> found = new List<Object>();
             List<Object> roots = new List<Object>();
             if (root != null)
             {
@@ -44,10 +43,12 @@ namespace convinity
             {
                 foreach (FileType t in fileTypes)
                 {
-                    found.AddRange(EditorAssetUtil.SearchAssetObjects(rootObj, type, t));
+                    foreach (var o in EditorAssetUtil.SearchAssetObjects(rootObj, type, t))
+                    {
+                        yield return o;
+                    }
                 }
             }
-            return found;
         }
         
         public override void OnHeaderGUI()
