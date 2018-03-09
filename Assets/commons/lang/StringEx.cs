@@ -79,8 +79,9 @@ namespace commons
 			return str.Replace(" ", @"\ ");
 			#elif UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX
 			return str.Wrap("\"");
-			#endif
+			#else
 			return str;
+			#endif
 		}
 		
 		public static string ToUnixPath(this string str)

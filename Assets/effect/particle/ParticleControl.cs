@@ -102,11 +102,7 @@ namespace effect
 			foreach (ParticleSystem s in particles)
 			{
 //				s.emission.enabled = true;
-				#if UNITY_5_5
 				if (!s.main.loop)
-				#else
-				if (!s.loop)
-				#endif
 				{
 					s.time = 0;
 				}
@@ -122,11 +118,7 @@ namespace effect
 			{
 				return;
 			}
-			#if UNITY_5_5
 			ParticleSystemScalingMode scaleMode = particles[0].main.scalingMode;
-			#else
-			ParticleSystemScalingMode scaleMode = particles[0].scalingMode;
-			#endif
 			if (scaleMode == ParticleSystemScalingMode.Local)
 			{
 				scale = trans.localScale.x;
