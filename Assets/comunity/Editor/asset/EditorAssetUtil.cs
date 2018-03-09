@@ -669,7 +669,7 @@ namespace comunity
             return list;
         }
 
-        public static IEnumerator<T> SearchAssetObjects<T>(Object root, FileType fileType) where T: Object
+        public static IEnumerable<T> SearchAssetObjects<T>(Object root, FileType fileType) where T: Object
         {
             foreach (var o in  SearchAssetObjects(root, typeof(T), fileType))
             {
@@ -975,6 +975,50 @@ namespace comunity
                     AssetDatabase.MoveAsset(path, dstPath);
                 }
                 Directory.Delete(src);
+                Debug.LogFormat("Moving asset {0} to {1}", src, dst);
+            } finally
+            {
+                EditorUtility.ClearProgressBar();
+            }
+        }
+
+        private static void CopyAssets(string src, string dst, bool move = false)
+        {
+            string[] assets = ListAssetPaths(src, FileType.All);
+            try 
+            {
+                for (int i=0; i<assets.Length; ++i)
+                {
+                    var path = assets[i];
+                    if (EditorUtility.DisplayCancelableProgressBar("Move Directory", path, i/(float)assets.Length))
+                    {
+                        break;
+                    }
+                    string srcPath = path.Substring(src.Length+1); // skip '/' character
+                    string dir = Path.GetDirectoryName(srcPath);
+                    string dstDir = string.Concat(dst,"/",dir);
+                    string dstPath = string.Concat(dst,"/",srcPath);
+                    if (!Directory.Exists(dstDir))
+                    {
+                        Directory.CreateDirectory(dstDir);
+                        AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
+                    }
+                    if (File.Exists(dstPath))
+                    {
+                        AssetDatabase.DeleteAsset(dstPath);
+                    }
+                    if (move)
+                    {
+                        AssetDatabase.MoveAsset(path, dstPath);
+                    } else
+                    {
+                        AssetDatabase.CopyAsset(path, dstPath);
+                    }
+                }
+                if (move && Directory.Exists(src))
+                {
+                    Directory.Delete(src, true);
+                }
                 Debug.LogFormat("Moving asset {0} to {1}", src, dst);
             } finally
             {
