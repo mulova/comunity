@@ -3,11 +3,13 @@ using System.Collections;
 using comunity;
 using UnityEditor;
 using commons;
+using System;
+using Object = UnityEngine.Object;
 
 namespace comunity
 {
     [System.Serializable]
-    public class UnityObjId
+    public class UnityObjId : IComparable<UnityObjId>
     {
         public string id { get; private set; } // guid for asset, scene path for scene object
         public bool asset { get; private set; }
@@ -90,6 +92,17 @@ namespace comunity
         public override string ToString()
         {
             return id;
+        }
+
+        public int CompareTo(UnityObjId other)
+        {
+            if (this.starred^other.starred)
+            {
+                return this.starred? -1 : 1;
+            } else
+            {
+                return 0;
+            }
         }
     }
 }

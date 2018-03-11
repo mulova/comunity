@@ -4,9 +4,10 @@ using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using System;
-using UnityEditorInternal;
 using Rotorz.ReorderableList;
 using comunity;
+using commons;
+using UnityEngine.SceneManagement;
 
 namespace convinity
 {
@@ -17,6 +18,7 @@ namespace convinity
         private const string PATH = "Library/Shortcut/history";
         private int size = 10;
         private Object currentScene;
+        private Object previousScene;
         private bool changed;
 
         public SceneHistoryTab(object id, TabbedEditorWindow window) : base(id, window)
@@ -58,7 +60,6 @@ namespace convinity
 
         public override void OnChangePlayMode()
         {
-            currentScene = null;
         }
 
         public override void OnChangeScene(string sceneName)
@@ -67,13 +68,20 @@ namespace convinity
             {
                 return;
             }
-            currentScene = AssetDatabase.LoadAssetAtPath(EditorSceneBridge.currentScene, typeof(Object));
-            if (currentScene == null)
+            previousScene = currentScene;
+            currentScene = AssetDatabase.LoadAssetAtPath<Object>(EditorSceneBridge.currentScene);
+            if (!currentScene == null)
             {
                 return;
             }
-            sceneHistory.Remove(currentScene);
-            sceneHistory.Insert(0, currentScene);
+            int index = sceneHistory.IndexOf(currentScene);
+            if (index >= 0)
+            {
+                sceneHistory.Swap(index, 0);
+            } else
+            {
+                sceneHistory.Insert(0, currentScene);
+            }
             if (sceneHistory.Count > size)
             {
                 sceneHistory.RemoveAt(sceneHistory.Count-1);
@@ -89,12 +97,12 @@ namespace convinity
         public override void OnHeaderGUI()
         {
             EditorGUILayout.BeginHorizontal();
-            GUI.enabled = sceneHistory.Count > 1;
+            GUI.enabled = previousScene != null;
             if (GUILayout.Button("Back", EditorStyles.toolbarButton, GUILayout.ExpandWidth(true)))
             {
                 if (!changed||EditorSceneBridge.SaveCurrentSceneIfUserWantsTo())
                 {
-                    EditorSceneBridge.OpenScene(sceneHistory[1].path);
+                    EditorSceneBridge.OpenScene(AssetDatabase.GetAssetPath(previousScene));
                 }
             }
             GUI.enabled = true;
@@ -108,6 +116,7 @@ namespace convinity
             try
             {
                 listDrawer.Draw(ReorderableListFlags.ShowIndices|ReorderableListFlags.HideAddButton|ReorderableListFlags.DisableContextMenu);
+                sceneHistory.Sort();
             } catch (Exception ex)
             {
                 if (!(ex.GetBaseException() is ExitGUIException))

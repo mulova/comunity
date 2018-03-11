@@ -9,7 +9,7 @@ namespace convinity
     {
         public override bool DrawItem(Rect rect, int index, UnityObjId item, out UnityObjId newItem)
         {
-            Rect[] area = SplitRectHorizontally(rect, rect.width-30);
+            Rect[] area = SplitRectHorizontally(rect, (int)rect.width-15);
             Object obj = item.reference;
             EditorGUI.ObjectField(area[0], obj, typeof(Object), true);
             bool starred = item.starred;

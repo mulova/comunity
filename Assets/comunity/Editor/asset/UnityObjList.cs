@@ -12,6 +12,18 @@ namespace comunity
             Add(new UnityObjId(obj));
         }
 
+        public int IndexOf(Object obj)
+        {
+            for (int i=0; i<Count; ++i)
+            {
+                if (this[i].reference == obj)
+                {
+                        return i;
+                }
+            }
+            return -1;
+        }
+
         public void Insert(int index, Object obj)
         {
             Insert(index, new UnityObjId(obj));
