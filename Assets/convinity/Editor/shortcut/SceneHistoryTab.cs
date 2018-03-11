@@ -13,8 +13,8 @@ namespace convinity
 
     public class SceneHistoryTab : EditorTab
     {
-        private List<Object> sceneHistory;
-        private string path = "Library/Shortcut/history";
+        private UnityObjList sceneHistory;
+        private const string PATH = "Library/Shortcut/history";
         private int size = 10;
         private Object currentScene;
         private bool changed;
@@ -25,7 +25,13 @@ namespace convinity
 
         public override void OnEnable()
         {
-            sceneHistory = EditorAssetUtil.LoadReferencesFromFile<Object>(path);
+            BinarySerializer ser = new BinarySerializer(PATH, FileAccess.Read);
+            sceneHistory = ser.Deserialize<UnityObjList>();
+            ser.Close();
+            if (sceneHistory == null)
+            {
+                sceneHistory = new UnityObjList();
+            }
             OnChangeScene("");
             size = EditorPrefs.GetInt("SceneHistory", 10);
             EditorApplication.hierarchyWindowChanged += OnSceneObjChange;
@@ -88,7 +94,7 @@ namespace convinity
             {
                 if (!changed||EditorSceneBridge.SaveCurrentSceneIfUserWantsTo())
                 {
-                    EditorSceneBridge.OpenScene(AssetDatabase.GetAssetPath(sceneHistory[1]));
+                    EditorSceneBridge.OpenScene(sceneHistory[1].path);
                 }
             }
             GUI.enabled = true;
@@ -97,7 +103,7 @@ namespace convinity
 
         public override void OnInspectorGUI()
         {
-            ListDrawer<Object> listDrawer = new ListDrawer<Object>(sceneHistory);
+            ListDrawer<UnityObjId> listDrawer = new ListDrawer<UnityObjId>(sceneHistory, new UnityObjIdDrawer());
             listDrawer.allowSceneObject = false;
             try
             {
@@ -121,14 +127,15 @@ namespace convinity
             if (GUILayout.Button("Clear"))
             {
                 sceneHistory.Clear();
-                File.Delete(path);
+                File.Delete(PATH);
             }
             EditorGUILayout.EndHorizontal();
         }
 
         private void SaveHistory()
         {
-            EditorAssetUtil.SaveReferences(path, sceneHistory);
+            BinarySerializer w = new BinarySerializer(PATH, FileAccess.Write);
+            w.Serialize(sceneHistory);
         }
     }
 }

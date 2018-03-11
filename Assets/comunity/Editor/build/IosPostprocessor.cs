@@ -1,4 +1,4 @@
-﻿#if UNITY_IOS
+﻿#if UNITY_IOS && PBX_PROJECT
 using System;
 using System.IO;
 using UnityEditor.iOS.Xcode;

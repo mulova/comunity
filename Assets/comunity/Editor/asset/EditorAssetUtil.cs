@@ -316,7 +316,7 @@ namespace comunity
         /// <param name='o'>
         /// The Object
         /// </param>
-        public static string GetObjectId(Object o, out bool asset)
+        public static string GetObjectId(this Object o, out bool asset)
         {
             string str = AssetDatabase.GetAssetPath(o);
             if (!string.IsNullOrEmpty(str))

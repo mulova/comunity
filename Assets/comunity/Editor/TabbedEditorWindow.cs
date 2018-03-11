@@ -23,11 +23,12 @@ namespace comunity {
 						break;
 					}
 				}
+
 			} else {
 				selected = tabs[0];
 			}
 			selected.tab.OnSelected(true);
-            #if UNITY_2017
+            #if UNITY_2017_1_OR_NEWER
             EditorApplication.playModeStateChanged += ChangePlayMode;
             #else
             EditorApplication.playmodeStateChanged += ChangePlaymode;

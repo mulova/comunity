@@ -192,6 +192,7 @@ namespace comunity
             int i = GetActualIndex(index);
             T obj = list[i];
             T changedObj = default(T);
+
             if (getItemDrawer(obj).DrawItem(position, index, obj, out changedObj))
             {
                 changed = true;

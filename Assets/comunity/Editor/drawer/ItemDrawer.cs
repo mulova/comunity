@@ -49,9 +49,9 @@ namespace comunity
 
         public virtual bool DrawItem(Rect position, int index, T obj, out T newObj)
         {
-            Object o = toObj(obj);
             try
             {
+                Object o = toObj(obj);
                 newObj = EditorGUI.ObjectField(position, o, typeof(T), true) as T;
                 return obj != newObj;
             } catch (Exception ex)
@@ -75,6 +75,17 @@ namespace comunity
             Rect left = src;
             Rect right = src;
             left.width = src.width*ratio;
+            right = src;
+            right.x = left.x+left.width;
+            right.width = src.width-left.width;
+            return new Rect[] { left, right};
+        }
+
+        public Rect[] SplitRectHorizontally(Rect src, int pixel)
+        {
+            Rect left = src;
+            Rect right = src;
+            left.width = pixel;
             right = src;
             right.x = left.x+left.width;
             right.width = src.width-left.width;

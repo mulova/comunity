@@ -588,7 +588,7 @@ namespace comunity
                 manifest.packageName = manifest.packageName+"_reslib";
                 manifest.Write();
             }
-#elif UNITY_IOS
+#elif UNITY_IOS && PBX_PROJECT
             IosPostprocessor proc = new IosPostprocessor(path);
             proc.SetBitCode(Platform.conf.GetBool("XCODE_BITCODE", false));
             var frameworks = Platform.conf.GetString("XCODE_FRAMEWORKS", string.Empty).SplitCSV();
