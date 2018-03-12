@@ -14,9 +14,9 @@ namespace convinity {
 		
 		public string name;
 		public string dir;
-		[System.NonSerialized] private List<Object> assetRefs = new List<Object>();
-		[System.NonSerialized] private List<Object> sceneRefs = new List<Object>(); // current scene's object refs
-		[System.NonSerialized] private Dictionary<string, List<string>> sceneObjPaths = new Dictionary<string, List<string>>();
+        [System.NonSerialized] private UnityObjList assetRefs = new UnityObjList();
+        [System.NonSerialized] private UnityObjList sceneRefs = new UnityObjList(); // current scene's object refs
+        [System.NonSerialized] private Dictionary<string, UnityObjList> sceneObjPaths = new Dictionary<string, UnityObjList>();
 		[System.NonSerialized] private string cacheName;
 		[System.NonSerialized] public Vector2 scroll = new Vector2();
 		
@@ -27,22 +27,19 @@ namespace convinity {
 			this.dir = "Assets/../"+dir;
 		}
 
-		public List<Object> GetAssetRefs() {
+        public UnityObjList GetAssetRefs() {
 			return assetRefs;
 		}
 
-		public List<Object> GetSceneRefs() {
+        public UnityObjList GetSceneRefs() {
 			return sceneRefs;
 		}
 
-		public List<Object> GetSceneObjects(string sceneName) {
+        public UnityObjList GetSceneObjects(string sceneName) {
 			if (cacheName != sceneName) {
 				cacheName = sceneName;
 				sceneRefs.Clear();
-				List<string> list = LoadSceneObjList(sceneName);
-				foreach (string s in list) {
-					sceneRefs.Add(EditorAssetUtil.GetObject(s));
-				}
+                sceneRefs = LoadSceneObjList(sceneName);
 			}
 			return sceneRefs;
 		}
@@ -51,26 +48,15 @@ namespace convinity {
 			cacheName = null;
 			sceneRefs.Clear();
 		}
-		
+
 		public void Load() {
-			assetRefs = EditorAssetUtil.LoadReferencesFromFile<Object>(GetAssetStore());
+            assetRefs = UnityObjList.Load(GetAssetStore());
 			LoadSceneObjList(EditorAssetUtil.GetCurrentScene());
 		}
 		
-		public List<string> LoadSceneObjList(string sceneName) {
-			List<string> list = null;
-			if (!sceneObjPaths.TryGetValue(sceneName, out list)) {
-                string path = GetSceneStore(sceneName);
-                if (File.Exists(path))
-                {
-                    list = SerializationUtil.ReadObject<List<string>>(path);
-                    sceneObjPaths[sceneName] = list;
-                }
-			}
-			if (list == null) {
-				list = new List<string>();
-				sceneObjPaths[sceneName] = list;
-			}
+        public UnityObjList LoadSceneObjList(string sceneName) {
+            var list = UnityObjList.Load(GetSceneStore(sceneName));
+            sceneObjPaths[sceneName] = list;
 			return list;
 		}
 		
@@ -80,14 +66,14 @@ namespace convinity {
 		/// <param name="sceneName">Scene name.</param>
 		public void Save(string sceneName) {
 			// save asset objects
-			EditorAssetUtil.SaveReferences(GetAssetStore(), assetRefs);
+            assetRefs.Save(GetAssetStore());
 			// save scene objects
-			List<Object> list = GetSceneObjects(sceneName);
+            UnityObjList list = GetSceneObjects(sceneName);
 			if (list != null) {
 				string path = GetSceneStore(sceneName);
 				if (list.Count > 0) {
-					List<string> refs = EditorAssetUtil.SaveReferences(path, list);
-					sceneObjPaths[sceneName] = refs;
+                    list.Save(GetSceneStore(sceneName));
+                    sceneObjPaths[sceneName] = list;
 				} else {
 					if (File.Exists(path)) {
 						File.Delete(path);
@@ -112,20 +98,14 @@ namespace convinity {
 		public bool AddObject(string sceneName, Object o) {
 			if (string.IsNullOrEmpty(AssetDatabase.GetAssetPath(o))) {
 				if (!sceneRefs.Contains(o)) {
-					List<string> list = null;
+                    UnityObjList list = null;
 					if (!sceneObjPaths.TryGetValue(sceneName, out list)) {
-						list = new List<string>();
+                        list = new UnityObjList();
 						sceneObjPaths[sceneName] = list;
 					}
 					sceneRefs.Add(o);
-					string objPath = null;
-					if (o as GameObject) {
-						objPath = (o as GameObject).transform.GetScenePath();
-					} else if (o as Component) {
-						objPath = (o as Component).transform.GetScenePath();
-					}
-					if (!list.Contains(objPath)) {
-						list.Add(objPath);
+					if (!list.Contains(o)) {
+						list.Add(o);
 						return true;
 					}
 				}

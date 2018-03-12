@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 
 namespace comunity
 {
@@ -45,6 +46,36 @@ namespace comunity
             {
                 RemoveAt(index);
             }
+        }
+
+        public bool Contains(Object obj)
+        {
+            return IndexOf(obj) >= 0;
+        }
+
+        public static UnityObjList Load(string path)
+        {
+            if (File.Exists(path))
+            {
+                BinarySerializer reader = new BinarySerializer(path, FileAccess.Read);
+                UnityObjList list = reader.Deserialize<UnityObjList>();
+                reader.Close();
+                if (list == null)
+                {
+                    list = new UnityObjList();
+                }
+                return list;
+            } else
+            {
+                return new UnityObjList();
+            }
+        }
+
+        public void Save(string path)
+        {
+            BinarySerializer writer = new BinarySerializer(path, FileAccess.Write);
+            writer.Serialize(this);
+            writer.Close();
         }
     }
 }

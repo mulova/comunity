@@ -27,13 +27,7 @@ namespace convinity
 
         public override void OnEnable()
         {
-            BinarySerializer ser = new BinarySerializer(PATH, FileAccess.Read);
-            sceneHistory = ser.Deserialize<UnityObjList>();
-            ser.Close();
-            if (sceneHistory == null)
-            {
-                sceneHistory = new UnityObjList();
-            }
+            sceneHistory = UnityObjList.Load(PATH);
             OnChangeScene("");
             size = EditorPrefs.GetInt("SceneHistory", 10);
             EditorApplication.hierarchyWindowChanged += OnSceneObjChange;
@@ -41,7 +35,7 @@ namespace convinity
 
         public override void OnDisable()
         {
-            SaveHistory();
+            sceneHistory.Save(PATH);
             EditorApplication.hierarchyWindowChanged -= OnSceneObjChange;
         }
 
@@ -86,7 +80,7 @@ namespace convinity
             {
                 sceneHistory.RemoveAt(sceneHistory.Count-1);
             }
-            SaveHistory();
+            sceneHistory.Save(PATH);
             changed = false;
         }
 
@@ -139,12 +133,6 @@ namespace convinity
                 File.Delete(PATH);
             }
             EditorGUILayout.EndHorizontal();
-        }
-
-        private void SaveHistory()
-        {
-            BinarySerializer w = new BinarySerializer(PATH, FileAccess.Write);
-            w.Serialize(sceneHistory);
         }
     }
 }

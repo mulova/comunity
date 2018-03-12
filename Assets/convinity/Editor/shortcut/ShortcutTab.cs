@@ -21,14 +21,14 @@ namespace convinity {
 			this.dir = dir;
 		}
 
-		private ObjListFilter<Object> assetFilter;
-		private ObjListFilter<Object> sceneFilter;
+        private ObjListFilter<UnityObjId> assetFilter;
+        private ObjListFilter<UnityObjId> sceneFilter;
 		public override void OnEnable() {
 			OnFocus(true);
 			LoadInfo();
 			sections = LoadShortcutSections();
-			assetFilter = new ObjListFilter<Object>("Assets", true, null);
-			sceneFilter = new ObjListFilter<Object>("Scene Objects", false, null);
+            assetFilter = new ObjListFilter<UnityObjId>("Assets", true, null);
+            sceneFilter = new ObjListFilter<UnityObjId>("Scene Objects", false, null);
 		}
 
 		public override void OnDisable() { }
@@ -105,8 +105,8 @@ namespace convinity {
 					EditorGUILayout.EndHorizontal();
 				}
 
-				List<Object> assetRefs = sect.GetAssetRefs();
-				List<Object> sceneRefs = sect.GetSceneObjects(GetSceneName());
+                UnityObjList assetRefs = sect.GetAssetRefs();
+                UnityObjList sceneRefs = sect.GetSceneObjects(GetSceneName());
 				sect.scroll = EditorGUILayout.BeginScrollView(sect.scroll, GUILayout.ExpandHeight(true));
 				changed |= DrawShortcutList(assetRefs, assetFilter);
 				EditorGUILayout.Space();
@@ -147,9 +147,9 @@ namespace convinity {
 			}
 		}
 
-        private bool DrawShortcutList(List<Object> list, ObjListFilter<Object> filter) {
-            AndPredicate<Object> predicate = filter.GetPredicate(list);
-            ListDrawer<Object> drawer = new ListDrawer<Object>(list);
+        private bool DrawShortcutList(UnityObjList list, ObjListFilter<UnityObjId> filter) {
+            AndPredicate<UnityObjId> predicate = filter.GetPredicate(list);
+            ListDrawer<UnityObjId> drawer = new ListDrawer<UnityObjId>(list, new UnityObjIdDrawer());
             drawer.allowSceneObject = false;
             drawer.Filter(predicate.Accept);
             return drawer.Draw(ReorderableListFlags.ShowIndices);
