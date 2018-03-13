@@ -52,8 +52,6 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\comunity\Editor\anim\EditorAnimUtil.cs" />
-     <Compile Include="Assets\comunity\Editor\asset\AssetBuilder.cs" />
-     <Compile Include="Assets\comunity\Editor\asset\AssetBuilderTab.cs" />
      <Compile Include="Assets\comunity\Editor\asset\AssetBundlePath.cs" />
      <Compile Include="Assets\comunity\Editor\asset\AssetDataInspector.cs" />
      <Compile Include="Assets\comunity\Editor\asset\AssetGuidDrawer.cs" />
@@ -65,6 +63,7 @@
      <Compile Include="Assets\comunity\Editor\asset\AudioKeyInspector.cs" />
      <Compile Include="Assets\comunity\Editor\asset\AudioTriggerInspector.cs" />
      <Compile Include="Assets\comunity\Editor\asset\AudioTriggerInspectorImpl.cs" />
+     <Compile Include="Assets\comunity\Editor\asset\BuildTargetEx.cs" />
      <Compile Include="Assets\comunity\Editor\asset\EditorAssetCache.cs" />
      <Compile Include="Assets\comunity\Editor\asset\EditorAssetLoader.cs" />
      <Compile Include="Assets\comunity\Editor\asset\EditorAssetUtil.cs" />
@@ -75,23 +74,8 @@
      <Compile Include="Assets\comunity\Editor\asset\TexFormatGroupEx.cs" />
      <Compile Include="Assets\comunity\Editor\asset\TextureImporterFormatEx.cs" />
      <Compile Include="Assets\comunity\Editor\asset\TextureTrimmer.cs" />
-     <Compile Include="Assets\comunity\Editor\build\AndroidManifest.cs" />
-     <Compile Include="Assets\comunity\Editor\build\Builder.cs" />
-     <Compile Include="Assets\comunity\Editor\build\BuildProcess\AssetBuildProcess.cs" />
-     <Compile Include="Assets\comunity\Editor\build\BuildProcess\BrokenAssetVerifier.cs" />
-     <Compile Include="Assets\comunity\Editor\build\BuildProcess\ComponentBuildProcess.cs" />
-     <Compile Include="Assets\comunity\Editor\build\BuildProcess\LexiconRegistryBuildProcessor.cs" />
-     <Compile Include="Assets\comunity\Editor\build\BuildProcess\RendererBuildProcess.cs" />
-     <Compile Include="Assets\comunity\Editor\build\BuildProcess\SceneBuildProcess.cs" />
-     <Compile Include="Assets\comunity\Editor\build\BuildProcess\TextureAssetBuildProcess.cs" />
-     <Compile Include="Assets\comunity\Editor\build\BuildScript.cs" />
-     <Compile Include="Assets\comunity\Editor\build\BuildScriptEx.cs" />
-     <Compile Include="Assets\comunity\Editor\build\BuildSettingTab.cs" />
-     <Compile Include="Assets\comunity\Editor\build\BuildSettingWindow.cs" />
-     <Compile Include="Assets\comunity\Editor\build\BuildTargetEx.cs" />
-     <Compile Include="Assets\comunity\Editor\build\IosPostprocessor.cs" />
-     <Compile Include="Assets\comunity\Editor\build\Plist.cs" />
-     <Compile Include="Assets\comunity\Editor\build\PlistDict.cs" />
+     <Compile Include="Assets\comunity\Editor\asset\UnityObjId.cs" />
+     <Compile Include="Assets\comunity\Editor\asset\UnityObjList.cs" />
      <Compile Include="Assets\comunity\Editor\CommandLineReader.cs" />
      <Compile Include="Assets\comunity\Editor\CompatibilityEditor.cs" />
      <Compile Include="Assets\comunity\Editor\config\PlatformEditorEx.cs" />
@@ -102,6 +86,7 @@
      <Compile Include="Assets\comunity\Editor\drawer\ItemDrawer.cs" />
      <Compile Include="Assets\comunity\Editor\drawer\ListDrawer.cs" />
      <Compile Include="Assets\comunity\Editor\drawer\StrEnumItemDrawer.cs" />
+     <Compile Include="Assets\comunity\Editor\drawer\UnityObjIdDrawer.cs" />
      <Compile Include="Assets\comunity\Editor\EditorGUIUtil.cs" />
      <Compile Include="Assets\comunity\Editor\EditorTab.cs" />
      <Compile Include="Assets\comunity\Editor\EditorTraversal.cs" />

@@ -14,7 +14,7 @@ namespace build
 		private string[] names;
 		private string selected;
 		private TexFormatGroup texFormat = TexFormatGroup.AUTO;
-        private AssetBundlePath path = new AssetBundlePath();
+		private AssetBundlePath path = new AssetBundlePath();
 
 		public AssetBuilderTab(string[] names, TabbedEditorWindow window) : base("AssetBuilder", window)
 		{
@@ -47,12 +47,12 @@ namespace build
 			EditorGUILayout.EndVertical();
 			if (GUILayout.Button("Build", GUILayout.Height(50)))
 			{
-                path.Save();
+				path.Save();
 				Build();
 			}
 			EditorGUILayout.EndHorizontal();
 
-            path.DrawInspectorGUI();
+			path.DrawInspectorGUI();
 		}
 
 		public override void OnFooterGUI()

@@ -25,13 +25,13 @@ namespace build
 		public static readonly Loggerx log = LogManager.GetLogger(typeof(AssetBuilder));
 		public readonly BuildTarget buildTarget;
 
-        private AssetBundlePath abPath = new AssetBundlePath();
+		private AssetBundlePath abPath = new AssetBundlePath();
 
 		public string targetRes
 		{
 			get
 			{
-                return buildTarget.ToRuntimePlatform().GetAbCategory(texFormat);
+				return buildTarget.ToRuntimePlatform().GetAbCategory(texFormat);
 			}
 		}
 
@@ -107,6 +107,19 @@ namespace build
 			return ver;
 		}
 
+		public static bool IsModified(string filePath, ref DateTime time)
+		{
+			DateTime modTime = File.GetLastWriteTime(filePath);
+			if (modTime != time)
+			{
+				time = modTime;
+				return true;
+			} else
+			{
+				return false;
+			}
+		}
+
 
 		/// <summary>
 		/// Build the specified snapshotPath and outputDir.
@@ -116,70 +129,70 @@ namespace build
 		public void Build()
 		{
 			BuildConfig.Reset();
-            List<Object> dirRefs = abPath.cdnRefs;
-            List<Object> rawDirRefs = abPath.rawCdnRefs;
+			List<Object> dirRefs = abPath.cdnRefs;
+			List<Object> rawDirRefs = abPath.rawCdnRefs;
 
-            if (EditorUserBuildSettings.activeBuildTarget == BuildTarget.WebGL)
-            {
-                // WWW Caching only allows asset bundle.
-                dirRefs.AddRange(rawDirRefs);
-                rawDirRefs.Clear();
-            }
+			if (EditorUserBuildSettings.activeBuildTarget == BuildTarget.WebGL)
+			{
+				// WWW Caching only allows asset bundle.
+				dirRefs.AddRange(rawDirRefs);
+				rawDirRefs.Clear();
+			}
 
 			if (Directory.Exists(outputDir)&&Directory.GetFiles(outputDir).IsNotEmpty())
 			{
 				throw new Exception(string.Format("Output directory {0} is not empty", outputDir));
 			}
 			AssetSnapshot snapshot = GetPrevSnapshot();
-            try
-            {
-                List<string> assetMods = new List<string>();
-                List<string> rawAssetMods = new List<string>();
-                // get mods
-                foreach (Object dir in rawDirRefs)
-                {
-                    string srcDir = AssetDatabase.GetAssetPath(dir);
-                    rawAssetMods.AddRange(GetRawAssetMods(snapshot, srcDir));
-                }
-                foreach (Object dir in dirRefs)
-                {
-                    string srcDir = AssetDatabase.GetAssetPath(dir);
-                    assetMods.AddRange(GetAssetMods(snapshot, srcDir));
-                }
-                string err1 = VerifyLowerCase(assetMods);
-                string err2 = VerifyLowerCase(rawAssetMods);
-                if (err1.IsNotEmpty() || err2.IsNotEmpty())
-                {
-                    throw new Exception(StringUtil.Join("\n", err1, err2));
-                }
-                
-                assetMods.RemoveAll(m=> rawAssetMods.Contains(m));
-                log.Info("Modified raw assets ({0:D0})", rawAssetMods.Count);
-                log.Info("Modified assets ({0:D0})", assetMods.Count);
-                string[] srcList = assetMods.ConvertAll(p => "Assets/"+p).ToArray();
-                // preprocess
-                string err = BuildScript.PrebuildAll(BuildScript.VERIFY_ONLY);
-                if (err.IsNotEmpty())
-                {
-                    throw new Exception(err);
-                }
-                BuildScript.PrebuildAssets(srcList, texFormat);
-                // change texture formats
-                texFormat.ConvertDependencies(srcList);
-                // build
-                GenerateRawAsset(rawAssetMods, outputDir);
-                GenerateAsset(assetMods, outputDir);
-                assetMods.AddRange(GenerateStreamingScene(outputDir));
-                AssetDatabase.SaveAssets();
-                modList.Clear();
-                modList.AddRange(assetMods);
-                modList.AddRange(rawAssetMods);
+			try
+			{
+				List<string> assetMods = new List<string>();
+				List<string> rawAssetMods = new List<string>();
+				// get mods
+				foreach (Object dir in rawDirRefs)
+				{
+					string srcDir = AssetDatabase.GetAssetPath(dir);
+					rawAssetMods.AddRange(GetRawAssetMods(snapshot, srcDir));
+				}
+				foreach (Object dir in dirRefs)
+				{
+					string srcDir = AssetDatabase.GetAssetPath(dir);
+					assetMods.AddRange(GetAssetMods(snapshot, srcDir));
+				}
+				string err1 = VerifyLowerCase(assetMods);
+				string err2 = VerifyLowerCase(rawAssetMods);
+				if (err1.IsNotEmpty() || err2.IsNotEmpty())
+				{
+					throw new Exception(StringUtil.Join("\n", err1, err2));
+				}
 
-            } catch (Exception ex)
-            {
-                log.Error(ex);
-                throw ex;
-            }
+				assetMods.RemoveAll(m=> rawAssetMods.Contains(m));
+				log.Info("Modified raw assets ({0:D0})", rawAssetMods.Count);
+				log.Info("Modified assets ({0:D0})", assetMods.Count);
+				string[] srcList = assetMods.ConvertAll(p => "Assets/"+p).ToArray();
+				// preprocess
+				string err = BuildScript.PrebuildAll(BuildScript.VERIFY_ONLY);
+				if (err.IsNotEmpty())
+				{
+					throw new Exception(err);
+				}
+				BuildScript.PrebuildAssets(srcList, texFormat);
+				// change texture formats
+				texFormat.ConvertDependencies(srcList);
+				// build
+				GenerateRawAsset(rawAssetMods, outputDir);
+				GenerateAsset(assetMods, outputDir);
+				assetMods.AddRange(GenerateStreamingScene(outputDir));
+				AssetDatabase.SaveAssets();
+				modList.Clear();
+				modList.AddRange(assetMods);
+				modList.AddRange(rawAssetMods);
+
+			} catch (Exception ex)
+			{
+				log.Error(ex);
+				throw ex;
+			}
 
 			if (modList.IsNotEmpty())
 			{
@@ -209,19 +222,19 @@ namespace build
 			}
 		}
 
-        private string VerifyLowerCase(List<string> mods)
-        {
-            StringBuilder str = new StringBuilder();
-            foreach (var m in mods)
-            {
-                string err = AssetCache.VerifyUrl(m);
-                if (err.IsNotEmpty())
-                {
-                    str.Append(err).AppendLine();
-                }
-            }
-            return str.ToString();
-        }
+		private string VerifyLowerCase(List<string> mods)
+		{
+			StringBuilder str = new StringBuilder();
+			foreach (var m in mods)
+			{
+				string err = AssetCache.VerifyUrl(m);
+				if (err.IsNotEmpty())
+				{
+					str.Append(err).AppendLine();
+				}
+			}
+			return str.ToString();
+		}
 
 		private List<string> GetAssetMods(AssetSnapshot snapshot, string srcDir)
 		{
@@ -230,15 +243,15 @@ namespace build
 			foreach (string assetPath in assetPaths)
 			{
 				if (assetPath.EndsWithIgnoreCase(".meta")
-                    ||Path.GetFileName(assetPath).StartsWith(".", StringComparison.Ordinal)
-                    ||assetPath.EndsWithIgnoreCase(".unity"))
+					||Path.GetFileName(assetPath).StartsWith(".", StringComparison.Ordinal)
+					||assetPath.EndsWithIgnoreCase(".unity"))
 				{
 					continue;
 				}
-				
+
 				AssetDigest digest = snapshot.GetAssetDigest(assetPath);
 				bool modified = IsDepModified(snapshot, digest);
-				
+
 				if (modified)
 				{
 					mods.Add(assetPath);
@@ -269,26 +282,26 @@ namespace build
 			}
 		}
 
-        private List<string> GenerateStreamingScene(string outputDir)
-        {
-            List<string> paths = new List<string>();
-            if (BuildConfig.STREAMING_SCENE_FROM <= 0)
-            {
-                return paths;
-            }
-            BuildOptions option = BuildOptions.BuildAdditionalStreamedScenes | BuildOptions.StrictMode;
-            for (int i=BuildConfig.STREAMING_SCENE_FROM; i<EditorBuildSettings.scenes.Length; ++i)
-            {
-                EditorBuildSettingsScene scene = EditorBuildSettings.scenes[i];
-                if (scene.enabled)
-                {
-                    string dstPath = GetOutputPath(outputDir, Path.GetFileNameWithoutExtension(scene.path)+FileTypeEx.ASSET_BUNDLE);
-                    paths.Add(dstPath);
-                    BuildPipeline.BuildStreamedSceneAssetBundle(new string[] { scene.path }, dstPath, buildTarget, option);
-                }
-            }
-            return paths;
-        }
+		private List<string> GenerateStreamingScene(string outputDir)
+		{
+			List<string> paths = new List<string>();
+			if (BuildConfig.STREAMING_SCENE_FROM <= 0)
+			{
+				return paths;
+			}
+			BuildOptions option = BuildOptions.BuildAdditionalStreamedScenes | BuildOptions.StrictMode;
+			for (int i=BuildConfig.STREAMING_SCENE_FROM; i<EditorBuildSettings.scenes.Length; ++i)
+			{
+				EditorBuildSettingsScene scene = EditorBuildSettings.scenes[i];
+				if (scene.enabled)
+				{
+					string dstPath = GetOutputPath(outputDir, Path.GetFileNameWithoutExtension(scene.path)+FileTypeEx.ASSET_BUNDLE);
+					paths.Add(dstPath);
+					BuildPipeline.BuildStreamedSceneAssetBundle(new string[] { scene.path }, dstPath, buildTarget, option);
+				}
+			}
+			return paths;
+		}
 
 		private List<string> GetRawAssetMods(AssetSnapshot snapshot, string srcDir)
 		{
@@ -299,7 +312,7 @@ namespace build
 				{
 					continue;
 				}
-				
+
 				AssetDigest digest = snapshot.GetAssetDigest(assetPath);
 				if (digest.IsModified())
 				{
@@ -318,10 +331,10 @@ namespace build
 
 			foreach (string assetPath in modList)
 			{
-                if (assetPath.Is(FileType.Prefab, FileType.Asset))
-                {
-                    throw new Exception(assetPath+" is not raw asset");
-                }
+				if (assetPath.Is(FileType.Prefab, FileType.Asset))
+				{
+					throw new Exception(assetPath+" is not raw asset");
+				}
 				string srcPath = "Assets/"+assetPath;
 				string dstPath = GetOutputPath(outputDir, assetPath);
 				DirectoryInfo dstDir = new DirectoryInfo(PathUtil.GetDirectory(dstPath));
@@ -332,22 +345,22 @@ namespace build
 				log.Debug("Copy {0} to {1}", srcPath, dstPath);
 				File.Copy(srcPath, dstPath, true);
 
-                // add texture property
-                if (srcPath.Is(FileType.Image))
-                {
-                    TextureImporter im = AssetImporter.GetAtPath(srcPath) as TextureImporter;
-                    Texture2D tex = AssetDatabase.LoadAssetAtPath<Texture2D>(srcPath);
-                    if (im != null)
-                    {
-                        TexData data = new TexData();
-                        data.crunch = im.crunchedCompression;
-                        data.filterMode = tex.filterMode;
-                        data.linear = !im.sRGBTexture;
-                        data.mipmap = im.mipmapEnabled;
-                        data.wrapMode = tex.wrapMode;
-                        TexData.Save(dstPath, data);
-                    }
-                }
+				// add texture property
+				if (srcPath.Is(FileType.Image))
+				{
+					TextureImporter im = AssetImporter.GetAtPath(srcPath) as TextureImporter;
+					Texture2D tex = AssetDatabase.LoadAssetAtPath<Texture2D>(srcPath);
+					if (im != null)
+					{
+						TexData data = new TexData();
+						data.crunch = im.crunchedCompression;
+						data.filterMode = tex.filterMode;
+						data.linear = !im.sRGBTexture;
+						data.mipmap = im.mipmapEnabled;
+						data.wrapMode = tex.wrapMode;
+						TexData.Save(dstPath, data);
+					}
+				}
 			}
 		}
 

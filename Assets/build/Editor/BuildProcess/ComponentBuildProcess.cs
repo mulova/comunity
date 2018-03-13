@@ -16,8 +16,8 @@ namespace build
 
 		protected abstract void PreprocessComponent(Component comp);
 
-        protected abstract void PreprocessOver(Component comp);
-        
+		protected abstract void PreprocessOver(Component comp);
+
 		private HashSet<string> errors = new HashSet<string>();
 		private Object currentObj;
 		private object[] options;
@@ -93,27 +93,27 @@ namespace build
 			return default(T);
 		}
 
-        public void Verify(Object obj, Component comp, object[] options)
-        {
-            if (compType == null ^ comp == null)
-            {
-                return;
-            }
-            if (compType != null && !compType.IsAssignableFrom(comp.GetType()))
-            {
-                return;
-            }
-            try
-            {
-                this.currentObj = obj;
-                this.options = options;
-                VerifyComponent(comp);
-            } catch (Exception ex)
-            {
-                errors.Add(string.Concat(path, "\n", ex.Message, "\n", ex.StackTrace));
-            }
-        }
-        
+		public void Verify(Object obj, Component comp, object[] options)
+		{
+			if (compType == null ^ comp == null)
+			{
+				return;
+			}
+			if (compType != null && !compType.IsAssignableFrom(comp.GetType()))
+			{
+				return;
+			}
+			try
+			{
+				this.currentObj = obj;
+				this.options = options;
+				VerifyComponent(comp);
+			} catch (Exception ex)
+			{
+				errors.Add(string.Concat(path, "\n", ex.Message, "\n", ex.StackTrace));
+			}
+		}
+
 		public void Preprocess(Object obj, Component comp, object[] options)
 		{
 			if (compType == null ^ comp == null)
@@ -138,30 +138,30 @@ namespace build
 			}
 		}
 
-        public void PreprocessOver(Object obj, Component comp, object[] options)
-        {
-            if (compType == null ^ comp == null)
-            {
-                return;
-            }
-            if (compType != null && !compType.IsAssignableFrom(comp.GetType()))
-            {
-                return;
-            }
-            try
-            {
-                this.currentObj = obj;
-                this.options = options;
-                if (!IsOption(BuildScript.VERIFY_ONLY))
-                {
-                    PreprocessOver(comp);
-                }
-            } catch (Exception ex)
-            {
-                errors.Add(string.Concat(path, "\n", ex.Message, "\n", ex.StackTrace));
-            }
-        }
-        
+		public void PreprocessOver(Object obj, Component comp, object[] options)
+		{
+			if (compType == null ^ comp == null)
+			{
+				return;
+			}
+			if (compType != null && !compType.IsAssignableFrom(comp.GetType()))
+			{
+				return;
+			}
+			try
+			{
+				this.currentObj = obj;
+				this.options = options;
+				if (!IsOption(BuildScript.VERIFY_ONLY))
+				{
+					PreprocessOver(comp);
+				}
+			} catch (Exception ex)
+			{
+				errors.Add(string.Concat(path, "\n", ex.Message, "\n", ex.StackTrace));
+			}
+		}
+
 		protected void AddError(string msg)
 		{
 			if (msg.IsNotEmpty())
@@ -169,17 +169,17 @@ namespace build
 				errors.Add(msg);
 			}
 		}
-        
+
 		protected void AddErrorConcat(params string[] msg)
 		{
 			errors.Add(string.Concat(msg));
 		}
-        
+
 		protected void AddErrorFormat(string format, params object[] param)
 		{
 			errors.Add(string.Format(format, param));
 		}
-        
+
 		public string GetErrorMessage()
 		{
 			if (errors.IsNotEmpty())
@@ -190,7 +190,7 @@ namespace build
 				return string.Empty;
 			}
 		}
-        
+
 		public static string GetErrorMessages()
 		{
 			if (processPool != null)
@@ -212,7 +212,7 @@ namespace build
 						errors.Add(err);
 					}
 				}
-				
+
 				return StringUtil.Join("\n", errors);
 			} else
 			{
@@ -220,7 +220,7 @@ namespace build
 			}
 		}
 
-        private static MultiMap<Type, ComponentBuildProcess> processPool;
+		private static MultiMap<Type, ComponentBuildProcess> processPool;
 
 		private static List<ComponentBuildProcess> GetBuildProcessor(Type type)
 		{
@@ -263,30 +263,30 @@ namespace build
 			}
 		}
 
-        protected void SetDirty(Object o)
-        {
-            EditorTraversal.SetDirty(o);
-        }
+		protected void SetDirty(Object o)
+		{
+			EditorTraversal.SetDirty(o);
+		}
 
 		public static void Reset()
 		{
 			processPool = null;
 		}
 
-        public static void VerifyComponents(Object obj, params object[] options)
-        {
-            ProcessComponents((p,o,c,op)=>p.Verify(o, c, op), obj, options);
-        }
+		public static void VerifyComponents(Object obj, params object[] options)
+		{
+			ProcessComponents((p,o,c,op)=>p.Verify(o, c, op), obj, options);
+		}
 
-        public static void PreprocessComponents(Object obj, params object[] options)
-        {
-            ProcessComponents((p,o,c,op)=>p.Preprocess(o, c, op), obj, options);
-        }
+		public static void PreprocessComponents(Object obj, params object[] options)
+		{
+			ProcessComponents((p,o,c,op)=>p.Preprocess(o, c, op), obj, options);
+		}
 
-        public static void PreprocessOver(Object obj, params object[] options)
-        {
-            ProcessComponents((p,o,c,op)=>p.PreprocessOver(o, c, op), obj, options);
-        }
+		public static void PreprocessOver(Object obj, params object[] options)
+		{
+			ProcessComponents((p,o,c,op)=>p.PreprocessOver(o, c, op), obj, options);
+		}
 
 		private static void ProcessComponents(Action<ComponentBuildProcess, Object, Component, object[]> action, Object obj, params object[] options)
 		{
