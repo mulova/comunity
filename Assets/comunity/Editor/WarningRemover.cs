@@ -23,7 +23,7 @@ public class WarningRemover : ScriptableWizard
 
     }
 
-    [MenuItem( "ProjectR/Etc/Warning Remover",false, 9999)]
+	[MenuItem( "Tools/Warning Remover",false, 9999)]
     public static void OpenWindow()
     {
         GetWindow<WarningRemover>( "Warning Remover" );

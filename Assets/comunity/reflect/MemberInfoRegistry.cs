@@ -211,7 +211,12 @@ namespace comunity
             {
                 foreach (FieldInfo f in fieldMatch)
                 {
-                    object fval = f.GetValue(obj);
+                    object fval = null;
+					try
+					{
+						fval = f.GetValue(obj);
+					} catch {
+					}
                     if (GameObjectEquals(fval, val))
                     {
                         return f;
@@ -317,7 +322,12 @@ namespace comunity
                         ParameterInfo[] param = get.GetParameters();
                         if (param.IsEmpty())
                         {
-                            object oval = p.GetValue(obj, null);
+							object oval = null;
+							try
+							{
+								oval = p.GetValue(obj, null);
+							} catch {
+							}
                             if (oval == null)
                             {
                                 return null;
