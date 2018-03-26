@@ -129,8 +129,8 @@ namespace build
 		public void Build()
 		{
 			BuildConfig.Reset();
-			List<Object> dirRefs = abPath.cdnRefs;
-			List<Object> rawDirRefs = abPath.rawCdnRefs;
+            List<UnityObjId> dirRefs = abPath.dirs;
+            List<UnityObjId> rawDirRefs = abPath.rawDirs;
 
 			if (EditorUserBuildSettings.activeBuildTarget == BuildTarget.WebGL)
 			{
@@ -149,15 +149,13 @@ namespace build
 				List<string> assetMods = new List<string>();
 				List<string> rawAssetMods = new List<string>();
 				// get mods
-				foreach (Object dir in rawDirRefs)
+                foreach (UnityObjId dir in rawDirRefs)
 				{
-					string srcDir = AssetDatabase.GetAssetPath(dir);
-					rawAssetMods.AddRange(GetRawAssetMods(snapshot, srcDir));
+                    rawAssetMods.AddRange(GetRawAssetMods(snapshot, dir.path));
 				}
-				foreach (Object dir in dirRefs)
+                foreach (UnityObjId dir in dirRefs)
 				{
-					string srcDir = AssetDatabase.GetAssetPath(dir);
-					assetMods.AddRange(GetAssetMods(snapshot, srcDir));
+                    assetMods.AddRange(GetAssetMods(snapshot, dir.path));
 				}
 				string err1 = VerifyLowerCase(assetMods);
 				string err2 = VerifyLowerCase(rawAssetMods);

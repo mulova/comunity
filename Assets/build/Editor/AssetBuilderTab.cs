@@ -47,7 +47,7 @@ namespace build
 			EditorGUILayout.EndVertical();
 			if (GUILayout.Button("Build", GUILayout.Height(50)))
 			{
-				path.Save();
+                path.Save(AssetBundlePath.PATH);
 				Build();
 			}
 			EditorGUILayout.EndHorizontal();

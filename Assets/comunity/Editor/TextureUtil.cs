@@ -392,5 +392,12 @@ namespace comunity
 			Exec("convert", src, string.Format(@"-resize {0}x{1}"+FORCE_RESIZE, width, height));
             AssetDatabase.ImportAsset(src, ImportAssetOptions.ForceUpdate);
         }
+
+        public static void InsertPadding(string src,Texture tex, int width, int height)
+        {
+            string param = string.Format("-trim -background none -gravity center -extent {0}x{1}",width, height);
+            Exec("convert", src, param);
+            AssetDatabase.ImportAsset(src, ImportAssetOptions.ForceUpdate);
+        }
     }
 }

@@ -9,9 +9,9 @@ using System.Collections.Generic;
 
 namespace commons
 {
+    [Flags]
     public enum FileType
     {
-        All = 0,
         // unity format
         Material = 1,
         Text = 2,
@@ -22,11 +22,13 @@ namespace commons
         Audio = 64,
         Video = 128,
         Scene = 256,
+        ScriptableObject = 512,
         // unity don't recognize
-        Asset = 512,
-        ScriptableObject = 1024,
+        Asset = 1024,
         Zip = 2048,
         Meta = 4096,
+        Script= 8192,
+        All = 16383,
     }
 
     public static class FileTypeEx

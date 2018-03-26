@@ -11,8 +11,25 @@ namespace comunity
     [System.Serializable]
     public class UnityObjId : IComparable<UnityObjId>
     {
-        public string id { get; private set; } // guid for asset, scene path for scene object
-        public bool asset { get; private set; }
+        [SerializeField]
+        private string _id;
+        // guid for asset, scene path for scene object
+        public string id
+        { 
+            get
+            {
+                return _id;
+            }
+            private set
+            {
+                this._id = value;
+            }
+        }
+
+        [SerializeField]
+        private bool _asset;
+        public bool asset { get { return _asset; } private set { _asset = value; } }
+
         public bool starred;
 
         public Object reference

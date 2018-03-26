@@ -31,6 +31,7 @@ namespace comunity
         public string title;
         public Object undoTarget;
         public Func<T> createDefaultValue = ()=> default(T);
+        public Func<Object, T> createItem;
         private GetItemDrawer getItemDrawer;
 
         private int[] indexer; // used for filtering
@@ -55,6 +56,7 @@ namespace comunity
             this.count = list.Count;
             this.itemDrawer = itemDrawer; // just for reference count
             this.getItemDrawer = t => itemDrawer;
+            this.createItem = CreateItem;
         }
 
         public ListDrawer(List<T> list, GetItemDrawer getItemDrawer)
@@ -62,6 +64,7 @@ namespace comunity
             this.list = list;
             this.count = list.Count;
             this.getItemDrawer = getItemDrawer;
+            this.createItem = CreateItem;
         }
 
         public virtual bool CanDrag(int index)
@@ -279,6 +282,32 @@ namespace comunity
             return ret;
         }
 
+        private T CreateItem(Object o)
+        {
+            if (typeof(Component).IsAssignableFrom(typeof(T)))
+            {
+                var go = o as GameObject;
+                T c = null;
+                if (go != null)
+                {
+                    c = go.GetComponent<T>();
+                }
+                if (c != null)
+                {
+                    return c as T;
+                } else if (typeof(T).IsAssignableFrom(o.GetType()))
+                {
+                    return o as T;
+                } else
+                {
+                    return default(T);
+                }
+            } else
+            {
+                return o as T;
+            }
+        }
+
         protected virtual IList<T> GetSelected()
         {
             List<T> list = new List<T>();
@@ -287,36 +316,18 @@ namespace comunity
             {
                 if (allowSceneObject && Selection.objects.IsNotEmpty())
                 {
-                    foreach (var o in Selection.objects)
+                    foreach (Object o in Selection.objects)
                     {
-                        if (typeof(Component).IsAssignableFrom(typeof(T)))
-                        {
-                            var go = o as GameObject;
-                            T c = null;
-                            if (go != null)
-                            {
-                                c = go.GetComponent<T>();
-                            }
-                            if (c != null)
-                            {
-                                list.Add(c as T);
-                            } else if (typeof(T).IsAssignableFrom(o.GetType()))
-                            {
-                                list.Add(o as T);
-                            }
-                        } else
-                        {
-                            list.Add(o as T);
-                        }
+                        list.Add(createItem(o));
                     }
                 } else
                 {
                     foreach (var guid in Selection.assetGUIDs)
                     {
-                        var sel = AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(guid), typeof(T));
+                        var sel = AssetDatabase.LoadAssetAtPath<Object>(AssetDatabase.GUIDToAssetPath(guid));
                         if (sel != null)
                         {
-                            list.Add(sel as T);
+                            list.Add(createItem(sel));
                         }
                     }
                 }

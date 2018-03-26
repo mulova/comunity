@@ -111,7 +111,7 @@ namespace convinity
 
         public override void OnInspectorGUI()
         {
-            ListDrawer<UnityObjId> listDrawer = new ListDrawer<UnityObjId>(sceneHistory, new UnityObjIdDrawer());
+            ListDrawer<UnityObjId> listDrawer = new UnityObjListDrawer(sceneHistory);
             listDrawer.allowSceneObject = false;
             try
             {
