@@ -12,7 +12,7 @@ using comunity;
 
 namespace build
 {
-	public class AssetBuilder
+	public class AssetBuilderV1
 	{
 		public const string OUTPUT_ROOT = "_asset";
 		public readonly string zone;
@@ -22,10 +22,10 @@ namespace build
 		private string rootDir;
 		private TexFormatGroup texFormat;
 		private List<string> modList = new List<string>();
-		public static readonly Loggerx log = LogManager.GetLogger(typeof(AssetBuilder));
+		public static readonly Loggerx log = LogManager.GetLogger(typeof(AssetBuilderV1));
 		public readonly BuildTarget buildTarget;
 
-		private AssetBundlePath abPath = new AssetBundlePath();
+        private AssetBundlePath abPath = AssetBundlePath.inst;
 
 		public string targetRes
 		{
@@ -43,7 +43,7 @@ namespace build
 			}
 		}
 
-		public AssetBuilder(string zone, BuildTarget buildTarget, TexFormatGroup format)
+		public AssetBuilderV1(string zone, BuildTarget buildTarget, TexFormatGroup format)
 		{
 			this.zone = zone;
 			this.buildTarget = buildTarget;
@@ -54,7 +54,7 @@ namespace build
 			Init();
 		}
 
-		public AssetBuilder(string zone, BuildTarget buildTarget, TexFormatGroup format, string oldVer, string newVer)
+		public AssetBuilderV1(string zone, BuildTarget buildTarget, TexFormatGroup format, string oldVer, string newVer)
 		{
 			this.zone = zone;
 			this.buildTarget = buildTarget;

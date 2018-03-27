@@ -185,7 +185,7 @@ namespace comunity
 		{
 			if (editor)
 			{
-                return (RuntimePlatform)ReflectionUtil.ExecuteMethod("PlatformEditorEx.GetPlatform");
+                return (RuntimePlatform)ReflectionUtil.ExecuteMethod("comunity.PlatformEditorEx.GetPlatform");
 			} else
 			{
 				return Application.platform;

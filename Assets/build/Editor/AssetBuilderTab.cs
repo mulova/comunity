@@ -14,7 +14,7 @@ namespace build
 		private string[] names;
 		private string selected;
 		private TexFormatGroup texFormat = TexFormatGroup.AUTO;
-		private AssetBundlePath path = new AssetBundlePath();
+        private AssetBundlePath path = AssetBundlePath.inst;
 
 		public AssetBuilderTab(string[] names, TabbedEditorWindow window) : base("AssetBuilder", window)
 		{
@@ -22,9 +22,9 @@ namespace build
 			this.selected = names[0];
 		}
 
-		private AssetBuilder CreateBuilder()
+		private AssetBuilderV1 CreateBuilder()
 		{
-			return new AssetBuilder(selected, EditorUserBuildSettings.activeBuildTarget, texFormat);
+			return new AssetBuilderV1(selected, EditorUserBuildSettings.activeBuildTarget, texFormat);
 		}
 
 		public override void OnEnable()
@@ -108,11 +108,11 @@ namespace build
 		{
 			try
 			{
-				AssetBuilder builder = CreateBuilder();
+				AssetBuilderV1 builder = CreateBuilder();
 				builder.Build();
 				if (appendCleanSnapshot)
 				{
-					AssetBuilder cleanBuilder = new AssetBuilder(builder.zone, builder.buildTarget, texFormat, "", builder.newVersion+"c");
+					AssetBuilderV1 cleanBuilder = new AssetBuilderV1(builder.zone, builder.buildTarget, texFormat, "", builder.newVersion+"c");
 					cleanBuilder.Build();
 				}
 				EditorUtil.OpenExplorer(builder.GetOutputDir());

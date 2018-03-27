@@ -14,7 +14,7 @@ namespace convinity {
 		private static int count = 0;
         private static bool showAllTabs;
 		protected override void CreateTabs() {
-			AddTab(new SceneHistoryTab("History", this), new ShortcutTab("Shared", "Shortcut", this), new ShortcutTab("Local", "Library/Shortcut", this));
+            AddTab(new SceneHistoryTab("History", this), new ShortcutTab("Local", "Library/Shortcut", this), new ShortcutTab("Shared", "Shortcut", this));
 //			ShowAllTab(true);
 		}
 
