@@ -22,9 +22,9 @@ namespace build
 			this.selected = names[0];
 		}
 
-		private AssetBuilderV1 CreateBuilder()
+        private build.v1.AssetBuilderV1 CreateBuilder()
 		{
-			return new AssetBuilderV1(selected, EditorUserBuildSettings.activeBuildTarget, texFormat);
+            return new build.v1.AssetBuilderV1(selected, EditorUserBuildSettings.activeBuildTarget, texFormat);
 		}
 
 		public override void OnEnable()
@@ -108,11 +108,11 @@ namespace build
 		{
 			try
 			{
-				AssetBuilderV1 builder = CreateBuilder();
+                var builder = CreateBuilder();
 				builder.Build();
 				if (appendCleanSnapshot)
 				{
-					AssetBuilderV1 cleanBuilder = new AssetBuilderV1(builder.zone, builder.buildTarget, texFormat, "", builder.newVersion+"c");
+                    var cleanBuilder = new build.v1.AssetBuilderV1(builder.zone, builder.buildTarget, texFormat, "", builder.newVersion+"c");
 					cleanBuilder.Build();
 				}
 				EditorUtil.OpenExplorer(builder.GetOutputDir());
