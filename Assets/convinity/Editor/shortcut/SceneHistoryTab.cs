@@ -8,13 +8,14 @@ using Rotorz.ReorderableList;
 using comunity;
 using commons;
 using UnityEngine.SceneManagement;
+using UnityEditor.SceneManagement;
 
 namespace convinity
 {
 
     public class SceneHistoryTab : EditorTab
     {
-        private UnityObjList sceneHistory;
+        private SceneHistory sceneHistory;
         private const string PATH = "Library/Shortcut/history";
         private int size = 10;
         private Object currentScene;
@@ -26,16 +27,18 @@ namespace convinity
 
         public override void OnEnable()
         {
-            sceneHistory = UnityObjList.Load(PATH);
-            OnChangeScene("");
+            sceneHistory = SceneHistory.Load(PATH);
+            OnSceneOpened(EditorSceneManager.GetActiveScene(), OpenSceneMode.Single);
             size = EditorPrefs.GetInt("SceneHistory", 10);
             EditorApplication.hierarchyWindowChanged += OnSceneObjChange;
+            EditorSceneManager.sceneOpened += OnSceneOpened;
         }
 
         public override void OnDisable()
         {
             sceneHistory.Save(PATH);
             EditorApplication.hierarchyWindowChanged -= OnSceneObjChange;
+            EditorSceneManager.sceneOpened -= OnSceneOpened;
         }
 
         private void OnSceneObjChange()
@@ -57,6 +60,10 @@ namespace convinity
 
         public override void OnChangeScene(string sceneName)
         {
+        }
+
+        private void OnSceneOpened(Scene s, OpenSceneMode mode)
+        {
             if (Application.isPlaying||EditorApplication.isPlaying)
             {
                 return;
@@ -67,20 +74,32 @@ namespace convinity
                 return;
             }
             int index = sceneHistory.IndexOf(currentScene);
-            UnityObjId obj = null;
+            SceneHistoryItem item = null;
             if (index >= 0)
             {
-                obj = sceneHistory[index];
-                sceneHistory.RemoveAt(index);
+                item = sceneHistory[index];
+                if (mode == OpenSceneMode.Single)
+                {
+                    sceneHistory.RemoveAt(index);
+                    sceneHistory.Insert(0, item);
+                    item.LoadAdditiveScenes();
+                } else
+                {
+                    var sceneObj = AssetDatabase.LoadAssetAtPath<Object>(s.path);
+                    if (!item.Contains(sceneObj))
+                    {
+                        item.AddScene(sceneObj);
+                    }
+                }
             } else
             {
-                obj = new UnityObjId(currentScene);
+                item = new SceneHistoryItem(currentScene);
+                sceneHistory.Insert(0, item);
             }
-            sceneHistory.Insert(0, obj);
             int i = sceneHistory.Count-1;
             while (sceneHistory.Count > size && i > 2)
             {
-                if (!sceneHistory[i].starred)
+                if (!sceneHistory[i].first.starred)
                 {
                     sceneHistory.RemoveAt(i);
                 }
@@ -102,7 +121,7 @@ namespace convinity
             {
                 if (!changed||EditorSceneBridge.SaveCurrentSceneIfUserWantsTo())
                 {
-                    EditorSceneBridge.OpenScene(sceneHistory[1].path);
+                    EditorSceneBridge.OpenScene(sceneHistory[1].first.path);
                 }
             }
             GUI.enabled = true;
@@ -111,7 +130,7 @@ namespace convinity
 
         public override void OnInspectorGUI()
         {
-            ListDrawer<UnityObjId> listDrawer = new UnityObjListDrawer(sceneHistory);
+            var listDrawer = new SceneHistoryDrawer(sceneHistory);
             listDrawer.allowSceneObject = false;
             try
             {

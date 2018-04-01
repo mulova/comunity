@@ -4,6 +4,7 @@ using System;
 using comunity;
 using System.Collections.Generic;
 using commons;
+using UnityEditor.SceneManagement;
 
 namespace convinity
 {
@@ -38,6 +39,31 @@ namespace convinity
                 {
                     return null;
                 }
+            }
+        }
+
+        public void AddScene(Object sceneObj)
+        {
+            list.Add(new UnityObjId(sceneObj));
+        }
+
+        public bool Contains(Object sceneObj)
+        {
+            foreach (var o in list)
+            {
+                if (o.reference == sceneObj)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public void LoadAdditiveScenes()
+        {
+            for (int i = 1; i < list.Count; ++i)
+            {
+                EditorSceneManager.OpenScene(list[i].path, OpenSceneMode.Additive);
             }
         }
     }
