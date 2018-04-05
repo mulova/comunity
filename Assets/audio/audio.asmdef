@@ -1,0 +1,9 @@
+{
+    "name": "audio",
+    "references": [
+        "commons",
+        "comunity"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": []
+}

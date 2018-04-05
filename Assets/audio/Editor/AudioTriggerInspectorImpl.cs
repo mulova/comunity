@@ -2,12 +2,12 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
 using System.IO;
-
 using System.Text;
 using commons;
+using comunity;
 
 
-namespace comunity
+namespace audio
 {
     public class AudioTriggerInspectorImpl
     {

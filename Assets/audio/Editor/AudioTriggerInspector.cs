@@ -6,12 +6,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Object = UnityEngine.Object;
-
-
-
 using System.Text;
 
-namespace comunity {
+namespace audio {
 	[CustomEditor(typeof(AudioTrigger))]
 	public class AudioTriggerInspector : Editor {
 		private AudioTriggerInspectorImpl impl;

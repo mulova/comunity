@@ -2,8 +2,9 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEditor;
+using comunity;
 
-namespace comunity {
+namespace audio {
 	public class AudioKeyInspector {
 		
 		private AudioGroup[] groups;

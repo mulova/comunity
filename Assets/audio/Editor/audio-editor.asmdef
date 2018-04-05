@@ -1,0 +1,12 @@
+{
+    "name": "audio-editor",
+    "references": [
+        "comunity-editor",
+        "audio",
+        "build",
+        "commons",
+        "comunity"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": []
+}

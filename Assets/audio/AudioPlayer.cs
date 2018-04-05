@@ -1,7 +1,8 @@
 using UnityEngine;
 using System;
+using comunity;
 
-namespace comunity
+namespace audio
 {
     /// <summary>
     /// if the downloader is set, assets are downloaded and loaded automatically.

@@ -115,9 +115,34 @@ namespace commons
 			}
 			return EnumUtil.Parse<T>(str, defValue);
 		}
-		
-		public static bool EqualsIgnoreWhiteSpace(this string str1, string str2)
-		{
+
+        private static bool EqualsIgnoreSeparator(string str1, string str2)
+        {
+            return EqualsIgnore(str1, str2, (c1, c2) => c1 == c2 || (c1 == '/' && c2 == '\\') || (c1 == '\\' && c2 ==  '/') );
+        }
+
+        public static bool EqualsIgnore(string str1, string str2, Func<char, char, bool> compare)
+        {
+            if (str1 == null || str2 == null)
+            {
+                return str1.IsEmpty() && str2.IsEmpty();
+            }
+            if (str1.Length != str2.Length)
+            {
+                return false;
+            }
+            for (int i = 0; i < str1.Length; ++i)
+            {
+                if (!compare(str1[i], str2[i]))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        
+        public static bool EqualsIgnoreWhiteSpace(this string str1, string str2)
+        {
 			if (str1.IsEmpty())
 			{
 				return str2.IsEmpty()||str2.Trim().IsEmpty();

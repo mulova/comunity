@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using Nullable = commons.Nullable;
 using Object = UnityEngine.Object;
 using commons;
+using comunity;
 
-namespace comunity
+namespace audio
 {
     /// <summary>
     /// if the downloader is set, assets are downloaded and loaded automatically.
@@ -180,7 +181,7 @@ namespace comunity
             if (!p.isPlaying||p.isInterruptable)
             {
                 p.volume = volume;
-                AudioClipLoadType loadType = streaming? AudioClipLoadType.Streaming: AudioClipLoadType.Uncompressed;
+                comunity.AudioClipLoadType loadType = streaming? comunity.AudioClipLoadType.Streaming: comunity.AudioClipLoadType.Uncompressed;
                 Cdn.cache.GetAudio(d.path, loadType, clip =>
                 {
                     if (clip != null)

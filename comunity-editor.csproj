@@ -59,10 +59,6 @@
      <Compile Include="Assets\comunity\Editor\asset\AssetPropertyAttribute.cs" />
      <Compile Include="Assets\comunity\Editor\asset\AssetRefDrawer.cs" />
      <Compile Include="Assets\comunity\Editor\asset\AssetRefEditorEx.cs" />
-     <Compile Include="Assets\comunity\Editor\asset\AudioGroupInspector.cs" />
-     <Compile Include="Assets\comunity\Editor\asset\AudioKeyInspector.cs" />
-     <Compile Include="Assets\comunity\Editor\asset\AudioTriggerInspector.cs" />
-     <Compile Include="Assets\comunity\Editor\asset\AudioTriggerInspectorImpl.cs" />
      <Compile Include="Assets\comunity\Editor\asset\BuildTargetEx.cs" />
      <Compile Include="Assets\comunity\Editor\asset\EditorAssetCache.cs" />
      <Compile Include="Assets\comunity\Editor\asset\EditorAssetLoader.cs" />

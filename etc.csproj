@@ -51,9 +51,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\etc\AppVersion.cs" />
      <Compile Include="Assets\etc\platform\android\Android.cs" />
      <Compile Include="Assets\etc\platform\android\AndroidActivity.cs" />
      <Compile Include="Assets\etc\platform\android\AndroidAudioManager.cs" />
+     <Compile Include="Assets\etc\PlatformConfig.cs" />
+     <Compile Include="Assets\etc\SystemMenu.cs" />
+     <Compile Include="Assets\etc\TextEx.cs" />
      <Compile Include="Assets\etc\Tool\RealtimeInspector\AttributeInspector.cs" />
      <Compile Include="Assets\etc\Tool\RealtimeInspector\Descriptor.cs" />
      <Compile Include="Assets\etc\Tool\RealtimeInspector\GameInspectorManager.cs" />

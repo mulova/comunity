@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using Object = UnityEngine.Object;
 using System.Text;
 using System.IO;
+using comunity;
 using commons;
 
-namespace comunity
+namespace audio
 {
     [CustomEditor(typeof(AudioGroup))]
     public class AudioGroupInspector : Editor

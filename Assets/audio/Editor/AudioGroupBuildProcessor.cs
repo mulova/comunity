@@ -3,10 +3,11 @@ using UnityEditor;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
-using commons;
 using comunity;
+using build;
+using commons;
 
-namespace build
+namespace audio
 {
     public class AudioGroupBuildProcessor : ComponentBuildProcess
     {

@@ -2,7 +2,7 @@ using UnityEngine;
 using Nullable = commons.Nullable;
 using commons;
 
-namespace comunity {
+namespace audio {
 	/// <summary>
 	/// if the downloader is set, assets are downloaded and loaded automatically.
 	/// else loaded by db at Start().

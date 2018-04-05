@@ -179,6 +179,10 @@
       <Project>{DCB2F120-C915-B5D1-C685-52412D7353FA}</Project>      <Name>comunity</Name>    </ProjectReference>
     <ProjectReference Include="uguiex-editor.csproj">
       <Project>{2879C03D-C890-1AB9-ECC8-1A382796D80C}</Project>      <Name>uguiex-editor</Name>    </ProjectReference>
+    <ProjectReference Include="audio.csproj">
+      <Project>{A3523514-4A98-4712-9C47-EFCF58A8CCFE}</Project>      <Name>audio</Name>    </ProjectReference>
+    <ProjectReference Include="audio-editor.csproj">
+      <Project>{7C10F73D-0E99-7C37-D6C3-12E75BEC6814}</Project>      <Name>audio-editor</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

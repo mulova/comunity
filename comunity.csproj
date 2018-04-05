@@ -58,11 +58,6 @@
      <Compile Include="Assets\comunity\asset\AssetPool.cs" />
      <Compile Include="Assets\comunity\asset\AssetRef.cs" />
      <Compile Include="Assets\comunity\asset\AssetType.cs" />
-     <Compile Include="Assets\comunity\asset\audio\AudioClipDataTable.cs" />
-     <Compile Include="Assets\comunity\asset\audio\AudioClipLoadType.cs" />
-     <Compile Include="Assets\comunity\asset\audio\AudioGroup.cs" />
-     <Compile Include="Assets\comunity\asset\audio\AudioPlayer.cs" />
-     <Compile Include="Assets\comunity\asset\audio\AudioTrigger.cs" />
      <Compile Include="Assets\comunity\asset\Cdn.cs" />
      <Compile Include="Assets\comunity\asset\CdnDownloader.cs" />
      <Compile Include="Assets\comunity\asset\Downloader.cs" />
@@ -205,6 +200,7 @@
      <Compile Include="Assets\comunity\thread\AsyncCallChain.cs" />
      <Compile Include="Assets\comunity\thread\SceneThreading.cs" />
      <Compile Include="Assets\comunity\thread\Threading.cs" />
+     <Compile Include="Assets\comunity\type\AudioClipLoadType.cs" />
      <Compile Include="Assets\comunity\type\EGameObject.cs" />
      <Compile Include="Assets\comunity\type\RuntimePlatformEx.cs" />
      <Compile Include="Assets\comunity\type\TransformData.cs" />

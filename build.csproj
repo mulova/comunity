@@ -57,7 +57,6 @@
      <Compile Include="Assets\build\Editor\AssetBuilderV1.cs" />
      <Compile Include="Assets\build\Editor\AssetBundleDep.cs" />
      <Compile Include="Assets\build\Editor\AssetBundleImportProcessor.cs" />
-     <Compile Include="Assets\build\Editor\AudioGroupBuildProcessor.cs" />
      <Compile Include="Assets\build\Editor\Builder.cs" />
      <Compile Include="Assets\build\Editor\BuildProcess\AssetBuildProcess.cs" />
      <Compile Include="Assets\build\Editor\BuildProcess\BrokenAssetVerifier.cs" />
