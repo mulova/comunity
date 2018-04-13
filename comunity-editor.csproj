@@ -110,7 +110,6 @@
      <Compile Include="Assets\comunity\Editor\PrefabTypeEx.cs" />
      <Compile Include="Assets\comunity\Editor\PropertyReferenceDrawer.cs" />
      <Compile Include="Assets\comunity\Editor\scene\EditorSceneBridge.cs" />
-     <Compile Include="Assets\comunity\Editor\scene\MeshRendererSortingLayersEditor.cs" />
      <Compile Include="Assets\comunity\Editor\scene\ObjSwitchInspector.cs" />
      <Compile Include="Assets\comunity\Editor\scene\RendererLayerEditor.cs" />
      <Compile Include="Assets\comunity\Editor\scene\SixWayCamInspector.cs" />

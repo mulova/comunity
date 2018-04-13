@@ -5,6 +5,7 @@ using comunity;
 using System.Collections.Generic;
 using commons;
 using UnityEditor.SceneManagement;
+using UnityEditor;
 
 namespace convinity
 {
@@ -12,6 +13,8 @@ namespace convinity
     public class SceneHistoryItem
     {
         public List<UnityObjId> list;
+        public Vector3? camPos;
+        public Quaternion? camRot;
 
         public SceneHistoryItem(Object o)
         {
@@ -45,6 +48,12 @@ namespace convinity
         public void AddScene(Object sceneObj)
         {
             list.Add(new UnityObjId(sceneObj));
+        }
+
+        public void UpdateSceneCam()
+        {
+            camPos = SceneView.currentDrawingSceneView.camera.transform.position;
+            camRot = SceneView.currentDrawingSceneView.camera.transform.rotation;
         }
 
         public bool Contains(Object sceneObj)
