@@ -10,7 +10,16 @@ namespace comunity
         public Vector3 scale;
         public bool local;
 
-        public TransformData(Transform t, bool local)
+        public TransformData(Transform t, bool local = true)
+        {
+            this.local = local;
+            this.pos = Vector3.zero;
+            this.rot = Quaternion.identity;
+            this.scale = Vector3.one;
+            CopyFrom(t);
+        }
+
+        public void CopyFrom(Transform t)
         {
             if (local)
             {
@@ -23,14 +32,22 @@ namespace comunity
                 this.rot = t.rotation;
                 this.scale = t.lossyScale;
             }
-            this.local = local;
         }
 
-        public void Apply(Transform t)
+        public void CopyTo(Transform t)
         {
-            t.localPosition = this.pos;
-            t.localRotation = this.rot;
-            t.localScale = this.scale;
+            if (local)
+            {
+                t.localPosition = this.pos;
+                t.localRotation = this.rot;
+                t.localScale = this.scale;
+            } else
+            {
+                t.position = this.pos;
+                t.rotation = this.rot;
+                throw new NotImplementedException();
+//                this.scale = t.lossyScale;
+            }
         }
 
         public bool IsSame(Transform t)

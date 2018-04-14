@@ -32,6 +32,7 @@ namespace convinity
             size = EditorPrefs.GetInt("SceneHistory", 10);
             EditorApplication.hierarchyWindowChanged += OnSceneObjChange;
             EditorSceneManager.sceneOpened += OnSceneOpened;
+            EditorSceneManager.sceneSaved += OnSceneSaved;
         }
 
         public override void OnDisable()
@@ -39,6 +40,7 @@ namespace convinity
             sceneHistory.Save(PATH);
             EditorApplication.hierarchyWindowChanged -= OnSceneObjChange;
             EditorSceneManager.sceneOpened -= OnSceneOpened;
+            EditorSceneManager.sceneSaved -= OnSceneSaved;
         }
 
         private void OnSceneObjChange()
@@ -62,6 +64,12 @@ namespace convinity
         {
         }
 
+        private void OnSceneSaved(Scene scene)
+        {
+            var item = sceneHistory[0];
+            item.SaveCam();
+        }
+
         private void OnSceneOpened(Scene s, OpenSceneMode mode)
         {
             if (Application.isPlaying||EditorApplication.isPlaying)
@@ -83,6 +91,7 @@ namespace convinity
                     sceneHistory.RemoveAt(index);
                     sceneHistory.Insert(0, item);
                     item.LoadAdditiveScenes();
+                    item.ApplyToSceneVIewCamera();
                 } else
                 {
                     var sceneObj = AssetDatabase.LoadAssetAtPath<Object>(s.path);

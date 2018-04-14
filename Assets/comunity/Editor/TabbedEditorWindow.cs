@@ -206,11 +206,16 @@ namespace comunity {
 		public void AddTab(params EditorTab[] tab) {
 			foreach (EditorTab t in tab) {
 				tabs.Add(new TabData(t));
-				t.OnEnable();
-				if (showAllTab)
-				{
-					t.OnSelected(true);
-				}
+                try {
+                    t.OnEnable();
+                    if (showAllTab)
+                    {
+                        t.OnSelected(true);
+                    }
+                } catch (Exception ex)
+                {
+                    Debug.LogError(ex.ToString());
+                }
 			}
 			if (selected == null) {
 				selected = tabs[0];
