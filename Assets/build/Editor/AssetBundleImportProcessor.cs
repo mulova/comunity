@@ -1,11 +1,15 @@
-﻿using UnityEngine;
+﻿//#define ASSET_BUNDLE_IMPORTER
+using UnityEngine;
 using System.Collections;
 using UnityEditor;
 using System.Collections.Generic;
 using comunity;
 using commons;
 
-public class AssetBundleImportProcessor : AssetPostprocessor
+public class AssetBundleImportProcessor
+#if ASSET_BUNDLE_IMPORTER
+: AssetPostprocessor
+#endif
 {
     [MenuItem("Tools/unilova/Asset/Reassign AssetBundles")]
     public static void ReassignAssetBundleNames()
