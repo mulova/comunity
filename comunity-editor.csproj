@@ -212,7 +212,7 @@
  <HintPath>/Applications/Unity/Hub/Editor/2017.3.1f1/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="Editor.ReorderableList">
- <HintPath>/Users/user/workspace/comunity/Assets/comunity/Editor/lib/Editor.ReorderableList.dll</HintPath>
+ <HintPath>/Users/user/workspace/3rdparty/comunity/Assets/comunity/Editor/lib/Editor.ReorderableList.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Advertisements">
  <HintPath>/Users/user/Library/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>

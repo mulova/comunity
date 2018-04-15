@@ -73,6 +73,18 @@ namespace convinity
             list.Add(new UnityObjId(sceneObj));
         }
 
+        public void RemoveScene(Object sceneObj)
+        {
+            for (int i = 0; i < list.Count; ++i)
+            {
+                if (list[i].reference == sceneObj)
+                {
+                    list.RemoveAt(i);
+                    break;
+                }
+            }
+        }
+
         public bool Contains(Object sceneObj)
         {
             foreach (var o in list)

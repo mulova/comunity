@@ -32,6 +32,7 @@ namespace convinity
             size = EditorPrefs.GetInt("SceneHistory", 10);
             EditorApplication.hierarchyWindowChanged += OnSceneObjChange;
             EditorSceneManager.sceneOpened += OnSceneOpened;
+            EditorSceneManager.sceneClosing += OnSceneClosing;
             EditorSceneManager.sceneSaved += OnSceneSaved;
         }
 
@@ -40,6 +41,7 @@ namespace convinity
             sceneHistory.Save(PATH);
             EditorApplication.hierarchyWindowChanged -= OnSceneObjChange;
             EditorSceneManager.sceneOpened -= OnSceneOpened;
+            EditorSceneManager.sceneClosing -= OnSceneClosing;
             EditorSceneManager.sceneSaved -= OnSceneSaved;
         }
 
@@ -99,6 +101,49 @@ namespace convinity
                     {
                         item.AddScene(sceneObj);
                     }
+                }
+            } else
+            {
+                item = new SceneHistoryItem(currentScene);
+                sceneHistory.Insert(0, item);
+            }
+            int i = sceneHistory.Count-1;
+            while (sceneHistory.Count > size && i > 2)
+            {
+                if (!sceneHistory[i].first.starred)
+                {
+                    sceneHistory.RemoveAt(i);
+                }
+                i--;
+            }
+            sceneHistory.Save(PATH);
+            changed = false;
+        }
+
+        private void OnSceneClosing(Scene s, bool removing)
+        {
+            if (!removing || Application.isPlaying||EditorApplication.isPlaying)
+            {
+                return;
+            }
+            if (EditorSceneBridge.currentScene == s.path)
+            {
+                return;
+            }
+            currentScene = AssetDatabase.LoadAssetAtPath<Object>(EditorSceneBridge.currentScene);
+            if (currentScene == null)
+            {
+                return;
+            }
+            int index = sceneHistory.IndexOf(currentScene);
+            SceneHistoryItem item = null;
+            if (index >= 0)
+            {
+                item = sceneHistory[index];
+                var sceneObj = AssetDatabase.LoadAssetAtPath<Object>(s.path);
+                if (item.Contains(sceneObj))
+                {
+                    item.RemoveScene(sceneObj);
                 }
             } else
             {
