@@ -13,8 +13,7 @@ namespace convinity
     public class SceneHistoryItem
     {
         public List<UnityObjId> list;
-        public TransformData? trans;
-        public bool in2dMode;
+		public SceneCamProperty camProperty;
 
         public SceneView sceneView {
             get {
@@ -40,10 +39,17 @@ namespace convinity
 
         public void SaveCam()
         {
-            var view = sceneView;
-            in2dMode = view.in2DMode;
-            trans = new TransformData(view.camera.transform);
+			camProperty = new SceneCamProperty();
+			camProperty.Collect();
         }
+
+		public void ApplyCam()
+		{
+			if (camProperty != null)
+			{
+				camProperty.Apply();
+			}
+		}
 
         public UnityObjId first
         {
@@ -105,14 +111,10 @@ namespace convinity
             }
         }
 
-        public void ApplyToSceneVIewCamera()
-        {
-            var view = sceneView;
-            if (trans != null)
-            {
-                trans.Value.CopyTo(view.camera.transform);
-                view.in2DMode = in2dMode;
-            }
-        }
+		public override string ToString()
+		{
+			return list[0].path;
+		}
     }
+
 }

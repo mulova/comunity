@@ -31,18 +31,20 @@ namespace convinity
             OnSceneOpened(EditorSceneManager.GetActiveScene(), OpenSceneMode.Single);
             size = EditorPrefs.GetInt("SceneHistory", 10);
             EditorApplication.hierarchyWindowChanged += OnSceneObjChange;
+            EditorSceneManager.sceneOpening += OnSceneOpening;
             EditorSceneManager.sceneOpened += OnSceneOpened;
             EditorSceneManager.sceneClosing += OnSceneClosing;
-            EditorSceneManager.sceneSaved += OnSceneSaved;
+			EditorSceneManager.sceneSaving += OnSceneSaved;
         }
 
         public override void OnDisable()
         {
             sceneHistory.Save(PATH);
             EditorApplication.hierarchyWindowChanged -= OnSceneObjChange;
+			EditorSceneManager.sceneOpening -= OnSceneOpening;
             EditorSceneManager.sceneOpened -= OnSceneOpened;
             EditorSceneManager.sceneClosing -= OnSceneClosing;
-            EditorSceneManager.sceneSaved -= OnSceneSaved;
+			EditorSceneManager.sceneSaving -= OnSceneSaved;
         }
 
         private void OnSceneObjChange()
@@ -66,12 +68,23 @@ namespace convinity
         {
         }
 
-        private void OnSceneSaved(Scene scene)
+        private void OnSceneSaved(Scene scene, string path)
         {
-            var item = sceneHistory[0];
-            item.SaveCam();
+			SaveCam();
+			sceneHistory.Save(PATH);
         }
 
+		private void SaveCam()
+		{
+			var item = sceneHistory[0];
+			item.SaveCam();
+		}
+
+		private void OnSceneOpening(string path,OpenSceneMode mode)
+		{
+			SaveCam();
+			sceneHistory.Save(PATH);
+		}
         private void OnSceneOpened(Scene s, OpenSceneMode mode)
         {
             if (Application.isPlaying||EditorApplication.isPlaying)
@@ -93,7 +106,7 @@ namespace convinity
                     sceneHistory.RemoveAt(index);
                     sceneHistory.Insert(0, item);
                     item.LoadAdditiveScenes();
-                    item.ApplyToSceneVIewCamera();
+                    item.ApplyCam();
                 } else
                 {
                     var sceneObj = AssetDatabase.LoadAssetAtPath<Object>(s.path);

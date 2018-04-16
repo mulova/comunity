@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace comunity
 {
+	[Serializable]
     public struct TransformData
     {
         public Vector3 pos;
