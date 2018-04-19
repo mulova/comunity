@@ -9,8 +9,55 @@ using System.IO;
 namespace convinity
 {
 	[System.Serializable]
-	public class SceneHistory : List<SceneHistoryItem>
+	public class SceneHistory
 	{
+		[SerializeField] private List<SceneHistoryItem> _items = new List<SceneHistoryItem>();
+
+		public List<SceneHistoryItem> items
+		{
+			get
+			{
+				return _items;
+			}
+		}
+
+
+		public int Count
+		{
+			get 
+			{
+				return items.Count;
+			}
+		}
+
+		public SceneHistoryItem this[int i]
+		{
+			get
+			{
+				return items[i];
+			}
+		}
+
+		public void Add(SceneHistoryItem item)
+		{
+			items.Add(item);
+		}
+
+		public void RemoveAt(int i)
+		{
+			items.RemoveAt(i);
+		}
+
+		public void Insert(int i, SceneHistoryItem item)
+		{
+			items.Insert(i, item);
+		}
+
+		public void Clear()
+		{
+			items.Clear();
+		}
+
 		public void Add(Object obj)
 		{
 			Add(new SceneHistoryItem(obj));
@@ -35,19 +82,19 @@ namespace convinity
 
 		public void Remove(Object obj)
 		{
-			int index = FindIndex(o => o.firstRef == obj);
+			int index = items.FindIndex(o => o.firstRef == obj);
 			if (index >= 0)
 			{
-				RemoveAt(index);
+				items.RemoveAt(index);
 			}
 		}
 
 		public void Remove(string guid)
 		{
-			int index = FindIndex(o => o.first != null && o.first.id == guid);
+			int index = items.FindIndex(o => o.first != null && o.first.id == guid);
 			if (index >= 0)
 			{
-				RemoveAt(index);
+				items.RemoveAt(index);
 			}
 		}
 

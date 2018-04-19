@@ -7,7 +7,6 @@ public class SceneCamProperty
 {
 	public bool in2dMode;
 	public float size;
-//	public float fov;
 	public bool ortho;
 	public Vector3 pivot;
 	public Quaternion rot;
@@ -46,6 +45,11 @@ public class SceneCamProperty
 	public void Apply()
 	{
 		var view = sceneView;
+		if (view == null)
+		{
+			Debug.LogWarning("Can't access SceneView.");
+			return;
+		}
 		view.size = size;
 		view.in2DMode = in2dMode;
 		sceneView.rotation = rot;
