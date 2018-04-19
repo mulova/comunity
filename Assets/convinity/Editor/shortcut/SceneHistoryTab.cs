@@ -34,17 +34,17 @@ namespace convinity
             EditorSceneManager.sceneOpening += OnSceneOpening;
             EditorSceneManager.sceneOpened += OnSceneOpened;
             EditorSceneManager.sceneClosing += OnSceneClosing;
-			EditorSceneManager.sceneSaving += OnSceneSaved;
+            EditorSceneManager.sceneSaving += OnSceneSaved;
         }
 
         public override void OnDisable()
         {
             sceneHistory.Save(PATH);
             EditorApplication.hierarchyWindowChanged -= OnSceneObjChange;
-			EditorSceneManager.sceneOpening -= OnSceneOpening;
+            EditorSceneManager.sceneOpening -= OnSceneOpening;
             EditorSceneManager.sceneOpened -= OnSceneOpened;
             EditorSceneManager.sceneClosing -= OnSceneClosing;
-			EditorSceneManager.sceneSaving -= OnSceneSaved;
+            EditorSceneManager.sceneSaving -= OnSceneSaved;
         }
 
         private void OnSceneObjChange()
@@ -70,71 +70,98 @@ namespace convinity
 
         private void OnSceneSaved(Scene scene, string path)
         {
-			SaveCam();
-			sceneHistory.Save(PATH);
+            SaveCam();
+            sceneHistory.Save(PATH);
         }
 
-		private void SaveCam()
-		{
-			var item = sceneHistory[0];
-			item.SaveCam();
-		}
+        private void SaveCam()
+        {
+            if (sceneHistory.Count > 0)
+            {
+                var item = sceneHistory[0];
+                item.SaveCam();
+            }
+        }
 
-		private void OnSceneOpening(string path,OpenSceneMode mode)
-		{
-			SaveCam();
-			sceneHistory.Save(PATH);
-		}
+        private void OnSceneOpening(string path,OpenSceneMode mode)
+        {
+            if (EditorUtil.IsChangingPlayMode())
+            {
+                return;
+            }
+            if (Application.isPlaying || EditorApplication.isPlaying)
+            {
+                return;
+            }
+            SaveCam();
+//            sceneHistory.Save(PATH);
+        }
+
         private void OnSceneOpened(Scene s, OpenSceneMode mode)
         {
-            if (Application.isPlaying||EditorApplication.isPlaying)
+            if (EditorUtil.IsChangingPlayMode())
             {
                 return;
             }
             currentScene = AssetDatabase.LoadAssetAtPath<Object>(EditorSceneBridge.currentScene);
-            if (!currentScene == null)
+            if (currentScene == null)
             {
                 return;
             }
-            int index = sceneHistory.IndexOf(currentScene);
+            SaveCam();
             SceneHistoryItem item = null;
-            if (index >= 0)
+            int index = sceneHistory.IndexOf(currentScene);
+            if (Application.isPlaying || EditorApplication.isPlaying)
             {
-                item = sceneHistory[index];
-                if (mode == OpenSceneMode.Single)
+                if (index >= 0)
                 {
-                    sceneHistory.RemoveAt(index);
-                    sceneHistory.Insert(0, item);
-                    item.LoadAdditiveScenes();
+                    item = sceneHistory[index];
                     item.ApplyCam();
-                } else
-                {
-                    var sceneObj = AssetDatabase.LoadAssetAtPath<Object>(s.path);
-                    if (!item.Contains(sceneObj))
-                    {
-                        item.AddScene(sceneObj);
-                    }
                 }
             } else
             {
-                item = new SceneHistoryItem(currentScene);
-                sceneHistory.Insert(0, item);
-            }
-            int i = sceneHistory.Count-1;
-            while (sceneHistory.Count > size && i > 2)
-            {
-                if (!sceneHistory[i].first.starred)
+                if (index >= 0)
                 {
-                    sceneHistory.RemoveAt(i);
+                    item = sceneHistory[index];
+                    if (mode == OpenSceneMode.Single)
+                    {
+                        sceneHistory.RemoveAt(index);
+                        sceneHistory.Insert(0, item);
+                        item.LoadAdditiveScenes();
+                        item.ApplyCam();
+                    } else
+                    {
+                        var sceneObj = AssetDatabase.LoadAssetAtPath<Object>(s.path);
+                        if (!item.Contains(sceneObj))
+                        {
+                            item.AddScene(sceneObj);
+                        }
+                    }
+                } else
+                {
+                    item = new SceneHistoryItem(currentScene);
+                    sceneHistory.Insert(0, item);
                 }
-                i--;
+                int i = sceneHistory.Count-1;
+                while (sceneHistory.Count > size && i > 2)
+                {
+                    if (!sceneHistory[i].first.starred)
+                    {
+                        sceneHistory.RemoveAt(i);
+                    }
+                    i--;
+                }
+                sceneHistory.Save(PATH);
+                changed = false;
             }
-            sceneHistory.Save(PATH);
-            changed = false;
         }
 
         private void OnSceneClosing(Scene s, bool removing)
         {
+            if (EditorUtil.IsChangingPlayMode())
+            {
+                return;
+            }
             if (!removing || Application.isPlaying||EditorApplication.isPlaying)
             {
                 return;

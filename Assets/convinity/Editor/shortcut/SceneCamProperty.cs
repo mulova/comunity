@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using UnityEditor;
+using System;
 
+[Serializable]
 public class SceneCamProperty
 {
 	public bool in2dMode;
 	public float size;
-	public float fov;
+//	public float fov;
 	public bool ortho;
-	public Quaternion lastSceneViewRotation;
 	public Vector3 pivot;
 	public Quaternion rot;
 	public bool rotationLocked;
@@ -34,7 +35,6 @@ public class SceneCamProperty
 		var view = sceneView;
 		size = view.size;
 		in2dMode = view.in2DMode;
-//		lastSceneViewRotation = sceneView.lastSceneViewRotation;
 		rot = sceneView.rotation;
 		pivot = sceneView.pivot;
 		ortho = view.orthographic;
@@ -47,7 +47,6 @@ public class SceneCamProperty
 	{
 		var view = sceneView;
 		view.size = size;
-//		view.lastSceneViewRotation = lastSceneViewRotation;
 		view.in2DMode = in2dMode;
 		sceneView.rotation = rot;
 		sceneView.pivot = pivot;

@@ -14,6 +14,12 @@ namespace comunity
 {
     public static class EditorUtil
     {
+
+        public static bool IsChangingPlayMode()
+        {
+            return EditorApplication.isPlayingOrWillChangePlaymode && !EditorApplication.isPlaying;
+        }
+
         public static void OpenExplorer(string path)
         {
             if (Application.platform == RuntimePlatform.OSXEditor) {
