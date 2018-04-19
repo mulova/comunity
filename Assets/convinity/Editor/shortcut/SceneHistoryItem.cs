@@ -39,7 +39,10 @@ namespace convinity
 
         public void SaveCam()
         {
-			camProperty = new SceneCamProperty();
+			if (camProperty == null)
+			{
+				camProperty = new SceneCamProperty();
+			}
 			camProperty.Collect();
         }
 

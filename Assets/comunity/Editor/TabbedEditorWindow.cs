@@ -36,6 +36,22 @@ namespace comunity {
 			autoRepaintOnSceneChange = true;
 		}
 
+		void OnDisable()
+		{
+			OnLostFocus();
+			foreach (TabData t in tabs) {
+				t.tab.OnDisable();
+			}
+		}
+
+		protected void OnDestroy() {
+			#if UNITY_2017
+			EditorApplication.playModeStateChanged += ChangePlayMode;
+			#else
+			EditorApplication.playmodeStateChanged += ChangePlaymode;
+			#endif
+		}
+
 		public string GetWindowId()
 		{
 			return string.Concat(GetType().FullName, "_", titleContent.text);
@@ -179,18 +195,6 @@ namespace comunity {
 			}
 		}
 		
-		protected void OnDestroy() {
-			OnLostFocus();
-			foreach (TabData t in tabs) {
-				t.tab.OnDisable();
-			}
-            #if UNITY_2017
-            EditorApplication.playModeStateChanged += ChangePlayMode;
-            #else
-            EditorApplication.playmodeStateChanged += ChangePlaymode;
-            #endif
-		}
-
         protected void ChangePlayMode(PlayModeStateChange change) {
             foreach (TabData t in tabs) {
                 t.tab.OnChangePlayMode();

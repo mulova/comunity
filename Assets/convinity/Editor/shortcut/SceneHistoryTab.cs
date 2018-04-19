@@ -29,23 +29,36 @@ namespace convinity
             sceneHistory = SceneHistory.Load(PATH);
 			OnSceneOpened(EditorSceneManager.GetActiveScene(), OpenSceneMode.Single);
 			EditorApplication.hierarchyWindowChanged += OnSceneObjChange;
+			EditorApplication.playmodeStateChanged += OnPlayModeChanged;
 			EditorSceneManager.sceneOpening += OnSceneOpening;
 			EditorSceneManager.sceneOpened += OnSceneOpened;
 			EditorSceneManager.sceneClosing += OnSceneClosing;
-			EditorSceneManager.sceneSaving += OnSceneSaved;
 			SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
         public override void OnDisable()
         {
-			sceneHistory.Save(PATH);
+			// Enter play mode
+			if (!Application.isPlaying)
+			{
+				SaveCam();
+				sceneHistory.Save(PATH);
+			}
 			EditorApplication.hierarchyWindowChanged -= OnSceneObjChange;
+			EditorApplication.playmodeStateChanged -= OnPlayModeChanged;
 			EditorSceneManager.sceneOpening -= OnSceneOpening;
 			EditorSceneManager.sceneOpened -= OnSceneOpened;
 			EditorSceneManager.sceneClosing -= OnSceneClosing;
-			EditorSceneManager.sceneSaving -= OnSceneSaved;
 			SceneManager.sceneLoaded -= OnSceneLoaded;
         }
+
+		void OnPlayModeChanged()
+		{
+			if (sceneHistory.Count >= 0)
+			{
+				sceneHistory[0].ApplyCam();
+			}
+		}
 
         private void OnSceneObjChange()
         {
@@ -81,16 +94,6 @@ namespace convinity
 			}
 		}
 
-        private void OnSceneSaved(Scene scene, string path)
-        {
-			if (EditorApplication.isPlayingOrWillChangePlaymode)
-			{
-				return;
-			}
-            SaveCam();
-            sceneHistory.Save(PATH);
-        }
-
         private void SaveCam()
         {
             if (sceneHistory.Count > 0)
@@ -107,7 +110,7 @@ namespace convinity
                 return;
             }
             SaveCam();
-//            sceneHistory.Save(PATH);
+            sceneHistory.Save(PATH);
         }
 
         private void OnSceneOpened(Scene s, OpenSceneMode mode)
@@ -156,34 +159,32 @@ namespace convinity
 			{
 				return;
 			}
-            if (!removing)
-            {
-                return;
-            }
             if (EditorSceneBridge.currentScene == s.path)
             {
-                return;
-            }
-            currentScene = AssetDatabase.LoadAssetAtPath<Object>(EditorSceneBridge.currentScene);
-            if (currentScene == null)
-            {
-                return;
-            }
-            int index = sceneHistory.IndexOf(currentScene);
-            SceneHistoryItem item = null;
-            if (index >= 0)
-            {
-                item = sceneHistory[index];
-                var sceneObj = AssetDatabase.LoadAssetAtPath<Object>(s.path);
-                if (item.Contains(sceneObj))
-                {
-                    item.RemoveScene(sceneObj);
-                }
-            } else
-            {
-                item = new SceneHistoryItem(currentScene);
-                sceneHistory.Insert(0, item);
-            }
+				SaveCam();
+			} else
+			{
+				currentScene = AssetDatabase.LoadAssetAtPath<Object>(EditorSceneBridge.currentScene);
+				if (currentScene == null)
+				{
+					return;
+				}
+				int index = sceneHistory.IndexOf(currentScene);
+				SceneHistoryItem item = null;
+				if (index >= 0)
+				{
+					item = sceneHistory[index];
+					var sceneObj = AssetDatabase.LoadAssetAtPath<Object>(s.path);
+					if (item.Contains(sceneObj))
+					{
+						item.RemoveScene(sceneObj);
+					}
+				} else
+				{
+					item = new SceneHistoryItem(currentScene);
+					sceneHistory.Insert(0, item);
+				}
+			}
             sceneHistory.Save(PATH);
             changed = false;
         }
