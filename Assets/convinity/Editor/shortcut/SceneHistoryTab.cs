@@ -215,6 +215,11 @@ namespace convinity
             try
             {
                 listDrawer.Draw(ReorderableListFlags.ShowIndices|ReorderableListFlags.HideAddButton|ReorderableListFlags.DisableContextMenu);
+				if (listDrawer.changed)
+				{
+					sceneHistory.Save(PATH);
+					changed = false;
+				}
             } catch (Exception ex)
             {
                 if (!(ex.GetBaseException() is ExitGUIException))
@@ -227,7 +232,13 @@ namespace convinity
         public override void OnFooterGUI()
         {
             EditorGUILayout.BeginHorizontal();
-			EditorGUIUtil.IntField("Size", ref sceneHistory.maxSize);
+			if (EditorGUIUtil.IntField("Size", ref sceneHistory.maxSize))
+			{
+				if (sceneHistory.maxSize < 2)
+				{
+					sceneHistory.maxSize = 2;
+				}
+			}
             if (GUILayout.Button("Clear"))
             {
                 sceneHistory.Clear();

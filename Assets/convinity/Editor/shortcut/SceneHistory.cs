@@ -64,7 +64,7 @@ namespace convinity
 		private void Resize()
 		{
 			int i = Count-1;
-			while (Count > maxSize && i > 2)
+			while (Count > maxSize && i >= 0)
 			{
 				if (!items[i].first.starred)
 				{
