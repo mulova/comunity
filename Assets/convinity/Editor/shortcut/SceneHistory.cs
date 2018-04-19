@@ -12,6 +12,7 @@ namespace convinity
 	public class SceneHistory
 	{
 		[SerializeField] private List<SceneHistoryItem> _items = new List<SceneHistoryItem>();
+		[SerializeField] internal int maxSize = 10;
 
 		public List<SceneHistoryItem> items
 		{
@@ -41,6 +42,7 @@ namespace convinity
 		public void Add(SceneHistoryItem item)
 		{
 			items.Add(item);
+			Resize();
 		}
 
 		public void RemoveAt(int i)
@@ -51,11 +53,25 @@ namespace convinity
 		public void Insert(int i, SceneHistoryItem item)
 		{
 			items.Insert(i, item);
+			Resize();
 		}
 
 		public void Clear()
 		{
 			items.Clear();
+		}
+
+		private void Resize()
+		{
+			int i = Count-1;
+			while (Count > maxSize && i > 2)
+			{
+				if (!items[i].first.starred)
+				{
+					items.RemoveAt(i);
+				}
+				i--;
+			}
 		}
 
 		public void Add(Object obj)
@@ -68,6 +84,18 @@ namespace convinity
 			for (int i=0; i<Count; ++i)
 			{
 				if (this[i].list.Count > 0 &&  this[i].list[0].reference == obj)
+				{
+					return i;
+				}
+			}
+			return -1;
+		}
+
+		public int IndexOf(string path)
+		{
+			for (int i=0; i<Count; ++i)
+			{
+				if (this[i].list.Count > 0 &&  this[i].list[0].path == path)
 				{
 					return i;
 				}

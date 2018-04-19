@@ -17,7 +17,6 @@ namespace convinity
     {
         private SceneHistory sceneHistory;
         private const string PATH = "Library/Shortcut/history";
-        private int size = 10;
         private Object currentScene;
         private bool changed;
 
@@ -28,23 +27,24 @@ namespace convinity
         public override void OnEnable()
         {
             sceneHistory = SceneHistory.Load(PATH);
-            OnSceneOpened(EditorSceneManager.GetActiveScene(), OpenSceneMode.Single);
-            size = EditorPrefs.GetInt("SceneHistory", 10);
-            EditorApplication.hierarchyWindowChanged += OnSceneObjChange;
-            EditorSceneManager.sceneOpening += OnSceneOpening;
-            EditorSceneManager.sceneOpened += OnSceneOpened;
-            EditorSceneManager.sceneClosing += OnSceneClosing;
-            EditorSceneManager.sceneSaving += OnSceneSaved;
+			OnSceneOpened(EditorSceneManager.GetActiveScene(), OpenSceneMode.Single);
+			EditorApplication.hierarchyWindowChanged += OnSceneObjChange;
+			EditorSceneManager.sceneOpening += OnSceneOpening;
+			EditorSceneManager.sceneOpened += OnSceneOpened;
+			EditorSceneManager.sceneClosing += OnSceneClosing;
+			EditorSceneManager.sceneSaving += OnSceneSaved;
+			SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
         public override void OnDisable()
         {
-            sceneHistory.Save(PATH);
-            EditorApplication.hierarchyWindowChanged -= OnSceneObjChange;
-            EditorSceneManager.sceneOpening -= OnSceneOpening;
-            EditorSceneManager.sceneOpened -= OnSceneOpened;
-            EditorSceneManager.sceneClosing -= OnSceneClosing;
-            EditorSceneManager.sceneSaving -= OnSceneSaved;
+			sceneHistory.Save(PATH);
+			EditorApplication.hierarchyWindowChanged -= OnSceneObjChange;
+			EditorSceneManager.sceneOpening -= OnSceneOpening;
+			EditorSceneManager.sceneOpened -= OnSceneOpened;
+			EditorSceneManager.sceneClosing -= OnSceneClosing;
+			EditorSceneManager.sceneSaving -= OnSceneSaved;
+			SceneManager.sceneLoaded -= OnSceneLoaded;
         }
 
         private void OnSceneObjChange()
@@ -68,8 +68,25 @@ namespace convinity
         {
         }
 
+		private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+		{
+//			if (mode != LoadSceneMode.Single)
+//			{
+//				return;
+//			}
+			int index = sceneHistory.IndexOf(scene.path);
+			if (index >= 0)
+			{
+				sceneHistory[index].ApplyCam();
+			}
+		}
+
         private void OnSceneSaved(Scene scene, string path)
         {
+			if (EditorApplication.isPlayingOrWillChangePlaymode)
+			{
+				return;
+			}
             SaveCam();
             sceneHistory.Save(PATH);
         }
@@ -85,11 +102,7 @@ namespace convinity
 
         private void OnSceneOpening(string path,OpenSceneMode mode)
         {
-            if (EditorUtil.IsChangingPlayMode())
-            {
-                return;
-            }
-            if (Application.isPlaying || EditorApplication.isPlaying)
+			if (EditorApplication.isPlayingOrWillChangePlaymode)
             {
                 return;
             }
@@ -99,7 +112,7 @@ namespace convinity
 
         private void OnSceneOpened(Scene s, OpenSceneMode mode)
         {
-            if (EditorUtil.IsChangingPlayMode())
+			if (EditorApplication.isPlayingOrWillChangePlaymode)
             {
                 return;
             }
@@ -108,61 +121,42 @@ namespace convinity
             {
                 return;
             }
-            SaveCam();
             SceneHistoryItem item = null;
             int index = sceneHistory.IndexOf(currentScene);
-            if (Application.isPlaying || EditorApplication.isPlaying)
+            
+            if (index >= 0)
             {
-                if (index >= 0)
+                item = sceneHistory[index];
+                if (mode == OpenSceneMode.Single)
                 {
-                    item = sceneHistory[index];
+                    sceneHistory.RemoveAt(index);
+                    sceneHistory.Insert(0, item);
+                    item.LoadAdditiveScenes();
                     item.ApplyCam();
+                } else
+                {
+                    var sceneObj = AssetDatabase.LoadAssetAtPath<Object>(s.path);
+                    if (!item.Contains(sceneObj))
+                    {
+                        item.AddScene(sceneObj);
+                    }
                 }
             } else
             {
-                if (index >= 0)
-                {
-                    item = sceneHistory[index];
-                    if (mode == OpenSceneMode.Single)
-                    {
-                        sceneHistory.RemoveAt(index);
-                        sceneHistory.Insert(0, item);
-                        item.LoadAdditiveScenes();
-                        item.ApplyCam();
-                    } else
-                    {
-                        var sceneObj = AssetDatabase.LoadAssetAtPath<Object>(s.path);
-                        if (!item.Contains(sceneObj))
-                        {
-                            item.AddScene(sceneObj);
-                        }
-                    }
-                } else
-                {
-                    item = new SceneHistoryItem(currentScene);
-                    sceneHistory.Insert(0, item);
-                }
-                int i = sceneHistory.Count-1;
-                while (sceneHistory.Count > size && i > 2)
-                {
-                    if (!sceneHistory[i].first.starred)
-                    {
-                        sceneHistory.RemoveAt(i);
-                    }
-                    i--;
-                }
-                sceneHistory.Save(PATH);
-                changed = false;
+                item = new SceneHistoryItem(currentScene);
+                sceneHistory.Insert(0, item);
             }
+            sceneHistory.Save(PATH);
+            changed = false;
         }
 
         private void OnSceneClosing(Scene s, bool removing)
         {
-            if (EditorUtil.IsChangingPlayMode())
-            {
-                return;
-            }
-            if (!removing || Application.isPlaying||EditorApplication.isPlaying)
+			if (EditorApplication.isPlayingOrWillChangePlaymode)
+			{
+				return;
+			}
+            if (!removing)
             {
                 return;
             }
@@ -189,15 +183,6 @@ namespace convinity
             {
                 item = new SceneHistoryItem(currentScene);
                 sceneHistory.Insert(0, item);
-            }
-            int i = sceneHistory.Count-1;
-            while (sceneHistory.Count > size && i > 2)
-            {
-                if (!sceneHistory[i].first.starred)
-                {
-                    sceneHistory.RemoveAt(i);
-                }
-                i--;
             }
             sceneHistory.Save(PATH);
             changed = false;
@@ -241,10 +226,7 @@ namespace convinity
         public override void OnFooterGUI()
         {
             EditorGUILayout.BeginHorizontal();
-            if (EditorGUIUtil.IntField("Size", ref size))
-            {
-                EditorPrefs.SetInt("SceneHistory", size);
-            }
+			EditorGUIUtil.IntField("Size", ref sceneHistory.maxSize);
             if (GUILayout.Button("Clear"))
             {
                 sceneHistory.Clear();
