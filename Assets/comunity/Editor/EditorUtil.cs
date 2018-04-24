@@ -9,6 +9,9 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 using commons;
+using System.Collections.Generic;
+using Object = UnityEngine.Object;
+using UnityEditor.SceneManagement;
 
 namespace comunity
 {
@@ -130,6 +133,16 @@ namespace comunity
                 }
             }
         }
+
+		public static List<Object> GetSceneRoots()
+		{
+			var list = new List<Object>();
+			for (int i=0; i<EditorSceneManager.sceneCount; ++i)
+			{
+				list.AddRange(EditorSceneManager.GetSceneAt(i).GetRootGameObjects());
+			}
+			return list;
+		}
     }
 }
 

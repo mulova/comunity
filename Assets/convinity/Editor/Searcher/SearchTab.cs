@@ -92,7 +92,19 @@ namespace convinity
         
         protected void Search()
         {
-            SetFound(SearchResource(root));
+			if (root != null)
+			{
+				SetFound(SearchResource(root));
+			} else
+			{
+				var roots = EditorUtil.GetSceneRoots();
+				var list = new List<T>();
+				foreach (var r in roots)
+				{
+					list.AddRange(SearchResource(r));
+				}
+				SetFound(list);
+			}
         }
         
         protected abstract List<T> SearchResource(Object root);

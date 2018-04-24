@@ -4,6 +4,7 @@ using UnityEngine;
 using Object = UnityEngine.Object;
 using commons;
 using comunity;
+using UnityEditor.SceneManagement;
 
 
 namespace convinity {
@@ -32,10 +33,7 @@ namespace convinity {
                 var rends = (root as GameObject).GetComponentsInChildren<Renderer>(true);
                 foreach (var r in rends)
                 {
-                    if (IsMatch(r))
-                    {
-                        list.Add(r.sharedMaterial);
-                    }
+					AddMatch(r, list);
                 }
             } else
             {
@@ -47,9 +45,7 @@ namespace convinity {
                 }
                 foreach (Object o in SearchAssets(typeof(Renderer), FileType.Prefab, FileType.Material)) {
                     Renderer r = o as Renderer;
-                    if (IsMatch(r)) {
-                        list.Add(r.sharedMaterial);
-                    }
+					AddMatch(r, list);
                 }
             }
 			list.Sort(new MaterialSorter());
@@ -58,9 +54,35 @@ namespace convinity {
 
         private bool IsMatch(Renderer r)
         {
-            return r != null && r.sharedMaterial != null && r.sharedMaterial.shader != null && r.sharedMaterial.shader.name.Contains(shaderName);
+			if (r == null || r.sharedMaterials.Length == 0)
+			{
+				return false;
+			}
+			foreach (var m in r.sharedMaterials)
+			{
+				if (m != null && m.shader != null && m.shader.name.Contains(shaderName))
+				{
+					return true;
+				}
+			}
+			return false;
         }
-		
+
+		private void AddMatch(Renderer r, List<Material> store)
+		{
+			if (r == null || r.sharedMaterials.Length == 0)
+			{
+				return;
+			}
+			foreach (var m in r.sharedMaterials)
+			{
+				if (m != null && m.shader != null && m.shader.name.Contains(shaderName))
+				{
+					store.Add(m);
+				}
+			}
+		}
+
 		protected override void OnInspectorGUI(List<Material> found) {
 			EditorGUI.indentLevel += 2;
 			Material remove = null;
