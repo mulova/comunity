@@ -29,7 +29,7 @@ namespace convinity
             sceneHistory = SceneHistory.Load(PATH);
 			OnSceneOpened(EditorSceneManager.GetActiveScene(), OpenSceneMode.Single);
 			EditorApplication.hierarchyWindowChanged += OnSceneObjChange;
-			EditorApplication.playmodeStateChanged += OnPlayModeChanged;
+			EditorApplication.pauseStateChanged += OnPauseStateChanged;
 			EditorSceneManager.sceneOpening += OnSceneOpening;
 			EditorSceneManager.sceneOpened += OnSceneOpened;
 			EditorSceneManager.sceneClosing += OnSceneClosing;
@@ -45,14 +45,14 @@ namespace convinity
 				sceneHistory.Save(PATH);
 			}
 			EditorApplication.hierarchyWindowChanged -= OnSceneObjChange;
-			EditorApplication.playmodeStateChanged -= OnPlayModeChanged;
+			EditorApplication.pauseStateChanged -= OnPauseStateChanged;
 			EditorSceneManager.sceneOpening -= OnSceneOpening;
 			EditorSceneManager.sceneOpened -= OnSceneOpened;
 			EditorSceneManager.sceneClosing -= OnSceneClosing;
 			SceneManager.sceneLoaded -= OnSceneLoaded;
         }
 
-		void OnPlayModeChanged()
+		void OnPauseStateChanged(PauseState state)
 		{
 			if (sceneHistory.Count >= 0)
 			{

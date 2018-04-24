@@ -8,7 +8,7 @@ using UnityEditor.SceneManagement;
 
 
 namespace convinity {
-	class ShaderSearchTab : SearchTab<Material> {
+	class ShaderSearchTab : SearchTab<ShaderSearchItem> {
 		
 		public ShaderSearchTab(TabbedEditorWindow window) : base("Shader", window) {
 		}
@@ -17,7 +17,7 @@ namespace convinity {
 		public override void OnFocus(bool focus) {}
 
 		
-		public override void OnHeaderGUI(List<Material> found) {
+		public override void OnHeaderGUI(List<ShaderSearchItem> found) {
 			EditorGUILayout.BeginHorizontal();
 			EditorGUIUtil.TextField(null, ref shaderName);
 			if (GUILayout.Button("Search")) {
@@ -26,8 +26,8 @@ namespace convinity {
 			EditorGUILayout.EndHorizontal();
 		}
 		
-		protected override List<Material> SearchResource(Object root) {
-			List<Material> list = new List<Material>();
+		protected override List<ShaderSearchItem> SearchResource(Object root) {
+			List<ShaderSearchItem> list = new List<ShaderSearchItem>();
             if (root is GameObject)
             {
                 var rends = (root as GameObject).GetComponentsInChildren<Renderer>(true);
@@ -40,7 +40,7 @@ namespace convinity {
                 foreach (Object o in SearchAssets(typeof(Material), FileType.Prefab, FileType.Material)) {
                     Material mat = o as Material;
                     if (mat != null && mat.shader.name.Contains(shaderName)) {
-                        list.Add(mat);
+						list.Add(new ShaderSearchItem(o, mat));
                     }
                 }
                 foreach (Object o in SearchAssets(typeof(Renderer), FileType.Prefab, FileType.Material)) {
@@ -48,7 +48,7 @@ namespace convinity {
 					AddMatch(r, list);
                 }
             }
-			list.Sort(new MaterialSorter());
+			list.Sort();
 			return list;
 		}
 
@@ -68,7 +68,7 @@ namespace convinity {
 			return false;
         }
 
-		private void AddMatch(Renderer r, List<Material> store)
+		private void AddMatch(Renderer r, List<ShaderSearchItem> store)
 		{
 			if (r == null || r.sharedMaterials.Length == 0)
 			{
@@ -78,41 +78,17 @@ namespace convinity {
 			{
 				if (m != null && m.shader != null && m.shader.name.Contains(shaderName))
 				{
-					store.Add(m);
+					store.Add(new ShaderSearchItem(r, m));
 				}
 			}
 		}
 
-		protected override void OnInspectorGUI(List<Material> found) {
-			EditorGUI.indentLevel += 2;
-			Material remove = null;
-			foreach (Material m in found) {
-				EditorGUILayout.BeginHorizontal();
-				EditorGUILayout.LabelField(m.shader.name);
-				EditorGUILayout.ObjectField(m, m.GetType(), false);
-				if (GUILayout.Button("-", EditorStyles.miniButton, GUILayout.ExpandWidth(false))) {
-					remove = m;
-				}
-				EditorGUILayout.EndHorizontal();
-			}
-			if (remove != null) {
-				found.Remove(remove);
-			}
-			EditorGUI.indentLevel -= 2;
+		protected override void OnInspectorGUI(List<ShaderSearchItem> found) {
+			var drawer = new ListDrawer<ShaderSearchItem>(found, new ShaderSearchItemDrawer());
+			drawer.Draw();
 		}
 		
-		public override void OnFooterGUI(List<Material> found) {
-		}
-		
-		private class MaterialSorter :  IComparer<Material> {
-			public int Compare(Material x, Material y) {
-				if (x == null) {
-					return 1;
-				} else if (y == null) {
-					return -1;
-				}
-				return x.shader.name.CompareTo(y.shader.name);
-			}
+		public override void OnFooterGUI(List<ShaderSearchItem> found) {
 		}
 		
 		private bool showShader;

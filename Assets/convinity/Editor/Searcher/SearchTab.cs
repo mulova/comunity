@@ -11,7 +11,7 @@ using comunity;
 
 namespace convinity
 {
-    public abstract class SearchTab<T> : EditorTab where T:Object
+    public abstract class SearchTab<T> : EditorTab
     {
         private Object root;
         private StringBuilder str = new StringBuilder();
@@ -117,22 +117,35 @@ namespace convinity
                 EditorGUILayout.BeginHorizontal();
                 if (GUILayout.Button("Select GameObject"))
                 {
-                    List<GameObject> list = new List<GameObject>();
+                    List<Object> list = new List<Object>();
                     foreach (T t in found)
                     {
                         if (t is Component)
                         {
                             list.Add((t as Component).gameObject);
-                        } else if (t is GameObject)
+                        } else
                         {
-                            list.Add(t as GameObject);
+							var o = t as GameObject;
+							if (o != null)
+							{
+								list.Add(o);
+							}
                         }
                     }
                     Selection.objects = list.ToArray();
                 }
                 if (GUILayout.Button("Select"))
                 {
-                    Selection.objects = found.ToArray();
+					List<Object> list = new List<Object>();
+					foreach (var t in found)
+					{
+						Object o = t as Object;
+						if (o != null)
+						{
+							list.Add(o);
+						}
+					}
+                    Selection.objects = list.ToArray();
                 }
                 EditorGUILayout.EndHorizontal();
             }
