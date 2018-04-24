@@ -6,7 +6,6 @@ using commons;
 using comunity;
 using UnityEditor.SceneManagement;
 
-
 namespace convinity {
 	class ShaderSearchTab : SearchTab<ShaderSearchItem> {
 		
@@ -40,7 +39,7 @@ namespace convinity {
                 foreach (Object o in SearchAssets(typeof(Material), FileType.Prefab, FileType.Material)) {
                     Material mat = o as Material;
                     if (mat != null && mat.shader.name.Contains(shaderName)) {
-						list.Add(new ShaderSearchItem(o, mat));
+						list.Add(new ShaderSearchItem(null, mat));
                     }
                 }
                 foreach (Object o in SearchAssets(typeof(Renderer), FileType.Prefab, FileType.Material)) {
@@ -51,6 +50,27 @@ namespace convinity {
 			list.Sort();
 			return list;
 		}
+
+        protected override void SelectGameObjects(List<ShaderSearchItem> found)
+        {
+            List<Object> list = new List<Object>();
+            foreach (var i in found)
+            {
+                GameObject o = (GameObject)i;
+                if (o != null)
+                {
+                    list.Add(o);
+                }
+            }
+
+            Selection.objects = list.ToArray();
+        }
+
+        protected override void SelectObjects(List<ShaderSearchItem> found)
+        {
+            List<Object> list = found.ConvertAll<Object>(i=> i.material);
+            Selection.objects = list.ToArray();
+        }
 
         private bool IsMatch(Renderer r)
         {

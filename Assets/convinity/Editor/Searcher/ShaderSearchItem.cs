@@ -5,7 +5,7 @@ using Object = UnityEngine.Object;
 
 public class ShaderSearchItem : IComparable<ShaderSearchItem>
 {
-	public Object obj;
+	public Renderer rend;
 	public Material material;
 
 	public string name
@@ -16,9 +16,9 @@ public class ShaderSearchItem : IComparable<ShaderSearchItem>
 		}
 	}
 
-	public ShaderSearchItem(Object obj, Material mat)
+	public ShaderSearchItem(Renderer r, Material mat)
 	{
-		this.obj = obj;
+		this.rend = r;
 		this.material = mat;
 	}
 
@@ -32,12 +32,16 @@ public class ShaderSearchItem : IComparable<ShaderSearchItem>
 
 	public static explicit operator Object(ShaderSearchItem i)
 	{
-		return i.obj;
+        return i.material;
 	}
 
 	public static explicit operator GameObject(ShaderSearchItem i)
 	{
-		return i.obj as GameObject;
+        if (i.rend != null)
+        {
+            return i.rend.gameObject;
+        }
+        return null;
 	}
 }
 

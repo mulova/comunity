@@ -117,38 +117,48 @@ namespace convinity
                 EditorGUILayout.BeginHorizontal();
                 if (GUILayout.Button("Select GameObject"))
                 {
-                    List<Object> list = new List<Object>();
-                    foreach (T t in found)
-                    {
-                        if (t is Component)
-                        {
-                            list.Add((t as Component).gameObject);
-                        } else
-                        {
-							var o = t as GameObject;
-							if (o != null)
-							{
-								list.Add(o);
-							}
-                        }
-                    }
-                    Selection.objects = list.ToArray();
+                    SelectGameObjects(found);
                 }
                 if (GUILayout.Button("Select"))
                 {
-					List<Object> list = new List<Object>();
-					foreach (var t in found)
-					{
-						Object o = t as Object;
-						if (o != null)
-						{
-							list.Add(o);
-						}
-					}
-                    Selection.objects = list.ToArray();
+                    SelectObjects(found);
                 }
                 EditorGUILayout.EndHorizontal();
             }
+        }
+
+        protected virtual void SelectGameObjects(List<T> found)
+        {
+            List<Object> list = new List<Object>();
+            foreach (T t in found)
+            {
+                if (t is Component)
+                {
+                    list.Add((t as Component).gameObject);
+                } else
+                {
+                    var o = t as GameObject;
+                    if (o != null)
+                    {
+                        list.Add(o);
+                    }
+                }
+            }
+            Selection.objects = list.ToArray();
+        }
+
+        protected virtual void SelectObjects(List<T> found)
+        {
+            List<Object> list = new List<Object>();
+            foreach (var t in found)
+            {
+                Object o = t as Object;
+                if (o != null)
+                {
+                    list.Add(o);
+                }
+            }
+            Selection.objects = list.ToArray();
         }
 
         public abstract void OnFooterGUI(List<T> found);
