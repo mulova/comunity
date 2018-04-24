@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System;
+using commons;
 
 [Serializable]
 public class SceneCamProperty
@@ -32,6 +33,11 @@ public class SceneCamProperty
 	public void Collect()
 	{
 		var view = sceneView;
+		if (view == null)
+		{
+			Debug.LogWarning("Can't access SceneView.");
+			return;
+		}
 		size = view.size;
 		in2dMode = view.in2DMode;
 		rot = sceneView.rotation;
@@ -52,9 +58,16 @@ public class SceneCamProperty
 		}
 		view.size = size;
 		view.in2DMode = in2dMode;
-		sceneView.rotation = rot;
-		sceneView.pivot = pivot;
+		view.rotation = rot;
+		view.pivot = pivot;
 		view.orthographic = ortho;
+
+		if (!in2dMode)
+		{
+			var svRot = ReflectionUtil.GetFieldValue<object>(view, "svRot");
+			ReflectionUtil.Invoke(svRot, "ViewFromNiceAngle", view, !in2dMode);
+		}
+
 //		if (ortho) {
 //			view.camera.orthographicSize = fov;
 //		} else
