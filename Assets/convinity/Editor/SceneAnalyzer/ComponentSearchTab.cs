@@ -30,43 +30,45 @@ namespace convinity
             EditorGUILayout.EndHorizontal();
         }
 
-        protected override List<Object> SearchResource(Object root)
+        protected override List<Object> SearchResource()
         {
             Type type = selector.GetSelected();
             List<Object> list = new List<Object>();
-            if (!string.IsNullOrEmpty(AssetDatabase.GetAssetPath(root)))
-            {
-                if (type != null)
-                {
-                    foreach (Object o in SearchAssets(type, FileType.Prefab, FileType.Asset, FileType.Material, FileType.Anim))
-                    {
-                        Object c = o as Object;
-                        list.Add(c);
-                    }
-                }
-            } else
-            {
-                IEnumerable<Transform> trans = null;
-                if (root is GameObject)
-                {
-                    trans = new Transform[] { (root as GameObject).transform };
-                } else if (root == null)
-                {
-                    trans = EditorSceneManager.GetActiveScene().GetRootGameObjects().Convert(o=>o.transform);
-                }
-                if (trans != null)
-                {
-                    foreach (Transform t in trans)
-                    {
-                        Component[] comps = type != null? t.GetComponentsInChildren(type, true) : GetMissingComponents(t.gameObject);
-                        foreach (Object c in comps)
-                        {
-                            list.Add(c);
-                        }
-                    }
-                }
-            }
-
+			foreach (var root in roots)
+			{
+				if (!string.IsNullOrEmpty(AssetDatabase.GetAssetPath(root)))
+				{
+					if (type != null)
+					{
+						foreach (Object o in SearchAssets(type, FileType.Prefab, FileType.Asset, FileType.Material, FileType.Anim))
+						{
+							Object c = o as Object;
+							list.Add(c);
+						}
+					}
+				} else
+				{
+					IEnumerable<Transform> trans = null;
+					if (root is GameObject)
+					{
+						trans = new Transform[] { (root as GameObject).transform };
+					} else if (root == null)
+					{
+						trans = EditorSceneManager.GetActiveScene().GetRootGameObjects().Convert(o=>o.transform);
+					}
+					if (trans != null)
+					{
+						foreach (Transform t in trans)
+						{
+							Component[] comps = type != null? t.GetComponentsInChildren(type, true) : GetMissingComponents(t.gameObject);
+							foreach (Object c in comps)
+							{
+								list.Add(c);
+							}
+						}
+					}
+				}
+			}
             return list;
         }
 

@@ -9,6 +9,7 @@ using System.Text;
 using System.IO;
 using System.Collections.Generic;
 using System.Collections;
+using System.Globalization;
 
 namespace commons
 {
@@ -160,5 +161,28 @@ namespace commons
             }
             
         }
+
+		public static bool ContainsIgnoreCase(this string s1, string s2)
+		{
+			return s1.IndexOfIgnoreCase(s2) >= 0;
+		}
+
+		public static int IndexOfIgnoreCase(this string s1, string s2)
+		{
+			if (s1 == null)
+			{
+				if (s2 == null)
+				{
+					return 0;
+				} else
+				{
+					return 1;
+				}
+			} else if (s2 == null)
+			{
+				return -1;
+			}
+			return CultureInfo.CurrentCulture.CompareInfo.IndexOf(s1, s2, CompareOptions.IgnoreCase);
+		}
     }
 }

@@ -41,7 +41,7 @@ namespace convinity {
 			EditorGUI.indentLevel -= 2;
 		}
 		
-		protected override List<Texture> SearchResource(Object root)
+		protected override List<Texture> SearchResource()
 		{
 			List<Texture> list = new List<Texture>();
 			foreach (Object o in SearchAssets(typeof(Texture), FileType.Image, FileType.Prefab)) {

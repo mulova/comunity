@@ -61,7 +61,7 @@ namespace convinity {
 		public override void OnSelected(bool sel) {}
 		public override void OnFocus(bool focus) {}
 		
-		protected override List<AudioClip> SearchResource(Object root)
+		protected override List<AudioClip> SearchResource()
 		{
 			SetProgress(0);
 			List<AudioClip> list = new List<AudioClip>();

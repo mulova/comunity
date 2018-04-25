@@ -89,25 +89,27 @@ namespace convinity
         {
             this.progress = progress;
         }
-        
-        protected void Search()
-        {
-			if (root != null)
+
+		protected IEnumerable<Object> roots
+		{
+			get
 			{
-				SetFound(SearchResource(root));
-			} else
-			{
-				var roots = EditorUtil.GetSceneRoots();
-				var list = new List<T>();
-				foreach (var r in roots)
+				if (root == null)
 				{
-					list.AddRange(SearchResource(r));
+					return new Object[0];
+				} else
+				{
+					return EditorUtil.GetSceneRoots();
 				}
-				SetFound(list);
 			}
+		}
+        
+		protected void Search()
+        {
+			SetFound(SearchResource());
         }
         
-        protected abstract List<T> SearchResource(Object root);
+        protected abstract List<T> SearchResource();
         
         public override void OnFooterGUI()
         {

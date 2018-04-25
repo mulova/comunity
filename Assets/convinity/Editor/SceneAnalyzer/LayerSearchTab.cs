@@ -24,7 +24,7 @@ namespace convinity {
 			EditorGUILayout.EndHorizontal ();
 		}
 		
-		protected override List<GameObject> SearchResource(Object root)
+		protected override List<GameObject> SearchResource()
 		{
 			layerList.Clear ();
 			Object[] objects = Object.FindObjectsOfType (typeof(GameObject));

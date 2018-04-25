@@ -95,62 +95,65 @@ namespace convinity
         private List<FieldRefDrawer> allocInfo = new List<FieldRefDrawer>();
         private List<Object> simpleRef = new List<Object>();
 
-        protected override List<Object> SearchResource(Object root)
+        protected override List<Object> SearchResource()
         {
             List<Object> store = new List<Object>();
             allocInfo.Clear();
             simpleRef.Clear();
             if (!isScene)
             {
-                if (AssetDatabase.GetAssetPath(root).IsEmpty())
-                {
-                    IEnumerable<Transform> roots = null;
-                    if (root != null)
-                    {
-                        roots = new Transform[] { (root as GameObject).transform };
-                    } else
-                    {
-                        roots = EditorSceneManager.GetActiveScene().GetRootGameObjects().Convert(o => o.transform);
-                    }
-                    
-                    SearchTransforms(searchObj, roots, store);
-                    if (searchObj is GameObject)
-                    {
-                        foreach (Component c in (searchObj as GameObject).GetComponents<Component>())
-                        {
-                            SearchTransforms(c, roots, store);
-                        }
-                    }
-                } else
-                {
-                    foreach (var o in SearchAssets(typeof(Object), FileType.All))
-                    {
-                        if (EditorUtility.DisplayCancelableProgressBar("Assets", o.name, 0.5f))
-                        {
-                            break;
-                        }
-                        if (o is GameObject)
-                        {
-                            foreach (Component c in (o as GameObject).GetComponentsInChildren<Component>(true))
-                            {
-                                if (c != null&&searchObj != c&&searchObj != c.gameObject)
-                                {
-                                    if (SearchMemberRefs(c, searchObj))
-                                    {
-                                        store.Add(c);
-                                    }
-                                }
-                            }
-                        } else
-                        {
-                            if (SearchMemberRefs(o, searchObj))
-                            {
-                                store.Add(o);
-                            }
-                        }
-                    }
-                    EditorUtility.ClearProgressBar();
-                }
+				foreach (var root in roots)
+				{
+					if (AssetDatabase.GetAssetPath(root).IsEmpty())
+					{
+						IEnumerable<Transform> roots = null;
+						if (root != null)
+						{
+							roots = new Transform[] { (root as GameObject).transform };
+						} else
+						{
+							roots = EditorSceneManager.GetActiveScene().GetRootGameObjects().Convert(o => o.transform);
+						}
+						
+						SearchTransforms(searchObj, roots, store);
+						if (searchObj is GameObject)
+						{
+							foreach (Component c in (searchObj as GameObject).GetComponents<Component>())
+							{
+								SearchTransforms(c, roots, store);
+							}
+						}
+					} else
+					{
+						foreach (var o in SearchAssets(typeof(Object), FileType.All))
+						{
+							if (EditorUtility.DisplayCancelableProgressBar("Assets", o.name, 0.5f))
+							{
+								break;
+							}
+							if (o is GameObject)
+							{
+								foreach (Component c in (o as GameObject).GetComponentsInChildren<Component>(true))
+								{
+									if (c != null&&searchObj != c&&searchObj != c.gameObject)
+									{
+										if (SearchMemberRefs(c, searchObj))
+										{
+											store.Add(c);
+										}
+									}
+								}
+							} else
+							{
+								if (SearchMemberRefs(o, searchObj))
+								{
+									store.Add(o);
+								}
+							}
+						}
+						EditorUtility.ClearProgressBar();
+					}
+				}
             } else
             {
                 EditorTraversal.ForEachScene(roots => {

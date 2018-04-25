@@ -5,6 +5,8 @@ using Object = UnityEngine.Object;
 using commons;
 using comunity;
 using UnityEditor.SceneManagement;
+using System;
+using System.Globalization;
 
 namespace convinity {
 	class ShaderSearchTab : SearchTab<ShaderSearchItem> {
@@ -25,28 +27,31 @@ namespace convinity {
 			EditorGUILayout.EndHorizontal();
 		}
 		
-		protected override List<ShaderSearchItem> SearchResource(Object root) {
+		protected override List<ShaderSearchItem> SearchResource() {
 			List<ShaderSearchItem> list = new List<ShaderSearchItem>();
-            if (root is GameObject)
-            {
-                var rends = (root as GameObject).GetComponentsInChildren<Renderer>(true);
-                foreach (var r in rends)
-                {
-					AddMatch(r, list);
-                }
-            } else
-            {
-                foreach (Object o in SearchAssets(typeof(Material), FileType.Prefab, FileType.Material)) {
-                    Material mat = o as Material;
-                    if (mat != null && mat.shader.name.Contains(shaderName)) {
-						list.Add(new ShaderSearchItem(null, mat));
-                    }
-                }
-                foreach (Object o in SearchAssets(typeof(Renderer), FileType.Prefab, FileType.Material)) {
-                    Renderer r = o as Renderer;
-					AddMatch(r, list);
-                }
-            }
+			foreach (var root in roots)
+			{
+				if (root is GameObject)
+				{
+					var rends = (root as GameObject).GetComponentsInChildren<Renderer>(true);
+					foreach (var r in rends)
+					{
+						AddMatch(r, list);
+					}
+				} else
+				{
+					foreach (Object o in SearchAssets(typeof(Material), FileType.Prefab, FileType.Material)) {
+						Material mat = o as Material;
+						if (mat != null && mat.shader.name.ContainsIgnoreCase(shaderName)) {
+							list.Add(new ShaderSearchItem(null, mat));
+						}
+					}
+					foreach (Object o in SearchAssets(typeof(Renderer), FileType.Prefab, FileType.Material)) {
+						Renderer r = o as Renderer;
+						AddMatch(r, list);
+					}
+				}
+			}
 			list.Sort();
 			return list;
 		}
@@ -96,7 +101,7 @@ namespace convinity {
 			}
 			foreach (var m in r.sharedMaterials)
 			{
-				if (m != null && m.shader != null && m.shader.name.Contains(shaderName))
+				if (m != null && m.shader != null && m.shader.name.ContainsIgnoreCase(shaderName))
 				{
 					store.Add(new ShaderSearchItem(r, m));
 				}

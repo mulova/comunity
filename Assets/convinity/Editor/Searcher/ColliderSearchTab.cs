@@ -18,13 +18,18 @@ namespace convinity {
 		}
 		
 		public override void OnHeaderGUI(List<Collider> found) {
-			EditorGUIUtil.Popup<Camera>("Camera", ref cam, Camera.allCameras);
+			var cams = Camera.allCameras;
+			if (cams.Length == 1)
+			{
+				cam = cams[0];
+			}
+			EditorGUIUtil.Popup<Camera>("Camera", ref cam, cams);
 		}
 		
-		protected override List<Collider> SearchResource(Object root)
+		protected override List<Collider> SearchResource()
 		{
 			List<Collider> list = new List<Collider>();
-			foreach (RaycastHit h in Physics.RaycastAll(ray)) {
+			foreach (var h in Physics.RaycastAll(ray)) {
 				list.Add(h.collider);
 			}
 			return list;
