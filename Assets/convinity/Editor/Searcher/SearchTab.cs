@@ -99,7 +99,7 @@ namespace convinity
 					return new Object[0];
 				} else
 				{
-					return EditorUtil.GetSceneRoots();
+					return EditorUtil.GetSceneRoots().ConvertAll<Object>(o=>o);
 				}
 			}
 		}

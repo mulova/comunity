@@ -629,7 +629,7 @@ namespace comunity
         public static List<T> FindSceneComponents<T>() where T: Component
         {
             List<T> list = new List<T>();
-            foreach (GameObject go in EditorSceneManager.GetActiveScene().GetRootGameObjects())
+			foreach (GameObject go in EditorUtil.GetSceneRoots())
             {
                 Transform root = go.transform;
                 foreach (T t in root.GetComponentsInChildren<T>(true))

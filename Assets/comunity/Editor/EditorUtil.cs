@@ -134,9 +134,9 @@ namespace comunity
             }
         }
 
-		public static List<Object> GetSceneRoots()
+		public static List<GameObject> GetSceneRoots()
 		{
-			var list = new List<Object>();
+			var list = new List<GameObject>();
 			for (int i=0; i<EditorSceneManager.sceneCount; ++i)
 			{
 				list.AddRange(EditorSceneManager.GetSceneAt(i).GetRootGameObjects());

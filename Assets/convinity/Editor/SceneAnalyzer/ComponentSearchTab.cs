@@ -54,7 +54,7 @@ namespace convinity
 						trans = new Transform[] { (root as GameObject).transform };
 					} else if (root == null)
 					{
-						trans = EditorSceneManager.GetActiveScene().GetRootGameObjects().Convert(o=>o.transform);
+						trans = EditorUtil.GetSceneRoots().ConvertAll(o=>o.transform);
 					}
 					if (trans != null)
 					{
