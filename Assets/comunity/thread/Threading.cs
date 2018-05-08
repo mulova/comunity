@@ -28,7 +28,7 @@ namespace comunity {
 				return StartCoroutine(DelayCo(delay, callback));
 			}
 		}
-		
+
 		private IEnumerator DelayCo(float delay, Action callback)
 		{
 			yield return new WaitForSeconds(delay);

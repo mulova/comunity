@@ -1,4 +1,5 @@
 #if !UNITY_WEBGL
+#define ASSETBUNDLE_MANAGER
 using System;
 using System.IO;
 using System.Collections;
@@ -199,62 +200,66 @@ namespace comunity
             Entry e = GetCacheEntry(url);
             if (e != null&&e.file != null)
             {
-                callback(GetBytesFromFile(e.file));
+                GetBytesFromFile(e.file, callback);
             } else
             {
                 fallback.GetBytes(url, callback);
             }
         }
 
-        public static byte[] GetBytesFromFile(FileInfo f)
+        public static void GetBytesFromFile(FileInfo f, Action<byte[]> callback)
         {
             if (f == null||!f.Exists)
             {
-                return null;
+                callback(null);
             }
             if (f.Name.Is(FileType.Asset))
             {
-                TextAsset a = GetAssetFromFile<TextAsset>(f);
-                if (a != null)
-                {
-                    return a.bytes;
-                } else
-                {
-                    log.Warn("{0} is not text asset", f.FullName);
-                    return null;
-                }
+                GetAssetFromFile<TextAsset>(f, a=> {
+                    if (a != null)
+                    {
+                        callback(a.bytes);
+                    } else
+                    {
+                        log.Warn("{0} is not text asset", f.FullName);
+                        callback(null);
+                    }
+                });
             } else
             {
-                return File.ReadAllBytes(f.FullName);
+                callback(File.ReadAllBytes(f.FullName));
             }
         }
 
-        public static AssetBundle GetAssetBundleFromFile(string filePath)
+        public static void GetAssetBundleFromFile(string filePath, Action<AssetBundle> callback)
         {
             log.Debug("Access {0}", filePath);
             #if UNITY_5_3_OR_NEWER
-            return AssetBundle.LoadFromFile(filePath);
+            var ab = AssetBundle.LoadFromFile(filePath);
+            callback(ab);
             #else
-            return AssetBundle.CreateFromFile(filePath);
+            var ab = AssetBundle.CreateFromFile(filePath);
+            callback(ab);
             #endif
         }
 
-        public static T GetAssetFromFile<T>(FileInfo f) where T: Object
+        public static void GetAssetFromFile<T>(FileInfo f, Action<T> callback) where T: Object
         {
             if (f == null)
             {
-                return null;
+                callback(null);
             }
-            return GetAssetFromFile<T>(f.FullName);
+            GetAssetFromFile<T>(f.FullName, callback);
         }
 
+#if !ASSETBUNDLE_MANAGER
         public static T GetAssetFromFile<T>(string filePath) where T: Object
         {
+            var op = AssetBundles.AssetBundleManager.LoadAssetAsync(filePath, "", typeof(T));
             AssetBundle bundle = GetAssetBundleFromFile(filePath);
             if (bundle != null)
             {
                 T asset = bundle.mainAsset as T;
-                bundle.Unload(false);
                 if (asset == null)
                 {
                     log.Warn("{0} is not type of {1}", filePath, typeof(T).FullName);
@@ -263,30 +268,53 @@ namespace comunity
             }
             return null;
         }
+#else
+        public static void GetAssetFromFile<T>(string filePath, Action<T> callback) where T: Object
+        {
+            GetAssetBundleFromFile(filePath, bundle=> {
+                if (bundle != null)
+                {
+                    T asset = bundle.mainAsset as T;
+                    bundle.Unload(false);
+                    if (asset == null)
+                    {
+                        log.Warn("{0} is not type of {1}", filePath, typeof(T).FullName);
+                    }
+                    callback(asset);
+                } else
+                {
+                    callback(null);
+                }
+            });
+        }
+#endif
 
-        public static T[] GetAssetsFromFile<T>(FileInfo f) where T: Object
+        public static void GetAssetsFromFile<T>(FileInfo f, Action<T[]> callback) where T: Object
         {
             if (f == null)
             {
-                return null;
+                callback(null);
             }
-            return GetAssetsFromFile<T>(f.FullName);
+            GetAssetsFromFile<T>(f.FullName, callback);
         }
 
-        public static T[] GetAssetsFromFile<T>(string filePath) where T: Object
+        public static void GetAssetsFromFile<T>(string filePath, Action<T[]> callback) where T: Object
         {
-            AssetBundle bundle = GetAssetBundleFromFile(filePath);
-            if (bundle != null)
-            {
-                T[] assets = bundle.LoadAllAssets<T>();
-                bundle.Unload(false);
-                if (assets.IsEmpty())
+            GetAssetBundleFromFile(filePath, bundle=> {
+                if (bundle != null)
                 {
-                    log.Warn("{0} is not type of {1}", filePath, typeof(T).FullName);
+                    T[] assets = bundle.LoadAllAssets<T>();
+                    bundle.Unload(false);
+                    if (assets.IsEmpty())
+                    {
+                        log.Warn("{0} is not type of {1}", filePath, typeof(T).FullName);
+                    }
+                    callback(assets);
+                } else
+                {
+                    callback(null);
                 }
-                return assets;
-            }
-            return null;
+            });
         }
 
         private void GetWWW(string url, bool dispose, Action<WWW> callback)
@@ -318,15 +346,16 @@ namespace comunity
             Entry e = GetCacheEntry(url);
             if (e.file != null&&!asyncHint)
             {
-                T asset = GetAssetFromFile<T>(e.file.FullName);
-                if (asset != null)
-                {
-                    callback(asset);
-                } else
-                {
-                    log.Warn("{0} is not type of {1}", url, typeof(T).FullName);
-                    callback(null);
-                }
+                GetAssetFromFile<T>(e.file.FullName, asset=> {
+                    if (asset != null)
+                    {
+                        callback(asset);
+                    } else
+                    {
+                        log.Warn("{0} is not type of {1}", url, typeof(T).FullName);
+                        callback(null);
+                    }
+                });
             } else
             {
                 GetWWW(url, true, www => {
@@ -347,15 +376,16 @@ namespace comunity
             Entry e = GetCacheEntry(url);
             if (e.file != null&&!asyncHint)
             {
-                T[] assets = GetAssetsFromFile<T>(e.file.FullName);
-                if (assets != null)
-                {
-                    callback(assets);
-                } else
-                {
-                    log.Warn("{0} is not type of {1}", url, typeof(T).FullName);
-                    callback(null);
-                }
+                GetAssetsFromFile<T>(e.file.FullName, assets=> {
+                    if (assets != null)
+                    {
+                        callback(assets);
+                    } else
+                    {
+                        log.Warn("{0} is not type of {1}", url, typeof(T).FullName);
+                        callback(null);
+                    }
+                });
             } else
             {
                 GetWWW(url, true, www => {
@@ -382,17 +412,12 @@ namespace comunity
             }
         }
 
-        public void GetTexture(string url, Action<Texture> callback)
+        public void GetTexture(string url, Action<Texture2D> callback)
         {
             GetFileCache(url, f => {
                 if (f != null)
                 {
-                    Texture t = GetTextureFromFile(url, f);
-                    if (t == null)
-                    {
-                        log.Warn("{0} is not a Texture", url);
-                    }
-                    callback(t);
+                    GetTextureFromFile(url, f, callback);
                 } else
                 {
                     fallback.GetTexture(url, callback);
@@ -400,36 +425,37 @@ namespace comunity
             });
         }
 
-        public static Texture2D GetTextureFromFile(string u, FileInfo f)
+        public static void GetTextureFromFile(string u, FileInfo f, Action<Texture2D> callback)
         {
             if (f == null)
             {
-                return null;
-            }
-            Texture2D tex = null;
-            if (f.Name.Is(FileType.Asset))
-            {
-                tex = GetAssetFromFile<Texture2D>(f);
+                callback(null);
             } else
             {
-                string texPath = f.FullName;
-                var texData = TexData.Load(texPath);
-                tex = new Texture2D(4, 4, TextureFormatEx.Get(u), texData.mipmap, texData.linear);
-                tex.wrapMode = texData.wrapMode;
-                tex.filterMode = texData.filterMode;
-                bool success = tex.LoadImage(File.ReadAllBytes(texPath), true);
-                if (success)
+                if (f.Name.Is(FileType.Asset))
                 {
-                    if (texData.crunch)
-                    {
-                        tex.Compress(true);
-                    }
+                    GetAssetFromFile<Texture2D>(f, callback);
                 } else
                 {
-                    log.Warn("Can't load textures {0}", u);
+                    string texPath = f.FullName;
+                    var texData = TexData.Load(texPath);
+                    var tex = new Texture2D(4, 4, TextureFormatEx.Get(u), texData.mipmap, texData.linear);
+                    tex.wrapMode = texData.wrapMode;
+                    tex.filterMode = texData.filterMode;
+                    bool success = tex.LoadImage(File.ReadAllBytes(texPath), true);
+                    if (success)
+                    {
+                        if (texData.crunch)
+                        {
+                            tex.Compress(true);
+                        }
+                    } else
+                    {
+                        log.Warn("Can't load textures {0}", u);
+                    }
+                    callback(tex);
                 }
             }
-            return tex;
         }
 
         private IEnumerator LoadWWWAsync(FileInfo f, bool dispose, Action<WWW> callback)

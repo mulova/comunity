@@ -58,7 +58,7 @@ namespace comunity
             {
                 if (f != null)
                 {
-                    callback(FileAssetLoader.GetAssetBundleFromFile(f.FullName));
+                    FileAssetLoader.GetAssetBundleFromFile(f.FullName, callback);
                 } else
                 {
                     fallback.GetAssetBundle(url, unload, callback);
@@ -75,7 +75,7 @@ namespace comunity
             GetRemote(url, f => {
                 if (f != null)
                 {
-                    callback(FileAssetLoader.GetBytesFromFile(f));
+                    FileAssetLoader.GetBytesFromFile(f, callback);
                 } else
                 {
                     fallback.GetBytes(url, callback);
@@ -123,38 +123,47 @@ namespace comunity
         public void GetAsset<T>(string url, Action<T> callback, bool asyncHint) where T: Object
         {
             GetRemote(url, f => {
-                T asset = FileAssetLoader.GetAssetFromFile<T>(f);
-                if (asset != null)
-                {
-                    callback(asset);
-                } else
-                {
-                    fallback.GetAsset<T>(url, callback, asyncHint);
-                }
+                FileAssetLoader.GetAssetFromFile<T>(f, asset=> {
+                    if (asset != null)
+                    {
+                        callback(asset);
+                    } else
+                    {
+                        fallback.GetAsset<T>(url, callback, asyncHint);
+                    }
+                });
             });
         }
 
         public void GetAssets<T>(string url, Action<IEnumerable<T>> callback, bool asyncHint) where T: Object
         {
             GetRemote(url, f => {
-                T[] assets = FileAssetLoader.GetAssetsFromFile<T>(f);
-                if (assets != null)
-                {
-                    callback(assets);
-                } else
-                {
-                    fallback.GetAssets<T>(url, callback, asyncHint);
-                }
+                FileAssetLoader.GetAssetsFromFile<T>(f, assets=> {
+                    if (assets != null)
+                    {
+                        callback(assets);
+                    } else
+                    {
+                        fallback.GetAssets<T>(url, callback, asyncHint);
+                    }
+                });
             });
         }
 
-        public void GetTexture(string url, Action<Texture> callback)
+        public void GetTexture(string url, Action<Texture2D> callback)
         {
             GetRemote(url, f => {
                 if (f != null)
                 {
-                    Texture tex = FileAssetLoader.GetTextureFromFile(url, f);
-                    callback(tex);
+                    FileAssetLoader.GetTextureFromFile(url, f, tex=> {
+                        if (tex != null)
+                        {
+                            callback(tex);
+                        } else
+                        {
+                            fallback.GetTexture(url, callback);
+                        }
+                    });
                 } else
                 {
                     fallback.GetTexture(url, callback);

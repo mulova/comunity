@@ -173,7 +173,7 @@ namespace comunity
 				FileInfo f = e.GetFile();
 				if (f != null)
 				{
-					callback.Call(FileAssetLoader.GetBytesFromFile(f));
+                    FileAssetLoader.GetBytesFromFile(f, callback);
 				} else
 				{
 					GetWWW(url, true, www =>
@@ -206,16 +206,17 @@ namespace comunity
 			FileInfo f = asyncHint? null : e.GetFile();
 			if (f != null)
 			{
-                AssetBundle bundle = FileAssetLoader.GetAssetBundleFromFile(f.FullName);
-				if (bundle != null)
-				{
-					T asset = bundle.mainAsset as T;
-					bundle.Unload(false);
-					callback.Call(asset);
-				} else
-				{
-					fallback.GetAsset<T>(url, callback, asyncHint);
-				}
+                FileAssetLoader.GetAssetBundleFromFile(f.FullName, bundle=> {
+                    if (bundle != null)
+                    {
+                        T asset = bundle.mainAsset as T;
+                        bundle.Unload(false);
+                        callback.Call(asset);
+                    } else
+                    {
+                        fallback.GetAsset<T>(url, callback, asyncHint);
+                    }
+                });
 			} else
 			{
 				GetWWW(url, true, www =>
@@ -244,16 +245,17 @@ namespace comunity
 			FileInfo f = asyncHint? null : e.GetFile();
 			if (f != null)
 			{
-                AssetBundle bundle = FileAssetLoader.GetAssetBundleFromFile(f.FullName);
-				if (bundle != null)
-				{
-					T[] assets = bundle.LoadAllAssets<T>();
-					bundle.Unload(false);
-					callback.Call(assets);
-				} else
-				{
-					fallback.GetAssets<T>(url, callback, asyncHint);
-				}
+                FileAssetLoader.GetAssetBundleFromFile(f.FullName, bundle=> {
+                    if (bundle != null)
+                    {
+                        T[] assets = bundle.LoadAllAssets<T>();
+                        bundle.Unload(false);
+                        callback.Call(assets);
+                    } else
+                    {
+                        fallback.GetAssets<T>(url, callback, asyncHint);
+                    }
+                });
 			} else
 			{
 				GetWWW(url, true, www =>
@@ -270,14 +272,13 @@ namespace comunity
 			}
 		}
 
-		public void GetTexture(string url, Action<Texture> callback)
+		public void GetTexture(string url, Action<Texture2D> callback)
 		{
 			Entry e = GetCacheEntry(url);
 			FileInfo f = e.GetFile();
 			if (f != null)
 			{
-				Texture2D t = FileAssetLoader.GetTextureFromFile(url, f);
-				callback.Call(t);
+				FileAssetLoader.GetTextureFromFile(url, f, callback);
 			} else
 			{
 				GetWWW(url, true, www =>

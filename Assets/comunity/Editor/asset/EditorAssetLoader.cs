@@ -171,12 +171,12 @@ namespace comunity
 			}
 		}
 
-		public void GetTexture(string url, Action<Texture> callback)
+		public void GetTexture(string url, Action<Texture2D> callback)
 		{
-			Texture asset = LoadEditorAsset<Texture>(url);
+			Texture2D asset = LoadEditorAsset<Texture2D>(url);
 			if (asset != null)
 			{
-				callback.Call(asset);
+				callback(asset);
 			} else
 			{
 				fallback.GetTexture(url, callback);

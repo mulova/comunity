@@ -38,7 +38,11 @@ namespace comunity
 
         static DiMenu()
         {
+            #if UNITY_2018_1_OR_NEWER
             EditorApplication.hierarchyChanged += OnHierarchyChange;
+            #else
+            EditorApplication.hierarchyWindowChanged += OnHierarchyChange;
+            #endif
             #if UNITY_2017
             EditorApplication.playModeStateChanged += OnPlayModeChange;
             #else

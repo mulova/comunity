@@ -101,7 +101,7 @@ namespace comunity
 			});
 		}
 
-		public void GetTexture(string url, Action<Texture> callback)
+		public void GetTexture(string url, Action<Texture2D> callback)
 		{
 			GetWWW(url, true, www =>
 			{
@@ -109,11 +109,11 @@ namespace comunity
 				{
 					if (www.assetBundle != null)
 					{
-						Texture tex = www.assetBundle.mainAsset as Texture;
+						Texture2D tex = www.assetBundle.mainAsset as Texture2D;
 						callback(tex);
 					} else
 					{
-						Texture tex = www.textureNonReadable as Texture;
+						Texture2D tex = www.textureNonReadable as Texture2D;
 						callback(tex);
 					}
 				}

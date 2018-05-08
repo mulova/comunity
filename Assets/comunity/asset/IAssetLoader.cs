@@ -15,7 +15,7 @@ namespace comunity {
 
 		void GetBytes(string url, Action<byte[]> callback);
 
-		void GetTexture(string url, Action<Texture> callback);
+		void GetTexture(string url, Action<Texture2D> callback);
 
         void GetAudio(string url, AudioClipLoadType loadType, Action<AudioClip> callback);
 

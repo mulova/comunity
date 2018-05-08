@@ -35,7 +35,7 @@ namespace comunity {
 			log.Warn("Failed to access {0}", url);
 			callback.Call(null);
 		}
-		public void GetTexture(string url, Action<Texture> callback)
+		public void GetTexture(string url, Action<Texture2D> callback)
 		{
 			log.Warn("Failed to access {0}", url);
 			callback.Call(null);
