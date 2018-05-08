@@ -106,10 +106,6 @@ namespace comunity
 			{
                 im.SetFormat(GetFormatFromLabel(tex, newFormat, tex.format.HasAlpha()));
 				changed = true;
-			} else if (newFormat == TexFormatGroup.ATC&&!tex.format.IsATC())
-			{
-                im.SetFormat(GetFormatFromLabel(tex, newFormat, tex.format.HasAlpha()));
-				changed = true;
 			} else if (newFormat == TexFormatGroup.PVRTC&&!tex.format.IsPVRTC())
 			{
 				if (EditorUserBuildSettings.activeBuildTarget.ToRuntimePlatform().IsIos() &&

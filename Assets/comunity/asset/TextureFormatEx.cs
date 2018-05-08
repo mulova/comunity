@@ -35,11 +35,6 @@ namespace comunity
 			TextureFormat.EAC_RG_SIGNED,
 		};
 		
-		public static readonly TextureFormat[] ATC = new TextureFormat[] {
-			TextureFormat.ATC_RGB4,
-			TextureFormat.ATC_RGBA8,
-		};
-		
 		public static readonly TextureFormat[] PVRTC = new TextureFormat[] {
 			TextureFormat.PVRTC_RGB2,
 			TextureFormat.PVRTC_RGB4,
@@ -68,8 +63,6 @@ namespace comunity
 				case TextureFormat.PVRTC_RGB4:
 				case TextureFormat.PVRTC_RGBA4:
 				case TextureFormat.ETC_RGB4:
-				case TextureFormat.ATC_RGB4:
-				case TextureFormat.ATC_RGBA8:
 					return true;
 			}
 			return false;
@@ -83,11 +76,6 @@ namespace comunity
 		public static bool IsETC2(this TextureFormat format)
 		{
 			return IsInGroup(format, ETC2);
-		}
-		
-		public static bool IsATC(this TextureFormat format)
-		{
-			return IsInGroup(format, ATC);
 		}
 		
 		public static bool IsPVRTC(this TextureFormat format)
@@ -128,7 +116,6 @@ namespace comunity
 				case TextureFormat.RGBA4444:
 				case TextureFormat.PVRTC_RGBA2:
 				case TextureFormat.PVRTC_RGBA4:
-				case TextureFormat.ATC_RGBA8:
 				case TextureFormat.BGRA32:
 				case TextureFormat.RGBAHalf:
 				case TextureFormat.DXT5:
@@ -148,7 +135,6 @@ namespace comunity
 				case TextureFormat.PVRTC_RGB2:
 				case TextureFormat.PVRTC_RGB4:
 				case TextureFormat.ETC_RGB4:
-				case TextureFormat.ATC_RGB4:
 				case TextureFormat.R16:
 				case TextureFormat.RHalf:
 				case TextureFormat.RGHalf:

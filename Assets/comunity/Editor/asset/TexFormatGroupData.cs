@@ -33,9 +33,9 @@ namespace comunity
             TextureImporterFormat.EAC_RG_SIGNED
 	        ) { rgba = TextureImporterFormat.ETC2_RGBA8, rgb = TextureImporterFormat.ETC2_RGB4};
 		public static readonly TexFormatGroupData ATC = new TexFormatGroupData("ATC",
-			TextureImporterFormat.ATC_RGB4,
-			TextureImporterFormat.ATC_RGBA8
-			) { rgba = TextureImporterFormat.ATC_RGBA8, rgb = TextureImporterFormat.ATC_RGB4 };
+			TextureImporterFormat.ETC_RGB4,
+			TextureImporterFormat.ETC2_RGBA8
+			) { rgba = TextureImporterFormat.ETC2_RGBA8, rgb = TextureImporterFormat.ETC_RGB4 };
 		public static readonly TexFormatGroupData PVRTC = new TexFormatGroupData("PVRTC",
 			TextureImporterFormat.PVRTC_RGB2,
 			TextureImporterFormat.PVRTC_RGB4,
