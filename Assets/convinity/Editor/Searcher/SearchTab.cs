@@ -94,9 +94,9 @@ namespace convinity
 		{
 			get
 			{
-				if (root == null)
+				if (root != null)
 				{
-					return new Object[0];
+					return new [] { root };
 				} else
 				{
 					return EditorUtil.GetSceneRoots().ConvertAll<Object>(o=>o);
