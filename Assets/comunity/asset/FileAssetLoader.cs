@@ -1,5 +1,5 @@
 #if !UNITY_WEBGL
-#define ASSETBUNDLE_MANAGER
+//#define ASSETBUNDLE_MANAGER
 using System;
 using System.IO;
 using System.Collections;
@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Text;
 using Object = UnityEngine.Object;
 using commons;
+using AssetBundles;
 
 namespace comunity
 {
@@ -234,13 +235,8 @@ namespace comunity
         public static void GetAssetBundleFromFile(string filePath, Action<AssetBundle> callback)
         {
             log.Debug("Access {0}", filePath);
-            #if UNITY_5_3_OR_NEWER
             var ab = AssetBundle.LoadFromFile(filePath);
             callback(ab);
-            #else
-            var ab = AssetBundle.CreateFromFile(filePath);
-            callback(ab);
-            #endif
         }
 
         public static void GetAssetFromFile<T>(FileInfo f, Action<T> callback) where T: Object
@@ -252,21 +248,12 @@ namespace comunity
             GetAssetFromFile<T>(f.FullName, callback);
         }
 
-#if !ASSETBUNDLE_MANAGER
-        public static T GetAssetFromFile<T>(string filePath) where T: Object
+#if ASSETBUNDLE_MANAGER
+        public static void GetAssetFromFile<T>(string filePath, Action<T> callback) where T: Object
         {
-            var op = AssetBundles.AssetBundleManager.LoadAssetAsync(filePath, "", typeof(T));
-            AssetBundle bundle = GetAssetBundleFromFile(filePath);
-            if (bundle != null)
-            {
-                T asset = bundle.mainAsset as T;
-                if (asset == null)
-                {
-                    log.Warn("{0} is not type of {1}", filePath, typeof(T).FullName);
-                }
-                return asset;
-            }
-            return null;
+            AssetBundles.AssetBundleLoadAssetOperation op = AssetBundles.AssetBundleManager.LoadAssetAsync(filePath, "", typeof(T));
+            yield return Threading.inst.StartCoroutine(op);
+            callback(op.GetAsset<T>());
         }
 #else
         public static void GetAssetFromFile<T>(string filePath, Action<T> callback) where T: Object
@@ -581,6 +568,13 @@ namespace comunity
         public void SetFallback(IAssetLoader f)
         {
             this.fallback = f;
+        }
+
+        public void UnloadAsset(string url)
+        {
+#if ASSETBUNDLE_MANAGER
+            AssetBundleManager.UnloadAssetBundle(url);
+#endif
         }
     }
 }

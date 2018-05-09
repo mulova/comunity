@@ -331,6 +331,11 @@ namespace comunity
 		{
 			this.fallback = fallback;
 		}
+
+        public void UnloadAsset(string url)
+        {
+            this.fallback.UnloadAsset(url);
+        }
 	}
 }
 #endif

@@ -21,6 +21,8 @@ namespace comunity {
 
 		void Remove(string url);
 
+        void UnloadAsset(string url);
+
 		Uri GetCachePath(string url);
 
 		void SetFallback(IAssetLoader fallback);

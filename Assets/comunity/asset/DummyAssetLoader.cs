@@ -5,7 +5,7 @@ using Object = UnityEngine.Object;
 using commons;
 
 namespace comunity {
-	public class DummyAssetLoader : IAssetLoader
+    public class DummyAssetLoader : IAssetLoader
 	{
         public static readonly Loggerx log = AssetCache.log;
 
@@ -55,6 +55,10 @@ namespace comunity {
 		public void SetFallback(IAssetLoader fallback)
 		{
 		}
+
+        public void UnloadAsset(string url)
+        {
+        }
 	}
 }
 

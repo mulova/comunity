@@ -80,8 +80,11 @@
      <Compile Include="Assets\convinity\Editor\Searcher\AudioSearchTab.cs" />
      <Compile Include="Assets\convinity\Editor\Searcher\ColliderSearchTab.cs" />
      <Compile Include="Assets\convinity\Editor\Searcher\SearchTab.cs" />
+     <Compile Include="Assets\convinity\Editor\Searcher\ShaderSearchItem.cs" />
+     <Compile Include="Assets\convinity\Editor\Searcher\ShaderSearchItemDrawer.cs" />
      <Compile Include="Assets\convinity\Editor\Searcher\ShaderSearchTab.cs" />
      <Compile Include="Assets\convinity\Editor\Searcher\TexSearchTab.cs" />
+     <Compile Include="Assets\convinity\Editor\shortcut\SceneCamProperty.cs" />
      <Compile Include="Assets\convinity\Editor\shortcut\SceneHistory.cs" />
      <Compile Include="Assets\convinity\Editor\shortcut\SceneHistoryDrawer.cs" />
      <Compile Include="Assets\convinity\Editor\shortcut\SceneHistoryItem.cs" />

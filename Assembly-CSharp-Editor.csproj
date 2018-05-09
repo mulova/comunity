@@ -51,10 +51,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\AssetBundleManager\Editor\AssetbundlesMenuItems.cs" />
-     <Compile Include="Assets\AssetBundleManager\Editor\BuildScript.cs" />
-     <Compile Include="Assets\AssetBundleManager\Editor\ExecuteInternalMono.cs" />
-     <Compile Include="Assets\AssetBundleManager\Editor\LaunchAssetBundleServer.cs" />
      <Compile Include="Assets\AssetBundleSample\Scripts\Editor\BuildResources.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Hub/Editor/2017.3.1f1/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
@@ -126,7 +122,7 @@
  <HintPath>/Applications/Unity/Hub/Editor/2017.3.1f1/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="Editor.ReorderableList">
- <HintPath>/Users/user/workspace/comunity/Assets/comunity/Editor/lib/Editor.ReorderableList.dll</HintPath>
+ <HintPath>/Users/user/workspace/3rdparty/comunity/Assets/comunity/Editor/lib/Editor.ReorderableList.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Advertisements">
  <HintPath>/Users/user/Library/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>

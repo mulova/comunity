@@ -92,6 +92,13 @@
      <Compile Include="Assets\comunity\asset\WebDownloader.cs" />
      <Compile Include="Assets\comunity\asset\WebGLDownloader.cs" />
      <Compile Include="Assets\comunity\asset\WWWEx.cs" />
+     <Compile Include="Assets\comunity\AssetBundleManager\AssetBundleLoadOperation.cs" />
+     <Compile Include="Assets\comunity\AssetBundleManager\AssetBundleManager.cs" />
+     <Compile Include="Assets\comunity\AssetBundleManager\Editor\AssetbundlesMenuItems.cs" />
+     <Compile Include="Assets\comunity\AssetBundleManager\Editor\BuildScript.cs" />
+     <Compile Include="Assets\comunity\AssetBundleManager\Editor\ExecuteInternalMono.cs" />
+     <Compile Include="Assets\comunity\AssetBundleManager\Editor\LaunchAssetBundleServer.cs" />
+     <Compile Include="Assets\comunity\AssetBundleManager\Utility.cs" />
      <Compile Include="Assets\comunity\comp\Lifecycle.cs" />
      <Compile Include="Assets\comunity\config\AndroidPlatformMethods.cs" />
      <Compile Include="Assets\comunity\config\BuildConfig.cs" />
