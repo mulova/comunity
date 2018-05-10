@@ -78,7 +78,7 @@ namespace comunity
 		
 		public Object GetActiveTopmost()
 		{
-			foreach (WeakReference<InputListener> e in stack) {
+			foreach (commons.WeakReference<InputListener> e in stack) {
 				Object o = e.Target as Object;
 				if (e != null) {
 					MonoBehaviour c = o as MonoBehaviour;
@@ -106,8 +106,8 @@ namespace comunity
 		
 		public void ForEach(Predicate<InputListener> predicate)
 		{
-			List<WeakReference<InputListener>> copy = new List<WeakReference<InputListener>> (stack);
-			foreach (WeakReference<InputListener> r in copy) {
+            List<commons.WeakReference<InputListener>> copy = new List<commons.WeakReference<InputListener>> (stack);
+            foreach (commons.WeakReference<InputListener> r in copy) {
 				InputListener l = r.Target;
 				if (l != null) {
 					if (!predicate (l)) {
