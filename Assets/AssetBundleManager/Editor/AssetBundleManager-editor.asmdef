@@ -1,0 +1,10 @@
+{
+    "name": "AssetBundleManager-editor",
+    "references": [
+        "AssetBundleManager"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": []
+}

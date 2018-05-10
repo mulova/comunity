@@ -180,6 +180,10 @@
       <Project>{A3523514-4A98-4712-9C47-EFCF58A8CCFE}</Project>      <Name>audio</Name>    </ProjectReference>
     <ProjectReference Include="uguiex-editor.csproj">
       <Project>{2879C03D-C890-1AB9-ECC8-1A382796D80C}</Project>      <Name>uguiex-editor</Name>    </ProjectReference>
+    <ProjectReference Include="AssetBundleManager.csproj">
+      <Project>{4EB79D97-23E0-7B03-55C8-FC32C3859938}</Project>      <Name>AssetBundleManager</Name>    </ProjectReference>
+    <ProjectReference Include="AssetBundleManager-editor.csproj">
+      <Project>{EA0262B2-EFD0-D3F1-AFD2-C9CE1A8BEC4F}</Project>      <Name>AssetBundleManager-editor</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

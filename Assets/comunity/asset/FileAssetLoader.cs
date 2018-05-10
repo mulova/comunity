@@ -1,5 +1,5 @@
-#if !UNITY_WEBGL
 //#define ASSETBUNDLE_MANAGER
+#if !UNITY_WEBGL
 using System;
 using System.IO;
 using System.Collections;
@@ -8,7 +8,9 @@ using System.Collections.Generic;
 using System.Text;
 using Object = UnityEngine.Object;
 using commons;
+#if ASSETBUNDLE_MANAGER
 using AssetBundles;
+#endif
 
 namespace comunity
 {
@@ -251,8 +253,13 @@ namespace comunity
 #if ASSETBUNDLE_MANAGER
         public static void GetAssetFromFile<T>(string filePath, Action<T> callback) where T: Object
         {
-            AssetBundles.AssetBundleLoadAssetOperation op = AssetBundles.AssetBundleManager.LoadAssetAsync(filePath, "", typeof(T));
-            yield return Threading.inst.StartCoroutine(op);
+            AssetBundleLoadAssetOperation op = AssetBundleManager.LoadAssetAsync(filePath, "mainAsset", typeof(T));
+            callback(op.GetAsset<T>());
+        }
+
+        private static IEnumerator GetAssetFromFileCo<T>(AssetBundleLoadAssetOperation op, Action<T> callback) where T: Object
+        {
+            yield return op;
             callback(op.GetAsset<T>());
         }
 #else

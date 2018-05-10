@@ -7,6 +7,8 @@
         "commons",
         "comunity"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": []
 }
