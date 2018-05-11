@@ -1025,5 +1025,29 @@ namespace comunity
                 EditorUtility.ClearProgressBar();
             }
         }
+
+		public static void ForEachSelection(Action<string> action, FileType fileType = FileType.All, bool recursive = true)
+		{
+			try 
+			{
+				string[] guids = Selection.assetGUIDs;
+				for (int i=0; i<guids.Length; ++i)
+				{
+					var path = AssetDatabase.GUIDToAssetPath(guids[i]);
+					var list = EditorAssetUtil.ListAssetPaths(path, fileType);
+					for (int j=0; j<list.Length; ++j)
+					{
+						if (EditorUtility.DisplayCancelableProgressBar("Processing...", list[i], j/(float)list.Length))
+						{
+							return;
+						}
+						action(list[i]);
+					}
+				}
+			} finally
+			{
+				EditorUtility.ClearProgressBar();
+			}
+		}
     }
 }

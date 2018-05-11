@@ -5,6 +5,7 @@ using UnityEngine;
 using System.IO;
 using commons;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace comunity
 {
@@ -30,12 +31,12 @@ namespace comunity
             return IMAGE_MAGICK.IsNotEmpty();
         }
         
-        private static ExecOutput Exec(string cmd, string src, string options)
+		private static ExecOutput Exec(string cmd, string options, string src)
         {
             string dir = PathUtil.GetDirectory(src);
             string filename = Path.GetFileName(src);
             string dst = PathUtil.Combine(dir, "tmp_"+filename);
-            var output = Exec(cmd, src, dst, options);
+			var output = Exec(cmd, options, src, dst);
             File.Delete(src);
             File.Delete(dst+".meta");
             File.Move(dst, src);
@@ -44,7 +45,7 @@ namespace comunity
             return output;
         }
         
-        public static ExecOutput Exec(string cmd, string[] src, string dst, string options)
+		public static ExecOutput Exec(string cmd, string options, string[] src, string dst)
         {
 			string srcStr = src.Convert(s=>s.WrapWhitespacePath()).Join(" ");
 			string param = string.Format("{0} {1} {2}", options, srcStr, dst.WrapWhitespacePath());
@@ -53,9 +54,9 @@ namespace comunity
             return result;
         }
         
-        public static ExecOutput Exec(string cmd, string src, string dst, string options)
+		public static ExecOutput Exec(string cmd, string options, string src, string dst)
         {
-            return Exec(cmd, new string[] {src}, dst, options);
+			return Exec(cmd, options, new string[] {src}, dst);
         }
         
         public static ExecOutput Exec(string cmd, string param)
@@ -83,7 +84,7 @@ namespace comunity
         public static string ConvertType(string src, string ext, string options)
         {
             string dst = PathUtil.ReplaceExtension(src, ext);
-            Exec("convert", src, dst, options);
+			Exec("convert", options, src, dst);
             return dst;
         }
         
@@ -194,7 +195,7 @@ namespace comunity
             string dst = PathUtil.AddFileSuffix(src, "_4444");
             File.Copy(src, dst, false);
             
-            Exec("convert", src, dst, "-quantize transparent -dither FloydSteinberg -colors 255");
+			Exec("convert", "-quantize transparent -dither FloydSteinberg -colors 255", src, dst);
             AssetDatabase.ImportAsset(dst, ImportAssetOptions.ForceSynchronousImport);
         }
         
@@ -213,7 +214,7 @@ namespace comunity
             {
                 AssetDatabase.DeleteAsset(rgb);
             }
-            Exec("convert", src, rgb, null);
+			Exec("convert", null, src, rgb);
             if (genAlpha)
             {
                 string a = PathUtil.AddFileSuffix(src, "_a");
@@ -221,7 +222,7 @@ namespace comunity
                 {
                     AssetDatabase.DeleteAsset(a);
                 }
-                Exec("convert", src, a, "-set colorspace RGBA -alpha extract");
+				Exec("convert", "-set colorspace RGBA -alpha extract", src, a);
                 AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
                 return new string[] { rgb, a };
             } else
@@ -252,7 +253,7 @@ namespace comunity
             {
                 AssetDatabase.DeleteAsset(rgb);
             }
-            Exec("convert", src, rgb, null); // v1
+			Exec("convert", null, src, rgb); // v1
 //          Exec("convert", src, rgb, "-background \"#000000\" -alpha remove");
             AssetDatabase.ImportAsset(rgb, ImportAssetOptions.ForceSynchronousImport);
             CopyTextureImporterSettings(src, rgb);
@@ -265,10 +266,10 @@ namespace comunity
             {
                 //          EditorAssetUtil.SplitTexAlpha(src, rgb, a);
                 //          Exec("convert", src, a, "-set colorspace RGBA -alpha extract");
-                Exec("convert", src, a, "-channel A -alpha extract -alpha copy");
+				Exec("convert", "-channel A -alpha extract -alpha copy", src, a);
             } else
             {
-                Exec("convert", src, a, "-channel A -separate");
+				Exec("convert", "-channel A -separate", src, a);
             }
             AssetDatabase.ImportAsset(a, ImportAssetOptions.ForceSynchronousImport);
             CopyTextureImporterSettings(src, a);
@@ -346,7 +347,7 @@ namespace comunity
         public static string AppendVertically(string tex1, string tex2)
         {
             string dst = PathUtil.AddFileSuffix(tex1, "_vert");
-            Exec("convert", new string[]{ tex1, tex2 }, dst, "-append");
+			Exec("convert", "-append", new string[]{ tex1, tex2 }, dst);
             CopyTextureImporterSettings(tex1, dst);
             OptimizeTexture(dst, TextureImporterFormat.Automatic);
             AssetDatabase.DeleteAsset(tex1);
@@ -357,7 +358,7 @@ namespace comunity
         public static string AppendHorizontally(string tex1, string tex2)
         {
             string dst = PathUtil.AddFileSuffix(tex1, "_horiz");
-            Exec("convert", new string[]{ tex1, tex2 }, dst, "+append");
+			Exec("convert", "+append", new string[]{ tex1, tex2 }, dst);
             CopyTextureImporterSettings(tex1, dst);
             OptimizeTexture(dst, TextureImporterFormat.Automatic);
             AssetDatabase.DeleteAsset(tex1);
@@ -368,36 +369,52 @@ namespace comunity
         public static void ScaleToImporterSizeRespectRatio(Texture t)
         {
             string src = AssetDatabase.GetAssetPath(t);
-            Exec("convert", src, string.Format("-resize {0}x{1}", t.width, t.height));
+			Exec("convert", string.Format("-resize {0}x{1}", t.width, t.height), src);
             AssetDatabase.ImportAsset(src, ImportAssetOptions.ForceUpdate);
         }
         
         public static void ScaleToImporterSize(Texture t)
         {
             string src = AssetDatabase.GetAssetPath(t);
-			Exec("convert", src, string.Format(@"-resize {0}x{1}"+FORCE_RESIZE, t.width, t.height));
+			Exec("convert", string.Format(@"-resize {0}x{1}"+FORCE_RESIZE, t.width, t.height), src);
             AssetDatabase.ImportAsset(src, ImportAssetOptions.ForceUpdate);
         }
         
         public static void Scale(Texture t, float scale)
         {
             string src = AssetDatabase.GetAssetPath(t);
-            Exec("convert", src, string.Format("-resize {0:N2}%", scale * 100));
+			Exec("convert", string.Format("-resize {0:N2}%", scale * 100), src);
             AssetDatabase.ImportAsset(src, ImportAssetOptions.ForceUpdate);
         }
         
         public static void Resize(Texture t, int width, int height)
         {
             string src = AssetDatabase.GetAssetPath(t);
-			Exec("convert", src, string.Format(@"-resize {0}x{1}"+FORCE_RESIZE, width, height));
+			Exec("convert", string.Format(@"-resize {0}x{1}"+FORCE_RESIZE, width, height), src);
             AssetDatabase.ImportAsset(src, ImportAssetOptions.ForceUpdate);
         }
 
         public static void InsertPadding(string src,Texture tex, int width, int height)
         {
             string param = string.Format("-trim -background none -gravity center -extent {0}x{1}",width, height);
-            Exec("convert", src, param);
+			Exec("convert", param, src);
             AssetDatabase.ImportAsset(src, ImportAssetOptions.ForceUpdate);
         }
+
+		private static Regex sizeRegex = new Regex(" (?<w>[0-9]+)x(?<h>[0-9]+) ");
+		public static int[] GetImageSize(string assetPath)
+		{
+			var output = Exec("identify", assetPath.WrapWhitespacePath());
+			if (!output.IsError())
+			{
+				var match = sizeRegex.Match(output.stdout);
+				int width = int.Parse(match.Groups["w"].Value);
+				int height = int.Parse(match.Groups["h"].Value);
+				return new int[] { width, height };
+			} else
+			{
+				return null;
+			}
+		}
     }
 }

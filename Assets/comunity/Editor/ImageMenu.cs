@@ -22,7 +22,24 @@ namespace comunity
             }
             return true;
         }
-        
+
+		[MenuItem("Assets/Image/Half Maxsize", false, 190)]
+		static void HalfMaxSize()
+		{
+			EditorAssetUtil.ForEachSelection(p => {
+				var size = TextureUtil.GetImageSize(p);
+				if (size != null)
+				{
+					int maxSize = Mathf.NextPowerOfTwo(Mathf.Max(size[0], size[1])) / 2;
+					TextureImporter im = AssetImporter.GetAtPath(p) as TextureImporter;
+					if (im.maxTextureSize > maxSize)
+					{
+						im.SetMaxTextureSize(maxSize);
+					}
+				}
+			}, FileType.Image);
+		}
+
         [MenuItem("Assets/Image/ToJPEG", false, 1)]
         static void ConvertToJpeg()
         {
@@ -179,6 +196,19 @@ namespace comunity
                 TextureUtil.FloydSteinberg4444(t);
             }
         }
+
+		[MenuItem("Assets/Image/Print ImageSize", false, 103)]
+		public static void PrintImageSize()
+		{
+			EditorAssetUtil.ForEachSelection(p => {
+				var size = TextureUtil.GetImageSize(p);
+				if (size != null)
+				{
+					Debug.LogFormat("{0}: {1}x{2}", p, size[0], size[1]);
+				}
+			}, FileType.Image);
+		}
+
     }
 }
 

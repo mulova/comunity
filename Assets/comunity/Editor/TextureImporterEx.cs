@@ -1,10 +1,28 @@
 ﻿using commons;
 using UnityEditor;
+using System;
 
 namespace comunity
 {
     public static class TextureImporterEx
     {
+		private static bool allPlatforms = false;
+		public static string[] platforms {
+			get {
+				if (allPlatforms)
+				{
+					return new string[] { "Android", "iPhone" };
+				} else
+				{
+					#if UNITY_ANDROID
+					return new string[] { "Android" };
+					#else
+					return new string[] {"iPhone"};
+					#endif
+				}
+			}
+		}
+
         public static TextureImporterFormat GetFormat(this TextureImporter im)
         {
             TextureImporterPlatformSettings setting = im.GetDefaultPlatformTextureSettings();
@@ -35,19 +53,30 @@ namespace comunity
 
         public static void SetMaxTextureSize(this TextureImporter im, int maxSize)
         {
-            TextureImporterPlatformSettings setting = im.GetDefaultPlatformTextureSettings();
-            setting.overridden = true;
-            setting.maxTextureSize = maxSize;
-            im.SetPlatformTextureSettings(setting);
+			im.ForEachPlatform((setting, path) => {
+				if (setting.maxTextureSize != maxSize)
+				{
+					setting.maxTextureSize = maxSize;
+					return true;
+				} else{
+					return false;
+				}
+			});
         }
 
-        public static void SetMaxTextureSize(this TextureImporter im, PlatformId platformId, int maxSize)
-        {
-            TextureImporterPlatformSettings setting = im.GetDefaultPlatformTextureSettings();
-            setting.overridden = true;
-            setting.maxTextureSize = maxSize;
-            im.SetPlatformTextureSettings(setting);
-        }
+		public static bool ForEachPlatform(this TextureImporter im, Func<TextureImporterPlatformSettings, string, bool> action, bool overridenOnly = false)
+		{
+			bool changed = false;
+			foreach (string p in platforms) {
+				var setting = im.GetPlatformTextureSettings(p);
+				if ((setting.overridden || !overridenOnly) && action(setting, p)) {
+					im.SetPlatformTextureSettings(setting);
+					im.SaveAndReimport();
+					changed = true;
+				}
+			}
+			return changed;
+		}
     }
 
     public class PlatformId : EnumClass<PlatformId>
