@@ -43,12 +43,9 @@ namespace comunity
         [MenuItem("Assets/Image/ToJPEG", false, 1)]
         static void ConvertToJpeg()
         {
-            foreach (Object o in Selection.objects)
-            {
-                Texture t = o as Texture;
-                string src = AssetDatabase.GetAssetPath(t);
-                TextureUtil.ToJpeg(src);
-            }
+            EditorAssetUtil.ForEachSelection(p => {
+                TextureUtil.ToJpeg(p);
+            }, FileType.Image);
         }
         
         [MenuItem("Assets/Image/ToJPEG", true)]
@@ -75,12 +72,9 @@ namespace comunity
         [MenuItem("Assets/Image/ToPNG", false, 2)]
         static void ConvertToPng()
         {
-            foreach (Object o in Selection.objects)
-            {
-                Texture t = o as Texture;
-                string src = AssetDatabase.GetAssetPath(t);
-                TextureUtil.ToPng(src);
-            }
+            EditorAssetUtil.ForEachSelection(p => {
+                TextureUtil.ToPng(p);
+            }, FileType.Image);
         }
         
         [MenuItem("Assets/Image/ToPNG", true)]
@@ -105,10 +99,13 @@ namespace comunity
         [MenuItem("Assets/Image/ScaleDown", false, 5)]
         public static void ScaleDown()
         {
-            foreach (Object o in Selection.objects)
-            {
-                TextureUtil.Scale(o as Texture, 0.5f);
-            }
+            EditorAssetUtil.ForEachSelection(p => {
+                Texture t = AssetDatabase.LoadAssetAtPath<Texture>(p);
+                if (t != null)
+                {
+                    TextureUtil.Scale(t, 0.5f);
+                }
+            }, FileType.Image);
         }
         
         [MenuItem("Assets/Image/ScaleDown", true)]
@@ -126,10 +123,13 @@ namespace comunity
         [MenuItem("Assets/Image/Resize to ImporterSize Respect Ratio", false, 15)]
         public static void ImporterSize()
         {
-            foreach (Object o in Selection.objects)
-            {
-                TextureUtil.ScaleToImporterSizeRespectRatio(o as Texture);
-            }
+            EditorAssetUtil.ForEachSelection(p => {
+                Texture t = AssetDatabase.LoadAssetAtPath<Texture>(p);
+                if (t != null)
+                {
+                    TextureUtil.ScaleToImporterSizeRespectRatio(t);
+                }
+            }, FileType.Image);
         }
         
         [MenuItem("Assets/Image/Resize to ImporterSize", true)]
@@ -141,19 +141,25 @@ namespace comunity
         [MenuItem("Assets/Image/Resize to ImporterSize", false, 10)]
         public static void ImporterSizeIgnore()
         {
-            foreach (Object o in Selection.objects)
-            {
-                TextureUtil.ScaleToImporterSize(o as Texture);
-            }
+            EditorAssetUtil.ForEachSelection(p => {
+                Texture t = AssetDatabase.LoadAssetAtPath<Texture>(p);
+                if (t != null)
+                {
+                    TextureUtil.ScaleToImporterSize(t);
+                }
+            }, FileType.Image);
         }
         
         [MenuItem("Assets/Image/To ETC1", false, 20)]
         public static void SplitChannel4ETC()
         {
-            foreach (Object o in Selection.objects)
-            {
-                TextureUtil.SplitChannel4ETC(o as Texture);
-            }
+            EditorAssetUtil.ForEachSelection(p => {
+                Texture t = AssetDatabase.LoadAssetAtPath<Texture>(p);
+                if (t != null)
+                {
+                    TextureUtil.SplitChannel4ETC(t);
+                }
+            }, FileType.Image);
         }
         
         [MenuItem("Assets/Image/To ETC1", true)]
@@ -177,24 +183,25 @@ namespace comunity
         [MenuItem("Assets/Image/Dither4444", false, 101)]
         static void Dither4444()
         {
-            foreach (Object o in Selection.objects)
-            {
-                Texture2D t = o as Texture2D;
+            EditorAssetUtil.ForEachSelection(p => {
+                Texture2D t = AssetDatabase.LoadAssetAtPath<Texture2D>(p);
                 if (t != null)
                 {
                     TextureUtil.Dither4444(t);
                 }
-            }
+            }, FileType.Image);
         }
         
         [MenuItem("Assets/Image/RGBA4444 with FloydSteinberg", false, 102)]
         public static void FloydSteinberg4444()
         {
-            foreach (Object o in Selection.objects)
-            {
-                Texture t = o as Texture;
-                TextureUtil.FloydSteinberg4444(t);
-            }
+            EditorAssetUtil.ForEachSelection(p => {
+                Texture t = AssetDatabase.LoadAssetAtPath<Texture>(p);
+                if (t != null)
+                {
+                    TextureUtil.FloydSteinberg4444(t);
+                }
+            }, FileType.Image);
         }
 
 		[MenuItem("Assets/Image/Print ImageSize", false, 103)]
