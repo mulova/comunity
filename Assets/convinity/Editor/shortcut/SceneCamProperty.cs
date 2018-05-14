@@ -12,7 +12,6 @@ public class SceneCamProperty
 	public Vector3 pivot;
 	public Quaternion rot;
 	public bool rotationLocked;
-	public DrawCameraMode renderMode;
 
 	public SceneView sceneView {
 		get {
@@ -45,7 +44,6 @@ public class SceneCamProperty
 		ortho = view.orthographic;
 //		fov = ortho? view.camera.orthographicSize: view.camera.fieldOfView;
 		rotationLocked = sceneView.isRotationLocked;
-		renderMode = sceneView.renderMode;
 	}
 
 	public void Apply()
@@ -75,6 +73,5 @@ public class SceneCamProperty
 //			view.camera.fieldOfView = fov;
 //		}
 		sceneView.isRotationLocked = rotationLocked;
-		sceneView.renderMode = renderMode;
 	}
 }
