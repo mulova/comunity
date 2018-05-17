@@ -1037,11 +1037,11 @@ namespace comunity
 					var list = EditorAssetUtil.ListAssetPaths(path, fileType);
 					for (int j=0; j<list.Length; ++j)
 					{
-						if (EditorUtility.DisplayCancelableProgressBar("Processing...", list[i], j/(float)list.Length))
+						if (EditorUtility.DisplayCancelableProgressBar("Processing...", list[j], j/(float)list.Length))
 						{
 							return;
 						}
-						action(list[i]);
+						action(list[j]);
 					}
 				}
 			} finally
