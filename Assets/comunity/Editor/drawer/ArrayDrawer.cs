@@ -23,7 +23,6 @@ namespace comunity
         {
             this.target = target;
             this.fieldName = fieldName;
-            this.title = fieldName;
             this.undoTarget = unityObj;
             onDuplicate += Refresh;
             onInsert += Refresh;

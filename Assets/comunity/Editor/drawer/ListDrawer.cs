@@ -28,7 +28,7 @@ namespace comunity
         public bool allowSceneObject = true;
         public bool addSelected = true;
         public bool allowSelection = true;
-        public string title;
+        public bool horizontal;
         public Object undoTarget;
         public Func<T> createDefaultValue = ()=> default(T);
         public Func<Object, T> createItem;
@@ -263,14 +263,9 @@ namespace comunity
 
         public bool Draw(ReorderableListFlags flags)
         {
-            if (title != null)
-            {
-                GUILayout.Label(title);
-            }
             if (undoTarget != null)
             {
-                string id = title!=null? title: undoTarget.name;
-                Undo.RecordObject(undoTarget, id);
+                Undo.RecordObject(undoTarget, undoTarget.name);
             }
             ReorderableListGUI.ListField(this, flags);
             if (undoTarget != null && !changed)

@@ -78,20 +78,17 @@ namespace comunity
 			ArrayDrawer<GameObject> objArr = objInspector.Get(data);
 			if (objArr == null) {
 				objArr = new ArrayDrawer<GameObject>(objSwitch, data, "objs");
-                objArr.title = null;
                 objArr.allowSelection = false;
                 objInspector[data] = objArr;
             }
             ArrayDrawer<Transform> transArr = transInspector.Get(data);
             if (transArr == null) {
                 transArr = new ArrayDrawer<Transform>(objSwitch, data, "trans");
-                transArr.title = null;
                 transArr.allowSelection = false;
 				transInspector[data] = transArr;
 			}
 			bool changed = false;
 			EditorGUILayout.BeginVertical();
-//			EditorGUILayout.BeginHorizontal();
 			changed |= DrawEnum(ref data.name);
 			bool toggle = on.Contains(data.name);
             if (EditorGUIUtil.Toggle(null, ref toggle)) {
@@ -116,7 +113,6 @@ namespace comunity
                 objSwitch.Set(new List<string>(on).ToArray());
 				changed = true;
 			}
-//			EditorGUILayout.EndHorizontal();
 //            EditorGUILayout.BeginHorizontal();
             EditorGUILayout.BeginVertical();
             EditorGUILayout.LabelField("Objs");
