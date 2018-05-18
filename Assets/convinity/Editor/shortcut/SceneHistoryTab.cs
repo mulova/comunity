@@ -193,16 +193,21 @@ namespace convinity
         {
         }
 
+        private void GoBack()
+        {
+            if (!changed||EditorSceneBridge.SaveCurrentSceneIfUserWantsTo())
+            {
+                EditorSceneBridge.OpenScene(sceneHistory[1].first.path);
+            }
+        }
+
         public override void OnHeaderGUI()
         {
             EditorGUILayout.BeginHorizontal();
             GUI.enabled = sceneHistory.Count >= 2;
             if (GUILayout.Button("Back", EditorStyles.toolbarButton, GUILayout.ExpandWidth(true)))
             {
-                if (!changed||EditorSceneBridge.SaveCurrentSceneIfUserWantsTo())
-                {
-                    EditorSceneBridge.OpenScene(sceneHistory[1].first.path);
-                }
+                GoBack();
             }
             GUI.enabled = true;
             EditorGUILayout.EndHorizontal();
@@ -226,6 +231,10 @@ namespace convinity
                 {
                     throw ex;
                 }
+            }
+            if ((Event.current.command || Event.current.control) && Event.current.shift && Event.current.type == EventType.KeyUp && Event.current.keyCode == KeyCode.Backspace)
+            {
+                GoBack();
             }
         }
 
