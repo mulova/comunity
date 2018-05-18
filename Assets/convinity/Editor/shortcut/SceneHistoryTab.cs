@@ -28,7 +28,11 @@ namespace convinity
         {
             sceneHistory = SceneHistory.Load(PATH);
 			OnSceneOpened(EditorSceneManager.GetActiveScene(), OpenSceneMode.Single);
-			EditorApplication.hierarchyWindowChanged += OnSceneObjChange;
+            #if UNITY_2018_1_OR_NEWER
+            EditorApplication.hierarchyChanged += OnSceneObjChange;
+            #else
+            EditorApplication.hierarchyWindowChanged += OnSceneObjChange;
+            #endif
 			EditorApplication.pauseStateChanged += OnPauseStateChanged;
 			EditorSceneManager.sceneOpening += OnSceneOpening;
 			EditorSceneManager.sceneOpened += OnSceneOpened;
@@ -44,7 +48,11 @@ namespace convinity
 				SaveCam();
 				sceneHistory.Save(PATH);
 			}
-			EditorApplication.hierarchyWindowChanged -= OnSceneObjChange;
+            #if UNITY_2018_1_OR_NEWER
+            EditorApplication.hierarchyChanged -= OnSceneObjChange;
+            #else
+            EditorApplication.hierarchyWindowChanged -= OnSceneObjChange;
+            #endif
 			EditorApplication.pauseStateChanged -= OnPauseStateChanged;
 			EditorSceneManager.sceneOpening -= OnSceneOpening;
 			EditorSceneManager.sceneOpened -= OnSceneOpened;

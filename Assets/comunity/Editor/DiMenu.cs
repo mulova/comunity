@@ -43,7 +43,7 @@ namespace comunity
             #else
             EditorApplication.hierarchyWindowChanged += OnHierarchyChange;
             #endif
-            #if UNITY_2017
+            #if UNITY_2017_1_OR_NEWER
             EditorApplication.playModeStateChanged += OnPlayModeChange;
             #else
             EditorApplication.playmodeStateChanged += OnPlaymodeChange;

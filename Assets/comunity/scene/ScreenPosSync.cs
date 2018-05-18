@@ -70,7 +70,7 @@ namespace comunity
             Vector3 screenPos = srcCam.WorldToScreenPoint(srcObj.position);
             screenPos.z = depth;
             Vector3 dstPoint = dstCam.ScreenToWorldPoint(screenPos);
-            trans.position = dstPoint+offset;
+            transform.position = dstPoint+offset;
         }
     }
 }

@@ -39,7 +39,7 @@ namespace comunity {
 		public void Put(string key, GameObject obj) {
             if (hideLayer == 0)
             {
-                obj.transform.SetParent(trans, false);
+                obj.transform.SetParent(transform, false);
                 obj.SetActive(false);
             } else
             {

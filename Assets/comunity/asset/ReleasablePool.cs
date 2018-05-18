@@ -27,7 +27,7 @@ namespace comunity
         public static void FindAndAdd(IReleasable r)
         {
             foreach (var p in pools) {
-                if (r.trans.IsChildOf(p.trans)) {
+                if (r.transform.IsChildOf(p.transform)) {
                     p.Add(r);
                     return;
                 }

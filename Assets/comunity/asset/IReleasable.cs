@@ -4,7 +4,7 @@ namespace comunity
 {
     public interface IReleasable
     {
-        Transform trans { get; }
+        Transform transform { get; }
         void Release();
     }
 }

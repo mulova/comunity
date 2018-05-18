@@ -36,7 +36,6 @@ namespace convinity {
             var view = sceneView;
             if (view == null)
             {
-                Debug.LogWarning("Can't access SceneView.");
                 return;
             }
             size = view.size;
@@ -60,7 +59,6 @@ namespace convinity {
             var view = sceneView;
             if (view == null)
             {
-                Debug.LogWarning("Can't access SceneView.");
                 return;
             }
             if (!in2dMode )

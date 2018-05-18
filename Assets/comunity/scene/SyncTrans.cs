@@ -48,7 +48,7 @@ namespace comunity
             this.syncTarget = target;
             if (syncTarget != null && useDelta)
             {
-                posDelta = trans.position-syncTarget.position;
+                posDelta = transform.position-syncTarget.position;
             }
         }
 
@@ -58,13 +58,13 @@ namespace comunity
             {
                 if (syncX && syncY && syncZ)
                 {
-                    trans.position = syncTarget.position+posDelta;
+                    transform.position = syncTarget.position+posDelta;
                 } else
                 {
-                    float x = syncX? syncTarget.position.x+posDelta.x : trans.position.x;
-                    float y = syncY? syncTarget.position.y+posDelta.y : trans.position.y;
-                    float z = syncZ? syncTarget.position.z+posDelta.z : trans.position.z;
-                    trans.position = new Vector3(x, y, z);
+                    float x = syncX? syncTarget.position.x+posDelta.x : transform.position.x;
+                    float y = syncY? syncTarget.position.y+posDelta.y : transform.position.y;
+                    float z = syncZ? syncTarget.position.z+posDelta.z : transform.position.z;
+                    transform.position = new Vector3(x, y, z);
                 }
             }
         }

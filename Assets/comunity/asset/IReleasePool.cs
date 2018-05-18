@@ -5,7 +5,7 @@ namespace comunity
 {
     public interface IReleasablePool
     {
-        Transform trans { get; }
+        Transform transform { get; }
         void Add(IReleasable r);
         void Remove(IReleasable r);
         void Release();

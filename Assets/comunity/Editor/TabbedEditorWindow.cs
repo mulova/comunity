@@ -45,7 +45,7 @@ namespace comunity {
 		}
 
 		protected void OnDestroy() {
-			#if UNITY_2017
+			#if UNITY_2017_1_OR_NEWER
 			EditorApplication.playModeStateChanged += ChangePlayMode;
 			#else
 			EditorApplication.playmodeStateChanged += ChangePlaymode;

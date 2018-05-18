@@ -24,20 +24,6 @@ namespace comunity
             }
         }
         
-        private Transform _trans;
-        
-        public Transform trans
-        {
-            get
-            {
-                if (_trans == null)
-                {
-                    _trans = transform;
-                }
-                return _trans;
-            }
-        }
-        
         public Loggerx log
         {
             get
