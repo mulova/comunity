@@ -35,11 +35,11 @@ namespace comunity
         {
             if (target is Object)
             {
-                CompatibilityEditor.SetDirty(target as Object);
+                EditorUtil.SetDirty(target as Object);
             }
             if (undoTarget is Object)
             {
-                CompatibilityEditor.SetDirty(undoTarget as Object);
+                EditorUtil.SetDirty(undoTarget as Object);
             }
         }
 

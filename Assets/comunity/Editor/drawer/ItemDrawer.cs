@@ -70,28 +70,6 @@ namespace comunity
             return LINE_HEIGHT;
         }
 
-        public Rect[] SplitRectHorizontally(Rect src, float ratio)
-        {
-            Rect left = src;
-            Rect right = src;
-            left.width = src.width*ratio;
-            right = src;
-            right.x = left.x+left.width;
-            right.width = src.width-left.width;
-            return new Rect[] { left, right};
-        }
-
-        public Rect[] SplitRectHorizontally(Rect src, int pixel)
-        {
-            Rect left = src;
-            Rect right = src;
-            left.width = pixel;
-            right = src;
-            right.x = left.x+left.width;
-            right.width = src.width-left.width;
-            return new Rect[] { left, right};
-        }
-
         public static string DefaultToString(object o)
         {
             if (o == null)

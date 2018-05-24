@@ -50,7 +50,7 @@ namespace comunity {
 							ArrayUtil.Add(ref loader.materials, data);
 						}
 					}
-					CompatibilityEditor.SetDirty(loader);
+					EditorUtil.SetDirty(loader);
 				});
 			}
 			EditorGUILayout.EndHorizontal();
@@ -62,7 +62,7 @@ namespace comunity {
             {
                 d.material.SetTexture(MaterialTexLoader.TEX1, AssetDatabase.LoadAssetAtPath<Texture>(d.tex1.GetEditorPath()));
                 d.material.SetTexture(MaterialTexLoader.TEX2, AssetDatabase.LoadAssetAtPath<Texture>(d.tex2.GetEditorPath()));
-                CompatibilityEditor.SetDirty(d.material);
+                EditorUtil.SetDirty(d.material);
             }
         }
 
@@ -72,7 +72,7 @@ namespace comunity {
             {
                 d.material.SetTexture(MaterialTexLoader.TEX1, null);
                 d.material.SetTexture(MaterialTexLoader.TEX2, null);
-                CompatibilityEditor.SetDirty(d.material);
+                EditorUtil.SetDirty(d.material);
             }
         }
 	}

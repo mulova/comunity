@@ -70,7 +70,7 @@ namespace convinity
             {
                 prop.SetValue(obj, val, null);
             }
-            CompatibilityEditor.SetDirty(obj);
+            EditorUtil.SetDirty(obj);
         }
 
         public override bool DrawItem(Rect position, int index, FieldRefDrawer o1, out FieldRefDrawer o2)
@@ -116,7 +116,7 @@ namespace convinity
                 string displayName = scenePath == null? 
                         string.Format("{0} [{1}]", assetPath, GetSignature()):
                         string.Format("{0} [{1}]", scenePath, GetSignature());
-                Rect[] rects = SplitRectHorizontally(position, 0.3f);
+                Rect[] rects = EditorGUIUtil.SplitRectHorizontally(position, 0.3f);
                 EditorGUI.ObjectField(rects[0], obj, typeof(Object), true);
                 EditorGUI.SelectableLabel(rects[1], displayName);
             } else

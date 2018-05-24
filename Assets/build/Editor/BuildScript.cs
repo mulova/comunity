@@ -383,7 +383,7 @@ namespace build
 
 		public static void SetDirty(Object o)
 		{
-			CompatibilityEditor.SetDirty(o);
+			EditorUtil.SetDirty(o);
 			if (sceneProcessing)
 			{
 				EditorSceneBridge.MarkSceneDirty();

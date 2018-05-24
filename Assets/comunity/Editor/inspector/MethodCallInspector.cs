@@ -33,7 +33,7 @@ namespace comunity
             bool changed = methodInspector.DrawComponentPopup(ref refObj, ref method.target); 
             changed |= methodInspector.DrawMethodPopup(method.target, ref method.methodName);
             if (changed) {
-                CompatibilityEditor.SetDirty(method.gameObject);
+                EditorUtil.SetDirty(method.gameObject);
             }
             varInspector.OnInspectorGUI();
         }

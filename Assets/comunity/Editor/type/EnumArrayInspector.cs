@@ -36,7 +36,7 @@ namespace comunity
         public EnumArrayInspector(ref D[] array, Object target)
         {
             if (ArrayUtil.ResizeEnumIndexedArray<T, D>(ref array)) {
-                CompatibilityEditor.SetDirty(target);
+                EditorUtil.SetDirty(target);
             }
             this.target = target;
             this.data = array;
@@ -133,7 +133,7 @@ namespace comunity
                 }
             }
             if (changed) {
-                CompatibilityEditor.SetDirty(target);
+                EditorUtil.SetDirty(target);
             }
             return changed;
         }

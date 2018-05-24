@@ -143,6 +143,29 @@ namespace comunity
 			}
 			return list;
 		}
+
+        public static void SetDirty(Object o)
+        {
+            if (Application.isPlaying)
+            {
+                return;
+            }
+            GameObject go = null;
+            if (o is GameObject)
+            {
+                go = o as GameObject;
+            } else if (o is Component)
+            {
+                go = (o as Component).gameObject;
+            }
+            if (go != null && go.scene != null)
+            {
+                EditorSceneManager.MarkSceneDirty(go.scene);
+            } else
+            {
+                UnityEditor.EditorUtility.SetDirty(o);
+            }
+        }
     }
 }
 

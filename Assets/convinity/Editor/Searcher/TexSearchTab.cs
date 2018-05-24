@@ -126,7 +126,7 @@ namespace convinity {
 		}
 
 		class TexTypeFilter: TexFilter {
-            private TextureImporterType texImportType = CompatibilityEditor.TEXTURE_IMPORTER_TYPE;
+            private TextureImporterType texImportType = TextureImporterType.Default;
 			public TexTypeFilter(): base("ImporterType") {}
 			protected override bool FilterImpl (TextureImporter importer, Texture tex) {
 				return importer.textureType == texImportType;

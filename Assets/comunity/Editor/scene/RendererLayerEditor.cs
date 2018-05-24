@@ -84,7 +84,7 @@ namespace comunity
 					l_renderers[0].sortingOrder = newSortingLayerOrder;
 				}
 				
-				CompatibilityEditor.SetDirty(l_renderers[0]); //saves
+				EditorUtil.SetDirty(l_renderers[0]); //saves
 			}
 		}
 		

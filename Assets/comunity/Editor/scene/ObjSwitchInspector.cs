@@ -41,7 +41,7 @@ namespace comunity
 				changed |= presetInspector.OnInspectorGUI();
 				if (changed) {
 					presetInspector.SetPresetKeys(GetAllKeys());
-                    CompatibilityEditor.SetDirty(objSwitch);
+                    EditorUtil.SetDirty(objSwitch);
 				}
 				EditorUI.EndContents();
 			}

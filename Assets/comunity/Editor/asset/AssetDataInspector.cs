@@ -92,12 +92,12 @@ namespace comunity {
 //				scan();
 //				showRef = true;
 //				HardLink(db.IsReferenced());
-//				CompatibilityEditor.SetDirty(db);
+//				EditorUtil.SetDirty(db);
 //				changed = true;
 //			}
 //			if (GUILayout.Button("Clear", EditorStyles.miniButton, GUILayout.ExpandWidth(false)) && EditorUtility.DisplayDialog("Warning", "Clear DB?", "OK", "Cancel")) {
 //				clear();
-//				CompatibilityEditor.SetDirty(db);
+//				EditorUtil.SetDirty(db);
 //				changed = true;
 //			}
 //			EditorGUILayout.EndHorizontal();
@@ -163,7 +163,7 @@ namespace comunity {
 //			for (int i=0; i<db.assets.Length; i++) {
 //				db.assets[i].type = type;
 //			}
-//			CompatibilityEditor.SetDirty(db);
+//			EditorUtil.SetDirty(db);
 //		}
 //		
 //		/// <summary>
@@ -176,7 +176,7 @@ namespace comunity {
 //				HardLink(db.assets[i], link);
 //			}
 //			db.SetReferenced(link);
-//			CompatibilityEditor.SetDirty(db);
+//			EditorUtil.SetDirty(db);
 //		}
 //		
 //		private void HardLink(AssetData a, bool link) {

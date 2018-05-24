@@ -164,7 +164,7 @@ namespace convinity {
 					} else if (property != null) {
 						property.SetValue(c, val, null);
 					}
-					CompatibilityEditor.SetDirty(c.gameObject);
+					EditorUtil.SetDirty(c.gameObject);
 				}
 			}
 		}

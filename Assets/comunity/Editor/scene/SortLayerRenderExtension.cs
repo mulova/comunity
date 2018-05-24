@@ -65,7 +65,7 @@ namespace comunity
 						childsRenderer[i].sortingLayerName = sortingLayerNames[selectedOption];
 					}
 				}
-				CompatibilityEditor.SetDirty(renderer);
+				EditorUtil.SetDirty(renderer);
 			}
 			
 			int newSortingLayerOrder = EditorGUILayout.IntField("Order in Layer", renderer.sortingOrder);
@@ -73,7 +73,7 @@ namespace comunity
 			{
 				Undo.RecordObject(renderer, "Edit Sorting Order");
 				renderer.sortingOrder = newSortingLayerOrder;
-				CompatibilityEditor.SetDirty(renderer);
+				EditorUtil.SetDirty(renderer);
 			}
 			
 			applyToChild = EditorGUILayout.ToggleLeft("Apply to Childs", applyToChild);
@@ -85,7 +85,7 @@ namespace comunity
 				}
 				Undo.RecordObject(renderer, "Apply Sort Mode To Child");
 				applyToChildOldValue = applyToChild;
-				CompatibilityEditor.SetDirty(renderer);
+				EditorUtil.SetDirty(renderer);
 			}
 		}
 		

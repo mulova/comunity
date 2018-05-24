@@ -24,7 +24,7 @@ namespace convinity {
 			setting.aniso = 1;
 			setting.spritePixelsPerUnit = 1;
 			setting.spritePivot = new Vector2(0.5f, 0.5f);
-            setting.ApplyTextureType(CompatibilityEditor.TEXTURE_IMPORTER_TYPE);
+            setting.ApplyTextureType(TextureImporterType.Default);
 			setting.wrapMode = TextureWrapMode.Clamp;
 			setting.filterMode = FilterMode.Bilinear;
 		}

@@ -56,8 +56,8 @@ namespace comunity
 					t.localRotation = Quaternion.identity;
 					t.localScale = Vector3.one;
 					AssetDatabase.CreateAsset(mesh.sharedMesh, PathUtil.AddFileSuffix(AssetDatabase.GetAssetPath(mesh.sharedMesh), "_clone"));
-					CompatibilityEditor.SetDirty(mesh);
-					CompatibilityEditor.SetDirty(mesh.sharedMesh);
+					EditorUtil.SetDirty(mesh);
+					EditorUtil.SetDirty(mesh.sharedMesh);
 				}
 				if (GUILayout.Button("Clone", GUILayout.ExpandWidth(false)))
 				{
@@ -81,7 +81,7 @@ namespace comunity
 					mesh.sharedMesh = m;
 					m.RecalculateBounds();
 					m.RecalculateNormals();
-					CompatibilityEditor.SetDirty(mesh);
+					EditorUtil.SetDirty(mesh);
 				}
 				GUILayout.EndHorizontal();
 			}

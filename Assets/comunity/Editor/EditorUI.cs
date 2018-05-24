@@ -106,7 +106,7 @@ namespace comunity
                 foreach (Object obj in objects)
                 {
                     if (obj == null) continue;
-                    CompatibilityEditor.SetDirty(obj);
+                    EditorUtil.SetDirty(obj);
                 }
             }
         }

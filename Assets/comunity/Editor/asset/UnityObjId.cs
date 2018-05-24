@@ -51,6 +51,26 @@ namespace comunity
                     return TransformUtil.Search(id);
                 }
             }
+
+            set
+            {
+                string assetPath = AssetDatabase.GetAssetPath(value);
+                if (assetPath.IsNotEmpty())
+                {
+                    this.id = AssetDatabase.AssetPathToGUID(assetPath);
+                    this.asset = true;
+                } else
+                {
+                    if (value is GameObject)
+                    {
+                        this.id = (value as GameObject).transform.GetScenePath();
+                    } else if (value is Component)
+                    {
+                        this.id = (value as Component).transform.GetScenePath();
+                    }
+                    this.asset = false;
+                }
+            }
         }
 
         public string path
@@ -69,22 +89,7 @@ namespace comunity
 
         public UnityObjId(Object o)
         {
-            string assetPath = AssetDatabase.GetAssetPath(o);
-            if (assetPath.IsNotEmpty())
-            {
-                this.id = AssetDatabase.AssetPathToGUID(assetPath);
-                this.asset = true;
-            } else
-            {
-                if (o is GameObject)
-                {
-                    this.id = (o as GameObject).transform.GetScenePath();
-                } else if (o is Component)
-                {
-                    this.id = (o as Component).transform.GetScenePath();
-                }
-                this.asset = false;
-            }
+            reference = o;
         }
 
         public override bool Equals(object obj)

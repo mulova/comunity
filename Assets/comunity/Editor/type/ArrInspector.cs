@@ -246,7 +246,7 @@ namespace comunity
         
         protected void SetDirty() {
             if (obj is UnityEngine.Object) {
-                CompatibilityEditor.SetDirty(obj as UnityEngine.Object);
+                EditorUtil.SetDirty(obj as UnityEngine.Object);
             }
         }
         

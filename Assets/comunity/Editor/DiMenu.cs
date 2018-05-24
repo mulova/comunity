@@ -94,11 +94,11 @@ namespace comunity
             var changeList = di.ResolveScene(allScripts);
             foreach (var m in changeList)
             {
-                CompatibilityEditor.SetDirty(m);
+                EditorUtil.SetDirty(m);
             }
             if (changeList.IsNotEmpty())
             {
-                CompatibilityEditor.SetDirty(di);
+                EditorUtil.SetDirty(di);
             }
         }
 

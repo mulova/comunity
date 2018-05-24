@@ -223,7 +223,7 @@ namespace comunity
         
         private void Invalidate() {
             if (obj is UnityEngine.Object) {
-                CompatibilityEditor.SetDirty((UnityEngine.Object)obj);
+                EditorUtil.SetDirty((UnityEngine.Object)obj);
             }
         }
         

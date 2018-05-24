@@ -61,10 +61,10 @@ namespace comunity
 				}
 			}
 			if (EditorGUIUtil.Toggle("Instantiate On Start", ref nestedPrefab.instantiateOnStart)) {
-				CompatibilityEditor.SetDirty(nestedPrefab);
+				EditorUtil.SetDirty(nestedPrefab);
 			}
 			if (EditorGUIUtil.Toggle("Destroy On Instantiation", ref nestedPrefab.destroyOnInstantiation)) {
-				CompatibilityEditor.SetDirty(nestedPrefab);
+				EditorUtil.SetDirty(nestedPrefab);
 			}
 		}
 		

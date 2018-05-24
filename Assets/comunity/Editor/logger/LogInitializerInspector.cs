@@ -66,7 +66,7 @@ namespace comunity
             
             if (changed)
             {
-                CompatibilityEditor.SetDirty(comp);
+                EditorUtil.SetDirty(comp);
             }
         }
         

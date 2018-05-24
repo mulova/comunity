@@ -82,7 +82,7 @@ namespace convinity
             {
                 prop.SetValue(obj, val, null);
             }
-            CompatibilityEditor.SetDirty(obj);
+            EditorUtil.SetDirty(obj);
         }
 
         public override bool Equals(object thatObj)

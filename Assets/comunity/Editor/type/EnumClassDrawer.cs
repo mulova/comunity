@@ -32,7 +32,7 @@ namespace comunity
             if (PopupNullable(GetLineRect(0), prop.displayName, ref o, values)) {
                 ReflectionUtil.SetFieldValue(target, prop.name, o);
                 prop.serializedObject.ApplyModifiedProperties();
-                CompatibilityEditor.SetDirty(prop.serializedObject.targetObject);
+                EditorUtil.SetDirty(prop.serializedObject.targetObject);
                 EditorSceneManager.SaveOpenScenes();
 			}
 		}

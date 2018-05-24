@@ -160,7 +160,7 @@ namespace comunity
 			}
 			if (changed)
 			{
-                im.textureType = CompatibilityEditor.TEXTURE_IMPORTER_TYPE;
+                im.textureType = TextureImporterType.Default;
 				im.isReadable = false;
 				AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceUpdate | ImportAssetOptions.ForceSynchronousImport);
 			}

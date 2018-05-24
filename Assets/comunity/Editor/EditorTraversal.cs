@@ -174,7 +174,7 @@ namespace comunity
 
         public static void SetDirty(UnityEngine.Object o)
         {
-            CompatibilityEditor.SetDirty(o);
+            EditorUtil.SetDirty(o);
             if (sceneProcessing)
             {
                 EditorSceneBridge.MarkSceneDirty();

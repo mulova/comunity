@@ -366,7 +366,7 @@ namespace comunity
 		 */
         public static List<Vector2> GetColorPixels(string assetPath, Color color)
         {
-            SetTextureImportProperty(assetPath, CompatibilityEditor.TEXTURE_IMPORTER_TYPE, TextureImporterNPOTScale.None, false, true);
+            SetTextureImportProperty(assetPath, TextureImporterType.Default, TextureImporterNPOTScale.None, false, true);
             Texture2D tex = (Texture2D)AssetDatabase.LoadAssetAtPath(assetPath, typeof(Texture2D));
             Color[] colors = tex.GetPixels(0);
             List<Vector2> coord = new List<Vector2>();

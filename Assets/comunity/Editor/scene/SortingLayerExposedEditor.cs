@@ -26,7 +26,7 @@ namespace comunity
 			if (newSortingLayerName != renderer.sortingLayerName) {
 				Undo.RecordObject(renderer, "Edit Sorting Layer Name");
 				renderer.sortingLayerName = newSortingLayerName;
-				CompatibilityEditor.SetDirty(renderer);
+				EditorUtil.SetDirty(renderer);
 			}
 			
 			// Expose the sorting layer ID
@@ -34,7 +34,7 @@ namespace comunity
 			if (newSortingLayerId != renderer.sortingLayerID) {
 				Undo.RecordObject(renderer, "Edit Sorting Layer ID");
 				renderer.sortingLayerID = newSortingLayerId;
-				CompatibilityEditor.SetDirty(renderer);
+				EditorUtil.SetDirty(renderer);
 			}
 			
 			// Expose the manual sorting order
@@ -42,7 +42,7 @@ namespace comunity
 			if (newSortingLayerOrder != renderer.sortingOrder) {
 				Undo.RecordObject(renderer, "Edit Sorting Order");
 				renderer.sortingOrder = newSortingLayerOrder;
-				CompatibilityEditor.SetDirty(renderer);
+				EditorUtil.SetDirty(renderer);
 			}
 		}
 	}

@@ -39,7 +39,7 @@ namespace comunity
                     InputAxisMapData srcData = sys.inputStateData[(int)srcState];
                     InputAxisMapData dstData = sys.inputStateData[(int)dstState];
                     dstData.Add(srcData);
-                    CompatibilityEditor.SetDirty(target);
+                    EditorUtil.SetDirty(target);
                 }
                 EditorGUILayout.EndHorizontal();
                 EditorUI.EndContents();
@@ -77,7 +77,7 @@ namespace comunity
             bool changed = false;
             changed |= inspector[(int)evt].OnInspectorGUI();
             if (changed) {
-                CompatibilityEditor.SetDirty(target);
+                EditorUtil.SetDirty(target);
             }
             return changed;
             

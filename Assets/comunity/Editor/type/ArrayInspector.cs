@@ -54,7 +54,7 @@ namespace comunity
 		
 		public void Set(List<object[]> row) {
 			rows.Set(row);
-			CompatibilityEditor.SetDirty(obj);
+			EditorUtil.SetDirty(obj);
 		}
 		
 		public void SetPreset(params object[] preset) {
@@ -102,7 +102,7 @@ namespace comunity
 			}
 			if (changed) {
 				rows.Set(list);
-				CompatibilityEditor.SetDirty(obj);
+				EditorUtil.SetDirty(obj);
 			} else {
 				Undo.ClearUndo(obj);
 			}
