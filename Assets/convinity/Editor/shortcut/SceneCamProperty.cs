@@ -12,7 +12,11 @@ public class SceneCamProperty
 	public Vector3 pivot;
 	public Quaternion rot;
 	public bool rotationLocked;
+	#if UNITY_2018_1_OR_NEWER
 	public SceneView.CameraMode camMode;
+	#else
+	public DrawCameraMode camMode;
+	#endif
 
 	public SceneView sceneView {
 		get {
@@ -30,6 +34,7 @@ public class SceneCamProperty
 		}
 	}
 
+
 	public void Collect()
 	{
 		var view = sceneView;
@@ -45,7 +50,11 @@ public class SceneCamProperty
 		ortho = view.orthographic;
 //		fov = ortho? view.camera.orthographicSize: view.camera.fieldOfView;
 		rotationLocked = sceneView.isRotationLocked;
+		#if UNITY_2018_1_OR_NEWER
 		camMode = sceneView.cameraMode;
+		#else
+		camMode = sceneView.renderMode;
+		#endif
 	}
 
 	public void Apply()
@@ -75,6 +84,10 @@ public class SceneCamProperty
 //			view.camera.fieldOfView = fov;
 //		}
 		sceneView.isRotationLocked = rotationLocked;
+		#if UNITY_2018_1_OR_NEWER
 		sceneView.cameraMode = camMode;
+		#else
+		sceneView.renderMode = camMode;
+		#endif
 	}
 }

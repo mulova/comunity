@@ -83,6 +83,13 @@ namespace convinity
 
         public override void OnChangePlayMode()
         {
+			if (!Application.isPlaying)
+			{
+				if (sceneHistory.Count >= 0)
+				{
+					sceneHistory[0].ApplyCam();
+				}
+			}
         }
 
         public override void OnChangeScene(string sceneName)
