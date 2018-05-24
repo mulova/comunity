@@ -11,7 +11,7 @@ namespace comunity
 {
     [InitializeOnLoad]
     public class LibManager
-    #if UNITY_2017
+    #if UNITY_2017_1_OR_NEWER
         : IActiveBuildTargetChanged
     #endif
     {
@@ -28,7 +28,7 @@ namespace comunity
             CopyLibs();
         }
 
-        #if UNITY_2017
+        #if UNITY_2017_1_OR_NEWER
 //        [ActiveBuildTargetChanged]
         public void OnActiveBuildTargetChanged(BuildTarget previousTarget, BuildTarget newTarget)
         {
