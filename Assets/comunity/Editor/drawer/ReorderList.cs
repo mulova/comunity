@@ -79,7 +79,7 @@ public abstract class ReorderList<T>
     public ReorderList(Object obj, IList src)
     {
         this.obj = obj;
-        this.drawer = new ReorderableList(src, typeof(T), true, true, true, true);
+        this.drawer = new ReorderableList(src, typeof(T), true, false, true, true);
         this.drawer.onAddCallback = OnAdd;
         this.drawer.drawElementCallback = DrawItem0;
         this.drawer.onReorderCallback = Reorder;
@@ -128,10 +128,7 @@ public abstract class ReorderList<T>
 
     public void SetDirty()
     {
-        if (obj != null)
-        {
-            EditorUtil.SetDirty(obj);
-        }
+        EditorUtil.SetDirty(obj);
         changed = false;
     }
 

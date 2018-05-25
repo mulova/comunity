@@ -149,10 +149,18 @@ namespace convinity {
 
         private bool DrawShortcutList(UnityObjList list, ObjListFilter<UnityObjId> filter) {
             AndPredicate<UnityObjId> predicate = filter.GetPredicate(list);
-            var drawer = new UnityObjIdReorderList(null, list);
+			#if REORDERABLE_LIST
+			var drawer = new UnityObjListDrawer(list);
+			#else
+			var drawer = new UnityObjIdReorderList(null, list);
+			#endif
             drawer.allowSceneObject = false;
             drawer.Filter(predicate.Accept);
-            return drawer.Draw();
+			#if REORDERABLE_LIST
+			return drawer.Draw(ReorderableListFlags.ShowIndices);
+			#else
+			return drawer.Draw();
+			#endif
         }
 
 		private Dictionary<Object, string> pathMap = new Dictionary<Object, string>();

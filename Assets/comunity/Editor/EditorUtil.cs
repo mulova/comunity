@@ -146,7 +146,7 @@ namespace comunity
 
         public static void SetDirty(Object o)
         {
-            if (Application.isPlaying)
+			if (Application.isPlaying || o == null)
             {
                 return;
             }

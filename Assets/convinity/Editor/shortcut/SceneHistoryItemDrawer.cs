@@ -8,7 +8,13 @@ namespace convinity
 {
     public class SceneHistoryItemDrawer : ItemDrawer<SceneHistoryItem>
     {
-        private UnityObjIdDrawer drawer = new UnityObjIdDrawer();
+        private UnityObjIdDrawer drawer;
+
+		public SceneHistoryItemDrawer()
+		{
+			this.drawer = new UnityObjIdDrawer();
+			this.drawer.allowSceneObject = false;
+		}
 
         public override bool DrawItem(Rect rect, int index, SceneHistoryItem item, out SceneHistoryItem newItem)
         {
