@@ -1,4 +1,4 @@
-﻿#if REORDERABLE_LIST
+﻿#if !INTERNAL_REORDER
 using UnityEngine;
 using System.Collections;
 using comunity;

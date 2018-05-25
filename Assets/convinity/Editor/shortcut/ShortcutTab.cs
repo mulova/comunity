@@ -149,14 +149,14 @@ namespace convinity {
 
         private bool DrawShortcutList(UnityObjList list, ObjListFilter<UnityObjId> filter) {
             AndPredicate<UnityObjId> predicate = filter.GetPredicate(list);
-			#if REORDERABLE_LIST
+			#if !INTERNAL_REORDER
 			var drawer = new UnityObjListDrawer(list);
 			#else
 			var drawer = new UnityObjIdReorderList(null, list);
 			#endif
             drawer.allowSceneObject = false;
             drawer.Filter(predicate.Accept);
-			#if REORDERABLE_LIST
+			#if !INTERNAL_REORDER
 			return drawer.Draw(ReorderableListFlags.ShowIndices);
 			#else
 			return drawer.Draw();

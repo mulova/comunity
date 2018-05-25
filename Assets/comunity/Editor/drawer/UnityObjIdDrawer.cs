@@ -5,7 +5,7 @@ using UnityEditor;
 
 namespace comunity
 {
-	#if REORDERABLE_LIST
+	#if !INTERNAL_REORDER
 	public class UnityObjIdDrawer : ItemDrawer<UnityObjId>
 	{
 		public bool allowSceneObject = true;
