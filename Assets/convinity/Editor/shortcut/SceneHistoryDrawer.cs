@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if REORDERABLE_LIST
+using UnityEngine;
 using System.Collections;
 using comunity;
 using convinity;
@@ -22,3 +23,4 @@ namespace convinity
 	}
 }
 
+#endif

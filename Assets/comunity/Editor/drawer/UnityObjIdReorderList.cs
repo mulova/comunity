@@ -18,6 +18,7 @@ namespace comunity
         {
             return new UnityObjId(Selection.activeGameObject);
         }
+
         protected override bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
         {
             UnityObjId item = this[index];
@@ -26,7 +27,7 @@ namespace comunity
             item.reference = EditorGUI.ObjectField(area[0], obj, typeof(Object), allowSceneObject);
             bool starred = item.starred;
             item.starred = EditorGUI.Toggle(area[1], item.starred);
-            return obj != item.reference || starred != item.starred;
+            return starred != item.starred || obj != item.reference;
         }
     }
 }

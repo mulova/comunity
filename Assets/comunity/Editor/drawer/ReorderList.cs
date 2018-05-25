@@ -5,6 +5,7 @@ using System;
 using Object = UnityEngine.Object;
 using comunity;
 using System.Collections;
+using UnityEditor;
 
 public abstract class ReorderList<T>
 {
@@ -24,7 +25,7 @@ public abstract class ReorderList<T>
         }
     }
 
-    public int AllCount
+    public int count
     {
         get {
             if (drawer.serializedProperty != null)
@@ -37,14 +38,22 @@ public abstract class ReorderList<T>
         }
     }
 
+    public int allCount
+    {
+        get {
+            return list.Count;
+        }
+    }
+
     public ReorderList(Object obj, IList src)
     {
         this.obj = obj;
         this.drawer = new ReorderableList(src, typeof(T), true, true, true, true);
-        this.drawer.onAddCallback = AddItem;
+        this.drawer.onAddCallback = OnAdd;
         this.drawer.drawElementCallback = DrawItem0;
         this.drawer.onReorderCallback = Reorder;
         this.drawer.elementHeight = 18;
+        this.drawer.headerHeight = 0;
     }
 
     protected abstract T createItem();
@@ -64,7 +73,12 @@ public abstract class ReorderList<T>
         SetDirty();
     }
 
-    protected void AddItem(ReorderableList list)
+    public void Refresh()
+    {
+        Filter(match);
+    }
+
+    protected void OnAdd(ReorderableList list)
     {
         if (list.serializedProperty != null)
         {
@@ -90,7 +104,15 @@ public abstract class ReorderList<T>
     public bool Draw()
     {
         changed = false;
+        if (obj != null && drawer.serializedProperty == null)
+        {
+            Undo.RecordObject(obj, obj.name);
+        }
         drawer.DoLayoutList();
+        if (!changed && obj != null && drawer.serializedProperty == null)
+        {
+            Undo.ClearUndo(obj);
+        }
         if (changed)
         {
             SetDirty();
@@ -103,15 +125,16 @@ public abstract class ReorderList<T>
 
     private Predicate<T> match;
     private int[] indexer; // used for filtering
-    private int count;
+    private int filteredCount;
     public void Filter(Predicate<T> match)
     {
         this.match = match;
+        this.drawer.draggable = match == null;
         if (match != null)
         {
-            indexer = new int[AllCount];
+            indexer = new int[count];
             int n = 0;
-            for (int i=0; i<AllCount; ++i)
+            for (int i=0; i<count; ++i)
             {
                 if (match(this[i]))
                 {
@@ -119,12 +142,68 @@ public abstract class ReorderList<T>
                     n++;
                 }
             }
-            count = n;
+            filteredCount = n;
         } else
         {
             indexer = null;
-            count = AllCount;
+            filteredCount = allCount;
         }
+    }
+
+    public int GetActualIndex(int index)
+    {
+        if (indexer != null && index < indexer.Length)
+        {
+            return indexer[index];
+        } else
+        {
+            return index;
+        }
+    }
+
+    public void Duplicate(int index)
+    {
+        int i = GetActualIndex(index);
+        T obj = (T)list[GetActualIndex(index)];
+        list.Insert(i+1, obj);
+        this.drawer.index = i+1;
+        changed = true;
+        if (this.drawer.onAddCallback != null)
+        {
+            this.drawer.onAddCallback(this.drawer);
+        }
+    }
+
+    public void Remove(int index)
+    {
+        int i = GetActualIndex(index);
+        T obj = (T)list[i];
+        list.RemoveAt(i);
+        changed = true;
+        if (this.drawer.onRemoveCallback != null)
+        {
+            this.drawer.onRemoveCallback(this.drawer);
+        }
+    }
+
+    public void Move(int sourceIndex, int destIndex)
+    {
+        int si = GetActualIndex(sourceIndex);
+        int di = GetActualIndex(destIndex);
+        list.Insert(di, list[si]);
+        int si2 = si > di? si+1: si;
+        list.RemoveAt(si2);
+        changed = true;
+        if (this.drawer.onReorderCallback != null)
+        {
+            this.drawer.onReorderCallback(this.drawer);
+        }
+    }
+
+    public void Clear()
+    {
+        list.Clear();
+        changed = true;
     }
 }
 
