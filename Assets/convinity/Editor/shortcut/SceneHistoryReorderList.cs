@@ -7,6 +7,11 @@ namespace convinity
 {
     public class SceneHistoryReorderList : ReorderList<SceneHistoryItem>
     {
+		public SceneHistoryReorderList(SceneHistory history) : base(null, history.items)
+		{
+			this.showAdd = false;
+		}
+
         protected override SceneHistoryItem createItem()
         {
             return new SceneHistoryItem(Selection.activeObject);
@@ -14,7 +19,7 @@ namespace convinity
 
         protected override bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
         {
-            UnityObjIdDrawer.DrawItem(this[index], rect, this.allowSceneObject);
+			return UnityObjIdDrawer.DrawItem(this[index].first, rect, false);
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections;
 using comunity;
 using UnityEditor;
 
-namespace convinity
+namespace comunity
 {
     [CustomPropertyDrawer(typeof(UnityObjId))]
     public class UnityObjIdDrawer : PropertyDrawerBase
@@ -15,7 +15,7 @@ namespace convinity
 
         protected override void DrawGUI(GUIContent label)
         {
-            EditorGUIUtil.ObjectField();
+//            EditorGUIUtil.ObjectField();
         }
 
         public static bool DrawItem(UnityObjId item, Rect rect, bool allowSceneObject)

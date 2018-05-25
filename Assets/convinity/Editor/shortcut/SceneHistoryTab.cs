@@ -230,12 +230,10 @@ namespace convinity
 
         public override void OnInspectorGUI()
         {
-            var listDrawer = new SceneHistoryDrawer(sceneHistory);
-            listDrawer.allowSceneObject = false;
+			var listDrawer = new SceneHistoryReorderList(sceneHistory);
             try
             {
-                listDrawer.Draw(ReorderableListFlags.ShowIndices|ReorderableListFlags.HideAddButton|ReorderableListFlags.DisableContextMenu);
-				if (listDrawer.changed)
+				if (listDrawer.Draw())
 				{
 					sceneHistory.Save(PATH);
 					changed = false;
