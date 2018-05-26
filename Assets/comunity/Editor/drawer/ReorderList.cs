@@ -96,7 +96,11 @@ public abstract class ReorderList<T>
         Rect r = rect;
         r.y += 1;
         r.height -= 2;
-        changed |= DrawItem(r, index, isActive, isFocused);
+        if (DrawItem(r, index, isActive, isFocused))
+        {
+            changed = true;
+            SetDirty();
+        }
     }
 
     protected virtual void Reorder(ReorderableList list)
@@ -122,14 +126,14 @@ public abstract class ReorderList<T>
         {
             list.index = list.list.Add(createItem());
         }
-		changed = true;
+        SetDirty();
         OnChange();
     }
 
     public void SetDirty()
     {
         EditorUtil.SetDirty(obj);
-        changed = false;
+        changed = true;
     }
 
     public bool Draw()
@@ -161,24 +165,25 @@ public abstract class ReorderList<T>
     public void Filter(Predicate<T> match)
     {
         this.match = match;
-        this.draggable = match == null;
         if (match != null)
         {
+            List<T> filtered = new List<T>();
             indexer = new int[count];
-            int n = 0;
             for (int i=0; i<count; ++i)
             {
                 if (match(this[i]))
                 {
-                    indexer[n] = i;
-                    n++;
+                    indexer[filtered.Count] = i;
+                    filtered.Add(this[i]);
                 }
             }
-            filteredCount = n;
+            filteredCount = filtered.Count;
+            drawer.list = filtered;
         } else
         {
             indexer = null;
             filteredCount = allCount;
+            drawer.list = list;
         }
     }
 
@@ -199,7 +204,7 @@ public abstract class ReorderList<T>
         T obj = (T)list[GetActualIndex(index)];
         list.Insert(i+1, obj);
         this.drawer.index = i+1;
-		changed = true;
+        SetDirty();
         OnChange();
         if (this.drawer.onAddCallback != null)
         {
@@ -212,7 +217,7 @@ public abstract class ReorderList<T>
         int i = GetActualIndex(index);
         T obj = (T)list[i];
         list.RemoveAt(i);
-		changed = true;
+        SetDirty();
         OnChange();
         if (this.drawer.onRemoveCallback != null)
         {
@@ -227,7 +232,7 @@ public abstract class ReorderList<T>
         list.Insert(di, list[si]);
         int si2 = si > di? si+1: si;
         list.RemoveAt(si2);
-		changed = true;
+        SetDirty();
         OnChange();
         if (this.drawer.onReorderCallback != null)
         {
@@ -238,7 +243,7 @@ public abstract class ReorderList<T>
     public void Clear()
     {
         list.Clear();
-		changed = true;
+        SetDirty();
         OnChange();
     }
 }

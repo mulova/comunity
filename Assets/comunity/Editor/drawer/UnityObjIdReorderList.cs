@@ -16,7 +16,7 @@ namespace comunity
 
         protected override UnityObjId createItem()
         {
-            return new UnityObjId(Selection.activeGameObject);
+            return new UnityObjId(Selection.activeObject);
         }
 
         protected override bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
