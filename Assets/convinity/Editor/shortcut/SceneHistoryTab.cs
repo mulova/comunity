@@ -62,10 +62,10 @@ namespace convinity
 
 		void OnPauseStateChanged(PauseState state)
 		{
-			if (sceneHistory.Count >= 0)
-			{
-				sceneHistory[0].ApplyCam();
-			}
+//			if (sceneHistory.Count >= 0)
+//			{
+//				sceneHistory[0].ApplyCam();
+//			}
 		}
 
         private void OnSceneObjChange()

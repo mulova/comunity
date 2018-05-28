@@ -15,6 +15,7 @@ using System.Reflection;
 using commons;
 using comunity;
 using convinity;
+using System.Collections;
 
 namespace comunity {
 	class BackupTab : EditorTab {
@@ -76,7 +77,8 @@ namespace comunity {
 		public override void OnInspectorGUI() {
 			if (refDiffs != null) {
 				EditorGUI.indentLevel++;
-				EditorGUIUtil.ObjectFieldList(refDiffs);
+                var list = new RefDiffReorderList(null, refDiffs);
+                list.Draw();
 				EditorGUI.indentLevel--;
 			}
 		}	
@@ -194,11 +196,6 @@ namespace comunity {
 			}
 			return f.Name;
 		}
-
-		private string DrawRow(RefDiff row) {
-			row.DrawGUI();
-			return row.name;
-		}
 	}
 
 	class RefDiff {
@@ -223,13 +220,31 @@ namespace comunity {
 				field.SetValue(comp, obj);
 			}
 		}
-
-		public void DrawGUI()  {
-			EditorGUILayout.LabelField(name, EditorStyles.miniLabel);
-			Type compType = comp != null? comp.GetType(): typeof(Component);
-			Type objType = obj != null? obj.GetType(): typeof(Object);
-			EditorGUILayout.ObjectField(comp, compType, true);
-			EditorGUILayout.ObjectField(obj, objType, true);
-		}
 	}
+
+    class RefDiffReorderList : ReorderList<RefDiff>
+    {
+        public RefDiffReorderList(Object o, IList list) : base(o, list){
+            this.showAdd = false;
+        }
+            
+        protected override RefDiff createItem()
+        {
+            return null;
+        }
+
+        protected override bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
+        {
+            var rect1 = EditorGUIUtil.SplitRectHorizontally(rect, 0.2f);
+            var rect2 = EditorGUIUtil.SplitRectHorizontally(rect1[1], 0.5f);
+            var item = this[index];
+            EditorGUI.LabelField(rect1[0], item.name, EditorStyles.miniLabel);
+            Type compType = item.comp != null? item.comp.GetType(): typeof(Component);
+            Type objType = obj != null? obj.GetType(): typeof(Object);
+            EditorGUI.ObjectField(rect2[0], item.comp, compType, true);
+            EditorGUI.ObjectField(rect2[1], obj, objType, true);
+            return false;
+        }
+    }
+
 }

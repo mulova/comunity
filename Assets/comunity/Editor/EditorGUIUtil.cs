@@ -429,6 +429,15 @@ namespace comunity
             }
             return false;
         }
+
+        public static bool ObjectFieldReorderList<T>(List<T> list) where T : Object {
+            #if INTERNAL_REORDER
+            ObjReorderList l = new ObjReorderList(null, list);
+            return l.Draw();
+            #else
+            ObjectFieldList<T>(list);
+            #endif
+        }
         
         public static bool ObjectFieldList<T>(List<T> list) where T : class {
             return ObjectFieldList<T>(list, null, (ReorderableListFlags)0);
