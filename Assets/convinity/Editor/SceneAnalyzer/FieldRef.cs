@@ -11,7 +11,7 @@ using comunity;
 
 namespace convinity
 {
-    class FieldRefDrawer : ItemDrawer<FieldRefDrawer>
+    public class FieldRef : ItemDrawer<FieldRef>
     {
         public string assetGuid;
         public ScenePath scenePath;
@@ -19,7 +19,7 @@ namespace convinity
         public FieldInfo field;
         public PropertyInfo prop;
         private Object obj;
-        private string assetPath;
+        public string assetPath { get; private set; }
 
         internal Type DeclaringType
         {
@@ -35,7 +35,7 @@ namespace convinity
             }
         }
 
-        private FieldRefDrawer(Object o)
+        private FieldRef(Object o)
         {
             this.obj = o;
             assetPath = AssetDatabase.GetAssetPath(o);
@@ -51,12 +51,12 @@ namespace convinity
             assetGuid = AssetDatabase.AssetPathToGUID(assetPath);
         }
 
-        public FieldRefDrawer(Object o, FieldInfo f) : this(o)
+        public FieldRef(Object o, FieldInfo f) : this(o)
         {
             this.field = f;
         }
 
-        public FieldRefDrawer(Object o, PropertyInfo p) : this(o)
+        public FieldRef(Object o, PropertyInfo p) : this(o)
         {
             this.prop = p;
         }
@@ -73,7 +73,7 @@ namespace convinity
             EditorUtil.SetDirty(obj);
         }
 
-        public override bool DrawItem(Rect position, int index, FieldRefDrawer o1, out FieldRefDrawer o2)
+        public override bool DrawItem(Rect position, int index, FieldRef o1, out FieldRef o2)
         {
             // invalidate obj if scene is changed
             if (obj is SceneAsset && assetPath == SceneManager.GetActiveScene().path)
@@ -129,7 +129,7 @@ namespace convinity
 
         public override bool Equals(object thatObj)
         {
-            FieldRefDrawer that = thatObj as FieldRefDrawer;
+            FieldRef that = thatObj as FieldRef;
             if (that == null)
             {
                 return false;

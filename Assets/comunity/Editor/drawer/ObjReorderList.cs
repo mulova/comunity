@@ -9,7 +9,7 @@ namespace comunity
 
         public ObjReorderList(Object o, IList list) : base(o, list) { }
 
-        protected override Object createItem()
+        protected override Object CreateItem()
         {
             return null;
         }

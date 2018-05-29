@@ -228,11 +228,6 @@ namespace comunity {
             this.showAdd = false;
         }
             
-        protected override RefDiff createItem()
-        {
-            return null;
-        }
-
         protected override bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
         {
             var rect1 = EditorGUIUtil.SplitRectHorizontally(rect, 0.2f);

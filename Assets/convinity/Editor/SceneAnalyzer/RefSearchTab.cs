@@ -60,7 +60,7 @@ namespace convinity
 
         private void Allocate()
         {
-            foreach (FieldRefDrawer a in allocInfo)
+            foreach (FieldRef a in allocInfo)
             {
                 a.SetValue(rhsObj);
             }
@@ -92,7 +92,7 @@ namespace convinity
             }
         }
 
-        private List<FieldRefDrawer> allocInfo = new List<FieldRefDrawer>();
+        private List<FieldRef> allocInfo = new List<FieldRef>();
         private List<Object> simpleRef = new List<Object>();
 
         protected override List<Object> SearchResource()
@@ -199,7 +199,7 @@ namespace convinity
                 FieldInfo f = registry.GetFieldForValue(o, search);
                 if (f != null)
                 {
-                    var alloc = new FieldRefDrawer(o, f);
+                    var alloc = new FieldRef(o, f);
                     if (!allocInfo.Contains(alloc))
                     {
                         allocInfo.Add(alloc);
@@ -210,7 +210,7 @@ namespace convinity
                     PropertyInfo p = registry.GetPropertyForValue(o, search);
                     if (p != null)
                     {
-                        var alloc = new FieldRefDrawer(o, p);
+                        var alloc = new FieldRef(o, p);
                         if (!allocInfo.Contains(alloc))
                         {
                             allocInfo.Add(alloc);
@@ -227,7 +227,7 @@ namespace convinity
             GUI.enabled = true;
             if (allocInfo.Count > 0)
             {
-                ListDrawer<FieldRefDrawer> drawer = new ListDrawer<FieldRefDrawer>(allocInfo, t => (IItemDrawer<FieldRefDrawer>)t);
+                ListDrawer<FieldRef> drawer = new ListDrawer<FieldRef>(allocInfo, t => (IItemDrawer<FieldRef>)t);
                 drawer.Draw(Rotorz.ReorderableList.ReorderableListFlags.ShowIndices);
             }
             if (simpleRef.Count > 0)

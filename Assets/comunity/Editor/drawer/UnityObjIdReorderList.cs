@@ -14,7 +14,7 @@ namespace comunity
         {
         }
 
-        protected override UnityObjId createItem()
+        protected override UnityObjId CreateItem()
         {
             return new UnityObjId(Selection.activeObject);
         }

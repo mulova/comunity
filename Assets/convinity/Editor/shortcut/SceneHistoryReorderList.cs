@@ -12,7 +12,7 @@ namespace convinity
 			this.showAdd = false;
 		}
 
-        protected override SceneHistoryItem createItem()
+        protected override SceneHistoryItem CreateItem()
         {
             return new SceneHistoryItem(Selection.activeObject);
         }

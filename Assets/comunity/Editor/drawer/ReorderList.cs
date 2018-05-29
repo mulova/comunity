@@ -9,12 +9,17 @@ using UnityEditor;
 
 namespace comunity
 {
-    public abstract class ReorderList<T>
+    public class ReorderList<T>
     {
         public readonly ReorderableList drawer;
         protected Object obj { get; set; }
         protected IList list;
         public bool changed { get; private set; }
+        public delegate T OnCreateItem();
+        public delegate bool OnDrawItem(Rect rect, int index, bool isActive, bool isFocused);
+
+        public OnCreateItem onCreateItem;
+        public OnDrawItem onDrawItem;
         
         public bool showAdd
         {
@@ -87,18 +92,21 @@ namespace comunity
             this.drawer.onReorderCallback = Reorder;
             this.drawer.elementHeight = 18;
             this.drawer.headerHeight = 0;
+
+            this.onCreateItem = CreateItem;
+            this.onDrawItem = DrawItem;
         }
         
-        protected abstract T createItem();
+        protected virtual T CreateItem() { return default(T); }
         
-        protected abstract bool DrawItem(Rect rect, int index, bool isActive, bool isFocused);
+        protected virtual bool DrawItem(Rect rect, int index, bool isActive, bool isFocused) { return false; }
         
         private void DrawItem0(Rect rect, int index, bool isActive, bool isFocused)
         {
             Rect r = rect;
             r.y += 1;
             r.height -= 2;
-            if (DrawItem(r, index, isActive, isFocused))
+            if (onDrawItem(r, index, isActive, isFocused))
             {
                 changed = true;
                 SetDirty();
@@ -126,7 +134,7 @@ namespace comunity
             }
             else
             {
-                list.index = list.list.Add(createItem());
+                list.index = list.list.Add(CreateItem());
             }
             SetDirty();
             OnChange();
