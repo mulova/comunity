@@ -116,16 +116,16 @@ namespace commons
 			return EnumUtil.Parse<T>(str, defValue);
 		}
 
-        private static bool EqualsIgnoreSeparator(string str1, string str2)
+        public static bool EqualsIgnoreSeparator(this string str1, string str2)
         {
             return EqualsIgnore(str1, str2, (c1, c2) => c1 == c2 || (c1 == '/' && c2 == '\\') || (c1 == '\\' && c2 ==  '/') );
         }
 
-        public static bool EqualsIgnore(string str1, string str2, Func<char, char, bool> compare)
+        public static bool EqualsIgnore(this string str1, string str2, Func<char, char, bool> compare)
         {
             if (str1 == null || str2 == null)
             {
-                return str1.IsEmpty() && str2.IsEmpty();
+                return str1 == str2;
             }
             if (str1.Length != str2.Length)
             {

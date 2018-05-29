@@ -158,7 +158,7 @@ namespace comunity
             {
                 go = (o as Component).gameObject;
             }
-            if (go != null && go.scene != null)
+			if (go != null && go.scene.IsValid())
             {
                 EditorSceneManager.MarkSceneDirty(go.scene);
             } else

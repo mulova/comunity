@@ -435,7 +435,7 @@ namespace comunity
             ObjReorderList l = new ObjReorderList(null, list);
             return l.Draw();
             #else
-            ObjectFieldList<T>(list);
+            return ObjectFieldList<T>(list);
             #endif
         }
         

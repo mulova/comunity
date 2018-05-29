@@ -36,9 +36,7 @@ namespace comunity
 
         private int[] indexer; // used for filtering
         private int count;
-        #pragma warning disable 0414
         private IItemDrawer<T> itemDrawer;
-        #pragma warning restore 0414
 
         public T this[int i]
         {
