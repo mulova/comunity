@@ -6,6 +6,9 @@ using commons;
 
 namespace comunity
 {
+    public delegate string ConvToString(object o);
+    public delegate Object ConvToObject(object o);
+
     public class ItemDrawer<T> : IItemDrawer<T> where T:class
     {
         public const float LINE_HEIGHT = 16f;

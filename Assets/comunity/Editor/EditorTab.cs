@@ -149,7 +149,7 @@ namespace comunity {
 				GameObject objRoot = PrefabUtility.FindPrefabRoot(o);
 				if (objRoot != null && !saved.Contains(objRoot) && PrefabUtility.GetPrefabType(objRoot) == PrefabType.PrefabInstance) {
 					saved.Add(objRoot);
-					#if UNITY_2018_1_OR_NEWER
+					#if UNITY_2018_2_OR_NEWER
 					PrefabUtility.ReplacePrefab(objRoot, PrefabUtility.GetCorrespondingObjectFromSource(objRoot), ReplacePrefabOptions.ConnectToPrefab);
 					#else
 					PrefabUtility.ReplacePrefab(objRoot, PrefabUtility.GetPrefabParent(objRoot), ReplacePrefabOptions.ConnectToPrefab);

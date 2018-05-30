@@ -9,9 +9,6 @@ using Rotorz.ReorderableList;
 
 namespace comunity
 {
-    public delegate string ConvToString(object o);
-    public delegate Object ConvToObject(object o);
-
     public class ListDrawer<T> : IReorderableListAdaptor where T:class
     {
         public delegate IItemDrawer<T> GetItemDrawer(T obj);
