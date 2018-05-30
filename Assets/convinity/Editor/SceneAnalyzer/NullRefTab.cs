@@ -59,7 +59,8 @@ namespace convinity {
 		}
 
 		public override void OnInspectorGUI() {
-			DrawObjectList(nullRefs);
+			ObjWrapperReorderList drawer = new ObjWrapperReorderList(null, nullRefs);
+			drawer.Draw();
 		}
 		
 		public override void OnFooterGUI() {

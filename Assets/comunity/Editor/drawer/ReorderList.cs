@@ -83,10 +83,10 @@ namespace comunity
             }
         }
         
-        public ReorderList(Object obj, IList src)
+        public ReorderList(Object obj, IList list)
         {
             this.obj = obj;
-            this.drawer = new ReorderableList(src, typeof(T), true, false, true, true);
+            this.drawer = new ReorderableList(list, typeof(T), true, false, true, true);
             this.drawer.onAddCallback = OnAdd;
             this.drawer.drawElementCallback = DrawItem0;
             this.drawer.onReorderCallback = Reorder;
@@ -96,6 +96,22 @@ namespace comunity
             this.onCreateItem = CreateItem;
             this.onDrawItem = DrawItem;
         }
+
+		public ReorderList(Object obj, string varName)
+		{
+			this.obj = obj;
+			var ser = new SerializedObject(obj);
+			var prop = ser.FindProperty(varName);
+			this.drawer = new ReorderableList(ser, prop, true, false, true, true);
+			this.drawer.onAddCallback = OnAdd;
+			this.drawer.drawElementCallback = DrawItem0;
+			this.drawer.onReorderCallback = Reorder;
+			this.drawer.elementHeight = 18;
+			this.drawer.headerHeight = 0;
+
+			this.onCreateItem = CreateItem;
+			this.onDrawItem = DrawItem;
+		}
         
         protected virtual T CreateItem() { return default(T); }
         

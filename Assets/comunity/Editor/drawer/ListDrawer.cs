@@ -1,3 +1,4 @@
+#if !INTERNAL_REORDER
 using System;
 using System.Collections.Generic;
 using UnityEditor;
@@ -341,3 +342,4 @@ namespace comunity
         }
     }
 }
+#endif

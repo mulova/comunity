@@ -3,12 +3,17 @@ using System.Collections;
 using comunity;
 using UnityEngine.SceneManagement;
 using UnityEditor;
+using System.Collections.Generic;
 
 namespace convinity
 {
     public class FieldRefReorderList : ReorderList<FieldRef>
     {
-        public FieldRefReorderList(Object o, IList list): base(o, list) { }
+		public FieldRefReorderList(List<FieldRef> list): base(null, list)
+		{
+			showAdd = false;
+			showRemove = false;
+		}
 
         protected override bool DrawItem(Rect position, int index, bool isActive, bool isFocused)
         {

@@ -227,15 +227,18 @@ namespace convinity
             GUI.enabled = true;
             if (allocInfo.Count > 0)
             {
-                ListDrawer<FieldRef> drawer = new ListDrawer<FieldRef>(allocInfo, t => (IItemDrawer<FieldRef>)t);
-                drawer.Draw(Rotorz.ReorderableList.ReorderableListFlags.ShowIndices);
+				FieldRefReorderList drawer = new FieldRefReorderList(allocInfo);
+                drawer.Draw();
             }
             if (simpleRef.Count > 0)
             {
-                ListDrawer<Object> drawer = new ListDrawer<Object>(simpleRef);
-                drawer.Draw(Rotorz.ReorderableList.ReorderableListFlags.ShowIndices);
-            } 
-//                EditorGUILayout.HelpBox("No reference found", MessageType.Info);
+				var drawer = new ObjReorderList<Object>(null, simpleRef);
+				drawer.Draw();
+			}
+			if (allocInfo.Count == 0 && simpleRef.Count == 0)
+			{
+           		EditorGUILayout.HelpBox("No reference found", MessageType.Info);
+			}
         }
 
         public override void OnChangePlayMode()

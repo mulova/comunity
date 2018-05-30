@@ -106,6 +106,7 @@ namespace comunity {
 			}
 		}
 
+		#if !INTERNAL_REORDER
         public bool DrawObjectList<T>(List<T> list) where T: class {
             return DrawObjectList(list, null, null, null, (ReorderableListFlags)0 );
         }
@@ -135,6 +136,7 @@ namespace comunity {
             drawer.Filter(filter);
             return drawer.Draw(flags);
 		}
+		#endif
 
 		/// <summary>
 		/// Apply scene changes to prefab
@@ -147,7 +149,11 @@ namespace comunity {
 				GameObject objRoot = PrefabUtility.FindPrefabRoot(o);
 				if (objRoot != null && !saved.Contains(objRoot) && PrefabUtility.GetPrefabType(objRoot) == PrefabType.PrefabInstance) {
 					saved.Add(objRoot);
+					#if UNITY_2018_1_OR_NEWER
+					PrefabUtility.ReplacePrefab(objRoot, PrefabUtility.GetCorrespondingObjectFromSource(objRoot), ReplacePrefabOptions.ConnectToPrefab);
+					#else
 					PrefabUtility.ReplacePrefab(objRoot, PrefabUtility.GetPrefabParent(objRoot), ReplacePrefabOptions.ConnectToPrefab);
+					#endif
 				}
 				changed = true;
 			}

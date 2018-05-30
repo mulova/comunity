@@ -101,7 +101,8 @@ namespace convinity
         protected override void OnInspectorGUI(List<Object> found)
         {
             GUI.enabled = true;
-            DrawObjectList<Object>(found);
+			ObjReorderList<Object> drawer = new ObjReorderList<Object>(null, found);
+			drawer.Draw();
         }
 
         public override void OnFooterGUI(List<Object> found)

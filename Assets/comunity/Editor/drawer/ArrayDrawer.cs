@@ -1,3 +1,4 @@
+#if !INTERNAL_REORDER
 using System.Collections.Generic;
 using Object = UnityEngine.Object;
 using UnityEngine;
@@ -72,4 +73,4 @@ namespace comunity
         }
     }
 }
-
+#endif

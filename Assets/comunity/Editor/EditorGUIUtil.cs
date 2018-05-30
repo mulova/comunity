@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using Rotorz.ReorderableList;
 using commons;
 
 namespace comunity
@@ -438,16 +437,18 @@ namespace comunity
             return ObjectFieldList<T>(list);
             #endif
         }
-        
+
+		#if !INTERNAL_REORDER
         public static bool ObjectFieldList<T>(List<T> list) where T : class {
-            return ObjectFieldList<T>(list, null, (ReorderableListFlags)0);
+			return ObjectFieldList<T>(list, null, (Rotorz.ReorderableList.ReorderableListFlags)0);
         }
         
-        public static bool ObjectFieldList<T>(List<T> list, Predicate<T> filter, ReorderableListFlags flags) where T : class {
+		public static bool ObjectFieldList<T>(List<T> list, Predicate<T> filter, Rotorz.ReorderableList.ReorderableListFlags flags) where T : class {
             ListDrawer<T> drawer = new ListDrawer<T>(list);
             drawer.Filter(filter);
             return drawer.Draw(flags);
         }
+		#endif
         
         public static bool GameObjectField(string label, ref GameObject obj, bool allowSceneObjects, ref bool floating, params GUILayoutOption[] options) {
             EditorGUILayout.BeginHorizontal();
