@@ -243,8 +243,18 @@ namespace commons
 			}
 			int dot = methodStr.LastIndexOf('.');
 			string className = methodStr.Substring(0, dot);
-			string method = methodStr.Substring(dot+1, methodStr.Length-(dot+1));
-			return ReflectionUtil.GetType(className).GetMethod(method).Invoke(null, null);
+			string methodName = methodStr.Substring(dot+1, methodStr.Length-(dot+1));
+			var cls = ReflectionUtil.GetType(className);
+			if (cls == null)
+			{
+				throw new ArgumentException("Missing class " + className);
+			}
+			var method = cls.GetMethod(methodName);
+			if (method == null)
+			{
+				throw new ArgumentException("Missing method " + methodName);
+			}
+			return method.Invoke(null, null);
 		}
 
 		private static MultiMap<Type, Type> attrTypes;
