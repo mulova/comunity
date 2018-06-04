@@ -646,5 +646,33 @@ namespace comunity
             right.width = src.width-left.width;
             return new Rect[] { left, right};
         }
+
+        public static void DisplayProgressBar<T>(IList<T> list, string title, bool failOnError, Action<T> func)
+        {
+            if (list == null)
+            {
+                return;
+            }
+            for (int i=0; i<list.Count; ++i)
+            {
+                if (SystemInfo.graphicsDeviceID != 0)
+                {
+                    EditorUtility.DisplayProgressBar(title, list[i].ToString(), i/(float)list.Count);
+                }
+                try 
+                {
+                    func(list[i]);
+                } catch (Exception ex)
+                {
+                    Debug.LogError(ex);
+                    if (failOnError)
+                    {
+                        EditorUtility.ClearProgressBar();
+                        throw ex;
+                    }
+                }
+            }
+            EditorUtility.ClearProgressBar();
+        }
     }
 }

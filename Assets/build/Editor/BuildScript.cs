@@ -110,34 +110,19 @@ namespace build
 			try
 			{
 				StringBuilder err = new StringBuilder();
-				string[] paths = EditorAssetUtil.ListAssetPaths("Assets", fileType, true);
+				string[] paths = EditorAssetUtil.ListAssetPaths("Assets", fileType, false);
 				log.Info("Prebuild {0:D0} assets", paths.Length);
-				for (int i = 0; i < paths.Length; ++i)
-				{
-					string p = "Assets/"+paths[i];
-					if (ignorePath.IsMatch(p))
-					{
-						continue;
-					}
-					if (DisplayProgressBar("Assets", p, i / (float)paths.Length))
-					{
-						return "canceled by user";
-					}
-					try {
-						string error = func(p);
-						if (error.IsNotEmpty())
-						{
-							err.Append(error).Append("\n");
-						}
-					} catch (Exception ex)
-					{
-						log.Error(ex);
-						EditorUtility.ClearProgressBar();
-						EditorUtility.DisplayDialog("Error", "See editor log for details", "OK");
-						throw ex;
-					}
-				}
-				EditorUtility.ClearProgressBar();
+                EditorGUIUtil.DisplayProgressBar(paths, "Asset Processing", false, p=> {
+                    if (ignorePath.IsMatch(p))
+                    {
+                        return;
+                    }
+                    string error = func(p);
+                    if (error.IsNotEmpty())
+                    {
+                        err.Append(error).Append("\n");
+                    }
+                });
 				if (err.Length > 0)
 				{
 					return err.ToString();
@@ -507,22 +492,14 @@ namespace build
 
 		private static void PreprocessAsset(string[] allPaths, string progressTitle, Action<Object, string> preprocess)
 		{
-			for (int i = 0; i < allPaths.Length; ++i)
-			{
-				string path = allPaths[i];
-				if (ignorePath.IsMatch(path))
-				{
-					continue;
-				}
-				if (DisplayProgressBar(progressTitle, path, i / (float)allPaths.Length))
-				{
-					EditorUtility.ClearProgressBar();
-					throw new Exception("canceled by user");
-				}
-				Object asset = AssetDatabase.LoadAssetAtPath<Object>(path);
-				preprocess(asset, path);
-			}
-			EditorUtility.ClearProgressBar();
+            EditorGUIUtil.DisplayProgressBar(allPaths, progressTitle, true, path => {
+                if (ignorePath.IsMatch(path))
+                {
+                    return;
+                }
+                Object asset = AssetDatabase.LoadAssetAtPath<Object>(path);
+                preprocess(asset, path);
+            });
 		}
 
 		/// <summary>
