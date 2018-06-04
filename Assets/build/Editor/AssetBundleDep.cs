@@ -29,11 +29,20 @@ public static class AssetBundleDep
         }
         _curDeps = new HashSet<string>();
         var names = AssetDatabase.GetAllAssetBundleNames();
-        EditorGUIUtil.DisplayProgressBar(names, "Collect Bundles", true, n=> {
-            var p = AssetDatabase.GetAssetPathsFromAssetBundle(n);
-            var dep = AssetDatabase.GetDependencies(p, true);
-            _curDeps.AddAll(dep);
-        });
+        try {
+            if (names != null)
+            {
+                for (int i=0; i<names.Length; ++i)
+                {
+                    EditorUtility.DisplayProgressBar("Collecting Dependencies", names[i], i / (float)names.Length);
+                    var p = AssetDatabase.GetAssetPathsFromAssetBundle(names[i]);
+                    var dep = AssetDatabase.GetDependencies(p, true);
+                    _curDeps.AddAll(dep);
+                }
+            }
+        } finally {
+            EditorUtility.ClearProgressBar();
+        }
     }
 
     public static bool IsAssetBundle(string path)
