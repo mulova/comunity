@@ -72,7 +72,7 @@ namespace convinity
             return list;
         }
 
-        public override void OnChangePlayMode()
+        public override void OnChangePlayMode(PlayModeStateChange stateChange)
         {
         }
 

@@ -371,7 +371,7 @@ namespace build
         {
         }
         
-        public override void OnChangePlayMode()
+        public override void OnChangePlayMode(PlayModeStateChange stateChange)
         {
         }
         

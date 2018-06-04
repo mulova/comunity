@@ -148,6 +148,30 @@ namespace comunity
             return projPath;
         }
 
+		public static void ForEachSelection(string title, FileType ext, Action<string> action)
+		{
+			try
+			{
+				string[] guids = Selection.assetGUIDs;
+				for (int i=0; i<guids.Length; ++i)
+				{
+					var path = AssetDatabase.GUIDToAssetPath(guids[i]);
+					var list = ListAssetPaths(path, ext);
+					for (int j=0; j<list.Length; ++j)
+					{
+						if (EditorUtility.DisplayCancelableProgressBar(title, list[j], j/(float)list.Length))
+						{
+							return;
+						}
+						action(list[j]);
+					}
+				}
+			} finally
+			{
+				EditorUtility.ClearProgressBar();
+			}
+		}
+
         /**
 		 * assetPath 아래에서 wildcard filter를 거친 asset들을 반환한다.
 		 * @assetPath AssetDatabase.GetAssetPath()로 부터 얻어지는 path 혹은 Assets/ 아래의 relative path

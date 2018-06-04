@@ -119,7 +119,7 @@ namespace convinity {
 		private bool showShader;
 		private string shaderName;
 
-		public override void OnChangePlayMode() {}
+		public override void OnChangePlayMode(PlayModeStateChange stateChange) {}
 		public override void OnChangeScene(string sceneName) {}
 	}
 	

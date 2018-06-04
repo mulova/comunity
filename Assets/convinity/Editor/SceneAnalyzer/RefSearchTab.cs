@@ -241,7 +241,7 @@ namespace convinity
 			}
         }
 
-        public override void OnChangePlayMode()
+        public override void OnChangePlayMode(PlayModeStateChange stateChange)
         {
         }
 

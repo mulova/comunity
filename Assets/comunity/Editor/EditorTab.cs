@@ -32,7 +32,7 @@ namespace comunity {
 		public abstract void OnInspectorGUI();
 		public abstract void OnFooterGUI();
 		public abstract void OnDisable();
-		public abstract void OnChangePlayMode();
+		public abstract void OnChangePlayMode(PlayModeStateChange stateChange);
 		public abstract void OnChangeScene(string sceneName);
 		public abstract void OnSelected(bool sel);
 		/// <summary>

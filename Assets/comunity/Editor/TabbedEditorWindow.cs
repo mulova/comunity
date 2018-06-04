@@ -197,16 +197,10 @@ namespace comunity {
 		
         protected void ChangePlayMode(PlayModeStateChange change) {
             foreach (TabData t in tabs) {
-                t.tab.OnChangePlayMode();
+                t.tab.OnChangePlayMode(change);
             }
         }
 
-		protected void ChangePlaymode() {
-			foreach (TabData t in tabs) {
-				t.tab.OnChangePlayMode();
-			}
-		}
-		
 		public void AddTab(params EditorTab[] tab) {
 			foreach (EditorTab t in tab) {
 				tabs.Add(new TabData(t));

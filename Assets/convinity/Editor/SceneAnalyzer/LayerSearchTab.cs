@@ -48,7 +48,7 @@ namespace convinity {
 		
 		public override void OnFooterGUI(List<GameObject> found) {}
 
-		public override void OnChangePlayMode() {}
+		public override void OnChangePlayMode(PlayModeStateChange stateChange) {}
 		public override void OnChangeScene(string sceneName) {}
 
 		public override void OnFocus(bool focus) {}

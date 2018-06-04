@@ -25,7 +25,7 @@ namespace convinity {
 		}
 		
 		public override void OnDisable() {}
-		public override void OnChangePlayMode() {}
+		public override void OnChangePlayMode(PlayModeStateChange stateChange) {}
 		public override void OnChangeScene(string sceneName) {}
 		
 		private Transform root;

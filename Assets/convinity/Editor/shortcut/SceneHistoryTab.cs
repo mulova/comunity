@@ -81,9 +81,9 @@ namespace convinity
         {
         }
 
-        public override void OnChangePlayMode()
+        public override void OnChangePlayMode(PlayModeStateChange stateChange)
         {
-			if (!Application.isPlaying)
+			if (stateChange == PlayModeStateChange.EnteredEditMode)
 			{
 				if (sceneHistory.Count >= 0)
 				{
