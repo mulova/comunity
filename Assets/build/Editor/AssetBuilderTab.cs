@@ -38,21 +38,35 @@ namespace build
 		}
 
 		private bool appendCleanSnapshot;
-
+        private List<UnityObjId> duplicates;
 		public override void OnInspectorGUI()
 		{
 			EditorGUILayout.BeginHorizontal();
 			EditorGUILayout.BeginVertical();
 			EditorGUIUtil.Toggle("Append Clean Snapshot", ref appendCleanSnapshot);
 			EditorGUILayout.EndVertical();
-			if (GUILayout.Button("Build", GUILayout.Height(50)))
-			{
+            if (GUILayout.Button("Build", GUILayout.Height(50)))
+            {
                 path.Save(AssetBundlePath.PATH);
-				Build();
-			}
-			EditorGUILayout.EndHorizontal();
+                Build();
+            }
+            EditorGUILayout.EndHorizontal();
 
-			path.DrawInspectorGUI();
+            path.DrawInspectorGUI();
+
+            EditorGUIUtil.DrawSeparator();
+
+            if (GUILayout.Button("Find Duplicates"))
+            {
+                duplicates = AssetBundleDep.FindDuplicateAssetBundles().ConvertAll(p=>new UnityObjId(AssetDatabase.LoadAssetAtPath<Object>(p)));
+            }
+            if (duplicates != null)
+            {
+                UnityObjIdReorderList drawer = new UnityObjIdReorderList(null, duplicates);
+                drawer.showAdd = false;
+                drawer.showRemove = false;
+                drawer.Draw();
+            }
 		}
 
 		public override void OnFooterGUI()

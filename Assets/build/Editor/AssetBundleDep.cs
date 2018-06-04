@@ -146,6 +146,41 @@ public static class AssetBundleDep
     {
         _curDeps = null;
     }
+
+    public static List<string> FindDuplicateAssetBundles()
+    {
+        var names = AssetDatabase.GetAllAssetBundleNames();
+        var assets = new HashSet<string>();
+        var duplicates = new HashSet<string>();
+        var subAssets = new HashSet<string>();
+        EditorGUIUtil.DisplayProgressBar(names, "Find", true, n=> {
+            var paths = AssetDatabase.GetAssetPathsFromAssetBundle(n);
+            var newAssets = new HashSet<string>();
+            foreach (var p in paths)
+            {
+                var deps = AssetDatabase.GetDependencies(p, false);
+                foreach (var d in deps)
+                {
+                    if (!string.IsNullOrEmpty(AssetDatabase.GetImplicitAssetBundleName(d))
+                        || d.EndsWithIgnoreCase(".cs"))
+                    {
+                        continue;
+                    }
+                    if (assets.Contains(d))
+                    {
+                        duplicates.Add(d);
+                    } else
+                    {
+                        newAssets.Add(d);
+                    }
+                    var subDeps = AssetDatabase.GetDependencies(d, true);
+                    subAssets.AddAll(subDeps);
+                }
+            }
+            assets.AddAll(newAssets);
+        });
+        return duplicates.ToList(d=>d);
+    }
 }
 
 //public class AssetBundleModificationProcessor : AssetModificationProcessor

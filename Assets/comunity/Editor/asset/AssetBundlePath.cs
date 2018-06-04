@@ -122,7 +122,7 @@ namespace comunity
             DrawAssetDir("Raw AssetDir", rawDirs, true);
 
             EditorGUILayout.BeginHorizontal();
-            if (GUILayout.Button("Save"))
+            if (GUILayout.Button("Save", GUILayout.Height(50)))
             {
                 Save(PATH);
             }

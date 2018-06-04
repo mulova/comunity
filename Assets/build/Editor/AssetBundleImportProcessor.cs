@@ -30,38 +30,6 @@ public class AssetBundleImportProcessor
         AssetBundleDep.SetCommonAssetAsBundles(assets);
     }
 
-    [MenuItem("Tools/unilova/Asset/Find Duplicate AssetBundles")]
-    public static void FindDuplicateAssetBundleNames()
-    {
-        var names = AssetDatabase.GetAllAssetBundleNames();
-        var assets = new HashSet<string>();
-        var duplicates = new HashSet<string>();
-        var subAssets = new HashSet<string>();
-        EditorGUIUtil.DisplayProgressBar(names, "Find", true, n=> {
-            var paths = AssetDatabase.GetAssetPathsFromAssetBundle(n);
-            foreach (var p in paths)
-            {
-                var deps = AssetDatabase.GetDependencies(p, false);
-                foreach (var d in deps)
-                {
-                    if (assets.Contains(d))
-                    {
-                        duplicates.Add(d);
-                    } else
-                    {
-                        assets.Add(d);
-                    }
-                    var subDeps = AssetDatabase.GetDependencies(d, true);
-                    subAssets.AddAll(subDeps);
-                }
-            }
-//            assets.Add(p);
-        });
-//        duplicates.RemoveAll(subAssets);
-
-        Debug.Log("Duplicate Assets: "+duplicates.Join(", "));
-    }
-
     static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
     {
         // changed AssetBundle names for moved assets
