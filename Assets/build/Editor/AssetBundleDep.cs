@@ -7,6 +7,7 @@ using System;
 using comunity;
 using UnityEngine.UI;
 using System.IO;
+using Object = UnityEngine.Object;
 
 namespace build
 {
@@ -149,19 +150,19 @@ namespace build
             _curDeps = null;
         }
         
-        public static List<string> FindDuplicateAssetBundles()
+		public static List<AssetBundleDup> FindDuplicateAssetBundles()
         {
             var names = AssetDatabase.GetAllAssetBundleNames();
-            var assets = new HashSet<string>();
-            var duplicates = new HashSet<string>();
+			var duplicates = new Dictionary<string, AssetBundleDup>();
+			var deps = new Dictionary<string, AssetBundleDup>();
             var subAssets = new HashSet<string>();
             EditorGUIUtil.DisplayProgressBar(names, "Find", true, n=> {
                 var paths = AssetDatabase.GetAssetPathsFromAssetBundle(n);
-                var newAssets = new HashSet<string>();
+				var newAssets = new Dictionary<string, AssetBundleDup>();
                 foreach (var p in paths)
                 {
-                    var deps = AssetDatabase.GetDependencies(p, false);
-                    foreach (var d in deps)
+					var depPaths = AssetDatabase.GetDependencies(p, false);
+                    foreach (var d in depPaths)
                     {
                         if (!string.IsNullOrEmpty(AssetDatabase.GetImplicitAssetBundleName(d))
                             || d.EndsWithIgnoreCase(".cs")
@@ -169,20 +170,28 @@ namespace build
                         {
                             continue;
                         }
-                        if (assets.Contains(d))
-                        {
-                            duplicates.Add(d);
-                        } else
-                        {
-                            newAssets.Add(d);
-                        }
+						var item = duplicates.Get(d);
+						if (item == null)
+						{
+							var item0 = newAssets.Get(d);
+							if (item0 == null)
+							{
+								item0 = new AssetBundleDup(AssetDatabase.LoadAssetAtPath<Object>(d));
+								newAssets.Add(d, item0);
+							}
+							item0.AddRef(AssetDatabase.LoadAssetAtPath<Object>(p));
+						} else
+						{
+							item.duplicate = true;
+							item.AddRef(AssetDatabase.LoadAssetAtPath<Object>(p));
+						}
                         var subDeps = AssetDatabase.GetDependencies(d, true);
                         subAssets.AddAll(subDeps);
                     }
                 }
-                assets.AddAll(newAssets);
+				duplicates.AddAll(newAssets);
             });
-            return duplicates.ToList(d=>d);
+			return duplicates.Values.Filter(d=> d.duplicate);
         }
     }
 }

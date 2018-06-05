@@ -29,6 +29,14 @@ namespace commons
             }
             return defaultVal;
         }
+
+		public static IDictionary<K, V> AddAll<K, V>(this IDictionary<K, V> dict, IDictionary<K, V> rval) {
+			foreach (var pair in rval)
+			{
+				dict[pair.Key] = pair.Value;
+			}
+			return dict;
+		}
     }
 }
 

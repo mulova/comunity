@@ -2,12 +2,13 @@
 using System.Collections;
 using comunity;
 using UnityEditor;
+using System.Collections.Generic;
 
 namespace build
 {
-    public class AssetBundleDupReorderList : ReorderList<AssetBundleDup>
+	public class AssetBundleDupReorderList : ReorderList<AssetBundleDup>
     {
-        public AssetBundleDupReorderList(List<AssetBundleDup> list) : base(list) {
+		public AssetBundleDupReorderList(List<AssetBundleDup> list) : base(null, list) {
             showAdd = false;
             showRemove = false;
             base.drawer.elementHeightCallback = GetHeight;
@@ -20,8 +21,22 @@ namespace build
 
         protected override bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
         {
+			var item = this[index];
             int count = this[index].refs.Count+1;
-//            for (int i=0; 
+			float lineHeight = 16;
+			Rect lineRect = rect;
+			lineRect.height = lineHeight;
+			var color = GUI.backgroundColor;
+			GUI.contentColor = Color.yellow;
+			EditorGUI.ObjectField(lineRect, item.dup.reference, typeof(Object), false);
+			GUI.contentColor = color;
+			lineRect.x += 10;
+			lineRect.width -= 10;
+			for (int i=0; i<this[index].refs.Count; ++i)
+			{
+				lineRect.y += lineHeight+2;
+				EditorGUI.ObjectField(lineRect, item.refs[i].reference, typeof(Object),  false);
+			}
             return false;
         }
     }

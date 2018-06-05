@@ -38,7 +38,7 @@ namespace build
 		}
 
 		private bool appendCleanSnapshot;
-        private List<UnityObjId> duplicates;
+		private List<AssetBundleDup> duplicates;
 		public override void OnInspectorGUI()
 		{
 			EditorGUILayout.BeginHorizontal();
@@ -58,13 +58,11 @@ namespace build
 
             if (GUILayout.Button("Find Duplicates"))
             {
-                duplicates = AssetBundleDep.FindDuplicateAssetBundles().ConvertAll(p=>new UnityObjId(AssetDatabase.LoadAssetAtPath<Object>(p)));
+                duplicates = AssetBundleDep.FindDuplicateAssetBundles();
             }
             if (duplicates != null)
             {
-                UnityObjIdReorderList drawer = new UnityObjIdReorderList(null, duplicates);
-                drawer.showAdd = false;
-                drawer.showRemove = false;
+				AssetBundleDupReorderList drawer = new AssetBundleDupReorderList(duplicates);
                 drawer.Draw();
             }
 		}
