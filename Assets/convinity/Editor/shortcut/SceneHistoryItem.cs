@@ -17,15 +17,17 @@ namespace convinity
 
         public SceneView sceneView {
             get {
+				if (SceneView.currentDrawingSceneView != null)
+				{
+					return SceneView.currentDrawingSceneView;
+				}
                 if (SceneView.lastActiveSceneView != null)
                 {
                     return SceneView.lastActiveSceneView;
-                } else
+                }
+                if (SceneView.sceneViews.Count > 0)
                 {
-                    if (SceneView.sceneViews.Count > 0)
-                    {
-                        return (SceneView)SceneView.sceneViews[0];
-                    }
+                    return (SceneView)SceneView.sceneViews[0];
                 }
                 return null;
             }
@@ -39,18 +41,26 @@ namespace convinity
 
         public void SaveCam()
         {
+			if (sceneView == null)
+			{
+				return;
+			}
 			if (camProperty == null)
 			{
 				camProperty = new SceneCamProperty();
 			}
-			camProperty.Collect();
+			camProperty.Collect(sceneView);
         }
 
 		public void ApplyCam()
 		{
+			if (sceneView == null)
+			{
+				return;
+			}
 			if (camProperty != null)
 			{
-				camProperty.Apply();
+				camProperty.Apply(sceneView);
 			}
 		}
 

@@ -18,53 +18,25 @@ public class SceneCamProperty
 	public DrawCameraMode camMode;
 	#endif
 
-	public SceneView sceneView {
-		get {
-			if (SceneView.lastActiveSceneView != null)
-			{
-				return SceneView.lastActiveSceneView;
-			} else
-			{
-				if (SceneView.sceneViews.Count > 0)
-				{
-					return (SceneView)SceneView.sceneViews[0];
-				}
-			}
-			return null;
-		}
-	}
 
-
-	public void Collect()
+	public void Collect(SceneView view)
 	{
-		var view = sceneView;
-		if (view == null)
-		{
-			Debug.LogWarning("Can't access SceneView.");
-			return;
-		}
 		size = view.size;
 		in2dMode = view.in2DMode;
-		rot = sceneView.rotation;
-		pivot = sceneView.pivot;
+		rot = view.rotation;
+		pivot = view.pivot;
 		ortho = view.orthographic;
 //		fov = ortho? view.camera.orthographicSize: view.camera.fieldOfView;
-		rotationLocked = sceneView.isRotationLocked;
+		rotationLocked = view.isRotationLocked;
 		#if UNITY_2018_1_OR_NEWER
 		camMode = sceneView.cameraMode;
 		#else
-		camMode = sceneView.renderMode;
+		camMode = view.renderMode;
 		#endif
 	}
 
-	public void Apply()
+	public void Apply(SceneView view)
 	{
-		var view = sceneView;
-		if (view == null)
-		{
-			Debug.LogWarning("Can't access SceneView.");
-			return;
-		}
 		view.size = size;
 		view.in2DMode = in2dMode;
 		view.rotation = rot;
@@ -83,11 +55,11 @@ public class SceneCamProperty
 //		{
 //			view.camera.fieldOfView = fov;
 //		}
-		sceneView.isRotationLocked = rotationLocked;
+		view.isRotationLocked = rotationLocked;
 		#if UNITY_2018_1_OR_NEWER
-		sceneView.cameraMode = camMode;
+		view.cameraMode = camMode;
 		#else
-		sceneView.renderMode = camMode;
+		view.renderMode = camMode;
 		#endif
 	}
 }
