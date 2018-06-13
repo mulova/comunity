@@ -154,7 +154,6 @@ namespace build
         {
             var names = AssetDatabase.GetAllAssetBundleNames();
 			var duplicates = new Dictionary<string, AssetBundleDup>();
-			var deps = new Dictionary<string, AssetBundleDup>();
             var subAssets = new HashSet<string>();
             EditorGUIUtil.DisplayProgressBar(names, "Find", true, n=> {
                 var paths = AssetDatabase.GetAssetPathsFromAssetBundle(n);

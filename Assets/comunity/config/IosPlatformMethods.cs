@@ -13,10 +13,16 @@ namespace comunity
 			UnityEngine.iOS.Device.SetNoBackupFlag(path);
 		}
 		
+        [Obsolete]
 		public void SetNoBackupFlag(string path, int version)
 		{
 			Caching.SetNoBackupFlag(path, version);
 		}
+
+        public void SetNoBackupFlag(string path, Hash128 hash)
+        {
+            Caching.SetNoBackupFlag(path, hash);
+        }
 	}
 }
 #endif

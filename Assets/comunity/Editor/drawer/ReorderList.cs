@@ -187,7 +187,6 @@ namespace comunity
         
         private Predicate<T> match;
         private int[] indexer; // used for filtering
-        private int filteredCount;
         public void Filter(Predicate<T> match)
         {
             this.match = match;
@@ -203,12 +202,10 @@ namespace comunity
                         filtered.Add(this[i]);
                     }
                 }
-                filteredCount = filtered.Count;
                 drawer.list = filtered;
             } else
             {
                 indexer = null;
-                filteredCount = allCount;
                 drawer.list = list;
             }
         }

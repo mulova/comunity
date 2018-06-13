@@ -22,7 +22,6 @@ namespace build
         protected override bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
         {
 			var item = this[index];
-            int count = this[index].refs.Count+1;
 			float lineHeight = 16;
 			Rect lineRect = rect;
 			lineRect.height = lineHeight;

@@ -122,7 +122,7 @@ namespace audio
             if (DrawInspectorGUI(ref selected, ref trigger.clip))
             {
                 SelectTable(selected);
-                CompatibilityEditor.SetDirty(trigger);
+                EditorUtil.SetDirty(trigger);
                 return true;
             }
             return false;

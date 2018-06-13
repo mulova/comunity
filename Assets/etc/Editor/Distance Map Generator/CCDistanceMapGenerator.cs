@@ -100,7 +100,7 @@ namespace etc
 			TextureImporter importer = AssetImporter.GetAtPath(sourcePath) as TextureImporter;
 			if (importer != null && !importer.isReadable) {
 				AssetDatabase.StartAssetEditing();
-				importer.textureType = CompatibilityEditor.TEXTURE_IMPORTER_TYPE;
+                importer.textureType  = TextureImporterType.Default;
 				importer.isReadable = true;
 				AssetDatabase.StopAssetEditing();
 				AssetDatabase.ImportAsset(sourcePath);

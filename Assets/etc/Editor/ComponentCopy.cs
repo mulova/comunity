@@ -121,7 +121,7 @@ namespace etc
                 }
                 if (d != null) {
                     List<MemberInfo> changed = copy.SetValue(s, d);
-                    CompatibilityEditor.SetDirty(d);
+                    EditorUtil.SetDirty(d);
                     StringBuilder str = new StringBuilder();
                     foreach (MemberInfo m in changed) {
                         str.Append(dst.name).Append(".").Append(m.Name).Append("\n");
@@ -133,7 +133,7 @@ namespace etc
                     Debug.LogWarning(string.Format("Source has {0} but Missing in Dest", s.GetType().FullName));
                 }
             }
-            CompatibilityEditor.SetDirty(dst);
+            EditorUtil.SetDirty(dst);
         }
         
         private static bool IsAssignableForOnlyNullTarget(MemberInfo m, object oldValue, object newValue) {

@@ -35,7 +35,7 @@ namespace audio
             EditorGUILayout.EndHorizontal();
             if (changed)
             {
-                CompatibilityEditor.SetDirty(group);
+                EditorUtil.SetDirty(group);
             }
 
             if (Application.isPlaying)
@@ -57,7 +57,7 @@ namespace audio
         public static void ExportAudioCsv(AudioGroup group)
         {
             ExportAudioCsv(AssetDatabase.GUIDToAssetPath(group.assetDir.guid), group.csv.GetEditorPath());
-            CompatibilityEditor.SetDirty(group);
+            EditorUtil.SetDirty(group);
         }
 
         public static void ExportAudioCsv(string audioFolder, string csvPath)
