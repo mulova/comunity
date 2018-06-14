@@ -18,7 +18,7 @@ namespace convinity {
 //			ShowAllTab(true);
 		}
 
-		[MenuItem("Tools/unilova/Etc/Shortcuts")]
+		[MenuItem("Tools/unilova/Shortcuts")]
 		public static void Init() {
 			// Get existing open window or if none, make a new one:
 			ShortcutWindow window = ScriptableObject.CreateInstance<ShortcutWindow>();

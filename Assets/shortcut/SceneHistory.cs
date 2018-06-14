@@ -12,7 +12,7 @@ namespace convinity
 	public class SceneHistory
 	{
 		[SerializeField] private List<SceneHistoryItem> _items = new List<SceneHistoryItem>();
-		[SerializeField] internal int maxSize = 10;
+		[SerializeField] internal int maxSize = 100;
 
 		public List<SceneHistoryItem> items
 		{

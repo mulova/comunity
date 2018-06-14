@@ -32,13 +32,16 @@ namespace comunity
 */      
         public static Transform GetSceneRoot(string name)
         {
-            foreach (GameObject o in SceneManager.GetActiveScene().GetRootGameObjects())
-            {
-                if (o.name == name)
-                {
-                    return o.transform;
-                }
-            }
+			for (int i=0; i<SceneManager.sceneCount; ++i)
+			{
+				foreach (GameObject o in SceneManager.GetSceneAt(i).GetRootGameObjects())
+				{
+					if (o.name == name)
+					{
+						return o.transform;
+					}
+				}
+			}
             return null;
         }
         

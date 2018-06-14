@@ -150,26 +150,14 @@ namespace comunity
 
 		public static void ForEachSelection(string title, FileType ext, Action<string> action)
 		{
-			try
+			string[] guids = Selection.assetGUIDs;
+			var list = new List<string>();
+			for (int i=0; i<guids.Length; ++i)
 			{
-				string[] guids = Selection.assetGUIDs;
-				for (int i=0; i<guids.Length; ++i)
-				{
-					var path = AssetDatabase.GUIDToAssetPath(guids[i]);
-					var list = ListAssetPaths(path, ext);
-					for (int j=0; j<list.Length; ++j)
-					{
-						if (EditorUtility.DisplayCancelableProgressBar(title, list[j], j/(float)list.Length))
-						{
-							return;
-						}
-						action(list[j]);
-					}
-				}
-			} finally
-			{
-				EditorUtility.ClearProgressBar();
+				var path = AssetDatabase.GUIDToAssetPath(guids[i]);
+				list.AddRange(ListAssetPaths(path, ext));
 			}
+			EditorUtil.DisplayProgressBar(title, list, action);
 		}
 
         /**

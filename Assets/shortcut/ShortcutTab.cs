@@ -120,13 +120,14 @@ namespace convinity {
 						if (o == null) {
 							continue;
 						}
+						var obj = new UnityObjId(o);
 						if (AssetDatabase.IsMainAsset(o) || AssetDatabase.IsSubAsset(o)) {
-							if (!assetRefs.Contains(o)) {
-								assetRefs.Add(o);
+							if (!assetRefs.Contains(obj)) {
+								assetRefs.Add(obj);
 							}
 						} else {
-							if (!sceneRefs.Contains(o)) {
-								sceneRefs.Add(o);
+							if (!sceneRefs.Contains(obj)) {
+								sceneRefs.Add(obj);
 							}
 						}
 						changed = true;
