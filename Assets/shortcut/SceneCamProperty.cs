@@ -29,7 +29,7 @@ public class SceneCamProperty
 //		fov = ortho? view.camera.orthographicSize: view.camera.fieldOfView;
 		rotationLocked = view.isRotationLocked;
 		#if UNITY_2018_1_OR_NEWER
-		camMode = sceneView.cameraMode;
+		camMode = view.cameraMode;
 		#else
 		camMode = view.renderMode;
 		#endif
