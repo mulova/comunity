@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "comunity", "etc-Editor.cspr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "comunity", "assetbunlemanager.csproj", "{3CD42069-AC64-D61B-6C5F-FD4D7CAF99BE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "comunity", "Shortcut.csproj", "{16E36A82-E710-1092-576D-338CC7E8217C}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "comunity", "effect.csproj", "{59D24771-3370-2D55-90B1-627B34180EF3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "comunity", "audio-editor.csproj", "{7C10F73D-0E99-7C37-D6C3-12E75BEC6814}"
@@ -73,6 +75,10 @@ Global
 		{3CD42069-AC64-D61B-6C5F-FD4D7CAF99BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3CD42069-AC64-D61B-6C5F-FD4D7CAF99BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3CD42069-AC64-D61B-6C5F-FD4D7CAF99BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16E36A82-E710-1092-576D-338CC7E8217C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16E36A82-E710-1092-576D-338CC7E8217C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16E36A82-E710-1092-576D-338CC7E8217C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16E36A82-E710-1092-576D-338CC7E8217C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{59D24771-3370-2D55-90B1-627B34180EF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{59D24771-3370-2D55-90B1-627B34180EF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59D24771-3370-2D55-90B1-627B34180EF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
