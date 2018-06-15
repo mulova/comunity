@@ -26,6 +26,11 @@ namespace convinity
 
         public override void OnEnable()
         {
+			var dir = Path.GetDirectoryName(PATH);
+			if (!Directory.Exists(dir))
+			{
+				Directory.CreateDirectory(dir);
+			}
             sceneHistory = SceneHistory.Load(PATH);
 			OnSceneOpened(EditorSceneManager.GetActiveScene(), OpenSceneMode.Single);
             #if UNITY_2018_1_OR_NEWER
