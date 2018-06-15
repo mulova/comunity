@@ -161,14 +161,22 @@ namespace comunity
 
         protected void OnAdd(ReorderableList list)
         {
-            if (list.serializedProperty != null)
+            if (drawer.serializedProperty != null)
             {
-                list.serializedProperty.arraySize += 1;
-                list.index = list.serializedProperty.arraySize - 1;
+                drawer.serializedProperty.arraySize += 1;
+                drawer.index = list.serializedProperty.arraySize - 1;
             }
             else
             {
-                list.index = list.list.Add(CreateItem());
+                if (list.list.IsFixedSize)
+                {
+                    var arr = new T[list.list.Count+1];
+                    arr[arr.Length-1] = CreateItem();
+                    drawer.list = arr;
+                } else
+                {
+                    drawer.index = drawer.list.Add(CreateItem());
+                }
             }
             SetDirty();
             OnChange();

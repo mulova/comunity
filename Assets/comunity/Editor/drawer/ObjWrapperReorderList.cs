@@ -19,15 +19,6 @@ namespace comunity
 			EditorGUI.ObjectField(rect, o1.Obj, typeof(Object), allowSceneObjects);
 			return false;
 		}
-
-        protected override ObjWrapper GetItem(int i)
-        {
-            return null;
-        }
-
-        protected override void SetItem(int i, ObjWrapper val)
-        {
-        }
 	}
 }
 

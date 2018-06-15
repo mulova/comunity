@@ -44,7 +44,7 @@ namespace comunity
             {
                 this[index] = o2 as T;
             }
-            return o1 != o2;
+            return editable && o1 != o2;
         }
     }
 }
