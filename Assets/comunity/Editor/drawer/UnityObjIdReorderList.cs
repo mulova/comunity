@@ -27,14 +27,5 @@ namespace comunity
         {
 			return UnityObjIdDrawer.DrawItem(this[index], rect, allowSceneObject);
         }
-
-        protected override UnityObjId GetItem(int i)
-        {
-            return null;
-        }
-
-        protected override void SetItem(int i, UnityObjId val)
-        {
-        }
     }
 }

@@ -22,29 +22,32 @@ namespace comunity
             this.allowSceneObjects = allowSceneObjects;
         }
 
-        protected override T GetItem(int i)
+        protected override T GetSerializedItem(SerializedProperty p, int i)
         {
-            return (T)drawer.serializedProperty.GetArrayElementAtIndex(i).objectReferenceValue;
+            return (T)p.GetArrayElementAtIndex(i).objectReferenceValue;
         }
 
-        protected override void SetItem(int i, T val)
+        protected override void SetSerializedItem(SerializedProperty p, int i, T val)
         {
-            if (drawer.serializedProperty.arraySize < i)
+            if (p.arraySize < i)
             {
-                drawer.serializedProperty.InsertArrayElementAtIndex(i);
+                p.InsertArrayElementAtIndex(i);
             }
-            drawer.serializedProperty.GetArrayElementAtIndex(i).objectReferenceValue = val;
+            p.GetArrayElementAtIndex(i).objectReferenceValue = val;
         }
 
         protected override bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
         {
             var o1 = this[index];
             var o2 = EditorGUI.ObjectField(rect, o1, typeof(T), allowSceneObjects);
-            if (editable)
+            if (editable && o1 != o2)
             {
                 this[index] = o2 as T;
+                return true;
+            } else
+            {
+                return false;
             }
-            return editable && o1 != o2;
         }
     }
 }

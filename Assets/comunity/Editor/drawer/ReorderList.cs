@@ -51,11 +51,11 @@ namespace comunity
             }
         }
 
-        protected virtual T GetItem(int i) {
+        protected virtual T GetSerializedItem(SerializedProperty p, int i) {
             return default(T);
         }
 
-        protected virtual void SetItem(int i, T val) {}
+        protected virtual void SetSerializedItem(SerializedProperty p, int i, T val) {}
 
 
         public T this[int i]
@@ -63,7 +63,7 @@ namespace comunity
             get {
                 if (drawer.serializedProperty != null && drawer.serializedProperty.isArray)
                 {
-                    return GetItem(i);
+                    return GetSerializedItem(drawer.serializedProperty, i);
                 } else
                 {
                     return (T)drawer.list[i];
@@ -73,11 +73,12 @@ namespace comunity
             {
                 if (drawer.serializedProperty != null && drawer.serializedProperty.isArray)
                 {
-                    SetItem(i, value);
+                    SetSerializedItem(drawer.serializedProperty, i, value);
                 } else
                 {
                     drawer.list[i] = value;
                 }
+                SetDirty();
             }
         }
 
@@ -104,6 +105,7 @@ namespace comunity
         public ReorderList(Object obj, IList list)
         {
             this.obj = obj;
+            this.list = list;
             this.drawer = new ReorderableList(list, typeof(T), true, false, true, true);
             this.drawer.onAddCallback = OnAdd;
             this.drawer.drawElementCallback = DrawItem0;
@@ -159,19 +161,21 @@ namespace comunity
 
         protected virtual void OnChange() {}
 
-        protected void OnAdd(ReorderableList list)
+        protected void OnAdd(ReorderableList reorderList)
         {
             if (drawer.serializedProperty != null)
             {
                 drawer.serializedProperty.arraySize += 1;
-                drawer.index = list.serializedProperty.arraySize - 1;
+                drawer.index = reorderList.serializedProperty.arraySize - 1;
+                drawer.list[drawer.index] = CreateItem();
             }
             else
             {
-                if (list.list.IsFixedSize)
+                if (reorderList.list.IsFixedSize)
                 {
-                    var arr = new T[list.list.Count+1];
+                    var arr = new T[list.Count+1];
                     arr[arr.Length-1] = CreateItem();
+                    list = arr;
                     drawer.list = arr;
                 } else
                 {

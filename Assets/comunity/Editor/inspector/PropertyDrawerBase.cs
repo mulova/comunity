@@ -47,10 +47,9 @@ namespace comunity
         {
             Rect left = src;
             Rect right = src;
-            left.width = src.width*leftWidth;
-            right = src;
+            left.width = (src.width+EditorGUIUtility.currentViewWidth)*leftWidth;
             right.x = left.x+left.width;
-            right.width = src.width-left.width;
+            right.width = src.width+EditorGUIUtility.currentViewWidth-left.width;
             return new Rect[] { left, right};
         }
 
