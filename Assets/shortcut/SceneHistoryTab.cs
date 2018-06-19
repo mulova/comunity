@@ -129,8 +129,11 @@ namespace convinity
             {
                 return;
             }
-            SaveCam();
-            sceneHistory.Save(PATH);
+			if (mode == OpenSceneMode.Single)
+			{
+				SaveCam();
+			}
+			sceneHistory.Save(PATH);
         }
 
         private void OnSceneOpened(Scene s, OpenSceneMode mode)
