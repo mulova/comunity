@@ -38,11 +38,14 @@ namespace convinity
             #else
             EditorApplication.hierarchyWindowChanged += OnSceneObjChange;
             #endif
-			EditorApplication.pauseStateChanged += OnPauseStateChanged;
-			EditorSceneManager.sceneOpening += OnSceneOpening;
-			EditorSceneManager.sceneOpened += OnSceneOpened;
-			EditorSceneManager.sceneClosing += OnSceneClosing;
-			SceneManager.sceneLoaded += OnSceneLoaded;
+			if (!BuildPipeline.isBuildingPlayer)
+			{
+				EditorApplication.pauseStateChanged += OnPauseStateChanged;
+				EditorSceneManager.sceneOpening += OnSceneOpening;
+				EditorSceneManager.sceneOpened += OnSceneOpened;
+				EditorSceneManager.sceneClosing += OnSceneClosing;
+				SceneManager.sceneLoaded += OnSceneLoaded;
+			}
         }
 
         public override void OnDisable()
@@ -88,6 +91,10 @@ namespace convinity
 
         public override void OnChangePlayMode(PlayModeStateChange stateChange)
         {
+			if (BuildPipeline.isBuildingPlayer)
+			{
+				return;
+			}
 			if (stateChange == PlayModeStateChange.EnteredEditMode)
 			{
 				if (sceneHistory.Count >= 0)
@@ -107,6 +114,10 @@ namespace convinity
 //			{
 //				return;
 //			}
+			if (BuildPipeline.isBuildingPlayer)
+			{
+				return;
+			}
 			int index = sceneHistory.IndexOf(scene.path);
 			if (index >= 0)
 			{
@@ -125,6 +136,10 @@ namespace convinity
 
         private void OnSceneOpening(string path,OpenSceneMode mode)
         {
+			if (BuildPipeline.isBuildingPlayer)
+			{
+				return;
+			}
 			if (EditorApplication.isPlayingOrWillChangePlaymode)
             {
                 return;
