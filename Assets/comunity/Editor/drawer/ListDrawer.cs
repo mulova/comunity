@@ -5,8 +5,8 @@ using UnityEditor;
 using Object = UnityEngine.Object;
 using UnityEngine;
 using commons;
-using Rotorz.ReorderableList;
 
+using Rotorz.ReorderableList;
 namespace comunity
 {
     public class ListDrawer<T> : IReorderableListAdaptor where T:class

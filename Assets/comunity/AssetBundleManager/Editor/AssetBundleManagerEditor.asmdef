@@ -1,11 +1,12 @@
 {
-    "name": "comunity",
+    "name": "AssetBundleManagerEditor",
     "references": [
-        "commons",
         "AssetBundleManager"
     ],
     "optionalUnityReferences": [],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false
 }

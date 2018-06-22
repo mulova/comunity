@@ -17,12 +17,6 @@ namespace comunity
 {
 	public static class EditorUtil
 	{
-
-		public static bool IsChangingPlayMode()
-		{
-			return EditorApplication.isPlayingOrWillChangePlaymode && !EditorApplication.isPlaying;
-		}
-
 		public static void OpenExplorer(string path)
 		{
 			if (Application.platform == RuntimePlatform.OSXEditor) {
@@ -103,7 +97,6 @@ namespace comunity
 				return new ExecOutput(stdout, stderr);
 			} catch (System.Exception e) {
 				// Log the exception
-				UnityEngine.Debug.LogError("Got exception: " + e.Message);
 				return new ExecOutput(e);
 			}
 		}
