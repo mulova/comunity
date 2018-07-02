@@ -65,6 +65,7 @@
      <Compile Include="Assets\convinity\Editor\importer\ModelImporterTab.cs" />
      <Compile Include="Assets\convinity\Editor\importer\TexImport.cs" />
      <Compile Include="Assets\convinity\Editor\importer\TexImporterTab.cs" />
+     <Compile Include="Assets\convinity\Editor\NavigationHelper.cs" />
      <Compile Include="Assets\convinity\Editor\SceneAnalyzer\ComponentSearchTab.cs" />
      <Compile Include="Assets\convinity\Editor\SceneAnalyzer\FieldRef.cs" />
      <Compile Include="Assets\convinity\Editor\SceneAnalyzer\FieldRefReorderList.cs" />

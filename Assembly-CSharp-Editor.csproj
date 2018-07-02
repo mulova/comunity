@@ -175,6 +175,8 @@
       <Project>{59D24771-3370-2D55-90B1-627B34180EF3}</Project>      <Name>effect</Name>    </ProjectReference>
     <ProjectReference Include="etc.csproj">
       <Project>{1C031F9F-6D2A-86C1-F16F-48BAF732DDB2}</Project>      <Name>etc</Name>    </ProjectReference>
+    <ProjectReference Include="Shortcut.csproj">
+      <Project>{16E36A82-E710-1092-576D-338CC7E8217C}</Project>      <Name>Shortcut</Name>    </ProjectReference>
     <ProjectReference Include="uguiex.csproj">
       <Project>{67DA4179-F880-AC47-8D7D-29A0D8B76514}</Project>      <Name>uguiex</Name>    </ProjectReference>
     <ProjectReference Include="ani.csproj">
@@ -189,8 +191,6 @@
       <Project>{A3523514-4A98-4712-9C47-EFCF58A8CCFE}</Project>      <Name>audio</Name>    </ProjectReference>
     <ProjectReference Include="uguiex-editor.csproj">
       <Project>{2879C03D-C890-1AB9-ECC8-1A382796D80C}</Project>      <Name>uguiex-editor</Name>    </ProjectReference>
-    <ProjectReference Include="Shortcut.csproj">
-      <Project>{16E36A82-E710-1092-576D-338CC7E8217C}</Project>      <Name>Shortcut</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

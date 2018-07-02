@@ -2,11 +2,14 @@
 using UnityEditor;
 using System;
 using commons;
+using comunity;
+using NPOI.SS.Formula.Functions;
 
 [Serializable]
 public class SceneCamProperty
 {
-	public bool in2dMode;
+    public string id;
+    public bool in2dMode;
 	public float size;
 	public bool ortho;
 	public Vector3 pivot;
@@ -19,8 +22,9 @@ public class SceneCamProperty
 	#endif
 
 
-	public void Collect(SceneView view)
+	public void Collect()
 	{
+        var view = EditorUtil.sceneView;
 		size = view.size;
 		in2dMode = view.in2DMode;
 		rot = view.rotation;
@@ -35,8 +39,21 @@ public class SceneCamProperty
 		#endif
 	}
 
-	public void Apply(SceneView view)
+    public bool valid
+    {
+        get
+        {
+            return size != 0;
+        }
+    }
+
+	public void Apply()
 	{
+        if (size == 0)
+        {
+            throw new Exception("Not initialized");
+        }
+        var view = EditorUtil.sceneView;
 		view.size = size;
 		view.in2DMode = in2dMode;
 		view.rotation = rot;

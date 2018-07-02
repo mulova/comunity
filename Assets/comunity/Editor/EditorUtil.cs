@@ -17,6 +17,24 @@ namespace comunity
 {
 	public static class EditorUtil
 	{
+        public static SceneView sceneView {
+            get {
+                if (SceneView.currentDrawingSceneView != null)
+                {
+                    return SceneView.currentDrawingSceneView;
+                }
+                if (SceneView.lastActiveSceneView != null)
+                {
+                    return SceneView.lastActiveSceneView;
+                }
+                if (SceneView.sceneViews.Count > 0)
+                {
+                    return (SceneView)SceneView.sceneViews[0];
+                }
+                return null;
+            }
+        }
+
 		public static void OpenExplorer(string path)
 		{
 			if (Application.platform == RuntimePlatform.OSXEditor) {

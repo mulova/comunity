@@ -15,24 +15,6 @@ namespace convinity
         public List<UnityObjId> list;
 		public SceneCamProperty camProperty;
 
-        public SceneView sceneView {
-            get {
-				if (SceneView.currentDrawingSceneView != null)
-				{
-					return SceneView.currentDrawingSceneView;
-				}
-                if (SceneView.lastActiveSceneView != null)
-                {
-                    return SceneView.lastActiveSceneView;
-                }
-                if (SceneView.sceneViews.Count > 0)
-                {
-                    return (SceneView)SceneView.sceneViews[0];
-                }
-                return null;
-            }
-        }
-
         public SceneHistoryItem(Object o)
         {
             list = new List<UnityObjId>();
@@ -41,7 +23,7 @@ namespace convinity
 
         public void SaveCam()
         {
-			if (sceneView == null)
+			if (EditorUtil.sceneView == null)
 			{
 				return;
 			}
@@ -49,18 +31,18 @@ namespace convinity
 			{
 				camProperty = new SceneCamProperty();
 			}
-			camProperty.Collect(sceneView);
+			camProperty.Collect();
         }
 
 		public void ApplyCam()
 		{
-			if (sceneView == null)
+            if (EditorUtil.sceneView == null)
 			{
 				return;
 			}
 			if (camProperty != null)
 			{
-				camProperty.Apply(sceneView);
+				camProperty.Apply();
 			}
 		}
 
