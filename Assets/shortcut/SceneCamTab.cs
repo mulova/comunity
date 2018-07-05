@@ -54,7 +54,7 @@ namespace convinity
 			}
 			if (stateChange == PlayModeStateChange.EnteredEditMode)
 			{
-				if (history.Count >= 0)
+				if (history.Count > 0)
 				{
 					history[0].Apply();
 				}
