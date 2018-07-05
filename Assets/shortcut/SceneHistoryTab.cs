@@ -243,7 +243,7 @@ namespace convinity
         {
             EditorGUILayout.BeginHorizontal();
             GUI.enabled = sceneHistory.Count >= 2;
-            if (GUILayout.Button("Back", EditorStyles.toolbarButton, GUILayout.ExpandWidth(true)))
+			if (GUILayout.Button("Back", GUILayout.Height(30)))
             {
                 GoBack();
             }
