@@ -3,7 +3,6 @@ using UnityEditor;
 using System;
 using commons;
 using comunity;
-using NPOI.SS.Formula.Functions;
 
 [Serializable]
 public class SceneCamProperty

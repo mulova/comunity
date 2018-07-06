@@ -24,7 +24,7 @@ namespace convinity
             item.first.reference = EditorGUI.ObjectField(area1[0], obj, typeof(Object), false);
             Rect starRect = new Rect();
             Rect[] area2 = EditorGUIUtil.SplitRectHorizontally(area1[1], 30);
-            if (item.camProperty.valid && GUI.Button(area2[0], "cam"))
+            if (item.camProperty.valid && GUI.Button(area2[0], "cam", EditorStyles.miniButton))
             {
                 item.camProperty.Apply();
             }

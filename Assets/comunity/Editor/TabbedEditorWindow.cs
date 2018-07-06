@@ -13,7 +13,7 @@ namespace comunity {
 		private bool closable;
 		private static bool reloadStatic;
 
-		void OnEnable() {
+        protected virtual void OnEnable() {
 			CreateTabs();
 			string tabName = EditorPrefs.GetString(GetWindowId());
 			if (tabName.IsNotEmpty()) {
@@ -36,7 +36,7 @@ namespace comunity {
 			autoRepaintOnSceneChange = true;
 		}
 
-		void OnDisable()
+        protected virtual void OnDisable()
 		{
 			OnLostFocus();
 			foreach (TabData t in tabs) {

@@ -12,19 +12,14 @@ using UnityEditor.SceneManagement;
 
 namespace convinity
 {
-
-    public class SceneHistoryTab : EditorTab
+    public class SceneHistoryWindow : EditorWindow
     {
         private SceneHistory sceneHistory;
         private const string PATH = "Library/Shortcut/history";
         private Object currentScene;
         private bool changed;
 
-        public SceneHistoryTab(object id, TabbedEditorWindow window) : base(id, window)
-        {
-        }
-
-        public override void OnEnable()
+        void OnEnable()
         {
 			var dir = Path.GetDirectoryName(PATH);
 			if (!Directory.Exists(dir))
@@ -46,9 +41,15 @@ namespace convinity
 				EditorSceneManager.sceneClosing += OnSceneClosing;
 				SceneManager.sceneLoaded += OnSceneLoaded;
 			}
+
+            #if UNITY_2017_1_OR_NEWER
+            EditorApplication.playModeStateChanged += ChangePlayMode;
+            #else
+            EditorApplication.playmodeStateChanged += ChangePlaymode;
+            #endif
         }
 
-        public override void OnDisable()
+        void OnDisable()
         {
 			// Enter play mode
 			if (!Application.isPlaying)
@@ -66,6 +67,12 @@ namespace convinity
 			EditorSceneManager.sceneOpened -= OnSceneOpened;
 			EditorSceneManager.sceneClosing -= OnSceneClosing;
 			SceneManager.sceneLoaded -= OnSceneLoaded;
+
+            #if UNITY_2017_1_OR_NEWER
+            EditorApplication.playModeStateChanged += ChangePlayMode;
+            #else
+            EditorApplication.playmodeStateChanged += ChangePlaymode;
+            #endif
         }
 
 		void OnPauseStateChanged(PauseState state)
@@ -81,15 +88,7 @@ namespace convinity
             changed = true;
         }
 
-        public override void OnSelected(bool sel)
-        {
-        }
-
-        public override void OnFocus(bool focus)
-        {
-        }
-
-        public override void OnChangePlayMode(PlayModeStateChange stateChange)
+        private void ChangePlayMode(PlayModeStateChange stateChange)
         {
 			if (BuildPipeline.isBuildingPlayer)
 			{
@@ -102,10 +101,6 @@ namespace convinity
 					sceneHistory[0].ApplyCam();
 				}
 			}
-        }
-
-        public override void OnChangeScene(string sceneName)
-        {
         }
 
 		private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -227,11 +222,21 @@ namespace convinity
             changed = false;
         }
 
-        public override void OnInspectorUpdate()
+        [MenuItem("Tools/SceneView/Scene HIstory")]
+        private static void OpenWindow()
         {
+            var win = EditorWindow.GetWindow<SceneHistoryWindow>("Scene History");
+            win.Show();
         }
 
-        private void GoBack()
+        [MenuItem("Tools/SceneView/Previous Scene %#&z")]
+        private static void GoBackMenu()
+        {
+            var win = EditorWindow.GetWindow<SceneHistoryWindow>();
+            win.GoBack();
+        }
+
+        public void GoBack()
         {
             if (!changed||EditorSceneBridge.SaveCurrentSceneIfUserWantsTo())
             {
@@ -239,7 +244,7 @@ namespace convinity
             }
         }
 
-        public override void OnHeaderGUI()
+        public void OnHeaderGUI()
         {
             EditorGUILayout.BeginHorizontal();
             GUI.enabled = sceneHistory.Count >= 2;
@@ -251,8 +256,9 @@ namespace convinity
             EditorGUILayout.EndHorizontal();
         }
 
-        public override void OnInspectorGUI()
+        void OnGUI()
         {
+            OnHeaderGUI();
 			#if !INTERNAL_REORDER
 			var listDrawer = new SceneHistoryDrawer(sceneHistory);
 			listDrawer.allowSceneObject = false;
@@ -278,13 +284,10 @@ namespace convinity
                     throw ex;
                 }
             }
-            if ((Event.current.command || Event.current.control) && Event.current.shift && Event.current.type == EventType.KeyUp && Event.current.keyCode == KeyCode.Backspace)
-            {
-                GoBack();
-            }
+            OnFooterGUI();
         }
 
-        public override void OnFooterGUI()
+        void OnFooterGUI()
         {
             EditorGUILayout.BeginHorizontal();
 			if (EditorGUIUtil.IntField("Size", ref sceneHistory.maxSize))
