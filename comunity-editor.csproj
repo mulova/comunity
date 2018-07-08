@@ -77,6 +77,7 @@
      <Compile Include="Assets\comunity\Editor\CreateNewLine.cs" />
      <Compile Include="Assets\comunity\Editor\DiMenu.cs" />
      <Compile Include="Assets\comunity\Editor\drawer\ArrayDrawer.cs" />
+     <Compile Include="Assets\comunity\Editor\drawer\CustomEditorBase.cs" />
      <Compile Include="Assets\comunity\Editor\drawer\IItemDrawer.cs" />
      <Compile Include="Assets\comunity\Editor\drawer\ItemDrawer.cs" />
      <Compile Include="Assets\comunity\Editor\drawer\ListDrawer.cs" />
@@ -84,6 +85,7 @@
      <Compile Include="Assets\comunity\Editor\drawer\ObjWrapperReorderList.cs" />
      <Compile Include="Assets\comunity\Editor\drawer\ReorderList.cs" />
      <Compile Include="Assets\comunity\Editor\drawer\StrEnumItemDrawer.cs" />
+     <Compile Include="Assets\comunity\Editor\drawer\StrReorderList.cs" />
      <Compile Include="Assets\comunity\Editor\drawer\UnityObjIdDrawer.cs" />
      <Compile Include="Assets\comunity\Editor\drawer\UnityObjIdReorderList.cs" />
      <Compile Include="Assets\comunity\Editor\drawer\UnityObjListDrawer.cs" />

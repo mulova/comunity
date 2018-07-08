@@ -51,13 +51,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\shortcut\SceneCamHistory.cs" />
      <Compile Include="Assets\shortcut\SceneCamProperty.cs" />
+     <Compile Include="Assets\shortcut\SceneCamPropertyDrawer.cs" />
+     <Compile Include="Assets\shortcut\SceneCamTab.cs" />
      <Compile Include="Assets\shortcut\SceneHistory.cs" />
      <Compile Include="Assets\shortcut\SceneHistoryDrawer.cs" />
      <Compile Include="Assets\shortcut\SceneHistoryItem.cs" />
      <Compile Include="Assets\shortcut\SceneHistoryItemDrawer.cs" />
      <Compile Include="Assets\shortcut\SceneHistoryReorderList.cs" />
-     <Compile Include="Assets\shortcut\SceneHistoryTab.cs" />
+     <Compile Include="Assets\shortcut\SceneHistoryWindow.cs" />
      <Compile Include="Assets\shortcut\ShortcutSection.cs" />
      <Compile Include="Assets\shortcut\ShortcutTab.cs" />
      <Compile Include="Assets\shortcut\ShortcutWindow.cs" />

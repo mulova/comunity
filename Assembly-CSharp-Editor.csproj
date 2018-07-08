@@ -159,12 +159,8 @@
       <Project>{3C002EDC-6859-498C-8C24-5CB284215728}</Project>      <Name>ani-editor</Name>    </ProjectReference>
     <ProjectReference Include="commons.csproj">
       <Project>{B59A5B10-07C0-4CCB-78A3-A56495FD5CE6}</Project>      <Name>commons</Name>    </ProjectReference>
-    <ProjectReference Include="assetbundlemanager-editor.csproj">
-      <Project>{2F240BFE-DCCF-78F8-FF5F-CBFCFE751332}</Project>      <Name>assetbundlemanager-editor</Name>    </ProjectReference>
     <ProjectReference Include="convinity-editor.csproj">
       <Project>{AC6F1F73-0E9B-B0C4-2873-776BFF15E7FF}</Project>      <Name>convinity-editor</Name>    </ProjectReference>
-    <ProjectReference Include="assetbunlemanager.csproj">
-      <Project>{3CD42069-AC64-D61B-6C5F-FD4D7CAF99BE}</Project>      <Name>assetbunlemanager</Name>    </ProjectReference>
     <ProjectReference Include="audio-editor.csproj">
       <Project>{7C10F73D-0E99-7C37-D6C3-12E75BEC6814}</Project>      <Name>audio-editor</Name>    </ProjectReference>
     <ProjectReference Include="build.csproj">
@@ -191,6 +187,14 @@
       <Project>{A3523514-4A98-4712-9C47-EFCF58A8CCFE}</Project>      <Name>audio</Name>    </ProjectReference>
     <ProjectReference Include="uguiex-editor.csproj">
       <Project>{2879C03D-C890-1AB9-ECC8-1A382796D80C}</Project>      <Name>uguiex-editor</Name>    </ProjectReference>
+    <ProjectReference Include="assetbundlemanager-editor.csproj">
+      <Project>{2F240BFE-DCCF-78F8-FF5F-CBFCFE751332}</Project>      <Name>assetbundlemanager-editor</Name>    </ProjectReference>
+    <ProjectReference Include="assetbunlemanager.csproj">
+      <Project>{3CD42069-AC64-D61B-6C5F-FD4D7CAF99BE}</Project>      <Name>assetbunlemanager</Name>    </ProjectReference>
+    <ProjectReference Include="AssetBundleManager.csproj">
+      <Project>{4EB79D97-23E0-7B03-55C8-FC32C3859938}</Project>      <Name>AssetBundleManager</Name>    </ProjectReference>
+    <ProjectReference Include="AssetBundleManagerEditor.csproj">
+      <Project>{EE58A0C2-BA6C-B22C-81A9-E791EEFA4072}</Project>      <Name>AssetBundleManagerEditor</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

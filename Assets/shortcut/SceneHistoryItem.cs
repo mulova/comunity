@@ -10,10 +10,11 @@ using UnityEditor;
 namespace convinity
 {
     [Serializable]
-    public class SceneHistoryItem
+    public class SceneHistoryItem : IComparable<SceneHistoryItem>
     {
         public List<UnityObjId> list;
 		public SceneCamProperty camProperty;
+        public bool starred;
 
         public SceneHistoryItem(Object o)
         {
@@ -110,6 +111,17 @@ namespace convinity
 		{
 			return list[0].path;
 		}
+
+        public int CompareTo(SceneHistoryItem other)
+        {
+            if (this.starred^other.starred)
+            {
+                return this.starred? -1 : 1;
+            } else
+            {
+                return 0;
+            }
+        }
     }
 
 }

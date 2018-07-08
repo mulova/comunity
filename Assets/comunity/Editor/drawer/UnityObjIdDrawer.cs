@@ -15,10 +15,8 @@ namespace comunity
 			Rect[] area = EditorGUIUtil.SplitRectHorizontally(rect, (int)rect.width-15);
 			Object obj = item.reference;
 			item.reference = EditorGUI.ObjectField(area[0], obj, typeof(Object), allowSceneObject);
-			bool starred = item.starred;
-			item.starred = EditorGUI.Toggle(area[1], item.starred);
 			newItem = item;
-			return starred != item.starred || obj != item.reference;
+			return obj != item.reference;
 		}
 
 		public static bool DrawItem(UnityObjId item, Rect rect, bool allowSceneObject)
@@ -26,9 +24,7 @@ namespace comunity
 			Rect[] area = EditorGUIUtil.SplitRectHorizontally(rect, (int)rect.width-15);
 			Object obj = item.reference;
 			item.reference = EditorGUI.ObjectField(area[0], obj, typeof(Object), allowSceneObject);
-			bool starred = item.starred;
-			item.starred = EditorGUI.Toggle(area[1], item.starred);
-			return starred != item.starred || obj != item.reference;
+			return obj != item.reference;
 		}
 	}
 	#else
@@ -51,9 +47,7 @@ namespace comunity
             Rect[] area = EditorGUIUtil.SplitRectHorizontally(rect, (int)rect.width-15);
             Object obj = item.reference;
 			item.reference = EditorGUI.ObjectField(area[0], obj, typeof(Object), allowSceneObject);
-            bool starred = item.starred;
-            item.starred = EditorGUI.Toggle(area[1], item.starred);
-			return starred != item.starred || obj != item.reference;
+			return obj != item.reference;
         }
     }
 	#endif

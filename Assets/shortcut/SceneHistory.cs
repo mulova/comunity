@@ -66,7 +66,7 @@ namespace convinity
 			int i = Count-1;
 			while (Count > maxSize && i >= 0)
 			{
-				if (!items[i].first.starred)
+				if (!items[i].starred)
 				{
 					items.RemoveAt(i);
 				}

@@ -323,6 +323,8 @@
   <ItemGroup>
     <ProjectReference Include="commons.csproj">
       <Project>{B59A5B10-07C0-4CCB-78A3-A56495FD5CE6}</Project>      <Name>commons</Name>    </ProjectReference>
+    <ProjectReference Include="AssetBundleManager.csproj">
+      <Project>{4EB79D97-23E0-7B03-55C8-FC32C3859938}</Project>      <Name>AssetBundleManager</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

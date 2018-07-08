@@ -9,7 +9,7 @@ using Object = UnityEngine.Object;
 namespace comunity
 {
     [System.Serializable]
-    public class UnityObjId : IComparable<UnityObjId>
+    public class UnityObjId
     {
         [SerializeField]
         private string _id;
@@ -29,8 +29,6 @@ namespace comunity
         [SerializeField]
         private bool _asset;
         public bool asset { get { return _asset; } private set { _asset = value; } }
-
-        public bool starred;
 
         public Object reference
         {
@@ -114,17 +112,6 @@ namespace comunity
         public override string ToString()
         {
             return id;
-        }
-
-        public int CompareTo(UnityObjId other)
-        {
-            if (this.starred^other.starred)
-            {
-                return this.starred? -1 : 1;
-            } else
-            {
-                return 0;
-            }
         }
     }
 }

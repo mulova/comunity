@@ -51,10 +51,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\AssetBundleManager\AssetBundleLoadOperation.cs" />
-     <Compile Include="Assets\AssetBundleManager\AssetBundleManager.cs" />
-     <Compile Include="Assets\AssetBundleManager\Utility.cs" />
-     <None Include="Assets\AssetBundleManager\AssetBundleManager.asmdef" />
+     <Compile Include="Assets\comunity\AssetBundleManager\AssetBundleLoadOperation.cs" />
+     <Compile Include="Assets\comunity\AssetBundleManager\AssetBundleManager.cs" />
+     <Compile Include="Assets\comunity\AssetBundleManager\Utility.cs" />
+     <None Include="Assets\comunity\AssetBundleManager\AssetBundleManager.asmdef" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Hub/Editor/2017.3.1f1/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

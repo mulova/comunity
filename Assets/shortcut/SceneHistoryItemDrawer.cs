@@ -28,9 +28,9 @@ namespace convinity
             {
                 item.camProperty.Apply();
             }
-            bool starred = item.first.starred;
-            item.first.starred = EditorGUI.Toggle(area2[1], item.first.starred);
-            return starred != item.first.starred || obj != item.first.reference;
+            bool starred = item.starred;
+            item.starred = EditorGUI.Toggle(area2[1], item.starred);
+            return starred != item.starred || obj != item.first.reference;
         }
     }
 }

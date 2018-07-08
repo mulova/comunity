@@ -55,7 +55,7 @@
      <Compile Include="Assets\AssetBundleManager\Editor\BuildScript.cs" />
      <Compile Include="Assets\AssetBundleManager\Editor\ExecuteInternalMono.cs" />
      <Compile Include="Assets\AssetBundleManager\Editor\LaunchAssetBundleServer.cs" />
-     <None Include="Assets\AssetBundleManager\Editor\assetbundlemanager-editor.asmdef" />
+     <None Include="Assets\AssetBundleManager\Editor\AssetBundleManager-editor.asmdef" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Hub/Editor/2017.3.1f1/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

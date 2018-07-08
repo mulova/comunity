@@ -47,6 +47,7 @@ namespace convinity
             #else
             EditorApplication.playmodeStateChanged += ChangePlaymode;
             #endif
+            SceneView.onSceneGUIDelegate += OnSceneGUI;
         }
 
         void OnDisable()
@@ -222,7 +223,7 @@ namespace convinity
             changed = false;
         }
 
-        [MenuItem("Tools/SceneView/Scene HIstory")]
+        [MenuItem("Tools/SceneView/Scene History")]
         private static void OpenWindow()
         {
             var win = EditorWindow.GetWindow<SceneHistoryWindow>("Scene History");
@@ -244,21 +245,41 @@ namespace convinity
             }
         }
 
-        public void OnHeaderGUI()
-        {
-            EditorGUILayout.BeginHorizontal();
-            GUI.enabled = sceneHistory.Count >= 2;
-			if (GUILayout.Button("Back", GUILayout.Height(30)))
+        static void OnSceneGUI (SceneView sceneview) {
+            if (Event.current.button == 1)
             {
-                GoBack();
+                if (Event.current.type == EventType.MouseDown)
+                {
+                    var win = EditorWindow.GetWindow<SceneHistoryWindow>();
+                    GenericMenu menu = new GenericMenu();
+                    menu.AddItem(new GUIContent("Previous Scene"), false, GoBackMenu);
+                    foreach (var h in win.sceneHistory.items)
+                    {
+                        if (h.starred)
+                        {
+                            menu.AddItem(new GUIContent("starred/"+Path.GetFileNameWithoutExtension(h.first.path)), false, OnSceneMenu, h);
+                        }
+                    }
+                    menu.ShowAsContext();
+                }
             }
-            GUI.enabled = true;
-            EditorGUILayout.EndHorizontal();
         }
 
+        private static void OnSceneMenu(object h)
+        {
+            SceneHistoryItem hist = h as SceneHistoryItem;
+            EditorSceneManager.OpenScene(hist.first.path);
+        }
+
+        public void OnHeaderGUI()
+        {
+        }
+
+        private Vector3 scrollPos;
         void OnGUI()
         {
             OnHeaderGUI();
+            scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
 			#if !INTERNAL_REORDER
 			var listDrawer = new SceneHistoryDrawer(sceneHistory);
 			listDrawer.allowSceneObject = false;
@@ -284,11 +305,20 @@ namespace convinity
                     throw ex;
                 }
             }
+            EditorGUILayout.EndScrollView();
             OnFooterGUI();
         }
 
         void OnFooterGUI()
         {
+            EditorGUILayout.BeginHorizontal();
+            GUI.enabled = sceneHistory.Count >= 2;
+            if (GUILayout.Button("Back", GUILayout.Height(30)))
+            {
+                GoBack();
+            }
+            GUI.enabled = true;
+            EditorGUILayout.EndHorizontal();
             EditorGUILayout.BeginHorizontal();
 			if (EditorGUIUtil.IntField("Size", ref sceneHistory.maxSize))
 			{
