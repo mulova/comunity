@@ -8,8 +8,7 @@ namespace comunity
 		public static bool IsMobile(this RuntimePlatform platform)
 		{
 			return platform == RuntimePlatform.Android
-				||platform == RuntimePlatform.IPhonePlayer
-				||platform == RuntimePlatform.TizenPlayer;
+				||platform == RuntimePlatform.IPhonePlayer;
 		}
 		
 		public static bool IsStandalone(this RuntimePlatform platform)

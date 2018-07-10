@@ -32,8 +32,6 @@ namespace comunity
             }
         }
 
-        private bool auto = false;
-
         private static AssetBundlePath _inst;
         public static AssetBundlePath inst
         {
