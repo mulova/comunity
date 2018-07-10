@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using commons;
 using UnityEditor.SceneManagement;
 using UnityEditor;
+using UnityEngine.SceneManagement;
 
 namespace convinity
 {
@@ -15,6 +16,15 @@ namespace convinity
         public List<UnityObjId> list;
 		public SceneCamProperty camProperty;
         public bool starred;
+		public int activeIndex;
+
+		public UnityObjId activeScene
+		{
+			get
+			{
+				return list[activeIndex];
+			}
+		}
 
         public SceneHistoryItem(Object o)
         {
@@ -103,7 +113,11 @@ namespace convinity
         {
             for (int i = 1; i < list.Count; ++i)
             {
-                EditorSceneManager.OpenScene(list[i].path, OpenSceneMode.Additive);
+                var s = EditorSceneManager.OpenScene(list[i].path, OpenSceneMode.Additive);
+				if (activeIndex == i)
+				{
+					EditorSceneManager.SetActiveScene(s);
+				}
             }
         }
 
@@ -122,6 +136,15 @@ namespace convinity
                 return 0;
             }
         }
+
+		public void SetActiveScene(string path)
+		{
+			int index = list.FindIndex(id => id.path.EqualsIgnoreSeparator(path));
+			if (index >= 0)
+			{
+				activeIndex = index;
+			}
+		}
     }
 
 }

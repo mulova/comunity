@@ -19,6 +19,22 @@ namespace convinity
         private Object currentScene;
         private bool changed;
 
+		private bool valid
+		{
+			get
+			{
+				return !BuildPipeline.isBuildingPlayer;
+			}
+		}
+
+		public static SceneHistoryWindow instance
+		{
+			get
+			{
+				return EditorWindow.GetWindow<SceneHistoryWindow>();
+			}
+		}
+
         void OnEnable()
         {
 			var dir = Path.GetDirectoryName(PATH);
@@ -39,6 +55,7 @@ namespace convinity
 				EditorSceneManager.sceneOpening += OnSceneOpening;
 				EditorSceneManager.sceneOpened += OnSceneOpened;
 				EditorSceneManager.sceneClosing += OnSceneClosing;
+				EditorSceneManager.activeSceneChanged += OnActiveScene;
 				SceneManager.sceneLoaded += OnSceneLoaded;
 			}
 
@@ -67,6 +84,7 @@ namespace convinity
 			EditorSceneManager.sceneOpening -= OnSceneOpening;
 			EditorSceneManager.sceneOpened -= OnSceneOpened;
 			EditorSceneManager.sceneClosing -= OnSceneClosing;
+			EditorSceneManager.activeSceneChanged -= OnActiveScene;
 			SceneManager.sceneLoaded -= OnSceneLoaded;
 
             #if UNITY_2017_1_OR_NEWER
@@ -75,6 +93,21 @@ namespace convinity
             EditorApplication.playmodeStateChanged += ChangePlaymode;
             #endif
         }
+
+		private void OnActiveScene(Scene s1, Scene s2)
+		{
+			if (Application.isPlaying) {
+				return;
+			}
+			if (sceneHistory.Count == 0)
+			{
+				return;
+			}
+			if (!sceneHistory[0].activeScene.path.EqualsIgnoreSeparator(s2.path)) {
+				sceneHistory[0].SetActiveScene(s2.path);
+				sceneHistory.Save(PATH);
+			}
+		}
 
 		void OnPauseStateChanged(PauseState state)
 		{
@@ -226,15 +259,13 @@ namespace convinity
         [MenuItem("Tools/SceneView/Scene History")]
         private static void OpenWindow()
         {
-            var win = EditorWindow.GetWindow<SceneHistoryWindow>("Scene History");
-            win.Show();
+			instance.Show();
         }
 
-        [MenuItem("Tools/SceneView/Previous Scene %#&z")]
+        [MenuItem("Tools/SceneView/Previous Scene %#r")]
         private static void GoBackMenu()
         {
-            var win = EditorWindow.GetWindow<SceneHistoryWindow>();
-            win.GoBack();
+			instance.GoBack();
         }
 
         public void GoBack()
@@ -245,15 +276,18 @@ namespace convinity
             }
         }
 
+		private static bool drag;
         static void OnSceneGUI (SceneView sceneview) {
             if (Event.current.button == 1)
             {
-                if (Event.current.type == EventType.MouseDown)
-                {
-                    var win = EditorWindow.GetWindow<SceneHistoryWindow>();
+				if (Event.current.type == EventType.MouseDown) {
+					drag = false;				
+				} else if (Event.current.type == EventType.MouseDrag) {
+					drag = true;				
+				} else if (Event.current.type == EventType.MouseUp && !drag) {
                     GenericMenu menu = new GenericMenu();
                     menu.AddItem(new GUIContent("Previous Scene"), false, GoBackMenu);
-                    foreach (var h in win.sceneHistory.items)
+                    foreach (var h in instance.sceneHistory.items)
                     {
                         if (h.starred)
                         {
@@ -261,9 +295,19 @@ namespace convinity
                         }
                     }
                     menu.ShowAsContext();
+					Event.current.Use();
                 }
             }
         }
+
+		void OnInspectorUpdate() {
+			if (!Application.isPlaying)
+			{
+				// activeSceneChanged event is not available in Editor mode
+				var s = SceneManager.GetActiveScene();
+				OnActiveScene(s, s);
+			}
+		}
 
         private static void OnSceneMenu(object h)
         {
