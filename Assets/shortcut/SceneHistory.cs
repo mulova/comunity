@@ -138,7 +138,7 @@ namespace convinity
 				if (File.Exists(path))
 				{
 					var text = File.ReadAllText(path);
-					if (text != null)
+                    if (!string.IsNullOrEmpty(text))
 					{
 						return JsonUtility.FromJson<SceneHistory>(text);
 					}
