@@ -142,8 +142,8 @@ namespace comunity {
 				if (e.InnerException != null) {
 					e = e.InnerException;
 				}
-				Debug.LogError(e.Message+"\n"+e.StackTrace);
-				EditorUtility.DisplayDialog("Error", "Show error details in Editor log", "OK");
+                Debug.LogError(e.ToString());
+//				EditorUtility.DisplayDialog("Error", "Show error details in Editor log", "OK");
 			}
 		}
 
