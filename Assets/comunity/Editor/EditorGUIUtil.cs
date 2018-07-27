@@ -431,7 +431,7 @@ namespace comunity
 
         public static bool ObjectFieldReorderList<T>(List<T> list) where T : Object {
             #if INTERNAL_REORDER
-            ObjReorderList l = new ObjReorderList(null, list);
+            ObjReorderList<T> l = new ObjReorderList<T>(null, list);
             return l.Draw();
             #else
             return ObjectFieldList<T>(list);

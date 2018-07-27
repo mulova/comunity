@@ -1,4 +1,4 @@
-﻿#if !INTERNAL_REORDER
+﻿//#if !INTERNAL_REORDER
 using UnityEngine;
 using System.Collections;
 using comunity;
@@ -30,5 +30,4 @@ namespace convinity
         }
     }
 }
-#endif
-
+//#endif
