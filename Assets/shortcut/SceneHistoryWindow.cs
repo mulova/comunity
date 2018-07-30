@@ -18,6 +18,7 @@ namespace convinity
         private const string PATH = "Library/Shortcut/history";
         private Object currentScene;
         private bool changed;
+        private string filterName;
 
 		private bool valid
 		{
@@ -317,6 +318,7 @@ namespace convinity
 
         public void OnHeaderGUI()
         {
+            EditorGUIUtil.TextField("Name", ref filterName);
         }
 
         private Vector3 scrollPos;
@@ -324,19 +326,21 @@ namespace convinity
         {
             OnHeaderGUI();
             scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
-			#if !INTERNAL_REORDER
-			var listDrawer = new SceneHistoryDrawer(sceneHistory);
-			listDrawer.allowSceneObject = false;
-			#else
-			var listDrawer = new SceneHistoryReorderList(sceneHistory);
-			#endif
+			#if INTERNAL_REORDER
+            var listDrawer = new SceneHistoryReorderList(sceneHistory);
+            #else
+            var listDrawer = new SceneHistoryDrawer(sceneHistory);
+            listDrawer.allowSceneObject = false;
+            #endif
+            Predicate<SceneHistoryItem> filter = h => h.first != null && h.first.path != null && h.first.path.IndexOfIgnoreCase(filterName)>=0;
+            listDrawer.Filter(filter);
             try
             {
-				#if !INTERNAL_REORDER
-				listDrawer.Draw(ReorderableListFlags.ShowIndices|ReorderableListFlags.HideAddButton|ReorderableListFlags.DisableContextMenu);
-				if (listDrawer.changed)
-				#else
-				if (listDrawer.Draw())
+				#if INTERNAL_REORDER
+                if (listDrawer.Draw())
+                #else
+                listDrawer.Draw(ReorderableListFlags.ShowIndices|ReorderableListFlags.HideAddButton|ReorderableListFlags.DisableContextMenu);
+                if (listDrawer.changed)
 				#endif
 				{
 					sceneHistory.Save(PATH);

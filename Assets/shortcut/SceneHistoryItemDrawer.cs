@@ -32,7 +32,7 @@ namespace convinity
                 item.camProperty.Apply();
             }
             bool starred = item.starred;
-			starred = EditorGUI.Toggle(area2[1], starred);
+			item.starred = EditorGUI.Toggle(area2[1], starred);
 //			if (GUI.Button(area2[1], starred ? texOn: texOff))
 //			{
 //				item.starred = !item.starred;
