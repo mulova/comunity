@@ -292,7 +292,7 @@ namespace convinity
                     {
                         if (h.starred)
                         {
-                            menu.AddItem(new GUIContent("starred/"+Path.GetFileNameWithoutExtension(h.first.path)), false, OnSceneMenu, h);
+                            menu.AddItem(new GUIContent(Path.GetFileNameWithoutExtension(h.first.path)), false, OnSceneMenu, h);
                         }
                     }
                     menu.ShowAsContext();

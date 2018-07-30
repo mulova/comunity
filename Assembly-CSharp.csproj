@@ -51,10 +51,30 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\AssetBundleSample\Scripts\LoadAssets.cs" />
-     <Compile Include="Assets\AssetBundleSample\Scripts\LoadScenes.cs" />
-     <Compile Include="Assets\AssetBundleSample\Scripts\LoadTanks.cs" />
-     <Compile Include="Assets\AssetBundleSample\Scripts\LoadVariants.cs" />
+     <Compile Include="Assets\scenehistorian\commons\ArrayUtil.cs" />
+     <Compile Include="Assets\scenehistorian\commons\AssetUtil.cs" />
+     <Compile Include="Assets\scenehistorian\commons\CollectionEx.cs" />
+     <Compile Include="Assets\scenehistorian\commons\EnumUtil.cs" />
+     <Compile Include="Assets\scenehistorian\commons\FileType.cs" />
+     <Compile Include="Assets\scenehistorian\commons\IDictionaryEx.cs" />
+     <Compile Include="Assets\scenehistorian\commons\IPredicate.cs" />
+     <Compile Include="Assets\scenehistorian\commons\ListEx.cs" />
+     <Compile Include="Assets\scenehistorian\commons\MultiKeyMap.cs" />
+     <Compile Include="Assets\scenehistorian\commons\Multimap.cs" />
+     <Compile Include="Assets\scenehistorian\commons\NamePredicate.cs" />
+     <Compile Include="Assets\scenehistorian\commons\PathUtil.cs" />
+     <Compile Include="Assets\scenehistorian\commons\ReflectionUtil.cs" />
+     <Compile Include="Assets\scenehistorian\commons\StringEx.cs" />
+     <Compile Include="Assets\scenehistorian\commons\StringUtil.cs" />
+     <Compile Include="Assets\scenehistorian\SceneCamHistory.cs" />
+     <Compile Include="Assets\scenehistorian\SceneCamProperty.cs" />
+     <Compile Include="Assets\scenehistorian\SceneCamPropertyDrawer.cs" />
+     <Compile Include="Assets\scenehistorian\SceneHistory.cs" />
+     <Compile Include="Assets\scenehistorian\SceneHistoryDrawer.cs" />
+     <Compile Include="Assets\scenehistorian\SceneHistoryItem.cs" />
+     <Compile Include="Assets\scenehistorian\SceneHistoryItemDrawer.cs" />
+     <Compile Include="Assets\scenehistorian\SceneHistoryReorderList.cs" />
+     <Compile Include="Assets\scenehistorian\SceneHistoryWindow.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Hub/Editor/2017.3.1f1/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -150,46 +170,42 @@
  </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="ani-editor.csproj">
-      <Project>{3C002EDC-6859-498C-8C24-5CB284215728}</Project>      <Name>ani-editor</Name>    </ProjectReference>
-    <ProjectReference Include="commons.csproj">
-      <Project>{B59A5B10-07C0-4CCB-78A3-A56495FD5CE6}</Project>      <Name>commons</Name>    </ProjectReference>
-    <ProjectReference Include="convinity-editor.csproj">
-      <Project>{AC6F1F73-0E9B-B0C4-2873-776BFF15E7FF}</Project>      <Name>convinity-editor</Name>    </ProjectReference>
-    <ProjectReference Include="audio-editor.csproj">
-      <Project>{7C10F73D-0E99-7C37-D6C3-12E75BEC6814}</Project>      <Name>audio-editor</Name>    </ProjectReference>
-    <ProjectReference Include="build.csproj">
-      <Project>{BE8E0CBF-53B9-7F9D-DFA9-EF65BE486403}</Project>      <Name>build</Name>    </ProjectReference>
-    <ProjectReference Include="effect-editor.csproj">
-      <Project>{A994C05A-592E-7E79-0D78-9ACC4675C777}</Project>      <Name>effect-editor</Name>    </ProjectReference>
-    <ProjectReference Include="effect.csproj">
-      <Project>{59D24771-3370-2D55-90B1-627B34180EF3}</Project>      <Name>effect</Name>    </ProjectReference>
-    <ProjectReference Include="etc.csproj">
-      <Project>{1C031F9F-6D2A-86C1-F16F-48BAF732DDB2}</Project>      <Name>etc</Name>    </ProjectReference>
     <ProjectReference Include="Shortcut.csproj">
       <Project>{16E36A82-E710-1092-576D-338CC7E8217C}</Project>      <Name>Shortcut</Name>    </ProjectReference>
     <ProjectReference Include="uguiex.csproj">
       <Project>{67DA4179-F880-AC47-8D7D-29A0D8B76514}</Project>      <Name>uguiex</Name>    </ProjectReference>
-    <ProjectReference Include="ani.csproj">
-      <Project>{4D4B7033-4B33-4137-980A-25DE9E26C05B}</Project>      <Name>ani</Name>    </ProjectReference>
-    <ProjectReference Include="comunity-editor.csproj">
-      <Project>{479F44D8-44C6-E2D7-A9E5-BF8D470EB7B3}</Project>      <Name>comunity-editor</Name>    </ProjectReference>
+    <ProjectReference Include="audio-editor.csproj">
+      <Project>{7C10F73D-0E99-7C37-D6C3-12E75BEC6814}</Project>      <Name>audio-editor</Name>    </ProjectReference>
     <ProjectReference Include="etc-Editor.csproj">
       <Project>{206CB35A-0D6E-76D6-9109-C4D1F074F469}</Project>      <Name>etc-Editor</Name>    </ProjectReference>
-    <ProjectReference Include="comunity.csproj">
-      <Project>{DCB2F120-C915-B5D1-C685-52412D7353FA}</Project>      <Name>comunity</Name>    </ProjectReference>
-    <ProjectReference Include="audio.csproj">
-      <Project>{A3523514-4A98-4712-9C47-EFCF58A8CCFE}</Project>      <Name>audio</Name>    </ProjectReference>
-    <ProjectReference Include="uguiex-editor.csproj">
-      <Project>{2879C03D-C890-1AB9-ECC8-1A382796D80C}</Project>      <Name>uguiex-editor</Name>    </ProjectReference>
-    <ProjectReference Include="assetbundlemanager-editor.csproj">
-      <Project>{2F240BFE-DCCF-78F8-FF5F-CBFCFE751332}</Project>      <Name>assetbundlemanager-editor</Name>    </ProjectReference>
-    <ProjectReference Include="assetbunlemanager.csproj">
-      <Project>{3CD42069-AC64-D61B-6C5F-FD4D7CAF99BE}</Project>      <Name>assetbunlemanager</Name>    </ProjectReference>
     <ProjectReference Include="AssetBundleManager.csproj">
       <Project>{4EB79D97-23E0-7B03-55C8-FC32C3859938}</Project>      <Name>AssetBundleManager</Name>    </ProjectReference>
+    <ProjectReference Include="effect.csproj">
+      <Project>{59D24771-3370-2D55-90B1-627B34180EF3}</Project>      <Name>effect</Name>    </ProjectReference>
+    <ProjectReference Include="ani.csproj">
+      <Project>{4D4B7033-4B33-4137-980A-25DE9E26C05B}</Project>      <Name>ani</Name>    </ProjectReference>
+    <ProjectReference Include="ani-editor.csproj">
+      <Project>{3C002EDC-6859-498C-8C24-5CB284215728}</Project>      <Name>ani-editor</Name>    </ProjectReference>
+    <ProjectReference Include="commons.csproj">
+      <Project>{B59A5B10-07C0-4CCB-78A3-A56495FD5CE6}</Project>      <Name>commons</Name>    </ProjectReference>
+    <ProjectReference Include="build.csproj">
+      <Project>{BE8E0CBF-53B9-7F9D-DFA9-EF65BE486403}</Project>      <Name>build</Name>    </ProjectReference>
+    <ProjectReference Include="audio.csproj">
+      <Project>{A3523514-4A98-4712-9C47-EFCF58A8CCFE}</Project>      <Name>audio</Name>    </ProjectReference>
+    <ProjectReference Include="comunity.csproj">
+      <Project>{DCB2F120-C915-B5D1-C685-52412D7353FA}</Project>      <Name>comunity</Name>    </ProjectReference>
+    <ProjectReference Include="convinity-editor.csproj">
+      <Project>{AC6F1F73-0E9B-B0C4-2873-776BFF15E7FF}</Project>      <Name>convinity-editor</Name>    </ProjectReference>
+    <ProjectReference Include="effect-editor.csproj">
+      <Project>{A994C05A-592E-7E79-0D78-9ACC4675C777}</Project>      <Name>effect-editor</Name>    </ProjectReference>
+    <ProjectReference Include="comunity-editor.csproj">
+      <Project>{479F44D8-44C6-E2D7-A9E5-BF8D470EB7B3}</Project>      <Name>comunity-editor</Name>    </ProjectReference>
+    <ProjectReference Include="uguiex-editor.csproj">
+      <Project>{2879C03D-C890-1AB9-ECC8-1A382796D80C}</Project>      <Name>uguiex-editor</Name>    </ProjectReference>
     <ProjectReference Include="AssetBundleManagerEditor.csproj">
       <Project>{EE58A0C2-BA6C-B22C-81A9-E791EEFA4072}</Project>      <Name>AssetBundleManagerEditor</Name>    </ProjectReference>
+    <ProjectReference Include="etc.csproj">
+      <Project>{1C031F9F-6D2A-86C1-F16F-48BAF732DDB2}</Project>      <Name>etc</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
