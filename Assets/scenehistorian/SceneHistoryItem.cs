@@ -8,7 +8,7 @@ using UnityEditor.SceneManagement;
 using UnityEditor;
 using UnityEngine.SceneManagement;
 
-namespace convinity
+namespace scenehistorian
 {
     [Serializable]
     public class SceneHistoryItem : IComparable<SceneHistoryItem>

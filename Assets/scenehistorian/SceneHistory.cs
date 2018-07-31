@@ -6,7 +6,7 @@ using comunity;
 using Object = UnityEngine.Object;
 using System.IO;
 
-namespace convinity
+namespace scenehistorian
 {
 	[System.Serializable]
 	public class SceneHistory

@@ -9,7 +9,7 @@ using UnityEditorInternal;
 using commons;
 using comunity;
 
-namespace convinity {
+namespace shortcut {
 
 	public class ShortcutTab : EditorTab {
 		

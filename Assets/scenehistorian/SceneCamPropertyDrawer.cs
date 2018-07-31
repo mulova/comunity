@@ -4,7 +4,7 @@ using System.Collections;
 using comunity;
 using UnityEditor;
 
-namespace convinity
+namespace scenehistorian
 {
     public class SceneCamPropertyDrawer : ItemDrawer<SceneCamProperty>
     {

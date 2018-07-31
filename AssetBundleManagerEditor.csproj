@@ -9,10 +9,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{16E36A82-E710-1092-576D-338CC7E8217C}</ProjectGuid>
+    <ProjectGuid>{EE58A0C2-BA6C-B22C-81A9-E791EEFA4072}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Shortcut</AssemblyName>
+    <AssemblyName>AssetBundleManagerEditor</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>Assets</BaseDirectory>
@@ -51,10 +51,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\shortcut\ShortcutSection.cs" />
-     <Compile Include="Assets\shortcut\ShortcutTab.cs" />
-     <Compile Include="Assets\shortcut\ShortcutWindow.cs" />
-     <None Include="Assets\shortcut\Shortcut.asmdef" />
+     <Compile Include="Assets\comunity\AssetBundleManager\Editor\AssetbundlesMenuItems.cs" />
+     <Compile Include="Assets\comunity\AssetBundleManager\Editor\BuildScript.cs" />
+     <Compile Include="Assets\comunity\AssetBundleManager\Editor\ExecuteInternalMono.cs" />
+     <Compile Include="Assets\comunity\AssetBundleManager\Editor\LaunchAssetBundleServer.cs" />
+     <None Include="Assets\comunity\AssetBundleManager\Editor\AssetBundleManagerEditor.asmdef" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Hub/Editor/2017.3.1f1/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -150,12 +151,8 @@
  </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="commons.csproj">
-      <Project>{B59A5B10-07C0-4CCB-78A3-A56495FD5CE6}</Project>      <Name>commons</Name>    </ProjectReference>
-    <ProjectReference Include="comunity.csproj">
-      <Project>{DCB2F120-C915-B5D1-C685-52412D7353FA}</Project>      <Name>comunity</Name>    </ProjectReference>
-    <ProjectReference Include="comunity-editor.csproj">
-      <Project>{479F44D8-44C6-E2D7-A9E5-BF8D470EB7B3}</Project>      <Name>comunity-editor</Name>    </ProjectReference>
+    <ProjectReference Include="AssetBundleManager.csproj">
+      <Project>{4EB79D97-23E0-7B03-55C8-FC32C3859938}</Project>      <Name>AssetBundleManager</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

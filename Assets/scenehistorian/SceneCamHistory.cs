@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace convinity
+namespace scenehistorian
 {
     [System.Serializable]
     public class SceneCamHistory

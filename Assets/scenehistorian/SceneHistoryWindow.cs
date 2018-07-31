@@ -10,7 +10,7 @@ using commons;
 using UnityEngine.SceneManagement;
 using UnityEditor.SceneManagement;
 
-namespace convinity
+namespace scenehistorian
 {
     public class SceneHistoryWindow : EditorWindow
     {
@@ -32,7 +32,7 @@ namespace convinity
 		{
 			get
 			{
-				return EditorWindow.GetWindow<SceneHistoryWindow>();
+				return EditorWindow.GetWindow<SceneHistoryWindow>("SceneHistorian");
 			}
 		}
 

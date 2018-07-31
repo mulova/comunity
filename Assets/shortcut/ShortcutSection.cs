@@ -6,7 +6,7 @@ using Object = UnityEngine.Object;
 using commons;
 using comunity;
 
-namespace convinity {
+namespace shortcut {
 	[System.Serializable]
 	public class ShortcutSection {
 		public static readonly string ASSET_EXT = ".asc";

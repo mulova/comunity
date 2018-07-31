@@ -12,7 +12,7 @@ using UnityEngine.SceneManagement;
 using UnityEditor.SceneManagement;
 using System.Runtime.CompilerServices;
 
-namespace convinity
+namespace scenehistorian
 {
 
     public class SceneCamTab : EditorTab
