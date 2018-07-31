@@ -15,7 +15,7 @@ namespace scenehistorian
     public class SceneHistoryWindow : EditorWindow
     {
         private SceneHistory sceneHistory;
-        private const string PATH = "Library/Shortcut/history";
+        private const string PATH = "Library/scenehistorian/history";
         private Object currentScene;
         private bool changed;
         private string filterName;
@@ -257,13 +257,13 @@ namespace scenehistorian
             changed = false;
         }
 
-        [MenuItem("Tools/SceneView/Scene History")]
+        [MenuItem("Tools/SceneHistorian/Scene History")]
         private static void OpenWindow()
         {
 			instance.Show();
         }
 
-        [MenuItem("Tools/SceneView/Previous Scene %#r")]
+        [MenuItem("Tools/SceneHistorian/Previous Scene %#r")]
         private static void GoBackMenu()
         {
 			instance.GoBack();

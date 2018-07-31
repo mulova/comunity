@@ -14,9 +14,22 @@ namespace scenehistorian
 
         public override bool DrawItem(Rect rect, int index, SceneCamProperty item, out SceneCamProperty newItem)
         {
-            Rect[] r1 = EditorGUIUtil.SplitRectHorizontally(rect, 0.7f);
+            Rect[] r1 = EditorGUIUtil.SplitRectHorizontally(rect, -100);
+            Rect[] r2 = EditorGUIUtil.SplitRectHorizontally(r1[1], 50);
+            if (item == null)
+            {
+                item = new SceneCamProperty();
+                item.Collect();
+            }
             string name = EditorGUI.TextField(r1[0], item.id);
-            GUI.Button(r1[1], "Apply");
+            if (GUI.Button(r2[0], "Save"))
+            {
+                item.Collect();
+            }
+            if (GUI.Button(r2[1], "Apply"))
+            {
+                item.Apply();
+            }
             newItem = item;
             if (name != item.id)
             {
@@ -26,7 +39,6 @@ namespace scenehistorian
             {
                 return false;
             }
-            return name != item.id;
         }
     }
 }

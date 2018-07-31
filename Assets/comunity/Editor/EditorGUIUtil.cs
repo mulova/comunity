@@ -640,7 +640,13 @@ namespace comunity
         {
             Rect left = src;
             Rect right = src;
-            left.width = pixel;
+            if (pixel > 0)
+            {
+                left.width = pixel;
+            } else
+            {
+                left.width = src.width+pixel;
+            }
             right = src;
             right.x = left.x+left.width;
             right.width = src.width-left.width;

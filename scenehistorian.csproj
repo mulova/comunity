@@ -55,6 +55,7 @@
      <Compile Include="Assets\scenehistorian\SceneCamProperty.cs" />
      <Compile Include="Assets\scenehistorian\SceneCamPropertyDrawer.cs" />
      <Compile Include="Assets\scenehistorian\SceneCamTab.cs" />
+     <Compile Include="Assets\scenehistorian\SceneCamWindow.cs" />
      <Compile Include="Assets\scenehistorian\SceneHistory.cs" />
      <Compile Include="Assets\scenehistorian\SceneHistoryDrawer.cs" />
      <Compile Include="Assets\scenehistorian\SceneHistoryItem.cs" />
