@@ -90,6 +90,21 @@ namespace comunity
             return changed;
         }
         
+        public static bool SearchField(string label, ref string str) {
+            string s = str;
+            EditorGUILayout.BeginHorizontal();
+            EditorGUIUtil.TextField("", ref s, new GUIStyle("SearchTextField"));
+            if (GUILayout.Button("", "SearchCancelButton", GUILayout.Width(18f)))
+            {
+                s = "";
+                GUIUtility.keyboardControl = 0;
+            }
+            EditorGUILayout.EndHorizontal();
+            bool changed = s != str;
+            str = s;
+            return changed;
+        }
+
         public static bool TextField(string label, ref string str, params GUILayoutOption[] options) {
             return TextField(label, ref str, EditorStyles.textField, options);
         }
@@ -101,11 +116,9 @@ namespace comunity
             string newStr = label == null?
                 EditorGUILayout.TextField(str, style, options):
                 EditorGUILayout.TextField(label, str, style, options);
-            if (newStr != str) {
-                str = newStr;
-                return true;
-            }
-            return false;
+            bool changed = newStr != str;
+            str = newStr;
+            return changed;
         }
         
         public static bool TextArea(string title, ref string str, params GUILayoutOption[] options) {

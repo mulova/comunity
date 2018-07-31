@@ -318,7 +318,7 @@ namespace scenehistorian
 
         public void OnHeaderGUI()
         {
-            EditorGUIUtil.TextField("Name", ref filterName);
+            EditorGUIUtil.SearchField("", ref filterName);
         }
 
         private Vector3 scrollPos;
