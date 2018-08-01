@@ -19,6 +19,7 @@ namespace scenehistorian
     {
         private const string PATH = "Library/Shortcut/scene_cam";
         private SceneCamHistory history;
+        private ListDrawer<SceneCamProperty> listDrawer;
 
         public SceneCamTab(object id, TabbedEditorWindow window) : base(id, window)
         {
@@ -27,6 +28,7 @@ namespace scenehistorian
         public override void OnEnable()
         {
             history = SceneCamHistory.Load(PATH);
+            listDrawer = new ListDrawer<SceneCamProperty>(history.items, new SceneCamPropertyDrawer());
         }
 
         public override void OnDisable()
@@ -75,7 +77,6 @@ namespace scenehistorian
 
         public override void OnInspectorGUI()
         {
-            var listDrawer = new ListDrawer<SceneCamProperty>(history.items, new SceneCamPropertyDrawer());
             try
             {
 				if (listDrawer.Draw())

@@ -19,6 +19,7 @@ namespace scenehistorian
         private Object currentScene;
         private bool changed;
         private string filterName;
+        private SceneHistoryDrawer listDrawer;
 
 		private bool valid
 		{
@@ -44,6 +45,7 @@ namespace scenehistorian
 				Directory.CreateDirectory(dir);
 			}
             sceneHistory = SceneHistory.Load(PATH);
+            listDrawer = new SceneHistoryDrawer(sceneHistory);
 			OnSceneOpened(EditorSceneManager.GetActiveScene(), OpenSceneMode.Single);
             #if UNITY_2018_1_OR_NEWER
             EditorApplication.hierarchyChanged += OnSceneObjChange;
@@ -329,7 +331,6 @@ namespace scenehistorian
 			#if INTERNAL_REORDER
             var listDrawer = new SceneHistoryReorderList(sceneHistory);
             #else
-            var listDrawer = new SceneHistoryDrawer(sceneHistory);
             listDrawer.allowSceneObject = false;
             #endif
             Predicate<SceneHistoryItem> filter = h => h.first != null && h.first.path != null && h.first.path.IndexOfIgnoreCase(filterName)>=0;

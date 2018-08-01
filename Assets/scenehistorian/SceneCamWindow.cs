@@ -24,7 +24,7 @@ namespace scenehistorian
         {
             get
             {
-                return EditorWindow.GetWindow<SceneCamWindow>("SceneCam");
+                return EditorWindow.GetWindow<SceneCamWindow>("Scene Camera");
             }
         }
 
