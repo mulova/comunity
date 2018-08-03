@@ -1,4 +1,5 @@
 ﻿//#if !INTERNAL_REORDER
+//#define CONFIRM
 using UnityEngine;
 using System.Collections;
 using comunity;
@@ -9,7 +10,7 @@ namespace scenehistorian
 {
     public class SceneCamPropertyDrawer : ItemDrawer<SceneCamProperty>
     {
-        public const int CONFIRM_PERIOD = 2;
+        public const int CONFIRM_PERIOD = 0;
 
 		public SceneCamPropertyDrawer()
 		{
@@ -19,20 +20,22 @@ namespace scenehistorian
         private static SceneCamProperty toSave;
         public override bool DrawItem(Rect rect, int index, SceneCamProperty item, out SceneCamProperty newItem)
         {
+            bool changed = false;
             Rect[] r1 = EditorGUIUtil.SplitRectHorizontally(rect, -100);
-            Rect[] r2 = EditorGUIUtil.SplitRectHorizontally(r1[1], 60);
+            Rect[] r2 = EditorGUIUtil.SplitRectHorizontally(r1[1], 70);
             if (item == null)
             {
                 item = new SceneCamProperty();
                 item.Collect();
             }
             string name = EditorGUI.TextField(r1[0], item.id);
-            if (GUI.Button(r2[0], "Apply"))
+            if (GUI.Button(r2[0], "Load", EditorStyles.toolbarButton))
             {
                 item.Apply();
             }
-            TimeSpan diff = System.DateTime.Now-time;
             Color bg = GUI.backgroundColor;
+            #if CONFIRM
+            TimeSpan diff = System.DateTime.Now-time;
             if (diff.TotalSeconds < CONFIRM_PERIOD)
             {
                 if (toSave == item)
@@ -43,8 +46,10 @@ namespace scenehistorian
             {
                 toSave = null;
             }
-            if (GUI.Button(r2[1], "Save"))
+            #endif
+            if (GUI.Button(r2[1], "Save", EditorStyles.toolbarButton))
             {
+                #if CONFIRM
                 if (toSave == item)
                 {
                     item.Collect();
@@ -54,6 +59,9 @@ namespace scenehistorian
                     toSave = item;
                 }
                 time = System.DateTime.Now;
+                #else
+                changed = true;
+                #endif
             }
             GUI.backgroundColor = bg;
             newItem = item;
@@ -63,7 +71,7 @@ namespace scenehistorian
                 return true;
             } else
             {
-                return false;
+                return changed;
             }
         }
     }
