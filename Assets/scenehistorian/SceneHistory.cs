@@ -13,12 +13,43 @@ namespace scenehistorian
 	{
 		[SerializeField] private List<SceneHistoryItem> _items = new List<SceneHistoryItem>();
 		[SerializeField] internal int maxSize = 100;
+		[SerializeField] internal bool sort;
+		private List<SceneHistoryItem> _sorted = new List<SceneHistoryItem>();
+
+		private class SceneNameSorter : IComparer<SceneHistoryItem>
+		{
+			public int Compare(SceneHistoryItem x,SceneHistoryItem y)
+			{
+				if (x != null)
+				{
+					if (y != null)
+					{
+						return x.ToString().CompareTo(y.ToString());
+					} else
+					{
+						return -1;
+					}
+				} else
+				{
+					return 1;
+				}
+			}
+		}
 
 		public List<SceneHistoryItem> items
 		{
 			get
 			{
-				return _items;
+				if (sort)
+				{
+					_sorted.Clear();
+					_sorted.AddRange(_items);
+					_sorted.Sort(new SceneNameSorter());
+					return _sorted;
+				} else
+				{
+					return _items;
+				}
 			}
 		}
 

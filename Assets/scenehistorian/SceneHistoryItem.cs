@@ -123,7 +123,12 @@ namespace scenehistorian
 
 		public override string ToString()
 		{
-			return list[0].path;
+			string path = list[0].path;
+			if (path != null) {
+				return path;
+			} else {
+				return string.Empty;
+			}
 		}
 
         public int CompareTo(SceneHistoryItem other)

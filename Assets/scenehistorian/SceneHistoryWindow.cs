@@ -320,7 +320,13 @@ namespace scenehistorian
 
         public void OnHeaderGUI()
         {
+			EditorGUILayout.BeginHorizontal();
             EditorGUIUtil.SearchField("", ref filterName);
+			if (EditorGUIUtil.Toggle(null, ref sceneHistory.sort, GUILayout.Width(20)))
+			{
+				sceneHistory.Save(PATH);
+			}
+			EditorGUILayout.EndHorizontal();
         }
 
         private Vector3 scrollPos;
