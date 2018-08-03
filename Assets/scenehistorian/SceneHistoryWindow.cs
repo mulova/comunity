@@ -67,7 +67,16 @@ namespace scenehistorian
             #else
             EditorApplication.playmodeStateChanged += ChangePlaymode;
             #endif
-            SceneView.onSceneGUIDelegate += OnSceneGUI;
+            SceneViewMenu.AddContextMenu(menu=> {
+                menu.AddItem(new GUIContent("Previous Scene"), false, GoBackMenu);
+                foreach (var h in instance.sceneHistory.items)
+                {
+                    if (h.starred)
+                    {
+                        menu.AddItem(new GUIContent("scenes/"+Path.GetFileNameWithoutExtension(h.first.path)), false, OnSceneMenu, h);
+                    }
+                }
+            }, 2);
         }
 
         void OnDisable()
@@ -279,30 +288,6 @@ namespace scenehistorian
             }
         }
 
-		private static bool drag;
-        static void OnSceneGUI (SceneView sceneview) {
-            if (Event.current.button == 1)
-            {
-				if (Event.current.type == EventType.MouseDown) {
-					drag = false;				
-				} else if (Event.current.type == EventType.MouseDrag) {
-					drag = true;				
-				} else if (Event.current.type == EventType.MouseUp && !drag) {
-                    GenericMenu menu = new GenericMenu();
-                    menu.AddItem(new GUIContent("Previous Scene"), false, GoBackMenu);
-                    foreach (var h in instance.sceneHistory.items)
-                    {
-                        if (h.starred)
-                        {
-                            menu.AddItem(new GUIContent(Path.GetFileNameWithoutExtension(h.first.path)), false, OnSceneMenu, h);
-                        }
-                    }
-                    menu.ShowAsContext();
-					Event.current.Use();
-                }
-            }
-        }
-
 		void OnInspectorUpdate() {
 			if (!Application.isPlaying)
 			{
@@ -312,7 +297,7 @@ namespace scenehistorian
 			}
 		}
 
-        private static void OnSceneMenu(object h)
+        private  void OnSceneMenu(object h)
         {
             SceneHistoryItem hist = h as SceneHistoryItem;
             EditorSceneManager.OpenScene(hist.first.path);

@@ -42,6 +42,12 @@ namespace scenehistorian
             #else
             EditorApplication.playmodeStateChanged += ChangePlaymode;
             #endif
+            SceneViewMenu.AddContextMenu(menu=> {
+                foreach (var h in instance.history.items)
+                {
+                    menu.AddItem(new GUIContent("cam/"+h.id), false, OnCamMenu, h);
+                }
+            }, 1);
         }
 
         void OnDisable()
@@ -56,6 +62,12 @@ namespace scenehistorian
             {
                 history.Save(PATH);
             }
+        }
+
+        private void OnCamMenu(object h)
+        {
+            SceneCamProperty p = h as SceneCamProperty;
+            p.Apply();
         }
 
         private void ChangePlayMode(PlayModeStateChange stateChange)
