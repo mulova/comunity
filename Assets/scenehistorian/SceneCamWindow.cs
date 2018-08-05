@@ -37,11 +37,6 @@ namespace scenehistorian
         void OnEnable()
         {
             history = SceneCamHistory.Load(PATH);
-            #if UNITY_2017_1_OR_NEWER
-            EditorApplication.playModeStateChanged += ChangePlayMode;
-            #else
-            EditorApplication.playmodeStateChanged += ChangePlaymode;
-            #endif
             SceneViewMenu.AddContextMenu(menu=> {
                 foreach (var h in instance.history.items)
                 {
@@ -52,11 +47,6 @@ namespace scenehistorian
 
         void OnDisable()
         {
-            #if UNITY_2017_1_OR_NEWER
-            EditorApplication.playModeStateChanged += ChangePlayMode;
-            #else
-            EditorApplication.playmodeStateChanged += ChangePlaymode;
-            #endif
             // Enter play mode
             if (!Application.isPlaying)
             {
@@ -68,21 +58,6 @@ namespace scenehistorian
         {
             SceneCamProperty p = h as SceneCamProperty;
             p.Apply();
-        }
-
-        private void ChangePlayMode(PlayModeStateChange stateChange)
-        {
-			if (BuildPipeline.isBuildingPlayer)
-			{
-				return;
-			}
-			if (stateChange == PlayModeStateChange.EnteredEditMode)
-			{
-				if (history.Count > 0)
-				{
-					history[0].Apply();
-				}
-			}
         }
 
         void OnHeaderGUI()
@@ -115,6 +90,5 @@ namespace scenehistorian
             EditorGUILayout.EndScrollView();
             OnFooterGUI();
         }
-
     }
 }

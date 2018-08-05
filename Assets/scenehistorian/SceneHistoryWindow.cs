@@ -20,6 +20,7 @@ namespace scenehistorian
         private bool changed;
         private string filterName;
         private SceneHistoryDrawer listDrawer;
+        private const bool SHOW_SIZE = false;
 
 		private bool valid
 		{
@@ -353,26 +354,29 @@ namespace scenehistorian
         {
             EditorGUILayout.BeginHorizontal();
             GUI.enabled = sceneHistory.Count >= 2;
-            if (GUILayout.Button("Back", GUILayout.Height(30)))
+            if (GUILayout.Button("Back", GUILayout.Height(20)))
             {
                 GoBack();
             }
             GUI.enabled = true;
-            EditorGUILayout.EndHorizontal();
-            EditorGUILayout.BeginHorizontal();
-			if (EditorGUIUtil.IntField("Size", ref sceneHistory.maxSize))
-			{
-				if (sceneHistory.maxSize < 2)
-				{
-					sceneHistory.maxSize = 2;
-				}
-			}
             if (GUILayout.Button("Clear"))
             {
                 sceneHistory.Clear();
                 File.Delete(PATH);
             }
             EditorGUILayout.EndHorizontal();
+            if (SHOW_SIZE)
+            {
+                EditorGUILayout.BeginHorizontal();
+                if (EditorGUIUtil.IntField("Size", ref sceneHistory.maxSize))
+                {
+                    if (sceneHistory.maxSize < 2)
+                    {
+                        sceneHistory.maxSize = 2;
+                    }
+                }
+                EditorGUILayout.EndHorizontal();
+            }
         }
     }
 }

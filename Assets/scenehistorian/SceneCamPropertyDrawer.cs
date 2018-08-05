@@ -10,7 +10,7 @@ namespace scenehistorian
 {
     public class SceneCamPropertyDrawer : ItemDrawer<SceneCamProperty>
     {
-        public const int CONFIRM_PERIOD = 0;
+        public const int CONFIRM_PERIOD = 2;
 
 		public SceneCamPropertyDrawer()
 		{
@@ -60,6 +60,7 @@ namespace scenehistorian
                 }
                 time = System.DateTime.Now;
                 #else
+                item.Collect();
                 changed = true;
                 #endif
             }
