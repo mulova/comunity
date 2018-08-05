@@ -11,9 +11,13 @@ namespace scenehistorian
     public class SceneCamPropertyDrawer : ItemDrawer<SceneCamProperty>
     {
         public const int CONFIRM_PERIOD = 2;
+        private GUIContent saveIcon;
+        private GUIContent loadIcon;
 
 		public SceneCamPropertyDrawer()
 		{
+            saveIcon = new GUIContent(EditorGUIUtility.FindTexture("SceneLoadIn"), "Save");
+            loadIcon = new GUIContent(EditorGUIUtility.FindTexture("SceneLoadOut"), "Load");
 		}
 
         private static DateTime time;
@@ -21,15 +25,15 @@ namespace scenehistorian
         public override bool DrawItem(Rect rect, int index, SceneCamProperty item, out SceneCamProperty newItem)
         {
             bool changed = false;
-            Rect[] r1 = EditorGUIUtil.SplitRectHorizontally(rect, -100);
-            Rect[] r2 = EditorGUIUtil.SplitRectHorizontally(r1[1], 70);
+            Rect[] r1 = EditorGUIUtil.SplitRectHorizontally(rect, -60);
+            Rect[] r2 = EditorGUIUtil.SplitRectHorizontally(r1[1], 40);
             if (item == null)
             {
                 item = new SceneCamProperty();
                 item.Collect();
             }
             string name = EditorGUI.TextField(r1[0], item.id);
-            if (GUI.Button(r2[0], "Load", EditorStyles.toolbarButton))
+            if (GUI.Button(r2[0], loadIcon, EditorStyles.toolbarButton))
             {
                 item.Apply();
             }
@@ -47,7 +51,7 @@ namespace scenehistorian
                 toSave = null;
             }
             #endif
-            if (GUI.Button(r2[1], "Save", EditorStyles.toolbarButton))
+            if (GUI.Button(r2[1], saveIcon, EditorStyles.toolbarButton))
             {
                 #if CONFIRM
                 if (toSave == item)

@@ -7,6 +7,7 @@ using commons;
 using UnityEditor.SceneManagement;
 using UnityEditor;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 namespace scenehistorian
 {
@@ -25,6 +26,14 @@ namespace scenehistorian
 				return list[activeIndex];
 			}
 		}
+
+        public string name
+        {
+            get
+            {
+                return Path.GetFileNameWithoutExtension(ToString());
+            }
+        }
 
         public SceneHistoryItem(Object o)
         {
@@ -125,20 +134,40 @@ namespace scenehistorian
 		{
 			string path = list[0].path;
 			if (path != null) {
-				return path;
+                return path;
 			} else {
 				return string.Empty;
 			}
 		}
 
-        public int CompareTo(SceneHistoryItem other)
+        public int CompareTo(SceneHistoryItem that)
         {
-            if (this.starred^other.starred)
+            if (this.starred^that.starred)
             {
                 return this.starred? -1 : 1;
             } else
             {
-                return 0;
+                var str1 = this.name;
+                var str2 = that.name;
+                if (str1 != null)
+                {
+                    if (str2 != null)
+                    {
+                        return str1.CompareTo(str2);
+                    } else
+                    {
+                        return -1;
+                    }
+                } else
+                {
+                    if (str2 != null)
+                    {
+                        return 1;
+                    } else
+                    {
+                        return 0;
+                    }
+                }
             }
         }
 

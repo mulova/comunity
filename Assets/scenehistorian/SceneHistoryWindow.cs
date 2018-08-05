@@ -10,6 +10,8 @@ using commons;
 using UnityEngine.SceneManagement;
 using UnityEditor.SceneManagement;
 
+#pragma warning disable 162
+
 namespace scenehistorian
 {
     public class SceneHistoryWindow : EditorWindow
@@ -21,32 +23,34 @@ namespace scenehistorian
         private string filterName;
         private SceneHistoryDrawer listDrawer;
         private const bool SHOW_SIZE = false;
+        private GUIContent sortIcon;
 
-		private bool valid
-		{
-			get
-			{
-				return !BuildPipeline.isBuildingPlayer;
-			}
-		}
+        private bool valid
+        {
+            get
+            {
+                return !BuildPipeline.isBuildingPlayer;
+            }
+        }
 
-		public static SceneHistoryWindow instance
-		{
-			get
-			{
-				return EditorWindow.GetWindow<SceneHistoryWindow>("SceneHistorian");
-			}
-		}
+        public static SceneHistoryWindow instance
+        {
+            get
+            {
+                return EditorWindow.GetWindow<SceneHistoryWindow>("SceneHistorian");
+            }
+        }
+
 
         void OnEnable()
         {
+            sortIcon = new GUIContent(EditorGUIUtility.FindTexture("CustomSorting"), "Sort");
 			var dir = Path.GetDirectoryName(PATH);
 			if (!Directory.Exists(dir))
 			{
 				Directory.CreateDirectory(dir);
 			}
             sceneHistory = SceneHistory.Load(PATH);
-            listDrawer = new SceneHistoryDrawer(sceneHistory);
 			OnSceneOpened(EditorSceneManager.GetActiveScene(), OpenSceneMode.Single);
             #if UNITY_2018_1_OR_NEWER
             EditorApplication.hierarchyChanged += OnSceneObjChange;
@@ -308,8 +312,10 @@ namespace scenehistorian
         {
 			EditorGUILayout.BeginHorizontal();
             EditorGUIUtil.SearchField("", ref filterName);
-			if (EditorGUIUtil.Toggle(null, ref sceneHistory.sort, GUILayout.Width(20)))
+            Texture tex = null;
+            if (GUILayout.Button(sortIcon, GUILayout.Width(40), GUILayout.Height(40)))
 			{
+                sceneHistory.sort = !sceneHistory.sort;
 				sceneHistory.Save(PATH);
 			}
 			EditorGUILayout.EndHorizontal();
@@ -318,6 +324,7 @@ namespace scenehistorian
         private Vector3 scrollPos;
         void OnGUI()
         {
+            listDrawer = new SceneHistoryDrawer(sceneHistory);
             OnHeaderGUI();
             scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
 			#if INTERNAL_REORDER
@@ -325,7 +332,7 @@ namespace scenehistorian
             #else
             listDrawer.allowSceneObject = false;
             #endif
-            Predicate<SceneHistoryItem> filter = h => h.first != null && h.first.path != null && h.first.path.IndexOfIgnoreCase(filterName)>=0;
+            Predicate<SceneHistoryItem> filter = h => h.first != null && h.first.path != null && h.name.IndexOfIgnoreCase(filterName)>=0;
             listDrawer.Filter(filter);
             try
             {
