@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEditor;
 using Object = UnityEngine.Object;
 using UnityEngine;
-using Rotorz.ReorderableList;
 using commons;
+using Rotorz.Games.Collections;
 
 namespace comunity {
 	public abstract class EditorTab {
@@ -111,7 +111,7 @@ namespace comunity {
             return DrawObjectList(list, null, null, null, (ReorderableListFlags)0 );
         }
 
-        public bool DrawObjectList<T>(List<T> list, ReorderableListFlags flags) where T: class {
+		public bool DrawObjectList<T>(List<T> list, ReorderableListFlags flags) where T: class {
 			return DrawObjectList<T>(list, null, null, null, flags);
 		}
 

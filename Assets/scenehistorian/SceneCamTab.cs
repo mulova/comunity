@@ -5,7 +5,6 @@ using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using System;
-using Rotorz.ReorderableList;
 using comunity;
 using commons;
 using UnityEngine.SceneManagement;

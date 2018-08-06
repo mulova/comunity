@@ -1,0 +1,21 @@
+[submodule "Assets/reorderablelist/dotnet-exception-utils"]
+	path = Assets/reorderablelist/dotnet-exception-utils
+	url = https://github.com/rotorz/dotnet-exception-utils.git
+[submodule "Assets/reorderablelist/dotnet-json"]
+	path = Assets/reorderablelist/dotnet-json
+	url = https://github.com/rotorz/dotnet-json.git
+[submodule "Assets/reorderablelist/dotnet-type-utils"]
+	path = Assets/reorderablelist/dotnet-type-utils
+	url = https://github.com/rotorz/dotnet-type-utils.git
+[submodule "Assets/reorderablelist/unity3d-editor-menu"]
+	path = Assets/reorderablelist/unity3d-editor-menu
+	url = https://github.com/rotorz/unity3d-editor-menu.git
+[submodule "Assets/reorderablelist/unity3d-package-utils"]
+	path = Assets/reorderablelist/unity3d-package-utils
+	url = https://github.com/rotorz/unity3d-package-utils.git
+[submodule "Assets/reorderablelist/unity3d-reorderable-list"]
+	path = Assets/reorderablelist/unity3d-reorderable-list
+	url = https://github.com/rotorz/unity3d-reorderable-list.git
+[submodule "Assets/reorderablelist/unity3d-utils"]
+	path = Assets/reorderablelist/unity3d-utils
+	url = https://github.com/rotorz/unity3d-utils.git

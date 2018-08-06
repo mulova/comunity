@@ -4,11 +4,11 @@ using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using System;
-using Rotorz.ReorderableList;
 using comunity;
 using commons;
 using UnityEngine.SceneManagement;
 using UnityEditor.SceneManagement;
+using Rotorz.Games.Collections;
 
 #pragma warning disable 162
 
@@ -312,7 +312,6 @@ namespace scenehistorian
         {
 			EditorGUILayout.BeginHorizontal();
             EditorGUIUtil.SearchField("", ref filterName);
-            Texture tex = null;
             if (GUILayout.Button(sortIcon, GUILayout.Width(40), GUILayout.Height(40)))
 			{
                 sceneHistory.sort = !sceneHistory.sort;
@@ -339,7 +338,7 @@ namespace scenehistorian
 				#if INTERNAL_REORDER
                 if (listDrawer.Draw())
                 #else
-                listDrawer.Draw(ReorderableListFlags.ShowIndices|ReorderableListFlags.HideAddButton|ReorderableListFlags.DisableContextMenu);
+				listDrawer.Draw(ReorderableListFlags.ShowIndices|ReorderableListFlags.HideAddButton|ReorderableListFlags.DisableContextMenu);
                 if (listDrawer.changed)
 				#endif
 				{

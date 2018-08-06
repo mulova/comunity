@@ -9,6 +9,7 @@ using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using commons;
+using Rotorz.Games.Collections;
 
 namespace comunity
 {
@@ -453,10 +454,10 @@ namespace comunity
 
 		#if !INTERNAL_REORDER
         public static bool ObjectFieldList<T>(List<T> list) where T : class {
-			return ObjectFieldList<T>(list, null, (Rotorz.ReorderableList.ReorderableListFlags)0);
+			return ObjectFieldList<T>(list, null, (ReorderableListFlags)0);
         }
         
-		public static bool ObjectFieldList<T>(List<T> list, Predicate<T> filter, Rotorz.ReorderableList.ReorderableListFlags flags) where T : class {
+		public static bool ObjectFieldList<T>(List<T> list, Predicate<T> filter, ReorderableListFlags flags) where T : class {
             ListDrawer<T> drawer = new ListDrawer<T>(list);
             drawer.Filter(filter);
             return drawer.Draw(flags);
