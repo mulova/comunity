@@ -1,0 +1,51 @@
+# Derived From:
+# http://kleber-swf.com/the-definitive-gitignore-for-unity-projects/
+
+# ============= #
+# Working Files #
+# ============= #
+node_modules/
+npm-debug.log
+
+# ===================== #
+# Working Files - Unity #
+# ===================== #
+/Temp/
+/Library/
+/Packages/
+/ProjectSettings/
+/assets/Plugins/
+/assets/Plugins.meta
+/*.csproj
+/*.sln
+!/Rotorz.Json.sln
+
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+/.vs/
+bin
+obj
+ExportedObj/
+*.svd
+*.userprefs
+*.pidb
+*.suo
+*.user
+*.unityproj
+*.booproj
+*.pdb
+*.pdb.meta
+
+# ============ #
+# OS generated #
+# ============ #
+.DS_Store
+.DS_Store?
+*~
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
