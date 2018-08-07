@@ -311,12 +311,18 @@ namespace scenehistorian
         public void OnHeaderGUI()
         {
 			EditorGUILayout.BeginHorizontal();
+            var color = GUI.contentColor;
+            if (sceneHistory.sort)
+            {
+                GUI.contentColor = Color.red;
+            }
             EditorGUIUtil.SearchField("", ref filterName);
-            if (GUILayout.Button(sortIcon, GUILayout.Width(40), GUILayout.Height(40)))
+            if (GUILayout.Button(sortIcon, EditorStyles.toolbarButton, GUILayout.Width(30), GUILayout.Height(20)))
 			{
                 sceneHistory.sort = !sceneHistory.sort;
 				sceneHistory.Save(PATH);
 			}
+            GUI.contentColor = color;
 			EditorGUILayout.EndHorizontal();
         }
 
