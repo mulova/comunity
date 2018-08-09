@@ -44,7 +44,7 @@ namespace scenehistorian
 
         void OnEnable()
         {
-            sortIcon = new GUIContent(EditorGUIUtility.FindTexture("CustomSorting"), "Sort");
+            sortIcon = new GUIContent(EditorGUIUtility.FindTexture("AlphabeticalSorting"), "Sort");
 			var dir = Path.GetDirectoryName(PATH);
 			if (!Directory.Exists(dir))
 			{
@@ -81,7 +81,7 @@ namespace scenehistorian
                         menu.AddItem(new GUIContent("scenes/"+Path.GetFileNameWithoutExtension(h.first.path)), false, OnSceneMenu, h);
                     }
                 }
-            }, 2);
+            }, 1);
         }
 
         void OnDisable()

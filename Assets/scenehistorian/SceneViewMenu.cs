@@ -37,6 +37,7 @@ namespace scenehistorian
         public static void AddContextMenu(MenuFunc func, int order)
         {
             contextMenuCallback.Add(new MenuItem(func, order));
+            contextMenuCallback.Sort();
         }
 
         static void OnSceneGUI(SceneView sceneview)

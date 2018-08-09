@@ -41,8 +41,8 @@ namespace scenehistorian
                 {
                     menu.AddItem(new GUIContent("cam/"+h.id), false, OnCamMenu, h);
                 }
-            }, 1);
-        }
+            }, 10);
+        } 
 
         void OnDisable()
         {
