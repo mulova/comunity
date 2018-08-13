@@ -25,6 +25,8 @@ namespace scenehistorian
         private const bool SHOW_SIZE = false;
         private GUIContent sortIcon;
 
+        private static readonly Color SORT_COLOR = Color.green;
+
         private bool valid
         {
             get
@@ -231,6 +233,7 @@ namespace scenehistorian
             } else
             {
                 item = new SceneHistoryItem(currentScene);
+                item.SaveCam();
                 sceneHistory.Insert(0, item);
             }
             sceneHistory.Save(PATH);
@@ -308,22 +311,45 @@ namespace scenehistorian
             EditorSceneManager.OpenScene(hist.first.path);
         }
 
+        private void ShowMenu()
+        {
+            GenericMenu menu = new GenericMenu();
+            menu.AddItem(new GUIContent("Sort"), sceneHistory.sort, ()=> {
+                sceneHistory.sort = !sceneHistory.sort;
+                sceneHistory.Save(PATH);
+            });
+            menu.AddItem(new GUIContent("Clear"), false, () =>
+            {
+                if (EditorUtility.DisplayDialog("Warning", "Clear history?", "Ok", "Cancel"))
+                {
+                    sceneHistory.Clear();
+                    File.Delete(PATH);
+                }
+            });
+            menu.ShowAsContext();
+        }
+
         public void OnHeaderGUI()
         {
-			EditorGUILayout.BeginHorizontal();
+            //GUILayout.BeginHorizontal(EditorStyles.toolbar);
+            GUILayout.BeginHorizontal(EditorStyles.toolbar);
+            EditorGUIUtil.SearchField("", ref filterName);
+            GUI.enabled = sceneHistory.Count >= 2;
+            if (GUILayout.Button("Back", EditorStyles.toolbarButton, GUILayout.Width(50), GUILayout.Height(20)))
+            {
+                GoBack();
+            }
             var color = GUI.contentColor;
             if (sceneHistory.sort)
             {
-                GUI.contentColor = Color.red;
+                GUI.contentColor = SORT_COLOR;
             }
-            EditorGUIUtil.SearchField("", ref filterName);
             if (GUILayout.Button(sortIcon, EditorStyles.toolbarButton, GUILayout.Width(30), GUILayout.Height(20)))
-			{
-                sceneHistory.sort = !sceneHistory.sort;
-				sceneHistory.Save(PATH);
-			}
+            {
+                ShowMenu();
+            }
             GUI.contentColor = color;
-			EditorGUILayout.EndHorizontal();
+            GUILayout.EndHorizontal();
         }
 
         private Vector3 scrollPos;
@@ -364,19 +390,7 @@ namespace scenehistorian
 
         void OnFooterGUI()
         {
-            EditorGUILayout.BeginHorizontal();
-            GUI.enabled = sceneHistory.Count >= 2;
-            if (GUILayout.Button("Back", GUILayout.Height(20)))
-            {
-                GoBack();
-            }
             GUI.enabled = true;
-            if (GUILayout.Button("Clear"))
-            {
-                sceneHistory.Clear();
-                File.Delete(PATH);
-            }
-            EditorGUILayout.EndHorizontal();
             if (SHOW_SIZE)
             {
                 EditorGUILayout.BeginHorizontal();
