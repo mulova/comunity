@@ -70,6 +70,13 @@ namespace scenehistorian
 			}
 		}
 
+        public SceneHistory() { }
+
+        public SceneHistory(IList<SceneHistoryItem> history)
+        {
+            this._items = new List<SceneHistoryItem>(history);
+        }
+
 		public void Add(SceneHistoryItem item)
 		{
 			items.Add(item);

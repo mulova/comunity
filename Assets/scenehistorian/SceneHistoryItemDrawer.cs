@@ -20,16 +20,17 @@ namespace scenehistorian
 
         public override bool DrawItem(Rect rect, int index, SceneHistoryItem item, out SceneHistoryItem newItem)
         {
-            var right = item.camProperty.valid? 60 : 20;
+            bool camValid = item.camProperty != null && item.camProperty.valid;
+            var right = camValid? 60 : 20;
             newItem = item;
             Rect[] area1 = EditorGUIUtil.SplitRectHorizontally(rect, (int)rect.width-right);
             Object obj = item.first.reference as Object;
             item.first.reference = EditorGUI.ObjectField(area1[0], obj, typeof(Object), false);
             Rect starredRect = area1[1];
-            if (item.camProperty.valid)
+            if (camValid)
             {
                 Rect[] area2 = EditorGUIUtil.SplitRectHorizontally(area1[1], 40);
-                if (item.camProperty.valid && GUI.Button(area2[0], "cam", EditorStyles.toolbarButton))
+                if (camValid && GUI.Button(area2[0], "cam", EditorStyles.toolbarButton))
                 {
                     item.camProperty.Apply();
                 }

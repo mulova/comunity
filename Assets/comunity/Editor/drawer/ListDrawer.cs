@@ -33,7 +33,7 @@ namespace comunity
         private GetItemDrawer getItemDrawer;
 
         private int[] indexer; // used for filtering
-        private int count;
+        public int Count { get; private set; }
 #pragma warning disable 0414
 		private IItemDrawer<T> itemDrawer; // just for reference count
 #pragma warning restore 0414
@@ -51,7 +51,7 @@ namespace comunity
         public ListDrawer(List<T> list, IItemDrawer<T> itemDrawer)
         {
             this.list = list;
-            this.count = list.Count;
+            this.Count = list.Count;
             this.itemDrawer = itemDrawer; // just for reference count
             this.getItemDrawer = t => itemDrawer;
             this.createItem = CreateItem;
@@ -60,7 +60,7 @@ namespace comunity
         public ListDrawer(List<T> list, GetItemDrawer getItemDrawer)
         {
             this.list = list;
-            this.count = list.Count;
+            this.Count = list.Count;
             this.getItemDrawer = getItemDrawer;
             this.createItem = CreateItem;
         }
@@ -211,14 +211,6 @@ namespace comunity
             return itemHeight;
         }
 
-        public int Count
-        {
-            get
-            {
-                return count;
-            }
-        }
-
         private int GetActualIndex(int index)
         {
             if (indexer != null && index < indexer.Length)
@@ -246,11 +238,11 @@ namespace comunity
                         n++;
                     }
                 }
-                count = n;
+                Count = n;
             } else
             {
                 indexer = null;
-                count = list.Count;
+                Count = list.Count;
             }
         }
 
@@ -336,7 +328,7 @@ namespace comunity
         public virtual void Add(T item)
         {
             list.Add(item);
-            count = list.Count;
+            Count = list.Count;
             changed = true;
         }
     }

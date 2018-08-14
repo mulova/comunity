@@ -329,11 +329,16 @@ namespace scenehistorian
             menu.ShowAsContext();
         }
 
+        private List<UnityObjId> allScenes = new List<UnityObjId>();
         public void OnHeaderGUI()
         {
             //GUILayout.BeginHorizontal(EditorStyles.toolbar);
             GUILayout.BeginHorizontal(EditorStyles.toolbar);
             EditorGUIUtil.SearchField("", ref filterName);
+            if (filterName.IsEmpty())
+            {
+                allScenes.Clear();
+            }
             GUI.enabled = sceneHistory.Count >= 2;
             if (GUILayout.Button("Back", EditorStyles.toolbarButton, GUILayout.Width(50), GUILayout.Height(20)))
             {
@@ -367,16 +372,46 @@ namespace scenehistorian
             listDrawer.Filter(filter);
             try
             {
-				#if INTERNAL_REORDER
-                if (listDrawer.Draw())
-                #else
-				listDrawer.Draw(ReorderableListFlags.ShowIndices|ReorderableListFlags.HideAddButton|ReorderableListFlags.DisableContextMenu);
-                if (listDrawer.changed)
-				#endif
-				{
-					sceneHistory.Save(PATH);
-					changed = false;
-				}
+                if (listDrawer.Count > 0)
+                {
+#if INTERNAL_REORDER
+                    if (listDrawer.Draw())
+#else
+                    listDrawer.Draw(ReorderableListFlags.ShowIndices | ReorderableListFlags.HideAddButton | ReorderableListFlags.DisableContextMenu);
+                    if (listDrawer.changed)
+#endif
+                    {
+                        sceneHistory.Save(PATH);
+                        changed = false;
+                    }
+                } else
+                {
+                    if (allScenes.IsEmpty())
+                    {
+                        var guids = UnityEditor.AssetDatabase.FindAssets("t:Scene");
+                        foreach (var id in guids)
+                        {
+                            string path = AssetDatabase.GUIDToAssetPath(id);
+                            allScenes.Add(new UnityObjId(AssetDatabase.LoadAssetAtPath<Object>(path)));
+                        }
+                    }
+
+                    var filteredScenes = new SceneHistory();
+                    foreach (var s in allScenes)
+                    {
+                        string name = Path.GetFileNameWithoutExtension(s.path);
+                        if (name.IndexOfIgnoreCase(filterName) >= 0)
+                        {
+                            filteredScenes.Add(s.reference);
+                        }
+                    }
+                    listDrawer = new SceneHistoryDrawer(filteredScenes);
+#if INTERNAL_REORDER
+                    if (listDrawer.Draw())
+#else
+                    listDrawer.Draw(ReorderableListFlags.HideAddButton | ReorderableListFlags.DisableContextMenu | ReorderableListFlags.DisableReordering | ReorderableListFlags.DisableDuplicateCommand);
+#endif
+                }
             } catch (Exception ex)
             {
                 if (!(ex.GetBaseException() is ExitGUIException))
