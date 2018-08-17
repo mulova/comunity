@@ -13,7 +13,8 @@ namespace scenehistorian
 	{
 		[SerializeField] private List<SceneHistoryItem> _items = new List<SceneHistoryItem>();
 		[SerializeField] internal int maxSize = 100;
-		[SerializeField] internal bool sort;
+        [SerializeField] internal bool sort;
+		[SerializeField] internal bool useCam;
 		private List<SceneHistoryItem> _sorted = new List<SceneHistoryItem>();
 
 		private class SceneNameSorter : IComparer<SceneHistoryItem>
@@ -69,13 +70,6 @@ namespace scenehistorian
 				return items[i];
 			}
 		}
-
-        public SceneHistory() { }
-
-        public SceneHistory(IList<SceneHistoryItem> history)
-        {
-            this._items = new List<SceneHistoryItem>(history);
-        }
 
 		public void Add(SceneHistoryItem item)
 		{

@@ -9,7 +9,7 @@ namespace scenehistorian
 {
 	public class SceneHistoryDrawer : ListDrawer<SceneHistoryItem>
 	{
-		public SceneHistoryDrawer(SceneHistory list) : base(list.items, new SceneHistoryItemDrawer())
+        public SceneHistoryDrawer(SceneHistory list) : base(list.items, new SceneHistoryItemDrawer(list.useCam))
 		{
 			this.createDefaultValue = () => new SceneHistoryItem(Selection.activeObject);
 			this.createItem = CreateItem;

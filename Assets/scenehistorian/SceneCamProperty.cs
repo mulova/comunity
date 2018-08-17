@@ -44,13 +44,13 @@ namespace scenehistorian
         {
             get
             {
-                return size != 0;
+                return size != 0f;
             }
         }
         
         public void Apply()
         {
-            if (size == 0)
+            if (size == 0f)
             {
                 throw new Exception("Not initialized");
             }
