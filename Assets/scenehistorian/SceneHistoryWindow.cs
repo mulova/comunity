@@ -1,13 +1,14 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.IO;
-using commons;
-using comunity;
-using Rotorz.Games.Collections;
 using UnityEditor;
-using UnityEditor.SceneManagement;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
+using System;
+using comunity;
+using commons;
+using UnityEngine.SceneManagement;
+using UnityEditor.SceneManagement;
+using Rotorz.Games.Collections;
 
 #pragma warning disable 162
 
@@ -148,7 +149,7 @@ namespace scenehistorian
 			}
 			if (stateChange == PlayModeStateChange.EnteredEditMode)
 			{
-                if (sceneHistory.Count >= 0 && sceneHistory.useCam)
+				if (sceneHistory.Count >= 0 && sceneHistory.useCam)
 				{
 					sceneHistory[0].ApplyCam();
 				}
@@ -167,11 +168,11 @@ namespace scenehistorian
 			}
             if (sceneHistory.useCam)
             {
-                int index = sceneHistory.IndexOf(scene.path);
-                if (index >= 0)
-                {
-                    sceneHistory[index].ApplyCam();
-                }
+			    int index = sceneHistory.IndexOf(scene.path);
+			    if (index >= 0)
+			    {
+				    sceneHistory[index].ApplyCam();
+			    }
             }
 		}
 
@@ -327,6 +328,7 @@ namespace scenehistorian
                 sceneHistory.useCam = !sceneHistory.useCam;
                 sceneHistory.Save(PATH);
             });
+
             menu.AddItem(new GUIContent("Clear"), false, () =>
             {
                 if (EditorUtility.DisplayDialog("Warning", "Clear history?", "Ok", "Cancel"))
@@ -338,11 +340,16 @@ namespace scenehistorian
             menu.ShowAsContext();
         }
 
+        private List<UnityObjId> allScenes = new List<UnityObjId>();
         public void OnHeaderGUI()
         {
             //GUILayout.BeginHorizontal(EditorStyles.toolbar);
             GUILayout.BeginHorizontal(EditorStyles.toolbar);
             EditorGUIUtil.SearchField("", ref nameFilter);
+            if (nameFilter.IsEmpty())
+            {
+                allScenes.Clear();
+            }
             GUI.enabled = sceneHistory.Count >= 2;
             if (GUILayout.Button("Back", EditorStyles.toolbarButton, GUILayout.Width(50), GUILayout.Height(20)))
             {
@@ -371,11 +378,12 @@ namespace scenehistorian
             var listDrawer = new SceneHistoryReorderList(sceneHistory);
             #else
             listDrawer.allowSceneObject = false;
-#endif
+            #endif
             if (nameFilter.IsNotEmpty())
             {
                 string[] filters = nameFilter.SplitEx(' ');
-                Predicate<SceneHistoryItem> filter = h => {
+                Predicate<SceneHistoryItem> filter = h =>
+                {
                     if (h.first == null || h.first.path.IsEmpty())
                     {
                         return false;
@@ -394,16 +402,56 @@ namespace scenehistorian
             }
             try
             {
-				#if INTERNAL_REORDER
-                if (listDrawer.Draw())
-                #else
-				listDrawer.Draw(ReorderableListFlags.ShowIndices|ReorderableListFlags.HideAddButton|ReorderableListFlags.DisableContextMenu);
-                if (listDrawer.changed)
-				#endif
-				{
-					sceneHistory.Save(PATH);
-					changed = false;
-				}
+                if (listDrawer.Count > 0)
+                {
+#if INTERNAL_REORDER
+                    if (listDrawer.Draw())
+#else
+                    listDrawer.Draw(ReorderableListFlags.ShowIndices | ReorderableListFlags.HideAddButton | ReorderableListFlags.DisableContextMenu);
+                    if (listDrawer.changed)
+#endif
+                    {
+                        sceneHistory.Save(PATH);
+                        changed = false;
+                    }
+                } else
+                {
+                    if (allScenes.IsEmpty())
+                    {
+                        var guids = UnityEditor.AssetDatabase.FindAssets("t:Scene");
+                        foreach (var id in guids)
+                        {
+                            string path = AssetDatabase.GUIDToAssetPath(id);
+                            allScenes.Add(new UnityObjId(AssetDatabase.LoadAssetAtPath<Object>(path)));
+                        }
+                    }
+
+                    string[] filters = nameFilter.IsNotEmpty()? nameFilter.SplitEx(' '): new string[0];
+                    var filteredScenes = new SceneHistory();
+                    foreach (var s in allScenes)
+                    {
+                        string name = Path.GetFileNameWithoutExtension(s.path);
+                        bool match = true;
+                        foreach (var f in filters)
+                        {
+                            if (name.IndexOfIgnoreCase(f) < 0)
+                            {
+                                match = false;
+                                break;
+                            }
+                        }
+                        if (match)
+                        {
+                            filteredScenes.Add(s.reference);
+                        }
+                    }
+                    listDrawer = new SceneHistoryDrawer(filteredScenes);
+#if INTERNAL_REORDER
+                    if (listDrawer.Draw())
+#else
+                    listDrawer.Draw(ReorderableListFlags.HideAddButton | ReorderableListFlags.DisableContextMenu | ReorderableListFlags.DisableReordering | ReorderableListFlags.DisableDuplicateCommand);
+#endif
+                }
             } catch (Exception ex)
             {
                 if (!(ex.GetBaseException() is ExitGUIException))
