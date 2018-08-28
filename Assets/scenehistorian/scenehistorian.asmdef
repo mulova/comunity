@@ -4,15 +4,7 @@
         "commons",
         "comunity",
         "comunity-editor",
-        "rotorz.unity3d-utils.editor",
-        "rotorz.unity3d-reorderable-list",
-        "rotorz.unity3d-editor-menu.editor",
-        "rotorz.dotnet-type-utils",
-        "rotorz.unity3d-package-utils.editor",
-        "rotorz.dotnet-exception-utils",
-        "rotorz.unity3d-reorderable-list.editor",
-        "rotorz.unity3d-utils",
-        "rotorz.dotnet-json"
+        "reorderablelist"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [
