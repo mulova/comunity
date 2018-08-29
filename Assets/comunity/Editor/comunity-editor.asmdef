@@ -3,7 +3,8 @@
     "references": [
         "commons",
         "comunity",
-        "reorderablelist"
+        "reorderablelist",
+        "reorderablelist-editor"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [

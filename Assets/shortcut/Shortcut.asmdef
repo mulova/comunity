@@ -4,7 +4,8 @@
         "commons",
         "comunity",
         "comunity-editor",
-        "reorderablelist"
+        "reorderablelist",
+        "reorderablelist-editor"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [

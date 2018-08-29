@@ -1,11 +1,7 @@
 {
-    "name": "scenehistorian",
+    "name": "reorderablelist-editor",
     "references": [
-        "commons",
-        "comunity",
-        "comunity-editor",
-        "reorderablelist",
-        "reorderablelist-editor"
+        "reorderablelist"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [
