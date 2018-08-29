@@ -11,11 +11,12 @@ namespace comunity
     [System.Serializable]
     public class UnityObjId
     {
-        [SerializeField]
-        private string _id;
+        [SerializeField] private string _id;
+        [SerializeField] private bool _asset;
+
         // guid for asset, scene path for scene object
         public string id
-        { 
+        {
             get
             {
                 return _id;
@@ -26,8 +27,6 @@ namespace comunity
             }
         }
 
-        [SerializeField]
-        private bool _asset;
         public bool asset { get { return _asset; } private set { _asset = value; } }
 
         public Object reference
@@ -40,11 +39,13 @@ namespace comunity
                     if (uid.IsNotEmpty())
                     {
                         return AssetDatabase.LoadAssetAtPath<Object>(uid);
-                    } else
+                    }
+                    else
                     {
                         return null;
                     }
-                } else
+                }
+                else
                 {
                     return TransformUtil.Search(id);
                 }
@@ -57,12 +58,14 @@ namespace comunity
                 {
                     this.id = AssetDatabase.AssetPathToGUID(assetPath);
                     this.asset = true;
-                } else
+                }
+                else
                 {
                     if (value is GameObject)
                     {
                         this.id = (value as GameObject).transform.GetScenePath();
-                    } else if (value is Component)
+                    }
+                    else if (value is Component)
                     {
                         this.id = (value as Component).transform.GetScenePath();
                     }
@@ -78,7 +81,8 @@ namespace comunity
                 if (asset)
                 {
                     return AssetDatabase.GUIDToAssetPath(id);
-                } else
+                }
+                else
                 {
                     return id;
                 }
@@ -88,6 +92,12 @@ namespace comunity
         public UnityObjId(Object o)
         {
             reference = o;
+        }
+
+        public UnityObjId(string guid)
+        {
+            id = guid;
+            asset = true;
         }
 
         public override bool Equals(object obj)

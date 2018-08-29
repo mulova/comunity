@@ -402,55 +402,52 @@ namespace scenehistorian
             }
             try
             {
-                if (listDrawer.Count > 0)
-                {
 #if INTERNAL_REORDER
-                    if (listDrawer.Draw())
+                if (listDrawer.Draw())
 #else
-                    listDrawer.Draw(ReorderableListFlags.ShowIndices | ReorderableListFlags.HideAddButton | ReorderableListFlags.DisableContextMenu);
-                    if (listDrawer.changed)
+                listDrawer.Draw(ReorderableListFlags.ShowIndices | ReorderableListFlags.HideAddButton | ReorderableListFlags.DisableContextMenu);
+                if (listDrawer.changed)
 #endif
-                    {
-                        sceneHistory.Save(PATH);
-                        changed = false;
-                    }
-                } else
                 {
-                    if (allScenes.IsEmpty())
+                    sceneHistory.Save(PATH);
+                    changed = false;
+                }
+                if (allScenes.IsEmpty())
+                {
+                    var guids = UnityEditor.AssetDatabase.FindAssets("t:Scene");
+                    foreach (var id in guids)
                     {
-                        var guids = UnityEditor.AssetDatabase.FindAssets("t:Scene");
-                        foreach (var id in guids)
-                        {
-                            string path = AssetDatabase.GUIDToAssetPath(id);
-                            allScenes.Add(new UnityObjId(AssetDatabase.LoadAssetAtPath<Object>(path)));
-                        }
+                        allScenes.Add(new UnityObjId(id));
                     }
+                }
 
-                    string[] filters = nameFilter.IsNotEmpty()? nameFilter.SplitEx(' '): new string[0];
+                if (!nameFilter.IsNotEmpty())
+                {
+                    string[] filters = nameFilter.SplitEx(' ');
                     var filteredScenes = new SceneHistory();
                     foreach (var s in allScenes)
                     {
-                        string name = Path.GetFileNameWithoutExtension(s.path);
+                        string filename = Path.GetFileNameWithoutExtension(s.path);
                         bool match = true;
                         foreach (var f in filters)
                         {
-                            if (name.IndexOfIgnoreCase(f) < 0)
+                            if (filename.IndexOfIgnoreCase(f) < 0)
                             {
                                 match = false;
                                 break;
                             }
                         }
-                        if (match)
+                        if (match && !sceneHistory.Contains(s.path))
                         {
                             filteredScenes.Add(s.reference);
                         }
                     }
                     listDrawer = new SceneHistoryDrawer(filteredScenes);
-#if INTERNAL_REORDER
+                    #if INTERNAL_REORDER
                     if (listDrawer.Draw())
-#else
+                    #else
                     listDrawer.Draw(ReorderableListFlags.HideAddButton | ReorderableListFlags.DisableContextMenu | ReorderableListFlags.DisableReordering | ReorderableListFlags.DisableDuplicateCommand);
-#endif
+                    #endif
                 }
             } catch (Exception ex)
             {

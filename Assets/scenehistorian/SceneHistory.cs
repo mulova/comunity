@@ -163,7 +163,12 @@ namespace scenehistorian
 			return IndexOf(obj) >= 0;
 		}
 
-		public static SceneHistory Load(string path)
+        public bool Contains(string path)
+        {
+            return IndexOf(path) >= 0;
+        }
+
+        public static SceneHistory Load(string path)
 		{
 			try
 			{
