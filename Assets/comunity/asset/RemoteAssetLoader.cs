@@ -81,15 +81,16 @@ namespace comunity
                     fallback.GetBytes(url, callback);
                 }
             });
-        }
+		}
 
-        /// <summary>
-        /// Gets the WWW.
-        /// www is disposed after when the callback ends.
-        /// </summary>
-        /// <param name="url">URL.</param>
-        /// <param name="callback">Callback.</param>
-        private void GetWWW(string url, bool dispose, Action<WWW> callback)
+#if WWW_MODULE
+		/// <summary>
+		/// Gets the WWW.
+		/// www is disposed after when the callback ends.
+		/// </summary>
+		/// <param name="url">URL.</param>
+		/// <param name="callback">Callback.</param>
+		private void GetWWW(string url, bool dispose, Action<WWW> callback)
         {
             GetRemote(url, f => {
                 if (f == null)
@@ -119,6 +120,7 @@ namespace comunity
                 www.DisposeEx();
             }
         }
+#endif
 
         public void GetAsset<T>(string url, Action<T> callback, bool asyncHint) where T: Object
         {
@@ -177,7 +179,8 @@ namespace comunity
             bool threeD = (loadType & AudioClipLoadType.ThreeD) != 0;
             bool compressed = (loadType & AudioClipLoadType.Compressed) != 0;
 
-            GetWWW(url, !streaming, www => {
+#if WWW_MODULE
+			GetWWW(url, !streaming, www => {
                 if (www != null)
                 {
                     AudioClip a = compressed? www.GetAudioClipCompressed(threeD): www.GetAudioClip(threeD, streaming);
@@ -187,6 +190,9 @@ namespace comunity
                     fallback.GetAudio(url, loadType, callback);
                 }
             });
+#else
+			throw new Exception("Not implemented");
+#endif
         }
 
         /// <summary>

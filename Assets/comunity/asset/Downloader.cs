@@ -47,8 +47,9 @@ namespace comunity
         private DownloadStep step = DownloadStep.Null;
         private int initialDownloadSize;
         private int totalDownloadSize;
-        // web variables
-        [SerializeField] WebGLDownloader _webGL;
+		// web variables
+#if UNITY_WEBGL
+		[SerializeField] WebGLDownloader _webGL;
         public WebGLDownloader webGL
         {
             get
@@ -60,6 +61,7 @@ namespace comunity
                 return _webGL;
             }
         }
+#endif
         
         private Exception webException;
         private string srcRoot;
@@ -325,7 +327,12 @@ namespace comunity
         {
             filesToDownload.Clear();
             filesDownloaded.Clear();
-#if !UNITY_WEBGL
+#if UNITY_WEBGL
+			if (_webGL != null)
+            {
+                _webGL.Dispose();
+            }
+#else
             if (unzipQueue != null)
             {
                 unzipQueue.Stop();
@@ -337,16 +344,12 @@ namespace comunity
                 web = null;
             }
 #endif
-            if (_webGL != null)
-            {
-                _webGL.Dispose();
-            }
         }
-        
+
 #if TEST
         private System.Random rand = new System.Random();
 #endif
-        
+#if UNITY_WEBGL
         private void OnWWWProgressCallback(WWW www, float progress)
         {
             fileProgress = progress;
@@ -381,7 +384,7 @@ namespace comunity
                 }
             }
         }
-        
+#endif
         private void OnDownloadFileCallback(object sender, AsyncCompletedEventArgs e)
         {
             FileCallbackParam param = e.UserState as FileCallbackParam;

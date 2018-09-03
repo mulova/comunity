@@ -21,14 +21,17 @@ namespace comunity
 			this.caching = caching;
 		}
 
+#if WWW_MODULE
 		private void GetWWW(string url, bool dispose, Action<WWW> callback)
 		{
             log.Debug("Access web {0}", url);
 			Threading.inst.StartCoroutine(LoadWWW(url, dispose, callback));
 		}
+#endif
 
 		public void GetAsset<T>(string url, Action<T> callback, bool asyncHint) where T: Object
 		{
+#if WWW_MODULE
 			GetWWW(url, true, www =>
 			{
 				if (www != null)
@@ -40,10 +43,14 @@ namespace comunity
 					callback(null);
 				}
 			});
+#else
+			throw new Exception("Not implemented");
+#endif
 		}
 
 		public void GetAssets<T>(string url, Action<IEnumerable<T>> callback, bool asyncHint) where T: Object
 		{
+#if WWW_MODULE
 			GetWWW(url, true, www =>
 			{
 				if (www != null&&www.assetBundle != null)
@@ -55,6 +62,9 @@ namespace comunity
 					callback(null);
 				}
 			});
+#else
+			throw new Exception("Not implemented");
+#endif
 		}
 
 		public void IsCached(string url, Action<bool> callback)
@@ -82,6 +92,7 @@ namespace comunity
 
 		public void GetBytes(string url, Action<byte[]> callback)
 		{
+#if WWW_MODULE
 			GetWWW(url, true, www =>
 			{
 				if (www != null)
@@ -99,10 +110,14 @@ namespace comunity
 					callback(null);
 				}
 			});
+#else
+			throw new Exception("Not implemented");
+#endif
 		}
 
 		public void GetTexture(string url, Action<Texture2D> callback)
 		{
+#if WWW_MODULE
 			GetWWW(url, true, www =>
 			{
 				if (www != null)
@@ -118,6 +133,9 @@ namespace comunity
 					}
 				}
 			});
+#else
+			throw new Exception("Not implemented");
+#endif
 		}
 
         public void GetAudio(string url, AudioClipLoadType loadType, Action<AudioClip> callback)
@@ -126,6 +144,7 @@ namespace comunity
             bool threeD = (loadType & AudioClipLoadType.ThreeD) != 0;
             bool compressed = (loadType & AudioClipLoadType.Compressed) != 0;
 
+#if WWW_MODULE
 			GetWWW(url, !streaming, www =>
 			{
 				if (www != null)
@@ -137,6 +156,9 @@ namespace comunity
 					fallback.GetAudio(url, loadType, callback);
 				}
 			});
+#else
+			throw new Exception("Not implemented");
+#endif
 		}
 
 		public void Remove(string url)
@@ -150,6 +172,7 @@ namespace comunity
 			return new Uri(url, UriKind.RelativeOrAbsolute);
 		}
 
+#if WWW_MODULE
 		public WWW CreateWWW(string url)
 		{
 			string parent = PathUtil.GetParent(url);
@@ -172,7 +195,6 @@ namespace comunity
 				return new WWW(uri);
 			}
 		}
-
 		private IEnumerator LoadWWW(string url, bool dispose, Action<WWW> callback)
 		{
 			WWW www = CreateWWW(url);
@@ -193,6 +215,8 @@ namespace comunity
 				www.DisposeEx();
 			}
 		}
+#endif
+
 
 		private IAssetLoader fallback = new DummyAssetLoader();
 

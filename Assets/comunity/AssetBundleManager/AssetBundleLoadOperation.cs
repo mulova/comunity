@@ -1,15 +1,15 @@
-using UnityEngine;
 #if UNITY_5_3_OR_NEWER
-using UnityEngine.SceneManagement;
 #endif
 #if ENABLE_IOS_ON_DEMAND_RESOURCES
 using UnityEngine.iOS;
 #endif
 using System.Collections;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace AssetBundles
 {
-    public abstract class AssetBundleLoadOperation : IEnumerator
+	public abstract class AssetBundleLoadOperation : IEnumerator
     {
         public object Current
         {
@@ -146,7 +146,8 @@ namespace AssetBundles
     }
 #endif
 
-    public class AssetBundleDownloadFromWebOperation : AssetBundleDownloadOperation
+#if WWW_MODULE
+	public class AssetBundleDownloadFromWebOperation : AssetBundleDownloadOperation
     {
         WWW m_WWW;
         string m_Url;
@@ -183,9 +184,10 @@ namespace AssetBundles
             return m_Url;
         }
     }
+#endif
 
 #if UNITY_EDITOR
-    public class AssetBundleLoadLevelSimulationOperation : AssetBundleLoadOperation
+	public class AssetBundleLoadLevelSimulationOperation : AssetBundleLoadOperation
     {
         AsyncOperation m_Operation = null;
 

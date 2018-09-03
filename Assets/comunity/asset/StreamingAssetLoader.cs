@@ -60,7 +60,9 @@ namespace comunity
 			return k.ToLower();
 		});
 		// key: remote url   value: local file path
+#if WWW_MODULE
 		private MultiMap<string, Action<WWW>> callbacks = new MultiMap<string, Action<WWW>>();
+#endif
 		public static readonly Loggerx log = AssetCache.log;
 
 		public StreamingAssetLoader()
@@ -108,6 +110,7 @@ namespace comunity
 			return e;
 		}
 
+#if WWW_MODULE
 		private void GetWWW(string url, bool dispose, Action<WWW> callback)
 		{
 			callbacks.Add(url, callback);
@@ -159,6 +162,8 @@ namespace comunity
 				}
 			}
 		}
+#endif
+
 
 		/// <summary>
 		/// Gets the bytes. Support Web Platform
@@ -176,6 +181,7 @@ namespace comunity
                     FileAssetLoader.GetBytesFromFile(f, callback);
 				} else
 				{
+#if WWW_MODULE
 					GetWWW(url, true, www =>
 					{
 						if (www != null&&www.error.IsEmpty())
@@ -186,6 +192,9 @@ namespace comunity
 							fallback.GetBytes(url, callback);
 						}
 					});
+#else
+					throw new Exception("Not implemented");
+#endif
 				}
 			}
 		}
@@ -219,6 +228,7 @@ namespace comunity
                 });
 			} else
 			{
+#if WWW_MODULE
 				GetWWW(url, true, www =>
 				{
 					if (www != null)
@@ -230,6 +240,9 @@ namespace comunity
 						fallback.GetAsset<T>(url, callback, asyncHint);
 					}
 				});
+#else
+				throw new Exception("Not implemented");
+#endif
 			}
 		}
 
@@ -258,6 +271,7 @@ namespace comunity
                 });
 			} else
 			{
+#if WWW_MODULE
 				GetWWW(url, true, www =>
 				{
 					if (www != null)
@@ -269,6 +283,9 @@ namespace comunity
 						fallback.GetAssets<T>(url, callback, asyncHint);
 					}
 				});
+#else
+				throw new Exception("Not implemented");
+#endif
 			}
 		}
 
@@ -281,6 +298,7 @@ namespace comunity
 				FileAssetLoader.GetTextureFromFile(url, f, callback);
 			} else
 			{
+#if WWW_MODULE
 				GetWWW(url, true, www =>
 				{
 					if (www != null)
@@ -298,6 +316,9 @@ namespace comunity
 						fallback.GetTexture(url, callback);
 					}
 				});
+#else
+				throw new Exception("Not implemented");
+#endif
 			}
 		}
 
@@ -307,6 +328,7 @@ namespace comunity
             bool threeD = (loadType & AudioClipLoadType.ThreeD) != 0;
             bool compressed = (loadType & AudioClipLoadType.Compressed) != 0;
 
+#if WWW_MODULE
 			GetWWW(url, !streaming, www =>
 			{
 				if (www != null)
@@ -318,6 +340,9 @@ namespace comunity
 					fallback.GetAudio(url, loadType, callback);
 				}
 			});
+#else
+			throw new Exception("Not implemented");
+#endif
 		}
 
 		public void Remove(string url)

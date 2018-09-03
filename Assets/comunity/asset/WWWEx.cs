@@ -1,3 +1,4 @@
+#if WWW_MODULE
 //----------------------------------------------
 // Unity3D common libraries and editor tools
 // License: http://opensource.org/licenses/GPL-3.0
@@ -67,3 +68,4 @@ namespace comunity
 		}
 	}
 }
+#endif

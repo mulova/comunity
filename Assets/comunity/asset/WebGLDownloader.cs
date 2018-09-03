@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿#if WWW_MODULE
+using UnityEngine;
 using System.Collections;
-
 
 namespace comunity
 {
@@ -62,3 +62,4 @@ namespace comunity
 		}
 	}
 }
+#endif

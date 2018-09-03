@@ -458,7 +458,8 @@ namespace AssetBundles
             }
             else
             {
-                WWW download = null;
+#if WWW_MODULE
+				WWW download = null;
 
                 if (!bundleBaseDownloadingURL.EndsWith("/"))
                 {
@@ -474,7 +475,10 @@ namespace AssetBundles
                     download = WWW.LoadFromCacheOrDownload(url, m_AssetBundleManifest.GetAssetBundleHash(assetBundleName), 0);
 
                 m_InProgressOperations.Add(new AssetBundleDownloadFromWebOperation(assetBundleName, download));
-            }
+#else
+				throw new Exception("No WWW");
+#endif
+			}
             m_DownloadingBundles.Add(assetBundleName);
 
             return false;

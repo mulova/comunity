@@ -58,8 +58,10 @@ namespace comunity
         private const string EXT = ".alias";
         public const char VER_SEPARATOR = '#';
         private const int DIR_SIZE = 255;
-        private RemotePathConverter pathConv = new RemotePathConverter();
-        private MultiMap<string, Action<WWW>> callbacks = new MultiMap<string, Action<WWW>>();
+		private RemotePathConverter pathConv = new RemotePathConverter();
+#if WWW_MODULE
+		private MultiMap<string, Action<WWW>> callbacks = new MultiMap<string, Action<WWW>>();
+#endif
         public static readonly Loggerx log = AssetCache.log;
 
         public FileAssetLoader()
@@ -311,7 +313,8 @@ namespace comunity
             });
         }
 
-        private void GetWWW(string url, bool dispose, Action<WWW> callback)
+#if WWW_MODULE
+		private void GetWWW(string url, bool dispose, Action<WWW> callback)
         {
             callbacks.Add(url, callback);
             if (callbacks.GetCount(url) > 1)
@@ -334,8 +337,9 @@ namespace comunity
                 }
             });
         }
+#endif
 
-        public void GetAsset<T>(string url, Action<T> callback, bool asyncHint) where T: Object
+		public void GetAsset<T>(string url, Action<T> callback, bool asyncHint) where T: Object
         {
             Entry e = GetCacheEntry(url);
             if (e.file != null&&!asyncHint)
@@ -352,6 +356,7 @@ namespace comunity
                 });
             } else
             {
+#if WWW_MODULE
                 GetWWW(url, true, www => {
                     if (www != null)
                     {
@@ -362,7 +367,10 @@ namespace comunity
                         fallback.GetAsset<T>(url, callback, asyncHint);
                     }
                 });
-            }
+#else
+				throw new Exception("Not implemented");
+#endif
+			}
         }
 
         public void GetAssets<T>(string url, Action<IEnumerable<T>> callback, bool asyncHint) where T: Object
@@ -382,7 +390,8 @@ namespace comunity
                 });
             } else
             {
-                GetWWW(url, true, www => {
+#if WWW_MODULE
+				GetWWW(url, true, www => {
                     if (www != null)
                     {
                         T[] assets = www.GetAssets<T>();
@@ -403,6 +412,9 @@ namespace comunity
                         fallback.GetAssets<T>(url, callback, asyncHint);
                     }
                 });
+#else
+				throw new Exception("Not implemented");
+#endif
             }
         }
 
@@ -450,9 +462,10 @@ namespace comunity
                     callback(tex);
                 }
             }
-        }
+		}
 
-        private IEnumerator LoadWWWAsync(FileInfo f, bool dispose, Action<WWW> callback)
+#if WWW_MODULE
+		private IEnumerator LoadWWWAsync(FileInfo f, bool dispose, Action<WWW> callback)
         {
             if (f != null)
             {
@@ -496,6 +509,8 @@ namespace comunity
                 callback(null);
             }
         }
+#endif
+
 
         /// <summary>
         /// Gets the file cached locally or download new one.
@@ -520,8 +535,8 @@ namespace comunity
             bool streaming = (loadType & AudioClipLoadType.Streaming) != 0;
             bool threeD = (loadType & AudioClipLoadType.ThreeD) != 0;
             bool compressed = (loadType & AudioClipLoadType.Compressed) != 0;
-
-            GetWWW(url, !streaming, www => {
+#if WWW_MODULE
+			GetWWW(url, !streaming, www => {
                 if (www != null)
                 {
                     AudioClip a = compressed? www.GetAudioClipCompressed(threeD): www.GetAudioClip(threeD, streaming);
@@ -535,6 +550,9 @@ namespace comunity
                     fallback.GetAudio(url, loadType, callback);
                 }
             });
+#else
+			throw new Exception("Not implemented");
+#endif
         }
 
         private void DeleteLocalFile(FileInfo file)
