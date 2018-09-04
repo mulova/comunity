@@ -10,8 +10,6 @@ using UnityEngine.SceneManagement;
 using UnityEditor.SceneManagement;
 using Rotorz.Games.Collections;
 
-#pragma warning disable 162
-
 namespace scenehistorian
 {
     public class SceneHistoryWindow : EditorWindow
@@ -74,8 +72,8 @@ namespace scenehistorian
             #else
             EditorApplication.playmodeStateChanged += ChangePlaymode;
             #endif
-            SceneViewMenu.AddContextMenu(menu=> {
-                menu.AddItem(new GUIContent("Previous Scene"), false, GoBackMenu);
+            SceneViewContextMenu.AddContextMenu(menu=> {
+                menu.AddItem(new GUIContent("Previous Scene"), false, GoBack);
                 foreach (var h in instance.sceneHistory.items)
                 {
                     if (h.starred)
@@ -280,18 +278,6 @@ namespace scenehistorian
 			}
             sceneHistory.Save(PATH);
             changed = false;
-        }
-
-        [MenuItem("Tools/SceneHistorian/Scene History")]
-        private static void OpenWindow()
-        {
-			instance.Show();
-        }
-
-        [MenuItem("Tools/SceneHistorian/Previous Scene %#r")]
-        private static void GoBackMenu()
-        {
-			instance.GoBack();
         }
 
         public void GoBack()
