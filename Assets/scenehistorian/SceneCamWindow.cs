@@ -1,15 +1,7 @@
-﻿
-using System.Collections.Generic;
-using System.IO;
+﻿using System;
+using comunity;
 using UnityEditor;
 using UnityEngine;
-using Object = UnityEngine.Object;
-using System;
-using comunity;
-using commons;
-using UnityEngine.SceneManagement;
-using UnityEditor.SceneManagement;
-using System.Runtime.CompilerServices;
 
 namespace scenehistorian
 {
@@ -36,7 +28,7 @@ namespace scenehistorian
         void OnEnable()
         {
             history = SceneCamHistory.Load(PATH);
-            SceneViewMenu.AddContextMenu(menu=> {
+            SceneViewContextMenu.AddContextMenu(menu=> {
                 foreach (var h in instance.history.items)
                 {
                     menu.AddItem(new GUIContent("cam/"+h.id), false, OnCamMenu, h);
