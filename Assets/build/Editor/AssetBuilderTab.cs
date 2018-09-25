@@ -58,7 +58,7 @@ namespace build
 
             if (GUILayout.Button("Find Duplicates"))
             {
-                duplicates = AssetBundleDep.FindDuplicateAssetBundles();
+                duplicates = AssetBundleDep.inst.FindDuplicateAssetBundles();
             }
             if (duplicates != null)
             {

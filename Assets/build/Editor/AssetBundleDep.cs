@@ -1,30 +1,56 @@
-﻿using UnityEngine;
-using System.Collections;
-using UnityEditor;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using commons;
-using System;
 using comunity;
-using UnityEngine.UI;
-using System.IO;
+using UnityEditor;
+using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace build
 {
-    public static class AssetBundleDep
+    public class AssetBundleDep
     {
-        private static HashSet<string> excludes = new HashSet<string>();
-        private static HashSet<string> _curDeps;
-        private static HashSet<string> currentDeps
+        private bool exclude;
+        private HashSet<Regex> filter = new HashSet<Regex>();
+        private HashSet<string> _curDeps;
+        private HashSet<string> currentDeps
         {
             get
             {
-                InitDeps();
+                CollectDeps();
                 return _curDeps;
             }
         }
-        
-        private static void InitDeps()
+
+        private static AssetBundleDep _inst;
+        public static AssetBundleDep inst
+        {
+            get
+            {
+                if (_inst == null)
+                {
+                    _inst = new AssetBundleDep();
+                }
+                return _inst;
+            }
+        }
+
+        public AssetBundleDep()
+        {
+
+        }
+
+        private void SetExclude(bool ex)
+        {
+            exclude = ex;
+        }
+
+        private void AddFilter(string regexp)
+        {
+            filter.Add(new Regex(regexp));
+        }
+
+        public void CollectDeps()
         {
             if (_curDeps != null)
             {
@@ -32,10 +58,11 @@ namespace build
             }
             _curDeps = new HashSet<string>();
             var names = AssetDatabase.GetAllAssetBundleNames();
-            try {
+            try
+            {
                 if (names != null)
                 {
-                    for (int i=0; i<names.Length; ++i)
+                    for (int i = 0; i < names.Length; ++i)
                     {
                         EditorUtility.DisplayProgressBar("Collecting Dependencies", names[i], i / (float)names.Length);
                         var p = AssetDatabase.GetAssetPathsFromAssetBundle(names[i]);
@@ -43,12 +70,14 @@ namespace build
                         _curDeps.AddAll(dep);
                     }
                 }
-            } finally {
+            }
+            finally
+            {
                 EditorUtility.ClearProgressBar();
             }
         }
-        
-        public static bool IsAssetBundle(string path)
+
+        public bool IsAssetBundle(string path)
         {
             var type = FileTypeEx.GetFileType(path);
             switch (type)
@@ -73,15 +102,15 @@ namespace build
                     return false;
             }
         }
-        
-        
+
+
         /// <summary>
         /// Make the assets and it's dependencies which is the common asset of existing AssetBundles as AssetBundle
         /// </summary>
         /// <param name="assets">Assets.</param>
-        public static void SetCommonAssetAsBundles(IList<string> assets)
+        public void SetCommonAssetAsBundles(IList<string> assets)
         {
-            InitDeps();
+            CollectDeps();
             List<string> assetPaths = new List<string>();
             // filter asset bundle
             foreach (var p in assets)
@@ -93,21 +122,24 @@ namespace build
             }
             var deps = AssetDatabase.GetDependencies(assetPaths.ToArray(), false);
             SetDependenciesRecursive(deps);
-            
+
             foreach (var p in assetPaths)
             {
                 SetAssetBundleName(p);
             }
         }
-        
-        private static void SetDependenciesRecursive(string[] deps)
+
+        private void SetDependenciesRecursive(string[] deps)
         {
             // find duplicate dependencies add asset bundle name for them
             foreach (string d in deps)
             {
-                if (excludes.Contains(d))
+                foreach (var r in filter)
                 {
-                    continue;
+                    if (r.IsMatch(d))
+                    {
+                        continue;
+                    }
                 }
                 if (currentDeps.Contains(d))
                 {
@@ -120,7 +152,8 @@ namespace build
                             Debug.LogWarningFormat("Common asset '{0}' is not in CDN ", d);
                         }
                     }
-                } else
+                }
+                else
                 {
                     var deps2 = AssetDatabase.GetDependencies(d, false);
                     if (deps2.IsNotEmpty())
@@ -131,12 +164,12 @@ namespace build
                 currentDeps.Add(d);
             }
         }
-        
+
         /// <summary>
         /// Detach 'Assets/' from path and make it as asset bundle name 
         /// </summary>
         /// <param name="path">Path.</param>
-        public static void SetAssetBundleName(string path)
+        public void SetAssetBundleName(string path)
         {
             AssetImporter im = AssetImporter.GetAtPath(path);
             string bundleName = EditorAssetUtil.GetAssetRelativePath(path).ToLower();
@@ -144,23 +177,24 @@ namespace build
             currentDeps.Add(path);
             Debug.LogFormat("Assigning AssetBundle '{0}'", path);
         }
-        
-        public static void Clear()
+
+        public void Clear()
         {
             _curDeps = null;
         }
-        
-		public static List<AssetBundleDup> FindDuplicateAssetBundles()
+
+        public List<AssetBundleDup> FindDuplicateAssetBundles()
         {
             var names = AssetDatabase.GetAllAssetBundleNames();
-			var duplicates = new Dictionary<string, AssetBundleDup>();
+            var duplicates = new Dictionary<string, AssetBundleDup>();
             var subAssets = new HashSet<string>();
-            EditorGUIUtil.DisplayProgressBar(names, "Find", true, n=> {
+            EditorGUIUtil.DisplayProgressBar(names, "Find", true, n =>
+            {
                 var paths = AssetDatabase.GetAssetPathsFromAssetBundle(n);
-				var newAssets = new Dictionary<string, AssetBundleDup>();
+                var newAssets = new Dictionary<string, AssetBundleDup>();
                 foreach (var p in paths)
                 {
-					var depPaths = AssetDatabase.GetDependencies(p, false);
+                    var depPaths = AssetDatabase.GetDependencies(p, false);
                     foreach (var d in depPaths)
                     {
                         if (!string.IsNullOrEmpty(AssetDatabase.GetImplicitAssetBundleName(d))
@@ -169,28 +203,29 @@ namespace build
                         {
                             continue;
                         }
-						var item = duplicates.Get(d);
-						if (item == null)
-						{
-							var item0 = newAssets.Get(d);
-							if (item0 == null)
-							{
-								item0 = new AssetBundleDup(AssetDatabase.LoadAssetAtPath<Object>(d));
-								newAssets.Add(d, item0);
-							}
-							item0.AddRef(AssetDatabase.LoadAssetAtPath<Object>(p));
-						} else
-						{
-							item.duplicate = true;
-							item.AddRef(AssetDatabase.LoadAssetAtPath<Object>(p));
-						}
+                        var item = duplicates.Get(d);
+                        if (item == null)
+                        {
+                            var item0 = newAssets.Get(d);
+                            if (item0 == null)
+                            {
+                                item0 = new AssetBundleDup(AssetDatabase.LoadAssetAtPath<Object>(d));
+                                newAssets.Add(d, item0);
+                            }
+                            item0.AddRef(AssetDatabase.LoadAssetAtPath<Object>(p));
+                        }
+                        else
+                        {
+                            item.duplicate = true;
+                            item.AddRef(AssetDatabase.LoadAssetAtPath<Object>(p));
+                        }
                         var subDeps = AssetDatabase.GetDependencies(d, true);
                         subAssets.AddAll(subDeps);
                     }
                 }
-				duplicates.AddAll(newAssets);
+                duplicates.AddAll(newAssets);
             });
-			return duplicates.Values.Filter(d=> d.duplicate);
+            return duplicates.Values.Filter(d => d.duplicate);
         }
     }
 }

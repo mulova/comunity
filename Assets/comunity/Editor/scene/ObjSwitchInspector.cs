@@ -1,15 +1,13 @@
-using UnityEngine;
-using System.Collections;
-using UnityEditor;
-using System.Collections.Generic;
 using System;
-using UnityEditor.SceneManagement;
-using Object = UnityEngine.Object;
+using System.Collections.Generic;
 using commons;
+using UnityEditor;
+using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace comunity
 {
-	[CustomEditor(typeof(ObjSwitch))]
+    [CustomEditor(typeof(ObjSwitch))]
 	public class ObjSwitchInspector : Editor
 	{
 		private ObjSwitch objSwitch;

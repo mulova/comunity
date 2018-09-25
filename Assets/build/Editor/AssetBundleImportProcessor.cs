@@ -23,13 +23,13 @@ namespace build
 				string[] paths = EditorAssetUtil.ListAssetPaths(dir.path, FileType.All);
 				foreach (var p in paths)
 				{
-					if (AssetBundleDep.IsAssetBundle(p))
+					if (AssetBundleDep.inst.IsAssetBundle(p))
 					{
 						assets.Add(p);
 					}
 				}
 			}
-			AssetBundleDep.SetCommonAssetAsBundles(assets);
+			AssetBundleDep.inst.SetCommonAssetAsBundles(assets);
 		}
 		
 		static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
@@ -43,13 +43,13 @@ namespace build
 					var oldName = im.assetBundleName;
 					if (oldName.IsNotEmpty() && p != "Assets/"+oldName)
 					{
-						AssetBundleDep.SetAssetBundleName(p);
+						AssetBundleDep.inst.SetAssetBundleName(p);
 						Debug.LogFormat("Change AssetBundle name {0} => {1}", oldName, im.assetBundleName);
 					}
 				}
 			}
 			
-			AssetBundleDep.SetCommonAssetAsBundles(importedAssets);
+			AssetBundleDep.inst.SetCommonAssetAsBundles(importedAssets);
 		}
 		
 		[MenuItem("Tools/unilova/Asset/Clear AssetBundles")]
@@ -59,7 +59,7 @@ namespace build
 			{
 				AssetDatabase.RemoveAssetBundleName(n, true);
 			}
-			AssetBundleDep.Clear();
+			AssetBundleDep.inst.Clear();
 		}
 	}
 }

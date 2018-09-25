@@ -10,7 +10,7 @@ namespace build
             {
                 AssetDatabase.RemoveAssetBundleName(n, true);
             }
-            AssetBundleDep.Clear();
+            AssetBundleDep.inst.Clear();
         }
     }
 }
