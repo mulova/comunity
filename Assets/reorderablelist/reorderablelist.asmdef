@@ -1,3 +1,10 @@
-﻿{
-	"name": "reorderablelist"
+{
+    "name": "reorderablelist",
+    "references": [],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
 }

@@ -72,16 +72,23 @@ namespace scenehistorian
             #else
             EditorApplication.playmodeStateChanged += ChangePlaymode;
             #endif
-            SceneViewContextMenu.AddContextMenu(menu=> {
-                menu.AddItem(new GUIContent("Previous Scene"), false, GoBack);
-                foreach (var h in instance.sceneHistory.items)
-                {
-                    if (h.starred)
-                    {
-                        menu.AddItem(new GUIContent("scenes/"+Path.GetFileNameWithoutExtension(h.first.path)), false, OnSceneMenu, h);
-                    }
-                }
-            }, 1);
+			var history = instance.sceneHistory.items;
+			if (history.Count > 0)
+			{
+				SceneViewContextMenu.AddContextMenu(menu=> {
+					if (history.Count >= 2)
+					{
+						menu.AddItem(new GUIContent("Previous: " + history[1].name), false, GoBack);
+					}
+					for (int i=2; i<history.Count; ++i)
+					{
+						if (history[i].starred)
+						{
+							menu.AddItem(new GUIContent("scenes/"+ history[i].name), false, OnSceneMenu, history[i]);
+						}
+					}
+				}, 1);
+			}
         }
 
         void OnDisable()
@@ -282,7 +289,7 @@ namespace scenehistorian
 
         public void GoBack()
         {
-            if (!changed||EditorSceneBridge.SaveCurrentSceneIfUserWantsTo())
+            if ((!changed||EditorSceneBridge.SaveCurrentSceneIfUserWantsTo()) && sceneHistory.Count > 1)
             {
                 EditorSceneBridge.OpenScene(sceneHistory[1].first.path);
             }

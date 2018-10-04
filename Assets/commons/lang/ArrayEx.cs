@@ -165,7 +165,22 @@ namespace commons
 				}
 			}
 		}
-		
+
+		public static void ForEachIndex<T>(this T[] arr, Action<T, int> action)
+		{
+			if (arr == null || action == null)
+			{
+				return;
+			}
+			for (int i=0; i<arr.Length; ++i)
+			{
+				if (arr[i] != null)
+				{
+					action(arr[i], i);
+				}
+			}
+		}
+
 		public static void Fill<T>(this T[] arr, T val) {
 			if (arr == null) {
 				return;
