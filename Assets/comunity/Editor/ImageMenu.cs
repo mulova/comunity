@@ -40,7 +40,15 @@ namespace comunity
 			}, FileType.Image);
 		}
 
-        [MenuItem("Assets/Image/ToJPEG", false, 1)]
+		[MenuItem("Assets/Image/RemoveAlpha", false, 1)]
+		static void RemoveAlpha()
+		{
+			EditorAssetUtil.ForEachSelection(p => {
+				TextureUtil.RemoveAlphaChannel(p);
+			}, FileType.Image);
+		}
+
+		[MenuItem("Assets/Image/ToJPEG", false, 1)]
         static void ConvertToJpeg()
         {
             EditorAssetUtil.ForEachSelection(p => {

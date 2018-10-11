@@ -22,20 +22,25 @@ namespace comunity
 		public const string FORCE_RESIZE=
 			#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
 			"!";
-			#else
+#else
 			@"\!";
-			#endif
+#endif
 
-        public static bool IsValid()
-        {
-            return IMAGE_MAGICK.IsNotEmpty();
-        }
+		public static bool IsValid()
+		{
+			return IMAGE_MAGICK.IsNotEmpty();
+		}
+
+		private static string AppendPrefix(string src, string prefix)
+		{
+			string dir = PathUtil.GetDirectory(src);
+			string filename = Path.GetFileName(src);
+			return PathUtil.Combine(dir, "prefix_"+ filename);
+		}
         
 		private static ExecOutput Exec(string cmd, string options, string src)
         {
-            string dir = PathUtil.GetDirectory(src);
-            string filename = Path.GetFileName(src);
-            string dst = PathUtil.Combine(dir, "tmp_"+filename);
+            string dst = AppendPrefix(src, "tmp_");
 			var output = Exec(cmd, options, src, dst);
             File.Delete(src);
             File.Delete(dst+".meta");
@@ -96,9 +101,14 @@ namespace comunity
         public static string ToPng(string src)
         {
             return ConvertType(src, ".png", "-flatten");
-        }
-        
-        public static void Dither4444(Texture2D tex)
+		}
+
+		public static void RemoveAlphaChannel(string src)
+		{
+			Exec("convert", "-alpha off", src);
+		}
+
+		public static void Dither4444(Texture2D tex)
         {
             if (tex == null)
             {
