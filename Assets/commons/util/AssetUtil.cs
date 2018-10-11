@@ -57,6 +57,15 @@ namespace commons
             Directory.Delete(dirPath);
         }
 
-    }
+		public static void WriteAllText(string path, string text)
+		{
+			string dir = PathUtil.GetDirectory(path);
+			if (!Directory.Exists(dir))
+			{
+				Directory.CreateDirectory(dir);
+			}
+			File.WriteAllText(path, text);
+		}
+	}
     
 }

@@ -224,7 +224,8 @@ namespace comunity
             {
                 if (EditorUserBuildSettings.activeBuildTarget != BuildTarget.WebGL)
                 {
-                    var json = JsonUtility.ToJson(this, true);
+					var json = JsonUtility.ToJson(this, true);
+					AssetUtil.WriteAllText(PATH, json);
                     File.WriteAllText(PATH, json);
                 } else
                 {
