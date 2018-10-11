@@ -10,8 +10,8 @@ namespace build
 {
     public class AssetBundleDep
     {
-        private bool exclude;
-        private HashSet<Regex> filter = new HashSet<Regex>();
+        private bool includePath;
+        private HashSet<Regex> pathFilter = new HashSet<Regex>();
         private HashSet<string> _curDeps;
         private HashSet<string> currentDeps
         {
@@ -40,14 +40,12 @@ namespace build
 
         }
 
-        private void SetExclude(bool ex)
+        public void SetPathFilter(bool include, params string[] regexp)
         {
-            exclude = ex;
-        }
-
-        private void AddFilter(string regexp)
-        {
-            filter.Add(new Regex(regexp));
+            this.includePath = include;
+            if (regexp != null) {
+                regexp.ForEach(ex => pathFilter.Add(new Regex(ex)));
+            }
         }
 
         public void CollectDeps()
@@ -92,8 +90,8 @@ namespace build
                 case FileType.Video:
                 case FileType.Scene:
                 case FileType.ScriptableObject:
-                    return AssetBundlePath.inst.IsCdnPath(path);
                 case FileType.Asset:
+                    return AssetBundlePath.inst.IsCdnPath(path);
                 case FileType.Zip:
                 case FileType.Meta:
                 case FileType.Script:
@@ -134,14 +132,25 @@ namespace build
             // find duplicate dependencies add asset bundle name for them
             foreach (string d in deps)
             {
-                foreach (var r in filter)
+                bool include = false;
+                if (pathFilter.IsNotEmpty())
                 {
-                    if (r.IsMatch(d))
+                    foreach (var r in pathFilter)
                     {
-                        continue;
+                        bool match = r.IsMatch(d);
+                        if (includePath && match)
+                        {
+                            include = true;
+                            break;
+                        }
+                        if (!includePath && !match)
+                        {
+                            include = false;
+                            break;
+                        }
                     }
                 }
-                if (currentDeps.Contains(d))
+                if (currentDeps.Contains(d) && include)
                 {
                     AssetImporter im = AssetImporter.GetAtPath(d);
                     if (im.assetBundleName.IsEmpty())
@@ -187,7 +196,6 @@ namespace build
         {
             var names = AssetDatabase.GetAllAssetBundleNames();
             var duplicates = new Dictionary<string, AssetBundleDup>();
-            var subAssets = new HashSet<string>();
             EditorGUIUtil.DisplayProgressBar(names, "Find", true, n =>
             {
                 var paths = AssetDatabase.GetAssetPathsFromAssetBundle(n);
@@ -219,8 +227,6 @@ namespace build
                             item.duplicate = true;
                             item.AddRef(AssetDatabase.LoadAssetAtPath<Object>(p));
                         }
-                        var subDeps = AssetDatabase.GetDependencies(d, true);
-                        subAssets.AddAll(subDeps);
                     }
                 }
                 duplicates.AddAll(newAssets);

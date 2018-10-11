@@ -29,7 +29,9 @@ namespace build
 					}
 				}
 			}
-			AssetBundleDep.inst.SetCommonAssetAsBundles(assets);
+            AssetBundleDep dep = new AssetBundleDep();
+            dep.SetPathFilter(true, @"\.jpg$", @"\.png$", @"\.tga$");
+            dep.SetCommonAssetAsBundles(assets);
 		}
 		
 		static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
