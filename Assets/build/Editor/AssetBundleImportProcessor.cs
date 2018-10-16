@@ -13,7 +13,7 @@ namespace build
 	: AssetPostprocessor
 	#endif
 	{
-		[MenuItem("Tools/unilova/Asset/Reassign AssetBundles")]
+		[MenuItem("Tools/unilova/Asset/Reassign Common AssetBundles")]
 		public static void ReassignAssetBundleNames()
 		{
 			// Clear All AssetBundles
@@ -30,11 +30,25 @@ namespace build
 				}
 			}
             AssetBundleDep dep = new AssetBundleDep();
-            dep.SetPathFilter(true, @"\.jpg$", @"\.png$", @"\.tga$");
+            //dep.SetPathFilter(true, @"\.jpg$", @"\.png$", @"\.tga$");
             dep.SetCommonAssetAsBundles(assets);
 		}
-		
-		static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
+
+        [MenuItem("Tools/unilova/Asset/Assign Selected AssetBundles")]
+        public static void AssignAssetBundleNames()
+        {
+            // Clear All AssetBundles
+            List<string> assets = new List<string>();
+            foreach (var guid in Selection.assetGUIDs)
+            {
+                assets.Add(AssetDatabase.GUIDToAssetPath(guid));
+            }
+            AssetBundleDep dep = new AssetBundleDep(false);
+            //dep.SetPathFilter(true, @"\.jpg$", @"\.png$", @"\.tga$");
+            dep.SetCommonAssetAsBundles(assets);
+        }
+
+        static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
 		{
 			// changed AssetBundle names for moved assets
 			foreach (var p in movedFromAssetPaths)

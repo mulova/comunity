@@ -10,8 +10,10 @@ namespace build
 {
     public class AssetBundleDep
     {
+        public bool collectCurrentDeps = true;
         private bool includePath;
         private HashSet<Regex> pathFilter = new HashSet<Regex>();
+
         private HashSet<string> _curDeps;
         private HashSet<string> currentDeps
         {
@@ -35,9 +37,9 @@ namespace build
             }
         }
 
-        public AssetBundleDep()
+        public AssetBundleDep(bool collectCurrentDeps = true)
         {
-
+            this.collectCurrentDeps = collectCurrentDeps;
         }
 
         public void SetPathFilter(bool include, params string[] regexp)
@@ -55,23 +57,26 @@ namespace build
                 return;
             }
             _curDeps = new HashSet<string>();
-            var names = AssetDatabase.GetAllAssetBundleNames();
-            try
+            if (collectCurrentDeps)
             {
-                if (names != null)
+                var names = AssetDatabase.GetAllAssetBundleNames();
+                try
                 {
-                    for (int i = 0; i < names.Length; ++i)
+                    if (names != null)
                     {
-                        EditorUtility.DisplayProgressBar("Collecting Dependencies", names[i], i / (float)names.Length);
-                        var p = AssetDatabase.GetAssetPathsFromAssetBundle(names[i]);
-                        var dep = AssetDatabase.GetDependencies(p, true);
-                        _curDeps.AddAll(dep);
+                        for (int i = 0; i < names.Length; ++i)
+                        {
+                            EditorUtility.DisplayProgressBar("Collecting Dependencies", names[i], i / (float)names.Length);
+                            var p = AssetDatabase.GetAssetPathsFromAssetBundle(names[i]);
+                            var dep = AssetDatabase.GetDependencies(p, true);
+                            _curDeps.AddAll(dep);
+                        }
                     }
                 }
-            }
-            finally
-            {
-                EditorUtility.ClearProgressBar();
+                finally
+                {
+                    EditorUtility.ClearProgressBar();
+                }
             }
         }
 
