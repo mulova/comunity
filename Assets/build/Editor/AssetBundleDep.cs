@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using commons;
 using comunity;
@@ -10,7 +11,9 @@ namespace build
 {
     public class AssetBundleDep
     {
+        public delegate string Labeler(string path);
         public bool collectCurrentDeps = true;
+        public Labeler generateLabel = s=> s;
         private bool includePath;
         private HashSet<Regex> pathFilter = new HashSet<Regex>();
 
@@ -128,7 +131,7 @@ namespace build
 
             foreach (var p in assetPaths)
             {
-                SetAssetBundleName(p);
+                SetAssetBundleName(generateLabel(p));
             }
         }
 

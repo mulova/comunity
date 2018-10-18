@@ -34,18 +34,19 @@ namespace build
             dep.SetCommonAssetAsBundles(assets);
 		}
 
-        [MenuItem("Tools/unilova/Asset/Assign Selected AssetBundles")]
+        [MenuItem("Assets/Create/Assign AssetBundle Labels")]
         public static void AssignAssetBundleNames()
         {
             // Clear All AssetBundles
-            List<string> assets = new List<string>();
-            foreach (var guid in Selection.assetGUIDs)
-            {
-                assets.Add(AssetDatabase.GUIDToAssetPath(guid));
-            }
             AssetBundleDep dep = new AssetBundleDep(false);
+            var assets = EditorAssetUtil.ListAssets(Selection.objects);
+            var paths = new List<string>();
+            foreach (var a in assets)
+            {
+                paths.Add(AssetDatabase.GetAssetPath(a));
+            }
             //dep.SetPathFilter(true, @"\.jpg$", @"\.png$", @"\.tga$");
-            dep.SetCommonAssetAsBundles(assets);
+            dep.SetCommonAssetAsBundles(paths);
         }
 
         static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
