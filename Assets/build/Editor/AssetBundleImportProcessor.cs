@@ -34,7 +34,7 @@ namespace build
             dep.SetCommonAssetAsBundles(assets);
 		}
 
-        [MenuItem("Assets/Create/Assign AssetBundle Labels")]
+        [MenuItem("Assets/Create/Assign AssetBundle Labels For Selection")]
         public static void AssignAssetBundleNames()
         {
             // Clear All AssetBundles

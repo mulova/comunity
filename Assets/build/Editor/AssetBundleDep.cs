@@ -13,7 +13,8 @@ namespace build
     {
         public delegate string Labeler(string path);
         public bool collectCurrentDeps = true;
-        public Labeler generateLabel = s=> s;
+        public Labeler generateLabel = o=> EditorAssetUtil.GetAssetRelativePath(o).ToLower();
+        public Labeler generateVariant = o=> "";
         private bool includePath;
         private HashSet<Regex> pathFilter = new HashSet<Regex>();
 
@@ -131,7 +132,7 @@ namespace build
 
             foreach (var p in assetPaths)
             {
-                SetAssetBundleName(generateLabel(p));
+                SetAssetBundleName(p);
             }
         }
 
@@ -188,9 +189,11 @@ namespace build
         /// <param name="path">Path.</param>
         public void SetAssetBundleName(string path)
         {
+            var bundleName = generateLabel(path);
+            var variantName = generateVariant(path);
             AssetImporter im = AssetImporter.GetAtPath(path);
-            string bundleName = EditorAssetUtil.GetAssetRelativePath(path).ToLower();
-            im.SetAssetBundleNameAndVariant(bundleName, "");
+            im.SetAssetBundleNameAndVariant()bundleName, variantName);
+            im.SaveAndReimport();
             currentDeps.Add(path);
             Debug.LogFormat("Assigning AssetBundle '{0}'", path);
         }
