@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using commons;
 using comunity;
@@ -192,7 +191,7 @@ namespace build
             var bundleName = generateLabel(path);
             var variantName = generateVariant(path);
             AssetImporter im = AssetImporter.GetAtPath(path);
-            im.SetAssetBundleNameAndVariant()bundleName, variantName);
+            im.SetAssetBundleNameAndVariant(bundleName, variantName);
             im.SaveAndReimport();
             currentDeps.Add(path);
             Debug.LogFormat("Assigning AssetBundle '{0}'", path);
