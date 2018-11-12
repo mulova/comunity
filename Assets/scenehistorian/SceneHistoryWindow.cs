@@ -72,7 +72,7 @@ namespace scenehistorian
             #else
             EditorApplication.playmodeStateChanged += ChangePlaymode;
             #endif
-			var history = instance.sceneHistory.items;
+			var history = sceneHistory.items;
 			if (history.Count > 0)
 			{
 				SceneViewContextMenu.AddContextMenu(menu=> {
