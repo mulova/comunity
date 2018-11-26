@@ -192,7 +192,7 @@ namespace comunity
             }
             
             tex.SetPixels(pixels);
-            EditorUtility.CompressTexture(tex, TextureFormat.RGBA4444, TextureCompressionQuality.Best);
+            EditorUtility.CompressTexture(tex, TextureFormat.RGBA4444, 100);
         }
         
         public static void FloydSteinberg4444(Texture tex)
