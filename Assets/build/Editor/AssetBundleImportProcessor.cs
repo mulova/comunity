@@ -13,7 +13,17 @@ namespace build
 	: AssetPostprocessor
 	#endif
 	{
-		[MenuItem("Tools/unilova/Asset/Reassign Common AssetBundles")]
+		[MenuItem("Tools/unilova/Asset/Extract Preassigned Common AssetBundles")]
+		public static void ExtractCommonBundles()
+		{
+			AssetBundleDep dep = new AssetBundleDep();
+			dep.collectCurrentDeps = true;
+			dep.CollectDeps();
+			//dep.SetPathFilter(true, @"\.jpg$", @"\.png$", @"\.tga$");
+			dep.SetCommonAssetAsBundles(AssetDatabase.GetAllAssetPaths());
+		}
+
+		[MenuItem("Tools/unilova/Asset/Extract Listed Common AssetBundles")]
 		public static void ReassignAssetBundleNames()
 		{
 			// Clear All AssetBundles
