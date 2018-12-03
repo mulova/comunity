@@ -12,7 +12,11 @@ namespace build
     {
         public delegate string Labeler(string path);
         public bool collectCurrentDeps = true;
-        public Labeler generateLabel = o=> EditorAssetUtil.GetAssetRelativePath(o).ToLower();
+		public Labeler generateLabel = o =>
+		{
+			var l = EditorAssetUtil.GetAssetRelativePath(o).ToLower() + "_ab";
+			return l.Replace('.', '_');
+		};
         public Labeler generateVariant = o=> "";
         private bool includePath;
         private HashSet<Regex> pathFilter = new HashSet<Regex>();
