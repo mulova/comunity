@@ -91,15 +91,15 @@ namespace comunity
             System.Diagnostics.Process.GetCurrentProcess().Kill();                      
 #endif
         }
-        
         private void CaptureScreenshot() {
+#if SCREEN_CAPTURE
             DateTime captureDateTime = DateTime.Now;
             captureDateTime.GetDateTimeFormats();
             string filename = string.Format("LineUp_{0}.png" , DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss"));
             ScreenCapture.CaptureScreenshot(filename);
             StartCoroutine(ShowScreenshotMessage());
+#endif
         }
-        
         IEnumerator ShowScreenshotMessage() {
             yield return new WaitForSeconds(0.5f);
             //      SplashMessage.Open("스크린샷이 저장되었습니다.");

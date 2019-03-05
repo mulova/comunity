@@ -388,11 +388,7 @@ namespace build
 
 		public static void ConvertAssetBundleToText(string path)
 		{
-			#if UNITY_5_3
 			AssetBundle bundle = AssetBundle.LoadFromFile(path);
-			#else
-			AssetBundle bundle = AssetBundle.LoadFromFile(path);
-			#endif
 			TextAsset[] csv = bundle.LoadAllAssets<TextAsset>();
 			if (csv.IsNotEmpty())
 			{
