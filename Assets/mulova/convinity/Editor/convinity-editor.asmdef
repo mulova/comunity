@@ -1,0 +1,15 @@
+{
+    "name": "convinity-editor",
+    "references": [
+        "commons",
+        "comunity",
+        "comunity-editor",
+        "convinity"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}

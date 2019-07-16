@@ -1,0 +1,12 @@
+{
+    "name": "build",
+    "references": [
+        "commons",
+        "comunity",
+        "comunity-editor"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": []
+}

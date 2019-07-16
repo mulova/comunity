@@ -1,0 +1,11 @@
+{
+    "name": "effect",
+    "references": [
+        "commons",
+        "comunity"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}

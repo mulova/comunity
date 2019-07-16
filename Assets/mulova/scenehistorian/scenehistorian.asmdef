@@ -1,0 +1,16 @@
+{
+    "name": "scenehistorian",
+    "references": [
+        "commons",
+        "comunity",
+        "comunity-editor",
+        "reorderablelist",
+        "reorderablelist-editor"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}

@@ -1,0 +1,15 @@
+{
+    "name": "comunity-editor",
+    "references": [
+        "commons",
+        "comunity",
+        "reorderablelist",
+        "reorderablelist-editor"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}
