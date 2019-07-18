@@ -4,6 +4,7 @@ using Object = UnityEngine.Object;
 using System.IO;
 using System.Collections.Generic;
 using commons;
+using System.Text.Ex;
 
 namespace comunity
 {

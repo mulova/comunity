@@ -11,6 +11,7 @@ using Object = UnityEngine.Object;
 using Debug = UnityEngine.Debug;
 using System.Text;
 using commons;
+using System.Text.Ex;
 
 namespace comunity
 {

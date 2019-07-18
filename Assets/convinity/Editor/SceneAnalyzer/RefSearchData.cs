@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEditor.SceneManagement;
 using commons;
 using comunity;
+using System.Text.Ex;
 
 namespace convinity
 {

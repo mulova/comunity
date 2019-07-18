@@ -235,7 +235,7 @@ public static class Builder
 		string error4 = Verifier.VerifyThumbnail("Assets/res/download/hero");
 		string error6 = Verifier.VerifyHeroNameCSV();
 
-		string err = StringUtil.Join("\n", new string[] { error1, error3, error4, error6 });
+		string err = string.Join("\n", error1, error3, error4, error6);
 		return err.Trim();
 	}
 

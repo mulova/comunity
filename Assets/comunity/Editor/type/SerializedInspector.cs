@@ -11,6 +11,8 @@ using System.Reflection;
 using System;
 using Object = UnityEngine.Object;
 using commons;
+using System.Text.Ex;
+using System.Collections.Generic.Ex;
 
 namespace comunity
 {

@@ -10,6 +10,7 @@ using UnityEditor;
 using System.Text.RegularExpressions;
 using Object = UnityEngine.Object;
 using commons;
+using System.Text.Ex;
 
 namespace comunity
 {

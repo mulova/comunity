@@ -8,6 +8,8 @@ using UnityEditorInternal;
 using commons;
 using comunity;
 using Rotorz.Games.Collections;
+using System.Text.Ex;
+using System.Collections.Generic.Ex;
 
 namespace shortcut {
 

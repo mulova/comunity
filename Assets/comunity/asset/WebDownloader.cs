@@ -2,6 +2,7 @@ using System.IO;
 using System.Net;
 using System;
 using commons;
+using System.Text.Ex;
 
 namespace comunity
 {

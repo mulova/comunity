@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using System.IO;
 using commons;
+using System.Text.Ex;
 
 namespace comunity {
 	public abstract class TabbedEditorWindow : EditorWindow {

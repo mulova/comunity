@@ -4,9 +4,8 @@
 // Copyright © 2013- mulova@gmail.com
 //----------------------------------------------
 using System.Collections;
-using System.Text;
 
-namespace commons {
+namespace System.Text.Ex {
 	public static class StringBuilderEx {
 		public static StringBuilder Trim(this StringBuilder s) {
 			int begin = 0;

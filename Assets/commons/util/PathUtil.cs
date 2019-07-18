@@ -7,6 +7,7 @@
 using System;
 using System.Text;
 using System.IO;
+using System.Text.Ex;
 
 namespace commons
 {

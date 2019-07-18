@@ -92,7 +92,7 @@ public static class BuildScriptEx {
 			}
 			return null;
 		});
-		Debug.Log(StringUtil.Join("\n", found));
+		Debug.Log(found.Join("\n"));
 	}
 }
 */

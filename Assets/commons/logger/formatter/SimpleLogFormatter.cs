@@ -7,6 +7,7 @@
 using System;
 using System.Diagnostics;
 using System.Text;
+using System.Text.Ex;
 
 namespace commons {
 	public class SimpleLogFormatter : LogFormatter

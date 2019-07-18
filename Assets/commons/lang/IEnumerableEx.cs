@@ -3,12 +3,10 @@
 // License: The MIT License ( http://opensource.org/licenses/MIT )
 // Copyright © 2013- mulova@gmail.com
 //----------------------------------------------
-using System.Collections.Generic;
-using System;
-using System.Collections;
-using commons;
+using System.Text;
+using System.Text.Ex;
 
-namespace commons
+namespace System.Collections.Generic.Ex
 {
 	public static class IEnumerableEx
 	{
@@ -43,26 +41,8 @@ namespace commons
 			}
 			return dst;
 		}
-		
-		public static Dictionary<K, V> ToDictionary<K, V>(this IEnumerable<V> src, Converter<V, K> converter)
-		{
-			if (src == null)
-			{
-				return null;
-			}
-			Dictionary<K, V> dst = new Dictionary<K, V>(); 
-			foreach (V v in src)
-			{
-				K k = converter(v);
-				if (k != null)
-				{
-					dst[k] = v;
-				}
-			}
-			return dst;
-		}
-		
-		public static List<T> Filter<T>(this IEnumerable<T> src, Predicate<T> predicate)
+
+        public static List<T> Filter<T>(this IEnumerable<T> src, Predicate<T> predicate)
 		{
 			List<T> dst = new List<T>();
 			if (src != null)
@@ -95,9 +75,25 @@ namespace commons
 		
 		public static string Join(this IEnumerable list, string separator)
 		{
-			return StringUtil.Join(separator, list);
-		}
+            int count = 0;
+            StringBuilder str = new StringBuilder(256);
+            foreach (object o in list)
+            {
+                if (o != null)
+                {
+                    if (count != 0)
+                    {
+                        str.Append(separator);
+                    }
+                    string t = o.ToString();
+                    if (t.IsNotEmpty())
+                    {
+                        str.Append(t);
+                        count++;
+                    }
+                }
+            }
+            return str.ToString();
+        }
 	}
 }
-
-

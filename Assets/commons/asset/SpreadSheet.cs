@@ -9,6 +9,8 @@ using System.IO;
 using System;
 using System.Text;
 using System.Reflection;
+using System.Text.Ex;
+using System.Collections.Generic.Ex;
 
 namespace commons
 {

@@ -8,10 +8,10 @@ using System;
 using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
-using System.Collections;
 using System.Reflection;
 using commons;
 using Object = UnityEngine.Object;
+using System.Text.Ex;
 
 /**
 * - title이 null이면 folding을 하지 않는다.

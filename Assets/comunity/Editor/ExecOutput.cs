@@ -5,6 +5,7 @@
 //----------------------------------------------
 
 using System;
+using System.Text.Ex;
 using commons;
 
 namespace comunity

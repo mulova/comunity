@@ -4,6 +4,8 @@ using System;
 using UnityEngine;
 using UnityEditor;
 using commons;
+using System.Text.Ex;
+using System.Collections.Generic.Ex;
 
 namespace build
 {
@@ -86,7 +88,7 @@ namespace build
         {
             if (errors.IsNotEmpty())
             {
-                return string.Format("{0}: {1}", scene, StringUtil.Join(", ", errors));
+                return string.Format("{0}: {1}", scene, errors.Join(", "));
             } else
             {
                 return string.Empty;
@@ -104,7 +106,7 @@ namespace build
                     errors.Add(err);
                 }
             }
-            return StringUtil.Join("\n", errors);
+            return errors.Join("\n");
         }
 
         private static List<SceneBuildProcess> pool;

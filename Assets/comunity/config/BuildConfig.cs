@@ -2,6 +2,7 @@ using System;
 using System.Security.Cryptography;
 using UnityEngine;
 using commons;
+using System.Text.Ex;
 
 namespace comunity
 {

@@ -3,7 +3,7 @@ using UnityEditor;
 using Object = UnityEngine.Object;
 using UnityEngine;
 using commons;
-
+using System.Text.Ex;
 
 namespace comunity
 {

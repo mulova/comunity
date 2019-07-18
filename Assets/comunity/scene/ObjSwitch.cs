@@ -5,14 +5,15 @@
 //----------------------------------------------
 
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using System;
 using commons;
+using System.Text.Ex;
+using System.Collections.Generic.Ex;
 
 namespace comunity
 {
-    public class ObjSwitch : Script
+    public class ObjSwitch : MonoBehaviour
     {
 	
         public ObjSwitchElement[] switches = new ObjSwitchElement[0];
@@ -20,8 +21,16 @@ namespace comunity
         public ObjSwitchPreset[] preset;
         public bool overwrite = false;
         private ObjSwitchElement DUMMY = new ObjSwitchElement();
-
         private HashSet<string> keySet = new HashSet<string>();
+
+        private ILogger log
+        {
+            get
+            {
+                return Debug.unityLogger;
+            }
+        }
+
 
         public void ResetSwitch()
         {
@@ -85,9 +94,9 @@ namespace comunity
         {
             if (!overwrite&&Contains(param))
             {
-                if (log.IsLoggable(LogLevel.DEBUG))
+                if (log.IsLoggable(LogType.Log))
                 {
-                    log.Debug("ObjSwitch {0}: Duplicate ignored ( {1} )", name, StringUtil.Join(",", param));
+                    log.Debug("ObjSwitch {0}: Duplicate ignored ( {1} )", name, param.Join(","));
                 }
                 return;
             }
@@ -153,13 +162,13 @@ namespace comunity
                     o.SetActive(false);
                 }
             }
-            if (log.IsLoggable(LogLevel.INFO))
+            if (log.IsLoggable(LogType.Log))
             {
-                log.Info("ObjSwitch {0}: {1}", name, keySet.Join(","));
+                log.Debug("ObjSwitch {0}: {1}", name, keySet.Join(","));
             }
             if (match != keySet.Count)
             {
-                Assert.Fail(this, "Invalid param {0}", StringUtil.Join(",", keySet));
+                Assert.Fail(this, "Invalid param {0}", keySet.Join(","));
             }
         }
 

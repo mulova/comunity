@@ -8,6 +8,8 @@ using System.Text;
 using comunity;
 using System.Text.RegularExpressions;
 using Object = UnityEngine.Object;
+using System.Collections.Generic.Ex;
+using System.Text.Ex;
 
 namespace comunity
 {
@@ -51,7 +53,7 @@ namespace comunity
             {
                 errors.AddRange(ProcessScene(scenes[i], func));
             }
-            return StringUtil.Join("\n", errors);
+            return errors.Join("\n");
         }
 
         public static List<string> ProcessScene(EditorBuildSettingsScene s, Func<IEnumerable<Transform>, string> func)

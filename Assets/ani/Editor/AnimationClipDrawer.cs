@@ -1,10 +1,9 @@
-using System;
 using UnityEngine;
-using System.Collections.Generic;
 using UnityEditor;
 using Object = UnityEngine.Object;
 using commons;
 using comunity;
+using System.Text.Ex;
 
 namespace ani
 {

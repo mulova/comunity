@@ -6,6 +6,8 @@ using System.IO;
 using commons;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Text.Ex;
+using System.Collections.Generic.Ex;
 
 namespace comunity
 {

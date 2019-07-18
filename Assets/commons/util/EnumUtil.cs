@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
+using System.Text.Ex;
 
 namespace commons {
 	public static class EnumUtil {

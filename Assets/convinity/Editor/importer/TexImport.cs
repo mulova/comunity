@@ -6,6 +6,7 @@ using System;
 using Object = UnityEngine.Object;
 using comunity;
 using commons;
+using System.Text.Ex;
 
 namespace convinity {
 	

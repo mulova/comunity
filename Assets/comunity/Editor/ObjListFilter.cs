@@ -4,6 +4,7 @@ using UnityEditor;
 using Object = UnityEngine.Object;
 using UnityEngine;
 using commons;
+using System.Text.Ex;
 
 namespace comunity {
 	public class ObjListFilter<T> where T:class {

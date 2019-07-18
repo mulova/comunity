@@ -1,9 +1,0 @@
-{
-    "name": "ani",
-    "references": [
-        "commons",
-        "comunity"
-    ],
-    "includePlatforms": [],
-    "excludePlatforms": []
-}

@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using commons;
+using System.Text.Ex;
 
 namespace comunity
 {

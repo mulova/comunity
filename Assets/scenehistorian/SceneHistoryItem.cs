@@ -6,8 +6,8 @@ using System.Collections.Generic;
 using commons;
 using UnityEditor.SceneManagement;
 using UnityEditor;
-using UnityEngine.SceneManagement;
 using System.IO;
+using System.Text.Ex;
 
 namespace scenehistorian
 {

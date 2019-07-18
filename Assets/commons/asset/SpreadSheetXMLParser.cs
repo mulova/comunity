@@ -9,7 +9,7 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System;
-
+using System.Text.Ex;
 
 namespace commons {
 	class SpreadSheetXMLParser : SpreadSheetParser {

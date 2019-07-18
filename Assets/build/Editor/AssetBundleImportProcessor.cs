@@ -5,6 +5,7 @@ using UnityEditor;
 using System.Collections.Generic;
 using comunity;
 using commons;
+using System.Text.Ex;
 
 namespace build
 {

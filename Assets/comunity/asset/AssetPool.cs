@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections;
 using commons;
+using System.Text.Ex;
 
 namespace comunity {
 	/// <summary>

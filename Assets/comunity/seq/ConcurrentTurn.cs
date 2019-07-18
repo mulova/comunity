@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 using commons;
+using System.Collections.Generic.Ex;
 
 namespace comunity {
 	public class ConcurrentTurn : SeqTurn {
@@ -54,7 +55,7 @@ namespace comunity {
 		
 		public override string ToString()
 		{
-            return StringUtil.Join("\n", list);
+            return list.Join("\n");
 		}
 	}
 }

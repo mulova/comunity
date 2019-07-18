@@ -1,4 +1,5 @@
-﻿using commons;
+﻿using System.Text.Ex;
+using commons;
 using UnityEngine;
 
 namespace comunity
@@ -9,13 +10,7 @@ namespace comunity
         [HideInInspector]
         public string guid;
 
-        public bool isValid
-        {
-            get
-            {
-                return guid.IsNotEmpty();
-            }
-        }
+        public bool isValid => guid.IsNotEmpty();
 
         public static implicit operator string(AssetGuid a)
         {

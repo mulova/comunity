@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using commons;
+using System.Text.Ex;
 
 namespace comunity
 {

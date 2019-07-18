@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Text;
 using Object = UnityEngine.Object;
 using commons;
+using System.Text.Ex;
+using System.Collections.Generic.Ex;
 #if ASSETBUNDLE_MANAGER
 using AssetBundles;
 #endif

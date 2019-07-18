@@ -3,6 +3,7 @@ using UnityEngine;
 using Object = UnityEngine.Object;
 using UnityEngine.Serialization;
 using commons;
+using System.Text.Ex;
 
 namespace comunity
 {

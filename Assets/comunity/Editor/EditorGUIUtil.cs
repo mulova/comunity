@@ -10,6 +10,7 @@ using UnityEngine;
 using Object = UnityEngine.Object;
 using commons;
 using Rotorz.Games.Collections;
+using System.Text.Ex;
 
 namespace comunity
 {

@@ -3,10 +3,8 @@
 // License: The MIT License ( http://opensource.org/licenses/MIT )
 // Copyright © 2013- mulova@gmail.com
 //----------------------------------------------
-using System.Collections.Generic;
-using System;
 
-namespace commons
+namespace System.Collections.Generic
 {
 	public static class ListEx
 	{
@@ -181,5 +179,24 @@ namespace commons
 			}
 			list[i] = val;
 		}
-	}
+
+        public static Dictionary<K, V> ToDictionary<K, V>(this ICollection<V> src, Converter<V, K> converter)
+        {
+            if (src == null)
+            {
+                return null;
+            }
+            Dictionary<K, V> dst = new Dictionary<K, V>(); 
+            foreach (V v in src)
+            {
+                K k = converter(v);
+                if (k != null)
+                {
+                    dst[k] = v;
+                }
+            }
+            return dst;
+        }
+
+    }
 }

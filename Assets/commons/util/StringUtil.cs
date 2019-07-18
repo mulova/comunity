@@ -4,12 +4,9 @@
 // Copyright © 2013- mulova@gmail.com
 //----------------------------------------------
 
-using System;
 using System.Text;
-using System.IO;
-using System.Collections.Generic;
-using System.Collections;
 using System.Globalization;
+using System.Text.Ex;
 
 namespace commons
 {
@@ -106,34 +103,6 @@ namespace commons
                 return string.Empty;
             }
             return paths[0].Substring(0, index);
-        }
-
-        public static string Join(string separator, params string[] str)
-        {
-            return Join(separator, (IEnumerable<string>)str);
-        }
-
-        public static string Join(string separator, IEnumerable list)
-        {
-            int count = 0;
-            StringBuilder str = new StringBuilder(256);
-            foreach (object o in list)
-            {
-                if (o != null)
-                {
-                    if (count != 0)
-                    {
-                        str.Append(separator);
-                    }
-                    string t = o.ToText();
-                    if (t.IsNotEmpty())
-                    {
-                        str.Append(t);
-                        count++;
-                    }
-                }
-            }
-            return str.ToString();
         }
 
         public static string ToOrdinal(int num)

@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEditor;
 using commons;
 using comunity;
+using System.Text.Ex;
+using System.Collections.Generic.Ex;
 
 namespace build
 {
@@ -184,7 +186,7 @@ namespace build
 		{
 			if (errors.IsNotEmpty())
 			{
-				return string.Format("{0}: {1}", title, StringUtil.Join(", ", errors));
+				return string.Format("{0}: {1}", title, errors.Join(", "));
 			} else
 			{
 				return string.Empty;
@@ -213,7 +215,7 @@ namespace build
 					}
 				}
 
-				return StringUtil.Join("\n", errors);
+				return errors.Join("\n");
 			} else
 			{
 				return null;

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Generic.Ex;
 
 namespace commons
 {
@@ -61,16 +62,16 @@ namespace commons
 			return map.TryGetValue(KeyOf(key), out value);
 		}
 
-		public V this[K key] {
-			get {
-				return map.Get(KeyOf(key));
-			}
-			set {
-				map[KeyOf(key)] = value;
-			}
-		}
+		public V this[K key]
+        {
+            get => map.Get(KeyOf(key));
+            set
+            {
+                map[KeyOf(key)] = value;
+            }
+        }
 
-		public ICollection<K> Keys {
+        public ICollection<K> Keys {
 			get {
 				List<K> keys = new List<K>(map.Count);
 				foreach (Key<K> k in map.Keys) {

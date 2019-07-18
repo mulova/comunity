@@ -3,6 +3,8 @@ using UnityEngine;
 using System.Text;
 using System;
 using commons;
+using System.Collections.Generic.Ex;
+using System.Text.Ex;
 
 namespace comunity
 {
@@ -161,7 +163,7 @@ namespace comunity
             }
             if (log.IsLoggable(LogLevel.INFO))
             {
-                log.Info("Duplicate Message Key: {0}", StringUtil.Join(",", conflict));
+                log.Info("Duplicate Message Key: {0}", conflict.Join(","));
             }
         }
         

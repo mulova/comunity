@@ -1,4 +1,5 @@
 #if !UNITY_WEBGL
+using System.Text.Ex;
 using commons;
 
 namespace comunity {

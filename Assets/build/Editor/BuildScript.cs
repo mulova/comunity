@@ -11,6 +11,8 @@ using commons;
 using UnityEditor.Callbacks;
 using UnityEditor.SceneManagement;
 using comunity;
+using System.Collections.Generic.Ex;
+using System.Text.Ex;
 
 namespace build
 {
@@ -65,7 +67,7 @@ namespace build
 			{
 				errors.AddRange(ProcessScene(scenes[i], func));
 			}
-			return StringUtil.Join("\n", errors);
+			return errors.Join("\n");
 		}
 
 		public static List<string> ProcessScene(EditorBuildSettingsScene s, Func<IEnumerable<Transform>, string> func)
@@ -410,7 +412,7 @@ namespace build
 			ResetPrebuilder();
 			if (options != null)
 			{
-				log.Info("Prebuild options: ", StringUtil.Join(", ", options));
+				log.Info("Prebuild options: ", options.Join(", "));
 			}
 			bool withoutCdn = ArrayUtility.Contains(options, EXCLUDE_CDN);
 			ForEachAssetPath(path =>
@@ -533,7 +535,7 @@ namespace build
 			string assetErrors = AssetBuildProcess.GetErrorMessages();
 			string sceneErrors = SceneBuildProcess.GetErrorMessages();
 			string compErrors = ComponentBuildProcess.GetErrorMessages();
-			return StringUtil.Join("\n", assetErrors, sceneErrors, compErrors);
+			return string.Join("\n", assetErrors, sceneErrors, compErrors);
 		}
 
 		public static void TestPostProcessBuild()

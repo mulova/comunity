@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Generic.Ex;
+using System.Text.Ex;
 using commons;
 using UnityEngine;
 
@@ -168,12 +170,12 @@ namespace comunity
 
         public void SetList<T>(object key, List<T> values, string separator = ",")
         {
-            SetString(key, StringUtil.Join(separator, values));
+            SetString(key, values.Join(separator));
         }
 
         public void SetDictionary<K, V>(object key, Dictionary<K, V> values, string separator = "/")
         {
-            SetString(key, StringUtil.Join(separator, values));
+            SetString(key, values.Join(separator));
         }
 
         public Dictionary<K, V> GetDictionary<K, V>(object key, Func<string, K> keyConverter, Func<string, V> valueConverter)

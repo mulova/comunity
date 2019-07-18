@@ -10,6 +10,8 @@ using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
 using comunity;
 using build;
+using System.Text.Ex;
+using System.Collections.Generic.Ex;
 
 namespace build.v1
 {
@@ -162,8 +164,9 @@ namespace build.v1
 				string err2 = VerifyLowerCase(rawAssetMods);
 				if (err1.IsNotEmpty() || err2.IsNotEmpty())
 				{
-					throw new Exception(StringUtil.Join("\n", err1, err2));
-				}
+					throw new Exception($"{err1}\n{err2}");
+
+                }
 
 				assetMods.RemoveAll(m=> rawAssetMods.Contains(m));
 				log.Info("Modified raw assets ({0:D0})", rawAssetMods.Count);
@@ -213,7 +216,7 @@ namespace build.v1
 			string verPath = PathUtil.Combine(outputDir, string.Format("modver_{0}.txt", newVersion));
 			snapshot.SaveDigest(savePath, verPath);
 			// save mod list
-			File.WriteAllText(modPath, StringUtil.Join("\n", modList));
+			File.WriteAllText(modPath, modList.Join("\n"));
 			// save version at file
 			if (oldVersion.IsNotEmpty())
 			{
@@ -592,12 +595,12 @@ namespace build.v1
 
 		public override string ToString()
 		{
-			return StringUtil.Join(Cdn.VER_SEPARATOR.ToString(), path, timestamp.ToString(), assetHash, metaHash, version.ToString());
+			return string.Join(Cdn.VER_SEPARATOR.ToString(), path, timestamp, assetHash, metaHash, version);
 		}
 
 		public string ToVerString()
 		{
-			return StringUtil.Join(Cdn.VER_SEPARATOR.ToString(), path, version.ToString());
+			return string.Join(Cdn.VER_SEPARATOR.ToString(), path, version);
 		}
 
 		public override bool Equals(object obj)

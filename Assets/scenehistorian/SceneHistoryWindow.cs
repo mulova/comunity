@@ -9,6 +9,7 @@ using commons;
 using UnityEngine.SceneManagement;
 using UnityEditor.SceneManagement;
 using Rotorz.Games.Collections;
+using System.Text.Ex;
 
 namespace scenehistorian
 {

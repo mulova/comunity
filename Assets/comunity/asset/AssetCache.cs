@@ -10,6 +10,8 @@ using UnityEngine;
 using Object = UnityEngine.Object;
 using System.Collections.Generic;
 using commons;
+using System.Text.Ex;
+using System.Collections.Generic.Ex;
 
 namespace comunity
 {
