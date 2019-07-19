@@ -3,19 +3,17 @@
 // License: The MIT License ( http://opensource.org/licenses/MIT )
 // Copyright © 2013- mulova@gmail.com
 //----------------------------------------------
-using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace UnityEngine.Ex
 {
-	public static class ComponentEx
+    public static class ComponentEx
 	{
-		public static T GetComponentEx<T>(this Component c) where T:Component
+		public static T FindComponent<T>(this Component c) where T:Component
 		{
 			if (c == null) {
 				return null;
 			}
-			return c.gameObject.GetComponentEx<T>();
+			return c.gameObject.FindComponent<T>();
 		}
 
 		/// <summary>
@@ -24,7 +22,7 @@ namespace UnityEngine.Ex
 		/// <returns>The component in children.</returns>
 		/// <param name="c">C.</param>
 		/// <typeparam name="T">The 1st type parameter.</typeparam>
-		public static T GetComponentInChildrenEx<T>(this Component c) where T:Component
+		public static T FindComponentInChildren<T>(this Component c) where T:Component
 		{
 			return c.gameObject.GetComponentInChildrenEx<T>();
 		}

@@ -23,7 +23,7 @@ namespace comunity
 		
 		public Rigidbody2D GetRigidbody() {
 			if (body == null) {
-				body = gameObject.GetComponentEx<Rigidbody2D>();
+				body = gameObject.FindComponent<Rigidbody2D>();
 			}
 			return body;
 		}

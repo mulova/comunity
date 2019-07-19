@@ -23,9 +23,9 @@ namespace build
 				if (tex != null&&AssetBundlePath.inst.IsCdnAsset(tex)
 					&& (loader == null || IsTextureMismatch(r)))
 				{
-					loader = r.GetComponentEx<MeshTexLoader>();
+					loader = r.FindComponent<MeshTexLoader>();
 					loader.rend = r;
-					MeshTexSetter setter = r.GetComponentEx<MeshTexSetter>();
+					MeshTexSetter setter = r.FindComponent<MeshTexSetter>();
 					var aref = new AssetRef();
 					aref.SetPath(tex);
 					setter.textures.Clear();

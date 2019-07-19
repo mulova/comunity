@@ -18,7 +18,7 @@ namespace comunity {
 		
 		public void Sync() {
 			if (front == null) {
-				front = gameObject.GetComponentEx<Camera>();
+				front = gameObject.FindComponent<Camera>();
 			}
 			front.rect = new Rect(       1/3f,    0, 1/3f, 1/2f);
 			CreateCam(ref back,   "back", 2/3f, 1/2f, -transform.forward);
@@ -43,7 +43,7 @@ namespace comunity {
 			foreach (Component c0 in comps) {
 				if (c0 is SixWayCam) continue;
 				MonoBehaviour c = (MonoBehaviour) c0;
-				MonoBehaviour c2 = (MonoBehaviour)cam.gameObject.GetComponentEx(c.GetType());
+				MonoBehaviour c2 = (MonoBehaviour)cam.gameObject.FindComponent(c.GetType());
                 ComponentUtil.Copy(c, c2, true);
 				//			c2.enabled = c.enabled;
 			}

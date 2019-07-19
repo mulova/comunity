@@ -88,7 +88,7 @@ namespace comunity
         {
             if (invoker == null)
             {
-                invoker = gameObject.GetComponentEx<Invoker>();
+                invoker = gameObject.FindComponent<Invoker>();
             }
             invoker.InvokeLater(action);
         }

@@ -88,7 +88,7 @@ namespace effect {
 						name += runningCount;
 					}
 					GameObject inst = prefab.InstantiateEx(transform);
-					e = inst.GetComponentEx<ParticleControl>();
+					e = inst.FindComponent<ParticleControl>();
 					e.gameObject.SetActive(false);
 				} else {
 					if (dummyParticle == null) {
@@ -154,7 +154,7 @@ namespace effect {
 			if (Platform.isEditor) {
 				inst.name = prefab.name+runningCount;
 			}
-			ParticleControl e = inst.GetComponentEx<ParticleControl>();
+			ParticleControl e = inst.FindComponent<ParticleControl>();
 			return e;
 		}
 

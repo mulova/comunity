@@ -21,12 +21,12 @@ namespace UnityEngine.Ex
 
 	    public static void PlayIgnoreScale( this Animation animation, AnimationClip clip, Action onComplete = null)
 	    {
-		    animation.GetComponentEx<IgnoreTimeScale>().Play(clip, onComplete);
+		    animation.FindComponent<IgnoreTimeScale>().Play(clip, onComplete);
 	    }
 
 	    public static void PlayIgnoreScale( this Animation animation, string clipName, Action onComplete = null)
 	    {
-		    animation.GetComponentEx<IgnoreTimeScale>().Play(clipName, onComplete);
+		    animation.FindComponent<IgnoreTimeScale>().Play(clipName, onComplete);
 	    }
 
 	    [Conditional("DEBUG"), Conditional("UNITY_EDITOR")]
@@ -153,12 +153,12 @@ namespace UnityEngine.Ex
 	    }
 
 	    public static void SetCallback(this Animation anim, Action<string> endCallback) {
-		    AnimEventReceiver receiver = anim.GetComponentEx<AnimEventReceiver>();
+		    AnimEventReceiver receiver = anim.FindComponent<AnimEventReceiver>();
 		    receiver.SetCallback(endCallback);
 	    }
 
 	    public static void AddOneShotCallback(this Animation anim, Action<string> endCallback) {
-		    AnimEventReceiver receiver = anim.GetComponentEx<AnimEventReceiver>();
+		    AnimEventReceiver receiver = anim.FindComponent<AnimEventReceiver>();
 		    receiver.AddOneShotCallback(endCallback);
 	    }
 

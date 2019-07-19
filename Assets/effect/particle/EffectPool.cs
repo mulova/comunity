@@ -16,7 +16,7 @@ namespace effect {
 		public void Init(string url) {
 			Assert.IsNull(pool);
 			this.url = url;
-			pool = this.GetComponentEx<AssetInstancePool>();
+			pool = this.FindComponent<AssetInstancePool>();
 			pool.Init(new AssetPool<GameObject>(url));
 			EventRegistry.RegisterListener(url, ReleaseEffect);
 		}
@@ -24,7 +24,7 @@ namespace effect {
 		public void Get<E>(string id, Action<E> callback) where E: Effect{
 			if (pool != null) {
 				pool.Get(id, (i,o)=> {
-					E e = o.GetComponentEx<E>();
+					E e = o.FindComponent<E>();
 					e.effectId = id;
 					e.poolId = url;
 					callback(e);

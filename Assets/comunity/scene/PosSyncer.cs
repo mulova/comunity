@@ -14,7 +14,7 @@ namespace comunity
         {
             foreach (Transform t in objs)
             {
-                ScreenPosSync s = t.GetComponentEx<ScreenPosSync>();
+                ScreenPosSync s = t.FindComponent<ScreenPosSync>();
                 Camera dstCam = CameraEx.GetCamera(t.gameObject.layer);
                 if (s.srcObj == null)
                 {

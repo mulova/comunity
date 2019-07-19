@@ -85,7 +85,7 @@ namespace UnityEngine.Ex {
 		/// <returns>The component</returns>
 		/// <param name="o">O.</param>
 		/// <typeparam name="T">The 1st type parameter.</typeparam>
-		public static T GetComponentEx<T>(this GameObject o) where T:Component {
+		public static T FindComponent<T>(this GameObject o) where T:Component {
 			T comp = o.GetComponent<T>();
 			if (comp == null) {
 				comp = o.AddComponent<T>();
@@ -96,7 +96,7 @@ namespace UnityEngine.Ex {
 			return comp;
 		}
 
-		public static Component GetComponentEx(this GameObject o, Type type) {
+		public static Component FindComponent(this GameObject o, Type type) {
 			Component comp = o.GetComponent(type);
 			if (comp == null) {
 				comp = o.AddComponent(type);
