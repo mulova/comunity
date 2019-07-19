@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System;
 using commons;
-using comunity;
 
 namespace ani {
 	public class AnimEventReceiver : MonoBehaviour {

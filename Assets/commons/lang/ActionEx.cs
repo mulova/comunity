@@ -4,10 +4,9 @@
 // Copyright © 2013- mulova@gmail.com
 //----------------------------------------------
 
-using System;
 using System.Linq;
 
-namespace commons
+namespace System.Ex
 {
 	public static class ActionEx {
 		

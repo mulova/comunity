@@ -2,6 +2,8 @@ using UnityEngine;
 using System;
 using comunity;
 using commons;
+using System.Ex;
+using UnityEngine.Ex;
 
 namespace effect
 {

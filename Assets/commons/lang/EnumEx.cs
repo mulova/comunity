@@ -5,7 +5,7 @@
 // Copyright © 2013- mulova@gmail.com
 //----------------------------------------------
 
-namespace commons
+namespace System.Ex
 {
 
 	using System;

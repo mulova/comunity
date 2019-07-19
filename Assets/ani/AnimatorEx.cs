@@ -1,7 +1,6 @@
-﻿using System;
-using ani;
+﻿using ani;
 
-namespace UnityEngine
+namespace UnityEngine.Ex
 {
     public static class AnimatorEx
     {

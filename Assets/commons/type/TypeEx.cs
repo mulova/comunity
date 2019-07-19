@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Reflection;
 using commons;
 
-namespace commons
+namespace System.Ex
 {
 	public static class TypeEx
 	{

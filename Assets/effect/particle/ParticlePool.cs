@@ -10,6 +10,8 @@ using Object = UnityEngine.Object;
 using comunity;
 using commons;
 using System.Collections.Generic.Ex;
+using UnityEngine.Ex;
+using System.Ex;
 
 namespace effect {
 	/// <summary>

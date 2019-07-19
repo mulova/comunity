@@ -15,6 +15,7 @@ using System.Reflection;
 using Nullable = commons.Nullable;
 using commons;
 using comunity;
+using UnityEngine.Ex;
 
 namespace convinity {
 	/// <summary>

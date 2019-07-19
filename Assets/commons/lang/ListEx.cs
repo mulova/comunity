@@ -4,7 +4,7 @@
 // Copyright © 2013- mulova@gmail.com
 //----------------------------------------------
 
-namespace System.Collections.Generic
+namespace System.Collections.Generic.Ex
 {
 	public static class ListEx
 	{

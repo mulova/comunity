@@ -15,6 +15,8 @@ using commons;
 using UnityEditor.SceneManagement;
 using System.Collections;
 using System.Text.Ex;
+using System.Ex;
+using UnityEngine.Ex;
 
 namespace comunity
 {

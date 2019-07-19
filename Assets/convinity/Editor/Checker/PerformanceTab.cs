@@ -10,6 +10,7 @@ using UnityEngine;
 
 using System.Collections.Generic;
 using comunity;
+using UnityEngine.Ex;
 
 namespace convinity {
 	class PerformanceTab : EditorTab {

@@ -9,7 +9,7 @@ using UnityEngine;
 using commons;
 using comunity;
 
-namespace comunity
+namespace UnityEngine.Ex
 {
     public static class ObjectEx {
         

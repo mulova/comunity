@@ -8,6 +8,7 @@ using UnityEditor.SceneManagement;
 using UnityEditor;
 using System.IO;
 using System.Text.Ex;
+using System.Collections.Generic.Ex;
 
 namespace scenehistorian
 {

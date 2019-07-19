@@ -4,11 +4,12 @@
 // Copyright © 2013- mulova@gmail.com
 //----------------------------------------------
 
+using commons;
 using System;
 using System.Reflection;
 using System.Text;
 
-namespace commons
+namespace System.Ex
 {
 	public static class ObjectEx {
 		

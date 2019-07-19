@@ -4,10 +4,8 @@
 // Copyright © 2013- mulova@gmail.com
 //----------------------------------------------
 
-using System;
-using System.IO;
-
-namespace commons {
+namespace System.IO.Ex
+{
 	public static class DirectoryInfoEx
 	{
 		public static FileStream CreateUniqueFile( this DirectoryInfo dir , string rootName )

@@ -4,14 +4,14 @@
 // Copyright © 2013- mulova@gmail.com
 //----------------------------------------------
 
-using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
-using comunity;
-using System;
 
-namespace ani {
-	public class AnimUtil {
+using UnityEngine;
+using UnityEngine.Ex;
+
+namespace ani
+{
+    public class AnimUtil {
 		
 		/**
 		 * 현재 SkinRenderer의 bone을 지정된 bone으로 교체한다.

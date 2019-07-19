@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 using Object = UnityEngine.Object;
 using commons;
 using System.Text.Ex;
+using UnityEngine.Ex;
 
 namespace comunity
 {

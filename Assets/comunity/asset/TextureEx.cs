@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace comunity
+namespace UnityEngine.Ex
 {
 	public static class TextureEx
 	{

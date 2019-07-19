@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace commons
+namespace System.Ex
 {
 	public static class DateTimeEx
 	{

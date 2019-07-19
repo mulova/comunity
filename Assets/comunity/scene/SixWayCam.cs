@@ -4,6 +4,7 @@
 // Copyright © 2013-2014 mulova@gmail.com
 //----------------------------------------------
 using UnityEngine;
+using UnityEngine.Ex;
 
 namespace comunity {
 	public class SixWayCam : MonoBehaviour

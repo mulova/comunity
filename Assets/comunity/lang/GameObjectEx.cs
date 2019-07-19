@@ -1,10 +1,8 @@
-using UnityEngine;
-using Object = UnityEngine.Object;
 using System.Collections.Generic;
 using System;
 using commons;
 
-namespace comunity {
+namespace UnityEngine.Ex {
 	public static class GameObjectEx {
 		public static GameObject FindPath(string path) {
 			string[] paths = path.Split(new char[] {'/'}, StringSplitOptions.RemoveEmptyEntries);

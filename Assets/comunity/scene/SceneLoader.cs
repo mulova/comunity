@@ -7,6 +7,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using comunity;
 using commons;
+using System.Ex;
 
 namespace comunity
 {

@@ -3,10 +3,8 @@
 // License: The MIT License ( http://opensource.org/licenses/MIT )
 // Copyright © 2013- mulova@gmail.com
 //----------------------------------------------
-using System.Collections.Generic;
-using System.Collections;
 
-namespace commons
+namespace System.Collections.Generic.Ex
 {
 	public class ComparerComposite<T> : IComparer<T> {
 		private IEnumerable<IComparer<T>> comparers;

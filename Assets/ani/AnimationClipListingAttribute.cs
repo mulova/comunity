@@ -1,12 +1,13 @@
-using UnityEngine;
+namespace UnityEngine.Ex
+{
+    public class AnimationClipListingAttribute : PropertyAttribute {
  
-public class AnimationClipListingAttribute : PropertyAttribute {
- 
-	public AnimationClipListingAttribute() {}
+	    public AnimationClipListingAttribute() {}
 
-	public string varName;
-	public AnimationClipListingAttribute(string animVarName) {
-		this.varName = animVarName;
-	}
+	    public string varName;
+	    public AnimationClipListingAttribute(string animVarName) {
+		    this.varName = animVarName;
+	    }
 	
+    }
 }

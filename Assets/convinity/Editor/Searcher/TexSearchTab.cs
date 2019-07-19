@@ -4,6 +4,7 @@ using UnityEngine;
 using Object = UnityEngine.Object;
 using commons;
 using comunity;
+using UnityEngine.Ex;
 
 namespace convinity {
 	class TexSearchTab : SearchTab<Texture>

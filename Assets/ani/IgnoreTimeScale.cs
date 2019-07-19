@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections;
 using commons;
+using System.Ex;
 
 [RequireComponent(typeof(Animation))]
 public class IgnoreTimeScale : MonoBehaviour

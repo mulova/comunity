@@ -8,6 +8,7 @@
 using UnityEditor;
 using UnityEngine;
 using comunity;
+using UnityEngine.Ex;
 
 namespace convinity {
 	class VisibilityCheckTab : EditorTab {

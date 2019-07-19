@@ -2,7 +2,7 @@
 using UnityEngine;
 using Assert = UnityEngine.Assertions.Assert;
 using comunity;
-
+using UnityEngine.Ex;
 
 namespace effect {
 	/// <summary>

@@ -1,14 +1,17 @@
-﻿using UnityEngine;
-using System.Collections;
-using System;
-using commons;
+﻿using commons;
 
-namespace comunity 
+using System;
+using System.Ex;
+
+using UnityEngine;
+using UnityEngine.Ex;
+
+namespace comunity
 {
-	/// <summary>
-	/// Phyx object.
-	/// </summary>
-	[RequireComponent(typeof(Rigidbody2D))]
+    /// <summary>
+    /// Phyx object.
+    /// </summary>
+    [RequireComponent(typeof(Rigidbody2D))]
 	public abstract class PhyxObj : MonoBehaviour {
 		
 		private Rigidbody2D body;

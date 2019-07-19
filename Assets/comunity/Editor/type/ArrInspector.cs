@@ -12,6 +12,8 @@ using System.Reflection;
 using commons;
 using Object = UnityEngine.Object;
 using System.Text.Ex;
+using System.Ex;
+using System.Collections.Generic.Ex;
 
 /**
 * - title이 null이면 folding을 하지 않는다.

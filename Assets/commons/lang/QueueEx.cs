@@ -6,7 +6,7 @@
 using System.Collections.Generic;
 using System;
 
-namespace commons
+namespace System.Collections.Generic.Ex
 {
 	public static class QueueEx
 	{

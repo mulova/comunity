@@ -6,7 +6,7 @@
 
 using System;
 
-namespace commons
+namespace System.Ex
 {
 	public static class PredicateEx {
 		

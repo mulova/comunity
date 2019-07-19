@@ -6,7 +6,7 @@
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace comunity
+namespace UnityEngine.Ex
 {
 	public static class ComponentEx
 	{

@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 using System;
 using comunity;
 using System.Text.Ex;
+using System.Ex;
 
 namespace convinity
 {

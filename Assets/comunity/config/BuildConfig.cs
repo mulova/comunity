@@ -3,6 +3,7 @@ using System.Security.Cryptography;
 using UnityEngine;
 using commons;
 using System.Text.Ex;
+using System.Ex;
 
 namespace comunity
 {

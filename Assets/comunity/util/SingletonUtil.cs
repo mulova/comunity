@@ -7,7 +7,7 @@
 using UnityEngine;
 using Object = UnityEngine.Object;
 using commons;
-
+using UnityEngine.Ex;
 
 namespace comunity {
 	public static class SingletonUtil {

@@ -1,10 +1,11 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
-using commons;
+﻿using comunity;
 
-namespace comunity
+using System.Collections.Generic;
+using System.Collections.Generic.Ex;
+
+namespace UnityEngine.Ex
 {
-	public static class Physics2DEx
+    public static class Physics2DEx
 	{
 		public static T Raycast<T>(Vector2 screenPos, int layer) where T: Component {
 			return Raycasts<T>(screenPos, layer).GetFirst();

@@ -4,10 +4,9 @@
 // Copyright © 2013- mulova@gmail.com
 //----------------------------------------------
 
-using System;
 using commons;
 
-namespace commons
+namespace System.Ex
 {
 	public static class ArrayEx {
 		public static Loggerx log = LogManager.GetLogger(typeof(ArrayEx));
