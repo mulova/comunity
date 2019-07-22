@@ -16,10 +16,9 @@ namespace comunity
 {
     public class ObjSwitch : MonoBehaviour
     {
-	
-        public ObjSwitchElement[] switches = new ObjSwitchElement[0];
-        public string enumType;
-        public ObjSwitchPreset[] preset;
+        [SerializeField] public ObjSwitchElement[] switches = new ObjSwitchElement[0];
+        [SerializeField] public string enumType;
+        [SerializeField] public ObjSwitchPreset[] preset;
         public bool overwrite = false;
         private ObjSwitchElement DUMMY = new ObjSwitchElement();
         private HashSet<string> keySet = new HashSet<string>();

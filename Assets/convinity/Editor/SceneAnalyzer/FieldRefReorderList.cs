@@ -11,11 +11,12 @@ namespace convinity
     {
 		public FieldRefReorderList(List<FieldRef> list): base(null, list)
 		{
-			showAdd = false;
-			showRemove = false;
-		}
+			displayAdd = false;
+			displayRemove = false;
+            onDrawItem = DrawItem;
+        }
 
-        protected override bool DrawItem(Rect position, int index, bool isActive, bool isFocused)
+        private bool DrawItem(Rect position, int index, bool isActive, bool isFocused)
         {
             FieldRef fr = this[index];
             // invalidate obj if scene is changed

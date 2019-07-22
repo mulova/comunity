@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using comunity;
 using UnityEditor;
 using System.Collections.Generic;
@@ -9,9 +8,10 @@ namespace build
 	public class AssetBundleDupReorderList : ReorderList<AssetBundleDup>
     {
 		public AssetBundleDupReorderList(List<AssetBundleDup> list) : base(null, list) {
-            showAdd = false;
-            showRemove = false;
+            displayAdd = false;
+            displayRemove = false;
             base.drawer.elementHeightCallback = GetHeight;
+            onDrawItem = DrawItem;
         }
 
         private float GetHeight(int index)
@@ -19,7 +19,7 @@ namespace build
             return base.drawer.elementHeight * (this[index].refs.Count+1);
         }
 
-        protected override bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
+        private bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
         {
 			var item = this[index];
 			float lineHeight = 16;

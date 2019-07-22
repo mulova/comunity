@@ -12,18 +12,20 @@ namespace comunity
 
         public UnityObjIdReorderList(Object obj, IList src) : base(obj, src)
         {
+            onCreateItem = CreateItem;
+            onDrawItem = DrawItem;
         }
 
         public UnityObjIdReorderList(Object obj, string varName) : base(obj, varName)
         {
         }
 
-        protected override UnityObjId CreateItem()
+        private UnityObjId CreateItem()
         {
             return new UnityObjId(Selection.activeObject);
         }
 
-        protected override bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
+        private bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
         {
 			return UnityObjIdDrawer.DrawItem(this[index], rect, allowSceneObject);
         }

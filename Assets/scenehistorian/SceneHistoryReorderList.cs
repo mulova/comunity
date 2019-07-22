@@ -9,15 +9,17 @@ namespace scenehistorian
     {
 		public SceneHistoryReorderList(SceneHistory history) : base(null, history.items)
 		{
-			this.showAdd = false;
-		}
+			this.displayAdd = false;
+            onCreateItem = CreateItem;
+            onDrawItem = DrawItem;
+        }
 
-        protected override SceneHistoryItem CreateItem()
+        private SceneHistoryItem CreateItem()
         {
             return new SceneHistoryItem(Selection.activeObject);
         }
 
-        protected override bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
+        private bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
         {
 			return UnityObjIdDrawer.DrawItem(this[index].first, rect, false);
         }

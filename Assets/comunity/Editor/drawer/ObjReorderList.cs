@@ -16,10 +16,12 @@ namespace comunity
 
         public ObjReorderList(Object o, IList list, bool allowSceneObjects = true) : base(o, list) {
             this.allowSceneObjects = allowSceneObjects;
+            onDrawItem = DrawItem;
         }
 
         public ObjReorderList(Object o, string varName, bool allowSceneObjects = true) : base(o, varName) {
             this.allowSceneObjects = allowSceneObjects;
+            onDrawItem = DrawItem;
         }
 
         protected override T GetSerializedItem(SerializedProperty p, int i)
@@ -36,7 +38,7 @@ namespace comunity
             p.GetArrayElementAtIndex(i).objectReferenceValue = val;
         }
 
-        protected override bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
+        private bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
         {
             var o1 = this[index];
             var o2 = EditorGUI.ObjectField(rect, o1, typeof(T), allowSceneObjects);

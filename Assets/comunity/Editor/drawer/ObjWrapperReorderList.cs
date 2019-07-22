@@ -11,9 +11,10 @@ namespace comunity
 
 		public ObjWrapperReorderList(Object o, IList list) : base(o, list)
 		{
-		}
+            onDrawItem = DrawItem;
+        }
 
-		protected override bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
+		private bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
 		{
 			var o1 = this[index];
 			EditorGUI.ObjectField(rect, o1.Obj, typeof(Object), allowSceneObjects);

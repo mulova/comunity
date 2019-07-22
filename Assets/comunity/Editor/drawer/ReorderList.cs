@@ -3,7 +3,6 @@ using UnityEditorInternal;
 using System.Collections.Generic;
 using System;
 using Object = UnityEngine.Object;
-using comunity;
 using System.Collections;
 using UnityEditor;
 
@@ -18,10 +17,10 @@ namespace comunity
         public delegate T OnCreateItem();
         public delegate bool OnDrawItem(Rect rect, int index, bool isActive, bool isFocused);
 
-        public OnCreateItem onCreateItem;
-        public OnDrawItem onDrawItem;
+        public OnCreateItem onCreateItem = () => default(T);
+        public OnDrawItem onDrawItem = (r,i,a,f) => false;
 
-        public bool showAdd
+        public bool displayAdd
         {
             get {
                 return drawer.displayAdd;
@@ -31,7 +30,7 @@ namespace comunity
             }
         }
 
-        public bool showRemove
+        public bool displayRemove
         {
             get {
                 return drawer.displayRemove;
@@ -112,9 +111,6 @@ namespace comunity
             this.drawer.onReorderCallback = Reorder;
             this.drawer.elementHeight = 18;
             this.drawer.headerHeight = 0;
-
-            this.onCreateItem = CreateItem;
-            this.onDrawItem = DrawItem;
         }
 
         public ReorderList(Object obj, string propPath)
@@ -128,14 +124,7 @@ namespace comunity
             this.drawer.onReorderCallback = Reorder;
             this.drawer.elementHeight = 18;
             this.drawer.headerHeight = 0;
-
-            this.onCreateItem = CreateItem;
-            this.onDrawItem = DrawItem;
         }
-
-        protected virtual T CreateItem() { return default(T); }
-
-        protected virtual bool DrawItem(Rect rect, int index, bool isActive, bool isFocused) { return false; }
 
         private void DrawItem0(Rect rect, int index, bool isActive, bool isFocused)
         {
@@ -167,19 +156,19 @@ namespace comunity
             {
                 drawer.serializedProperty.arraySize += 1;
                 drawer.index = reorderList.serializedProperty.arraySize - 1;
-                drawer.list[drawer.index] = CreateItem();
+                drawer.list[drawer.index] = onCreateItem();
             }
             else
             {
                 if (reorderList.list.IsFixedSize)
                 {
                     var arr = new T[list.Count+1];
-                    arr[arr.Length-1] = CreateItem();
+                    arr[arr.Length-1] = onCreateItem();
                     list = arr;
                     drawer.list = arr;
                 } else
                 {
-                    drawer.index = drawer.list.Add(CreateItem());
+                    drawer.index = drawer.list.Add(onCreateItem());
                 }
             }
             SetDirty();

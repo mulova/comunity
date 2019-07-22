@@ -12,9 +12,11 @@ namespace comunity
     public class StrReorderList : ReorderList<string>
     {
         public StrReorderList(Object o, IList list) : base(o, list) {
+            onDrawItem = DrawItem;
         }
 
         public StrReorderList(Object o, string varName) : base(o, varName) {
+            onDrawItem = DrawItem;
         }
 
         protected override string GetSerializedItem(SerializedProperty p, int i)
@@ -31,7 +33,7 @@ namespace comunity
             p.GetArrayElementAtIndex(i).stringValue = val;
         }
 
-        protected override bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
+        private bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
         {
             var o1 = this[index];
             var o2 = EditorGUI.TextField(rect, o1);
