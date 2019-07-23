@@ -11,7 +11,7 @@ namespace build
             displayAdd = false;
             displayRemove = false;
             base.drawer.elementHeightCallback = GetHeight;
-            onDrawItem = DrawItem;
+            drawItem = DrawItem;
         }
 
         private float GetHeight(int index)

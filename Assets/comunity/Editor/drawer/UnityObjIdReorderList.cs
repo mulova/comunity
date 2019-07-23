@@ -12,8 +12,8 @@ namespace comunity
 
         public UnityObjIdReorderList(Object obj, IList src) : base(obj, src)
         {
-            onCreateItem = CreateItem;
-            onDrawItem = DrawItem;
+            createItem = CreateItem;
+            drawItem = DrawItem;
         }
 
         public UnityObjIdReorderList(Object obj, string varName) : base(obj, varName)

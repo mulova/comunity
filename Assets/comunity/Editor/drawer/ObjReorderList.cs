@@ -16,12 +16,12 @@ namespace comunity
 
         public ObjReorderList(Object o, IList list, bool allowSceneObjects = true) : base(o, list) {
             this.allowSceneObjects = allowSceneObjects;
-            onDrawItem = DrawItem;
+            drawItem = DrawItem;
         }
 
         public ObjReorderList(Object o, string varName, bool allowSceneObjects = true) : base(o, varName) {
             this.allowSceneObjects = allowSceneObjects;
-            onDrawItem = DrawItem;
+            drawItem = DrawItem;
         }
 
         protected override T GetSerializedItem(SerializedProperty p, int i)

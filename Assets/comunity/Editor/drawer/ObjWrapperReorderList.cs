@@ -11,7 +11,7 @@ namespace comunity
 
 		public ObjWrapperReorderList(Object o, IList list) : base(o, list)
 		{
-            onDrawItem = DrawItem;
+            drawItem = DrawItem;
         }
 
 		private bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)

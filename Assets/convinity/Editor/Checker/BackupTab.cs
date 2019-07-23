@@ -227,7 +227,7 @@ namespace comunity {
     {
         public RefDiffReorderList(Object o, IList list) : base(o, list){
             this.displayAdd = false;
-            onDrawItem = DrawItem;
+            drawItem = DrawItem;
         }
             
         private bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)

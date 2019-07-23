@@ -10,8 +10,8 @@ namespace scenehistorian
 		public SceneHistoryReorderList(SceneHistory history) : base(null, history.items)
 		{
 			this.displayAdd = false;
-            onCreateItem = CreateItem;
-            onDrawItem = DrawItem;
+            createItem = CreateItem;
+            drawItem = DrawItem;
         }
 
         private SceneHistoryItem CreateItem()

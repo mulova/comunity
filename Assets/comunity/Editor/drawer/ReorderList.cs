@@ -14,11 +14,11 @@ namespace comunity
         protected Object obj { get; set; }
         protected IList list;
         public bool changed { get; private set; }
-        public delegate T OnCreateItem();
-        public delegate bool OnDrawItem(Rect rect, int index, bool isActive, bool isFocused);
+        public delegate T CreateItemDelegate();
+        public delegate bool DrawItemDelegate(Rect rect, int index, bool isActive, bool isFocused);
 
-        public OnCreateItem onCreateItem = () => default(T);
-        public OnDrawItem onDrawItem = (r,i,a,f) => false;
+        protected CreateItemDelegate createItem = () => default(T);
+        protected DrawItemDelegate drawItem = (r,i,a,f) => false;
 
         public bool displayAdd
         {
@@ -131,7 +131,7 @@ namespace comunity
             Rect r = rect;
             r.y += 1;
             r.height -= 2;
-            if (onDrawItem(r, index, isActive, isFocused))
+            if (drawItem(r, index, isActive, isFocused))
             {
                 changed = true;
                 SetDirty();
@@ -156,19 +156,19 @@ namespace comunity
             {
                 drawer.serializedProperty.arraySize += 1;
                 drawer.index = reorderList.serializedProperty.arraySize - 1;
-                drawer.list[drawer.index] = onCreateItem();
+                drawer.list[drawer.index] = createItem();
             }
             else
             {
                 if (reorderList.list.IsFixedSize)
                 {
                     var arr = new T[list.Count+1];
-                    arr[arr.Length-1] = onCreateItem();
+                    arr[arr.Length-1] = createItem();
                     list = arr;
                     drawer.list = arr;
                 } else
                 {
-                    drawer.index = drawer.list.Add(onCreateItem());
+                    drawer.index = drawer.list.Add(createItem());
                 }
             }
             SetDirty();

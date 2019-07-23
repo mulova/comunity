@@ -12,7 +12,7 @@ namespace convinity
 		{
 			this.displayAdd = false;
 			this.displayRemove = false;
-            onDrawItem = DrawItem;
+            drawItem = DrawItem;
         }
 
 		private bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
