@@ -1,3 +1,4 @@
+#if OLD_INPUT
 using UnityEngine;
 using System.Collections;
 using System;
@@ -54,3 +55,4 @@ namespace comunity {
 		}
 	}
 }
+#endif

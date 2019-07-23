@@ -6,6 +6,7 @@ using System.Text;
 using System.Reflection;
 using commons;
 using comunity;
+using System.Text.Ex;
 
 namespace etc
 {

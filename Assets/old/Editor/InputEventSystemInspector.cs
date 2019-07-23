@@ -1,3 +1,4 @@
+#if OLD_INPUT
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -90,3 +91,4 @@ namespace comunity
         
     }
 }
+#endif

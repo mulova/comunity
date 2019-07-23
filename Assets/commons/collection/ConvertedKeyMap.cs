@@ -64,7 +64,10 @@ namespace commons
 
 		public V this[K key]
         {
-            get => map.Get(KeyOf(key));
+            get
+            {
+                return map.Get(KeyOf(key));
+            }
             set
             {
                 map[KeyOf(key)] = value;

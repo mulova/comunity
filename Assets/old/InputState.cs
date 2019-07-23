@@ -1,4 +1,4 @@
-
+#if OLD_INPUT
 namespace comunity {
 	public enum InputState {
 		Null=0,
@@ -7,3 +7,4 @@ namespace comunity {
 	}
 }
 
+#endif

@@ -6,6 +6,7 @@ using System.IO;
 using comunity;
 using build;
 using commons;
+using System.Collections.Generic.Ex;
 
 namespace audio
 {
@@ -50,7 +51,7 @@ namespace audio
             }
             if (local.IsNotEmpty())
             {
-                AddErrorFormat("Missing clip data {0} in {1}", StringUtil.Join(",", local), g.csv.GetEditorPath());
+                AddErrorFormat("Missing clip data {0} in {1}", local.Join(","), g.csv.GetEditorPath());
             }
         }
 

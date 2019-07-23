@@ -5,7 +5,7 @@ using System.IO;
 using System.Text;
 using commons;
 using comunity;
-
+using System.Text.Ex;
 
 namespace audio
 {

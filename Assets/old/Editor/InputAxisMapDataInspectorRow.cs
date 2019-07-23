@@ -1,3 +1,4 @@
+#if OLD_INPUT
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -122,3 +123,4 @@ namespace comunity
 }
 
 
+#endif

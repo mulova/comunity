@@ -1,4 +1,4 @@
-
+#if OLD_INPUT
 
 using UnityEngine;
 
@@ -128,7 +128,7 @@ namespace comunity {
 			return deltaTime < 0.2f;
 		}
 
-		#region Event System
+#region Event System
 		private static readonly string AXIS_ID = typeof(InputAxisListener).FullName;
 		public static void AddAxisListener(InputAxisListener l) {
 			Messenger<InputAxis, InputAxisState>.AddListener(AXIS_ID, l.OnInputAxis);
@@ -150,8 +150,9 @@ namespace comunity {
 			log.Debug("InputEvent.{0}", evt);
 			dispatcher.Broadcast(evt, data);
 		}
-		#endregion
+#endregion
 	}
 
 }
 
+#endif

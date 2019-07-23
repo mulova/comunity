@@ -6,6 +6,7 @@ using System.Text;
 using System.IO;
 using comunity;
 using commons;
+using System.Collections.Generic.Ex;
 
 namespace audio
 {

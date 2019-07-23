@@ -2,6 +2,7 @@
 using System;
 using comunity;
 using commons;
+using System.Text.Ex;
 
 namespace audio
 {

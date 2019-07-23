@@ -1,3 +1,4 @@
+#if OLD_INPUT
 using System;
 using commons;
 
@@ -12,3 +13,4 @@ namespace comunity {
 	}
 }
 
+#endif

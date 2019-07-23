@@ -1,3 +1,4 @@
+#if OLD_INPUT
 using System;
 
 namespace comunity {
@@ -7,4 +8,4 @@ namespace comunity {
 	}
 }
 
-
+#endif

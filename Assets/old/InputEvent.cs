@@ -1,3 +1,4 @@
+#if OLD_INPUT
 using System;
 
 namespace comunity {
@@ -8,3 +9,4 @@ namespace comunity {
 		Escape = 3
 	}
 }
+#endif

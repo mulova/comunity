@@ -1,4 +1,4 @@
-
+#if OLD_INPUT
 
 namespace comunity {
 	public enum InputAxisState
@@ -11,3 +11,4 @@ namespace comunity {
 	}
 }
 
+#endif
