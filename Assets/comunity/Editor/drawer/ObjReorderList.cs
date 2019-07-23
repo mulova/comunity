@@ -19,7 +19,7 @@ namespace comunity
             drawItem = DrawItem;
         }
 
-        public ObjReorderList(Object o, string varName, bool allowSceneObjects = true) : base(o, varName) {
+        public ObjReorderList(SerializedObject ser, string varName, bool allowSceneObjects = true) : base(ser, varName) {
             this.allowSceneObjects = allowSceneObjects;
             drawItem = DrawItem;
         }

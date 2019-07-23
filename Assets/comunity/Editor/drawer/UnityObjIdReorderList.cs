@@ -16,7 +16,7 @@ namespace comunity
             drawItem = DrawItem;
         }
 
-        public UnityObjIdReorderList(Object obj, string varName) : base(obj, varName)
+        public UnityObjIdReorderList(SerializedObject ser, string varName) : base(ser, varName)
         {
         }
 

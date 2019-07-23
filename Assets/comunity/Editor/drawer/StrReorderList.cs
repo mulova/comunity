@@ -11,7 +11,7 @@ namespace comunity
             drawItem = DrawItem;
         }
 
-        public StrReorderList(Object o, string varName) : base(o, varName) {
+        public StrReorderList(SerializedObject ser, string varName) : base(ser, varName) {
             drawItem = DrawItem;
         }
 

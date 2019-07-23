@@ -5,6 +5,8 @@ using System;
 using Object = UnityEngine.Object;
 using System.Collections;
 using UnityEditor;
+using UnityEngine.Ex;
+using System.Text.Ex;
 
 namespace comunity
 {
@@ -16,6 +18,15 @@ namespace comunity
         public bool changed { get; private set; }
         public delegate T CreateItemDelegate();
         public delegate bool DrawItemDelegate(Rect rect, int index, bool isActive, bool isFocused);
+        private string _title;
+        public string title
+        {
+            set
+            {
+                _title = value;
+                drawer.headerHeight = _title.IsEmpty()? 0: 18;
+            }
+        }
 
         protected CreateItemDelegate createItem = () => default(T);
         protected DrawItemDelegate drawItem = (r,i,a,f) => false;
@@ -106,24 +117,33 @@ namespace comunity
             this.obj = obj;
             this.list = list;
             this.drawer = new ReorderableList(list, typeof(T), true, false, true, true);
-            this.drawer.onAddCallback = OnAdd;
-            this.drawer.drawElementCallback = DrawItem0;
-            this.drawer.onReorderCallback = Reorder;
-            this.drawer.elementHeight = 18;
-            this.drawer.headerHeight = 0;
+            Init();
         }
 
-        public ReorderList(Object obj, string propPath)
+        public ReorderList(SerializedObject ser, string propPath)
         {
-            this.obj = obj;
-            var ser = new SerializedObject(obj);
+            this.obj = ser.targetObject;
             var prop = ser.FindProperty(propPath);
             this.drawer = new ReorderableList(ser, prop, true, false, true, true);
+            this.title = propPath;
+            Init();
+        }
+
+        private void Init()
+        {
             this.drawer.onAddCallback = OnAdd;
+            this.drawer.drawHeaderCallback = DrawHeader;
             this.drawer.drawElementCallback = DrawItem0;
             this.drawer.onReorderCallback = Reorder;
             this.drawer.elementHeight = 18;
-            this.drawer.headerHeight = 0;
+        }
+
+        private void DrawHeader(Rect rect)
+        {
+            if (_title != null)
+            {
+                EditorGUI.LabelField(rect, new GUIContent(ObjectNames.NicifyVariableName(_title)));
+            }
         }
 
         private void DrawItem0(Rect rect, int index, bool isActive, bool isFocused)

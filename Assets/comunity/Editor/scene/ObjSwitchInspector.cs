@@ -13,26 +13,26 @@ namespace comunity
 	public class ObjSwitchInspector : Editor
 	{
 		private ObjSwitch objSwitch;
-        private ReorderableListEx elementInspector;
-		private ReorderableListEx presetInspector;
+        private ReorderList<ObjSwitch> elementInspector;
+		private ReorderList<ObjSwitch> presetInspector;
 		internal static bool exclusive = true;
-        private SerializedObject obj;
+        private SerializedObject ser;
 
 
         void OnEnable()
 		{
-            obj = new SerializedObject(target);
+            ser = new SerializedObject(target);
 			objSwitch = (ObjSwitch)target;
-            elementInspector = new ReorderableListEx(nameof(objSwitch.switches), obj);
-            presetInspector = new ReorderableListEx(nameof(objSwitch.preset), obj);
+            elementInspector = new ReorderList<ObjSwitch>(ser, nameof(objSwitch.switches));
+            presetInspector = new ReorderList<ObjSwitch>(ser, nameof(objSwitch.preset));
 		}
 	
 		public override void OnInspectorGUI()
 		{
-            obj.Update();
-            elementInspector.DoLayoutList();
-            presetInspector.DoLayoutList();
-            obj.ApplyModifiedProperties();
+            ser.Update();
+            elementInspector.Draw();
+            presetInspector.Draw();
+            ser.ApplyModifiedProperties();
 
 			//EditorGUIUtil.Toggle("Exclusive(Editor Only)", ref exclusive);
 			//changed |= elementInspector.OnInspectorGUI();
