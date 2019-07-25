@@ -11,7 +11,6 @@ namespace build
             displayAdd = false;
             displayRemove = false;
             base.drawer.elementHeightCallback = GetHeight;
-            drawItem = DrawItem;
         }
 
         private float GetHeight(int index)
@@ -19,7 +18,7 @@ namespace build
             return base.drawer.elementHeight * (this[index].refs.Count+1);
         }
 
-        private bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
+        protected override bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
         {
 			var item = this[index];
 			float lineHeight = 16;

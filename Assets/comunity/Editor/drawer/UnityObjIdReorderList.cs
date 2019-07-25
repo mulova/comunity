@@ -1,8 +1,7 @@
-﻿using comunity;
-using System.Collections;
-using Object = UnityEngine.Object;
+﻿using System.Collections;
 using UnityEditor;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace comunity
 {
@@ -12,20 +11,14 @@ namespace comunity
 
         public UnityObjIdReorderList(Object obj, IList src) : base(obj, src)
         {
-            createItem = CreateItem;
-            drawItem = DrawItem;
         }
 
-        public UnityObjIdReorderList(SerializedObject ser, string varName) : base(ser, varName)
-        {
-        }
-
-        private UnityObjId CreateItem()
+        protected override UnityObjId CreateItem()
         {
             return new UnityObjId(Selection.activeObject);
         }
 
-        private bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
+        protected override bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
         {
 			return UnityObjIdDrawer.DrawItem(this[index], rect, allowSceneObject);
         }

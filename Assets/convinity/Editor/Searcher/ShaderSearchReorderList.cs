@@ -12,10 +12,9 @@ namespace convinity
 		{
 			this.displayAdd = false;
 			this.displayRemove = false;
-            drawItem = DrawItem;
         }
 
-		private bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
+        protected override bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
 		{
 			var item = this[index];
 			Rect[] area1 = EditorGUIUtil.SplitRectHorizontally(rect, 0.5f);

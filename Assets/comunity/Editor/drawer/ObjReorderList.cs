@@ -1,9 +1,5 @@
 ﻿using UnityEngine;
-using UnityEditorInternal;
-using System.Collections.Generic;
-using System;
 using Object = UnityEngine.Object;
-using comunity;
 using System.Collections;
 using UnityEditor;
 
@@ -16,29 +12,23 @@ namespace comunity
 
         public ObjReorderList(Object o, IList list, bool allowSceneObjects = true) : base(o, list) {
             this.allowSceneObjects = allowSceneObjects;
-            drawItem = DrawItem;
         }
 
         public ObjReorderList(SerializedObject ser, string varName, bool allowSceneObjects = true) : base(ser, varName) {
             this.allowSceneObjects = allowSceneObjects;
-            drawItem = DrawItem;
         }
 
-        protected override T GetSerializedItem(SerializedProperty p, int i)
+        protected override T GetItem(SerializedProperty p)
         {
-            return (T)p.GetArrayElementAtIndex(i).objectReferenceValue;
+            return p.objectReferenceValue as T;
         }
 
-        protected override void SetSerializedItem(SerializedProperty p, int i, T val)
+        protected override void SetItem(SerializedProperty p, T value)
         {
-            if (p.arraySize < i)
-            {
-                p.InsertArrayElementAtIndex(i);
-            }
-            p.GetArrayElementAtIndex(i).objectReferenceValue = val;
+            p.objectReferenceValue = value;
         }
 
-        private bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
+        protected override bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
         {
             var o1 = this[index];
             var o2 = EditorGUI.ObjectField(rect, o1, typeof(T), allowSceneObjects);

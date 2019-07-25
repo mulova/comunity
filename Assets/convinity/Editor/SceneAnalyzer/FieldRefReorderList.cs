@@ -13,10 +13,9 @@ namespace convinity
 		{
 			displayAdd = false;
 			displayRemove = false;
-            drawItem = DrawItem;
         }
 
-        private bool DrawItem(Rect position, int index, bool isActive, bool isFocused)
+        protected override bool DrawItem(Rect position, int index, bool isActive, bool isFocused)
         {
             FieldRef fr = this[index];
             // invalidate obj if scene is changed

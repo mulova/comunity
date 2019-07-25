@@ -5,7 +5,6 @@ using System;
 using Object = UnityEngine.Object;
 using System.Collections;
 using UnityEditor;
-using UnityEngine.Ex;
 using System.Text.Ex;
 
 namespace comunity
@@ -18,6 +17,8 @@ namespace comunity
         public bool changed { get; private set; }
         public delegate T CreateItemDelegate();
         public delegate bool DrawItemDelegate(Rect rect, int index, bool isActive, bool isFocused);
+        public CreateItemDelegate createItem;
+
         private string _title;
         public string title
         {
@@ -28,8 +29,7 @@ namespace comunity
             }
         }
 
-        protected CreateItemDelegate createItem = () => default(T);
-        protected DrawItemDelegate drawItem = (r,i,a,f) => false;
+        public DrawItemDelegate drawItem;
 
         public bool displayAdd
         {
@@ -61,54 +61,27 @@ namespace comunity
             }
         }
 
-        protected virtual T GetSerializedItem(SerializedProperty p, int i) {
-            return default(T);
-        }
-
-        protected virtual void SetSerializedItem(SerializedProperty p, int i, T val) {}
-
-
         public T this[int i]
         {
             get {
-                if (drawer.serializedProperty != null && drawer.serializedProperty.isArray)
-                {
-                    return GetSerializedItem(drawer.serializedProperty, i);
-                } else
-                {
-                    return (T)drawer.list[i];
-                }
+                return (T)drawer.list[i];
             }
             set
             {
-                if (drawer.serializedProperty != null && drawer.serializedProperty.isArray)
+                if (i <= drawer.list.Count)
                 {
-                    SetSerializedItem(drawer.serializedProperty, i, value);
+                    drawer.list.Insert(i, value);
                 } else
                 {
                     drawer.list[i] = value;
                 }
-                SetDirty();
             }
         }
 
         public int count
         {
             get {
-                if (drawer.serializedProperty != null)
-                {
-                    return drawer.serializedProperty.arraySize;
-                } else
-                {
-                    return drawer.list.Count;
-                }
-            }
-        }
-
-        public int allCount
-        {
-            get {
-                return list.Count;
+                return drawer.list.Count;
             }
         }
 
@@ -120,22 +93,15 @@ namespace comunity
             Init();
         }
 
-        public ReorderList(SerializedObject ser, string propPath)
-        {
-            this.obj = ser.targetObject;
-            var prop = ser.FindProperty(propPath);
-            this.drawer = new ReorderableList(ser, prop, true, false, true, true);
-            this.title = propPath;
-            Init();
-        }
-
         private void Init()
         {
-            this.drawer.onAddCallback = OnAdd;
+            this.drawer.onAddCallback = _OnAdd;
             this.drawer.drawHeaderCallback = DrawHeader;
-            this.drawer.drawElementCallback = DrawItem0;
+            this.drawer.drawElementCallback = _DrawItem;
             this.drawer.onReorderCallback = Reorder;
             this.drawer.elementHeight = 18;
+            this.drawItem = DrawItem;
+            this.createItem = CreateItem;
         }
 
         private void DrawHeader(Rect rect)
@@ -146,7 +112,12 @@ namespace comunity
             }
         }
 
-        private void DrawItem0(Rect rect, int index, bool isActive, bool isFocused)
+        protected virtual bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
+        {
+            return false;
+        }
+
+        private void _DrawItem(Rect rect, int index, bool isActive, bool isFocused)
         {
             Rect r = rect;
             r.y += 1;
@@ -170,26 +141,20 @@ namespace comunity
 
         protected virtual void OnChange() {}
 
-        protected void OnAdd(ReorderableList reorderList)
+        protected virtual T CreateItem() { return default(T); }
+
+        private void _OnAdd(ReorderableList reorderList)
         {
-            if (drawer.serializedProperty != null)
+            var o = CreateItem();
+            if (drawer.list.IsFixedSize)
             {
-                drawer.serializedProperty.arraySize += 1;
-                drawer.index = reorderList.serializedProperty.arraySize - 1;
-                drawer.list[drawer.index] = createItem();
+                var arr = new T[list.Count + 1];
+                arr[arr.Length - 1] = o;
+                drawer.list = arr;
             }
             else
             {
-                if (reorderList.list.IsFixedSize)
-                {
-                    var arr = new T[list.Count+1];
-                    arr[arr.Length-1] = createItem();
-                    list = arr;
-                    drawer.list = arr;
-                } else
-                {
-                    drawer.index = drawer.list.Add(createItem());
-                }
+                drawer.index = drawer.list.Add(o);
             }
             SetDirty();
             OnChange();
@@ -263,8 +228,8 @@ namespace comunity
         public void Duplicate(int index)
         {
             int i = GetActualIndex(index);
-            T obj = (T)list[GetActualIndex(index)];
-            list.Insert(i+1, obj);
+            T o = (T)list[GetActualIndex(index)];
+            list.Insert(i+1, o);
             this.drawer.index = i+1;
             SetDirty();
             OnChange();
@@ -277,7 +242,7 @@ namespace comunity
         public void Remove(int index)
         {
             int i = GetActualIndex(index);
-            T obj = (T)list[i];
+            T o = (T)list[i];
             list.RemoveAt(i);
             SetDirty();
             OnChange();

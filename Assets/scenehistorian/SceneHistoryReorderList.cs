@@ -10,16 +10,15 @@ namespace scenehistorian
 		public SceneHistoryReorderList(SceneHistory history) : base(null, history.items)
 		{
 			this.displayAdd = false;
-            createItem = CreateItem;
-            drawItem = DrawItem;
         }
 
-        private SceneHistoryItem CreateItem()
+        protected override void FillNewItem(object o)
         {
-            return new SceneHistoryItem(Selection.activeObject);
+            var i = o as SceneHistoryItem;
+            i.list.Add(new UnityObjId(Selection.activeObject));
         }
 
-        private bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
+        protected override bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
         {
 			return UnityObjIdDrawer.DrawItem(this[index].first, rect, false);
         }

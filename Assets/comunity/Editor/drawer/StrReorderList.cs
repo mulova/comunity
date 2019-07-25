@@ -8,28 +8,23 @@ namespace comunity
     public class StrReorderList : ReorderList<string>
     {
         public StrReorderList(Object o, IList list) : base(o, list) {
-            drawItem = DrawItem;
         }
+
 
         public StrReorderList(SerializedObject ser, string varName) : base(ser, varName) {
-            drawItem = DrawItem;
         }
 
-        protected override string GetSerializedItem(SerializedProperty p, int i)
+        protected override string GetItem(SerializedProperty p)
         {
-            return p.GetArrayElementAtIndex(i).stringValue;
+            return p.stringValue;
         }
 
-        protected override void SetSerializedItem(SerializedProperty p, int i, string val)
+        protected override void SetItem(SerializedProperty p, string value)
         {
-            if (p.arraySize < i)
-            {
-                p.InsertArrayElementAtIndex(i);
-            }
-            p.GetArrayElementAtIndex(i).stringValue = val;
+            p.stringValue = value;
         }
 
-        private bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
+        protected override bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
         {
             var o1 = this[index];
             var o2 = EditorGUI.TextField(rect, o1);

@@ -227,10 +227,9 @@ namespace comunity {
     {
         public RefDiffReorderList(Object o, IList list) : base(o, list){
             this.displayAdd = false;
-            drawItem = DrawItem;
         }
-            
-        private bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
+
+        protected override bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
         {
             var rect1 = EditorGUIUtil.SplitRectHorizontally(rect, 0.2f);
             var rect2 = EditorGUIUtil.SplitRectHorizontally(rect1[1], 0.5f);
