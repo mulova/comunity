@@ -10,20 +10,6 @@ namespace comunity
         public StrReorderList(Object o, IList list) : base(o, list) {
         }
 
-
-        public StrReorderList(SerializedObject ser, string varName) : base(ser, varName) {
-        }
-
-        protected override string GetItem(SerializedProperty p)
-        {
-            return p.stringValue;
-        }
-
-        protected override void SetItem(SerializedProperty p, string value)
-        {
-            p.stringValue = value;
-        }
-
         protected override bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
         {
             var o1 = this[index];

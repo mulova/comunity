@@ -1,11 +1,6 @@
-using System;
 using System.Collections.Generic;
-using System.Collections.Generic.Ex;
-using commons;
 using UnityEditor;
 using UnityEngine;
-using Object = UnityEngine.Object;
-using UnityEditorInternal;
 
 namespace comunity
 {
@@ -13,8 +8,8 @@ namespace comunity
 	public class ObjSwitchInspector : Editor
 	{
 		private ObjSwitch objSwitch;
-        private ReorderList<ObjSwitch> elementInspector;
-		private ReorderList<ObjSwitch> presetInspector;
+        private ReorderProperty<ObjSwitch> elementInspector;
+		private ReorderProperty<ObjSwitch> presetInspector;
 		internal static bool exclusive = true;
         private SerializedObject ser;
 
@@ -23,8 +18,8 @@ namespace comunity
 		{
             ser = new SerializedObject(target);
 			objSwitch = (ObjSwitch)target;
-            elementInspector = new ReorderList<ObjSwitch>(ser, nameof(objSwitch.switches));
-            presetInspector = new ReorderList<ObjSwitch>(ser, nameof(objSwitch.preset));
+            elementInspector = new ReorderProperty<ObjSwitch>(ser, nameof(objSwitch.switches));
+            presetInspector = new ReorderProperty<ObjSwitch>(ser, nameof(objSwitch.preset));
 		}
 	
 		public override void OnInspectorGUI()

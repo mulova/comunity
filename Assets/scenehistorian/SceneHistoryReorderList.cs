@@ -12,10 +12,9 @@ namespace scenehistorian
 			this.displayAdd = false;
         }
 
-        protected override void FillNewItem(object o)
+        protected override SceneHistoryItem CreateItem()
         {
-            var i = o as SceneHistoryItem;
-            i.list.Add(new UnityObjId(Selection.activeObject));
+            return new SceneHistoryItem(Selection.activeObject);
         }
 
         protected override bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
