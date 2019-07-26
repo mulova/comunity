@@ -12,10 +12,9 @@ namespace comunity
 		{
         }
 
-        protected override bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
+        protected override bool DrawItem(ObjWrapper item, Rect rect, int index, bool isActive, bool isFocused)
 		{
-			var o1 = this[index];
-			EditorGUI.ObjectField(rect, o1.Obj, typeof(Object), allowSceneObjects);
+			EditorGUI.ObjectField(rect, item.Obj, typeof(Object), allowSceneObjects);
 			return false;
 		}
 	}

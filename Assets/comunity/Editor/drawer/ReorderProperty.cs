@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditorInternal;
-using System.Collections.Generic;
 using System;
 using Object = UnityEngine.Object;
-using System.Collections;
 using UnityEditor;
 using System.Text.Ex;
 
@@ -11,13 +9,21 @@ namespace comunity
 {
     public class ReorderProperty<T>
     {
-        public readonly ReorderableList drawer;
-        protected Object obj { get; set; }
-        public bool changed { get; private set; }
         public delegate void FillNewItemDelegate(object item);
         public delegate bool DrawItemDelegate(Rect rect, int index, bool isActive, bool isFocused);
         public delegate T GettemDelegate(SerializedProperty p);
         public delegate void SetItemDelegate(SerializedProperty p, T value);
+        public delegate void ChangeDelegate();
+        public const float HEIGHT = 18;
+
+        public readonly ReorderableList drawer;
+        public bool changed { get; private set; }
+
+        public FillNewItemDelegate fillNewItem;
+        public DrawItemDelegate drawItem;
+        public GettemDelegate getItem;
+        public SetItemDelegate setItem;
+        public ChangeDelegate onChange = () => { };
 
         private string _title;
         public string title
@@ -25,14 +31,10 @@ namespace comunity
             set
             {
                 _title = value;
-                drawer.headerHeight = _title.IsEmpty()? 0: 18;
+                drawer.headerHeight = _title.IsEmpty()? 0: HEIGHT;
             }
         }
 
-        public FillNewItemDelegate fillNewItem;
-        public DrawItemDelegate drawItem;
-        public GettemDelegate getItem;
-        public SetItemDelegate setItem;
 
         public bool displayAdd
         {
@@ -89,9 +91,16 @@ namespace comunity
             }
         }
 
+        protected Object obj
+        {
+            get
+            {
+                return drawer.serializedProperty.serializedObject.targetObject;
+            }
+        }
+
         public ReorderProperty(SerializedObject ser, string propPath)
         {
-            this.obj = ser.targetObject;
             var prop = ser.FindProperty(propPath);
             this.drawer = new ReorderableList(ser, prop, true, false, true, true);
             this.title = propPath;
@@ -106,9 +115,22 @@ namespace comunity
             this.drawer.drawHeaderCallback = DrawHeader;
             this.drawer.drawElementCallback = _DrawItem;
             this.drawer.onReorderCallback = Reorder;
-            this.drawer.elementHeight = 18;
+            this.drawer.elementHeight = HEIGHT;
+            this.drawer.elementHeightCallback = GetElementHeight;
             this.fillNewItem = FillNewItem;
             this.drawItem = DrawItem;
+        }
+
+        private float GetElementHeight(int index)
+        {
+            if (match == null || match(this[index]))
+            {
+                return drawer.elementHeight;
+            }
+            else
+            {
+                return 0;
+            }
         }
 
         private void DrawHeader(Rect rect)
@@ -126,13 +148,16 @@ namespace comunity
 
         private void _DrawItem(Rect rect, int index, bool isActive, bool isFocused)
         {
-            Rect r = rect;
-            r.y += 1;
-            r.height -= 2;
-            if (drawItem(r, index, isActive, isFocused))
+            if (match == null || match(this[index]))
             {
-                changed = true;
-                SetDirty();
+                Rect r = rect;
+                r.y += 1;
+                r.height -= 2;
+                if (drawItem(r, index, isActive, isFocused))
+                {
+                    changed = true;
+                    SetDirty();
+                }
             }
         }
 
@@ -155,15 +180,13 @@ namespace comunity
             SetDirty();
         }
 
-        protected virtual void OnChange() {}
-
         private void _OnAdd(ReorderableList reorderList)
         {
             drawer.serializedProperty.InsertArrayElementAtIndex(drawer.serializedProperty.arraySize);
             drawer.index = drawer.serializedProperty.arraySize - 1;
             fillNewItem(drawer.serializedProperty.GetArrayElementAtIndex(drawer.index));
             SetDirty();
-            OnChange();
+            onChange();
         }
 
         public void SetDirty()
@@ -186,13 +209,19 @@ namespace comunity
             }
             if (changed)
             {
-                OnChange();
+                onChange();
                 SetDirty();
                 return true;
             } else
             {
                 return false;
             }
+        }
+
+        private Predicate<T> match;
+        public void Filter(Predicate<T> match)
+        {
+            this.match = match;
         }
     }
 }

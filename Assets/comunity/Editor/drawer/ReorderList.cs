@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEditorInternal;
-using System.Collections.Generic;
 using System;
 using Object = UnityEngine.Object;
 using System.Collections;
@@ -11,13 +10,18 @@ namespace comunity
 {
     public class ReorderList<T>
     {
-        public readonly ReorderableList drawer;
-        protected Object obj { get; set; }
-        protected IList list;
-        public bool changed { get; private set; }
         public delegate T CreateItemDelegate();
-        public delegate bool DrawItemDelegate(Rect rect, int index, bool isActive, bool isFocused);
+        public delegate bool DrawItemDelegate(T item, Rect rect, int index, bool isActive, bool isFocused);
+        public delegate void ChangeDelegate();
+        public const float HEIGHT = 18;
+
+        public readonly ReorderableList drawer;
+        public bool changed { get; private set; }
+        protected Object obj { get; set; }
+
         public CreateItemDelegate createItem;
+        public DrawItemDelegate drawItem;
+        public ChangeDelegate onChange = () => { };
 
         private string _title;
         public string title
@@ -25,11 +29,10 @@ namespace comunity
             set
             {
                 _title = value;
-                drawer.headerHeight = _title.IsEmpty()? 0: 18;
+                drawer.headerHeight = _title.IsEmpty()? 0: HEIGHT;
             }
         }
 
-        public DrawItemDelegate drawItem;
 
         public bool displayAdd
         {
@@ -85,11 +88,23 @@ namespace comunity
             }
         }
 
+        public IList list
+        {
+            get
+            {
+                return drawer.list;
+            }
+            set
+            {
+                drawer.list = value;
+            }
+        }
+
         public ReorderList(Object obj, IList list)
         {
             this.obj = obj;
-            this.list = list;
             this.drawer = new ReorderableList(list, typeof(T), true, false, true, true);
+            this.list = list;
             Init();
         }
 
@@ -99,9 +114,21 @@ namespace comunity
             this.drawer.drawHeaderCallback = DrawHeader;
             this.drawer.drawElementCallback = _DrawItem;
             this.drawer.onReorderCallback = Reorder;
-            this.drawer.elementHeight = 18;
-            this.drawItem = DrawItem;
+            this.drawer.elementHeight = HEIGHT;
+            this.drawer.elementHeightCallback = GetElementHeight;
             this.createItem = CreateItem;
+            this.drawItem = DrawItem;
+        }
+
+        private float GetElementHeight(int index)
+        {
+            if (match == null || match(this[index]))
+            {
+                return drawer.elementHeight;
+            } else
+            {
+                return 0;
+            }
         }
 
         private void DrawHeader(Rect rect)
@@ -112,20 +139,23 @@ namespace comunity
             }
         }
 
-        protected virtual bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
+        protected virtual bool DrawItem(T item, Rect rect, int index, bool isActive, bool isFocused)
         {
             return false;
         }
 
         private void _DrawItem(Rect rect, int index, bool isActive, bool isFocused)
         {
-            Rect r = rect;
-            r.y += 1;
-            r.height -= 2;
-            if (drawItem(r, index, isActive, isFocused))
+            if (match == null || match(this[index]))
             {
-                changed = true;
-                SetDirty();
+                Rect r = rect;
+                r.y += 1;
+                r.height -= 2;
+                if (drawItem(this[index], r, index, isActive, isFocused))
+                {
+                    changed = true;
+                    SetDirty();
+                }
             }
         }
 
@@ -138,8 +168,6 @@ namespace comunity
         {
             Filter(match);
         }
-
-        protected virtual void OnChange() {}
 
         protected virtual T CreateItem() { return default(T); }
 
@@ -157,7 +185,7 @@ namespace comunity
                 drawer.index = drawer.list.Add(o);
             }
             SetDirty();
-            OnChange();
+            onChange();
         }
 
         public void SetDirty()
@@ -180,7 +208,7 @@ namespace comunity
             }
             if (changed)
             {
-                OnChange();
+                onChange();
                 SetDirty();
                 return true;
             } else
@@ -190,88 +218,45 @@ namespace comunity
         }
 
         private Predicate<T> match;
-        private int[] indexer; // used for filtering
         public void Filter(Predicate<T> match)
         {
             this.match = match;
-            if (match != null)
-            {
-                List<T> filtered = new List<T>();
-                indexer = new int[count];
-                for (int i=0; i<count; ++i)
-                {
-                    if (match(this[i]))
-                    {
-                        indexer[filtered.Count] = i;
-                        filtered.Add(this[i]);
-                    }
-                }
-                drawer.list = filtered;
-            } else
-            {
-                indexer = null;
-                drawer.list = list;
-            }
-        }
-
-        public int GetActualIndex(int index)
-        {
-            if (indexer != null && index < indexer.Length)
-            {
-                return indexer[index];
-            } else
-            {
-                return index;
-            }
         }
 
         public void Duplicate(int index)
         {
-            int i = GetActualIndex(index);
-            T o = (T)list[GetActualIndex(index)];
-            list.Insert(i+1, o);
-            this.drawer.index = i+1;
+            T o = (T)list[index];
+            list.Insert(index+1, o);
+            this.drawer.index = index+1;
             SetDirty();
-            OnChange();
-            if (this.drawer.onAddCallback != null)
-            {
-                this.drawer.onAddCallback(this.drawer);
-            }
+            onChange();
+            this.drawer.onAddCallback?.Invoke(this.drawer);
         }
 
-        public void Remove(int index)
+        public void Remove(int i)
         {
-            int i = GetActualIndex(index);
             T o = (T)list[i];
             list.RemoveAt(i);
             SetDirty();
-            OnChange();
-            if (this.drawer.onRemoveCallback != null)
-            {
-                this.drawer.onRemoveCallback(this.drawer);
-            }
+            onChange();
+            this.drawer.onRemoveCallback?.Invoke(this.drawer);
         }
 
-        public void Move(int sourceIndex, int destIndex)
+        public void Move(int si, int di)
         {
-            int si = GetActualIndex(sourceIndex);
-            int di = GetActualIndex(destIndex);
             list.Insert(di, list[si]);
             int si2 = si > di? si+1: si;
             list.RemoveAt(si2);
             SetDirty();
-            OnChange();
-            if (this.drawer.onReorderCallback != null)
-            {
-                this.drawer.onReorderCallback(this.drawer);
-            }
+            onChange();
+            this.drawer.onReorderCallback?.Invoke(this.drawer);
         }
 
         public void Clear()
         {
             list.Clear();
             SetDirty();
-            OnChange();
+            onChange();
         }
     }
 }

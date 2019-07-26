@@ -229,11 +229,10 @@ namespace comunity {
             this.displayAdd = false;
         }
 
-        protected override bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
+        protected override bool DrawItem(RefDiff item, Rect rect, int index, bool isActive, bool isFocused)
         {
             var rect1 = EditorGUIUtil.SplitRectHorizontally(rect, 0.2f);
             var rect2 = EditorGUIUtil.SplitRectHorizontally(rect1[1], 0.5f);
-            var item = this[index];
             EditorGUI.LabelField(rect1[0], item.name, EditorStyles.miniLabel);
             Type compType = item.comp != null? item.comp.GetType(): typeof(Component);
             Type objType = obj != null? obj.GetType(): typeof(Object);

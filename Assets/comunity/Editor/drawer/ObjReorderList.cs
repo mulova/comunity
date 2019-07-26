@@ -14,13 +14,12 @@ namespace comunity
             this.allowSceneObjects = allowSceneObjects;
         }
 
-        protected override bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
+        protected override bool DrawItem(T item, Rect rect, int index, bool isActive, bool isFocused)
         {
-            var o1 = this[index];
-            var o2 = EditorGUI.ObjectField(rect, o1, typeof(T), allowSceneObjects);
-            if (editable && o1 != o2)
+            var item2 = EditorGUI.ObjectField(rect, item, typeof(T), allowSceneObjects);
+            if (editable && item != item2)
             {
-                this[index] = o2 as T;
+                this[index] = item2 as T;
                 return true;
             } else
             {

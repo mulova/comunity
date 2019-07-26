@@ -18,9 +18,9 @@ namespace comunity
             return new UnityObjId(Selection.activeObject);
         }
 
-        protected override bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
+        protected override bool DrawItem(UnityObjId item, Rect rect, int index, bool isActive, bool isFocused)
         {
-			return UnityObjIdDrawer.DrawItem(this[index], rect, allowSceneObject);
+			return UnityObjIdDrawer.DrawItem(item, rect, allowSceneObject);
         }
     }
 }

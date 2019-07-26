@@ -18,9 +18,8 @@ namespace build
             return base.drawer.elementHeight * (this[index].refs.Count+1);
         }
 
-        protected override bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
+        protected override bool DrawItem(AssetBundleDup item, Rect rect, int index, bool isActive, bool isFocused)
         {
-			var item = this[index];
 			float lineHeight = 16;
 			Rect lineRect = rect;
 			lineRect.height = lineHeight;

@@ -70,7 +70,6 @@
     <Compile Include="Assets\scenehistorian\SceneHistoryItem.cs" />
     <Compile Include="Assets\scenehistorian\SceneHistoryItemDrawer.cs" />
     <Compile Include="Assets\scenehistorian\SceneHistoryMenu.cs" />
-    <Compile Include="Assets\scenehistorian\SceneHistoryReorderList.cs" />
     <Compile Include="Assets\scenehistorian\SceneHistoryWindow.cs" />
     <Compile Include="Assets\scenehistorian\SceneViewContextMenu.cs" />
     <Compile Include="Assets\scenehistorian\SceneViewMenu.cs" />
@@ -315,9 +314,6 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>/Applications/Visual Studio.app/Contents/Resources/lib/monodevelop/AddIns/MonoDevelop.Unity/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>/Users/user/workspace/3rdparty/comunity/Library/PackageCache/com.unity.ads@2.0.8/UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.Advertisements">
       <HintPath>/Users/user/workspace/3rdparty/comunity/Library/PackageCache/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
     </Reference>
@@ -329,9 +325,6 @@
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
       <HintPath>/Users/user/workspace/3rdparty/comunity/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Purchasing">
-      <HintPath>/Users/user/workspace/3rdparty/comunity/Library/PackageCache/com.unity.purchasing@2.0.3/UnityEngine.Purchasing.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.Purchasing">
       <HintPath>/Users/user/workspace/3rdparty/comunity/Library/PackageCache/com.unity.purchasing@2.0.3/Editor/UnityEditor.Purchasing.dll</HintPath>

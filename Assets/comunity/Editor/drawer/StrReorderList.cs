@@ -10,13 +10,12 @@ namespace comunity
         public StrReorderList(Object o, IList list) : base(o, list) {
         }
 
-        protected override bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
+        protected override bool DrawItem(string item, Rect rect, int index, bool isActive, bool isFocused)
         {
-            var o1 = this[index];
-            var o2 = EditorGUI.TextField(rect, o1);
-            if (o1 != o2)
+            var item2 = EditorGUI.TextField(rect, item);
+            if (item != item2)
             {
-                this[index] = o2;
+                this[index] = item2;
                 return true;
             } else
             {

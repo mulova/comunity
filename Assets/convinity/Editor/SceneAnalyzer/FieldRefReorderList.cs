@@ -15,50 +15,49 @@ namespace convinity
 			displayRemove = false;
         }
 
-        protected override bool DrawItem(Rect position, int index, bool isActive, bool isFocused)
+        protected override bool DrawItem(FieldRef item, Rect position, int index, bool isActive, bool isFocused)
         {
-            FieldRef fr = this[index];
             // invalidate obj if scene is changed
-            if (obj is SceneAsset && fr.assetPath == SceneManager.GetActiveScene().path)
+            if (obj is SceneAsset && item.assetPath == SceneManager.GetActiveScene().path)
             {
                 obj = null;
             }
 
             if (obj == null)
             {
-                if (fr.scenePath == null)
+                if (item.scenePath == null)
                 {
-                    obj = AssetDatabase.LoadAssetAtPath<Object>(fr.assetPath);
-                } else if (fr.assetPath == SceneManager.GetActiveScene().path)
+                    obj = AssetDatabase.LoadAssetAtPath<Object>(item.assetPath);
+                } else if (item.assetPath == SceneManager.GetActiveScene().path)
                 {
-                    Transform t = fr.scenePath.Find();
+                    Transform t = item.scenePath.Find();
                     if (t != null)
                     {
-                        if (fr.DeclaringType == typeof(GameObject))
+                        if (item.DeclaringType == typeof(GameObject))
                         {
                             obj = t.gameObject;
-                        } else if (typeof(Component).IsAssignableFrom(fr.DeclaringType))
+                        } else if (typeof(Component).IsAssignableFrom(item.DeclaringType))
                         {
-                            var comps = t.GetComponents(fr.DeclaringType);
-                            if (fr.compIndex < comps.Length)
+                            var comps = t.GetComponents(item.DeclaringType);
+                            if (item.compIndex < comps.Length)
                             {
-                                obj = comps[fr.compIndex];
+                                obj = comps[item.compIndex];
                             }
                         }
                     } else
                     {
-                        Debug.LogWarning("Can't find ref "+fr.scenePath);
+                        Debug.LogWarning("Can't find ref "+item.scenePath);
                     }
                 } else
                 {
-                    obj = AssetDatabase.LoadAssetAtPath<Object>(fr.assetPath);
+                    obj = AssetDatabase.LoadAssetAtPath<Object>(item.assetPath);
                 }
             }
             if (obj != null)
             {
-                string displayName = fr.scenePath == null? 
-                    string.Format("{0} [{1}]", fr.assetPath, fr.GetSignature()):
-                    string.Format("{0} [{1}]", fr.scenePath, fr.GetSignature());
+                string displayName = item.scenePath == null? 
+                    string.Format("{0} [{1}]", item.assetPath, item.GetSignature()):
+                    string.Format("{0} [{1}]", item.scenePath, item.GetSignature());
                 Rect[] rects = EditorGUIUtil.SplitRectHorizontally(position, 0.3f);
                 EditorGUI.ObjectField(rects[0], obj, typeof(Object), true);
                 EditorGUI.SelectableLabel(rects[1], displayName);
