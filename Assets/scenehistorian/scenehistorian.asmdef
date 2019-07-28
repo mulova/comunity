@@ -3,14 +3,16 @@
     "references": [
         "commons",
         "comunity",
-        "comunity-editor",
-        "reorderablelist",
-        "reorderablelist-editor"
+        "comunity-editor"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [
         "Editor"
     ],
     "excludePlatforms": [],
-    "allowUnsafeCode": false
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
 }

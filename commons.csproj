@@ -127,7 +127,6 @@
     <Compile Include="Assets\commons\logger\core\LogColor.cs" />
     <Compile Include="Assets\commons\logger\core\LogFormatter.cs" />
     <Compile Include="Assets\commons\logger\core\Loggable.cs" />
-    <Compile Include="Assets\commons\logger\core\LoggerData.cs" />
     <Compile Include="Assets\commons\logger\core\LoggerImpl.cs" />
     <Compile Include="Assets\commons\logger\core\Loggerx.cs" />
     <Compile Include="Assets\commons\logger\core\LogManager.cs" />

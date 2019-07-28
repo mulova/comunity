@@ -105,18 +105,18 @@ namespace comunity
                 {
                     return string.Empty;
                 }
-            } else if (o is ObjWrapper)
+            } else if (o is NamedObj)
             {
-                return (o as ObjWrapper).Name;
+                return (o as NamedObj).Name;
             }
             return o.ToString();
         }
 
         public static Object DefaultToObject(object o)
         {
-            if (o is ObjWrapper)
+            if (o is NamedObj)
             {
-                return (o as ObjWrapper).Obj;
+                return (o as NamedObj).Obj;
             } else if (o is Object)
             {
                 return o as Object;
@@ -161,9 +161,9 @@ namespace comunity
                             return c.transform.GetScenePath();
                         }
                     }
-                } else if (o is ObjWrapper)
+                } else if (o is NamedObj)
                 {
-                    return (o as ObjWrapper).Name;
+                    return (o as NamedObj).Name;
                 }
                 return DefaultToString(o);
             } catch (Exception ex)

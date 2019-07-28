@@ -60,7 +60,7 @@ namespace convinity {
 		}
 
 		public override void OnInspectorGUI() {
-			ObjWrapperReorderList drawer = new ObjWrapperReorderList(null, nullRefs);
+			NamedObjReorderList drawer = new NamedObjReorderList(nullRefs);
 			drawer.Draw();
 		}
 		
@@ -134,7 +134,7 @@ namespace convinity {
 		}
 	}
 
-	public class NullRefData : ObjWrapper {
+	public class NullRefData : NamedObj {
 		public Object obj;
 		public FieldInfo field;
 		private string str;

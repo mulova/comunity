@@ -9,7 +9,6 @@ using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using commons;
-using Rotorz.Games.Collections;
 using System.Text.Ex;
 using System.Ex;
 
@@ -445,27 +444,6 @@ namespace comunity
             return false;
         }
 
-        public static bool ObjectFieldReorderList<T>(List<T> list) where T : Object {
-            #if INTERNAL_REORDER
-            ObjReorderList<T> l = new ObjReorderList<T>(null, list);
-            return l.Draw();
-            #else
-            return ObjectFieldList<T>(list);
-            #endif
-        }
-
-		#if !INTERNAL_REORDER
-        public static bool ObjectFieldList<T>(List<T> list) where T : class {
-			return ObjectFieldList<T>(list, null, (ReorderableListFlags)0);
-        }
-        
-		public static bool ObjectFieldList<T>(List<T> list, Predicate<T> filter, ReorderableListFlags flags) where T : class {
-            ListDrawer<T> drawer = new ListDrawer<T>(list);
-            drawer.Filter(filter);
-            return drawer.Draw(flags);
-        }
-		#endif
-        
         public static bool GameObjectField(string label, ref GameObject obj, bool allowSceneObjects, ref bool floating, params GUILayoutOption[] options) {
             EditorGUILayout.BeginHorizontal();
             bool changed = ObjectField<GameObject>(label, ref obj, allowSceneObjects);

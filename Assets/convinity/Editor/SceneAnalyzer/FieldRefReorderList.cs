@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using comunity;
 using UnityEngine.SceneManagement;
 using UnityEditor;
@@ -9,14 +8,15 @@ namespace convinity
 {
     public class FieldRefReorderList : ReorderList<FieldRef>
     {
-		public FieldRefReorderList(List<FieldRef> list): base(null, list)
+		public FieldRefReorderList(List<FieldRef> list): base(list)
 		{
 			displayAdd = false;
 			displayRemove = false;
         }
 
-        protected override bool DrawItem(FieldRef item, Rect position, int index, bool isActive, bool isFocused)
+        protected override bool DrawItem(FieldRef item, Rect rect, int index, bool isActive, bool isFocused)
         {
+            Object obj = null;
             // invalidate obj if scene is changed
             if (obj is SceneAsset && item.assetPath == SceneManager.GetActiveScene().path)
             {
@@ -58,12 +58,12 @@ namespace convinity
                 string displayName = item.scenePath == null? 
                     string.Format("{0} [{1}]", item.assetPath, item.GetSignature()):
                     string.Format("{0} [{1}]", item.scenePath, item.GetSignature());
-                Rect[] rects = EditorGUIUtil.SplitRectHorizontally(position, 0.3f);
+                Rect[] rects = EditorGUIUtil.SplitRectHorizontally(rect, 0.3f);
                 EditorGUI.ObjectField(rects[0], obj, typeof(Object), true);
                 EditorGUI.SelectableLabel(rects[1], displayName);
             } else
             {
-                EditorGUI.SelectableLabel(position, ToString());
+                EditorGUI.SelectableLabel(rect, ToString());
             }
             return false;
         }

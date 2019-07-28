@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
-using Object = UnityEngine.Object;
-using System.Collections;
 using UnityEditor;
+using System.Collections.Generic;
+using System.Collections;
 
 namespace comunity
 {
     public class StrReorderList : ReorderList<string>
     {
-        public StrReorderList(Object o, IList list) : base(o, list) {
+        public StrReorderList(IList list) : base(list) {
         }
 
         protected override bool DrawItem(string item, Rect rect, int index, bool isActive, bool isFocused)

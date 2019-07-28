@@ -66,6 +66,11 @@ namespace comunity
             return rects;
         }
 
+        protected Rect[] HorizontalSplit(int line, float leftWidth)
+        {
+            return HorizontalSplitRect(GetLineRect(line), leftWidth);
+        }
+
         protected bool DrawObjectField<T>(Rect r, GUIContent label, ref T o, bool allowSceneObj = true) where T:Object
         {
             Rect controlRect = EditorGUI.PrefixLabel(r, label);

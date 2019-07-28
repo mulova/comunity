@@ -14,37 +14,36 @@ namespace comunity
     public class LogInitializerInspector : Editor
     {
         private LogInitializer comp;
-        private ArrayDrawer<LoggerData> drawer;
         
         void OnEnable()
         {
             comp = target as LogInitializer;
-            drawer = new ArrayDrawer<LoggerData>(comp, comp.snapshot, "data", new StrEnumItemDrawer<LoggerData>("name", "level"));
         }
         
         public override void OnInspectorGUI()
         {
-            serializedObject.Update();
-            var lifeTime = serializedObject.FindProperty("lifeTime");
-            EditorGUILayout.PropertyField(lifeTime);
-            serializedObject.ApplyModifiedProperties();
+            base.OnInspectorGUI();
+            //serializedObject.Update();
+            //var lifeTime = serializedObject.FindProperty("lifeTime");
+            //EditorGUILayout.PropertyField(lifeTime);
+            //serializedObject.ApplyModifiedProperties();
 
             if (Application.isPlaying&&GUILayout.Button("Apply"))
             {
                 comp.Apply();
             }
             bool changed = false;
-            if (drawer.Draw())
-            {
-                foreach (LoggerData d in comp.snapshot.data)
-                {
-                    if (d != null&&LogManager.HasLogger(d.name))
-                    {
-                        LogManager.GetLogger(d.name).level = d.level;
-                    }
-                }
-                changed = true;
-            }
+            //if (drawer.Draw())
+            //{
+            //    foreach (LoggerData d in comp.snapshot.data)
+            //    {
+            //        if (d != null&&LogManager.HasLogger(d.name))
+            //        {
+            //            LogManager.GetLogger(d.name).level = d.level;
+            //        }
+            //    }
+            //    changed = true;
+            //}
             ScanLoggers();
             changed |= EditorGUIUtil.PopupEnum("Log Level", ref comp.snapshot.logLevel);
             changed |= EditorGUIUtil.Toggle("Show Name", ref comp.snapshot.showName);
@@ -96,7 +95,7 @@ namespace comunity
                     EditorGUILayout.LabelField(log.ToString());
                     if (GUILayout.Button("+"))
                     {
-                        drawer.Add(new LoggerData(log.ToString(), log.level));
+                        //drawer.Add(new LoggerData(log.ToString(), log.level));
                         loggers.RemoveAt(i);
                     }
                     EditorGUILayout.EndHorizontal();

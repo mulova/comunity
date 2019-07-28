@@ -1,7 +1,7 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace comunity
 {
@@ -9,7 +9,7 @@ namespace comunity
     {
         public bool allowSceneObject = true;
 
-        public UnityObjIdReorderList(Object obj, IList src) : base(obj, src)
+        public UnityObjIdReorderList(IList src) : base(src)
         {
         }
 

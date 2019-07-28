@@ -9,12 +9,12 @@ namespace comunity
 {
     public class ReorderProperty<T>
     {
+        public const float HEIGHT = 21;
         public delegate void FillNewItemDelegate(object item);
         public delegate bool DrawItemDelegate(Rect rect, int index, bool isActive, bool isFocused);
         public delegate T GettemDelegate(SerializedProperty p);
         public delegate void SetItemDelegate(SerializedProperty p, T value);
         public delegate void ChangeDelegate();
-        public const float HEIGHT = 18;
 
         public readonly ReorderableList drawer;
         public bool changed { get; private set; }

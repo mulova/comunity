@@ -61,8 +61,8 @@ namespace comunity
 		}
 		
 		public static Object DefaultToObject(object o) {
-			if (o is ObjWrapper) {
-				return (o as ObjWrapper).Obj;
+			if (o is NamedObj) {
+				return (o as NamedObj).Obj;
 			} else if (o is Object) {
 				return o as Object;
 			}
@@ -96,8 +96,8 @@ namespace comunity
 							return c.transform.GetScenePath();
 						}
 					}
-				} else if (o is ObjWrapper) {
-					return (o as ObjWrapper).Name;
+				} else if (o is NamedObj) {
+					return (o as NamedObj).Name;
 				}
 				return DefaultToString(o);
 			} catch (Exception ex) {
@@ -129,8 +129,8 @@ namespace comunity
 				{
 					return string.Empty;
 				}
-			} else if (o is ObjWrapper) {
-				return (o as ObjWrapper).Name;
+			} else if (o is NamedObj) {
+				return (o as NamedObj).Name;
 			}
 			return o.ToString();
 		}

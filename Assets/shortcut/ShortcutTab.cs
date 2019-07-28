@@ -3,11 +3,8 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using System;
-using UnityEditorInternal;
 using commons;
 using comunity;
-using Rotorz.Games.Collections;
 using System.Text.Ex;
 using System.Collections.Generic.Ex;
 using UnityEngine.Ex;
@@ -153,18 +150,10 @@ namespace shortcut {
 
         private bool DrawShortcutList(UnityObjList list, ObjListFilter<UnityObjId> filter) {
             AndPredicate<UnityObjId> predicate = filter.GetPredicate(list);
-			#if !INTERNAL_REORDER
-			var drawer = new UnityObjListDrawer(list);
-			#else
-			var drawer = new UnityObjIdReorderList(null, list);
-			#endif
+			var drawer = new UnityObjIdReorderList(list);
             drawer.allowSceneObject = false;
             drawer.Filter(predicate.Accept);
-			#if !INTERNAL_REORDER
-			return drawer.Draw(ReorderableListFlags.ShowIndices);
-			#else
 			return drawer.Draw();
-			#endif
         }
 
 		private Dictionary<Object, string> pathMap = new Dictionary<Object, string>();

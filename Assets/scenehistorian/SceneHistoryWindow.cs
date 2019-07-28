@@ -363,7 +363,7 @@ namespace scenehistorian
         private ReorderList<SceneHistoryItem> CreateDrawer(SceneHistory history)
         {
             GUIContent favoriate = new GUIContent(EditorGUIUtility.FindTexture("Favorite"), "Save search");
-            return new ReorderList<SceneHistoryItem>(null, history.items)
+            return new ReorderList<SceneHistoryItem>(history.items)
             {
                 displayAdd = false,
                 createItem = () => new SceneHistoryItem(Selection.activeObject),

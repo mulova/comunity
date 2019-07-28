@@ -151,6 +151,7 @@
     <Compile Include="Assets\comunity\lang\Script.cs" />
     <Compile Include="Assets\comunity\lang\TransformEx.cs" />
     <Compile Include="Assets\comunity\lang\Vector3Ex.cs" />
+    <Compile Include="Assets\comunity\logger\LoggerData.cs" />
     <Compile Include="Assets\comunity\logger\LoggerEx.cs" />
     <Compile Include="Assets\comunity\logger\LogInitializer.cs" />
     <Compile Include="Assets\comunity\logger\LogSnapshot.cs" />
@@ -205,6 +206,7 @@
     <Compile Include="Assets\comunity\type\AudioClipLoadType.cs" />
     <Compile Include="Assets\comunity\type\EGameObject.cs" />
     <Compile Include="Assets\comunity\type\RuntimePlatformEx.cs" />
+    <Compile Include="Assets\comunity\type\StrEnumDrawerAttribute.cs" />
     <Compile Include="Assets\comunity\type\TransformData.cs" />
     <Compile Include="Assets\comunity\util\ActionTimer.cs" />
     <Compile Include="Assets\comunity\util\ApplyMaterial.cs" />

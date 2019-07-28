@@ -4,7 +4,6 @@ using UnityEditor;
 using Object = UnityEngine.Object;
 using UnityEngine;
 using commons;
-using Rotorz.Games.Collections;
 
 namespace comunity {
 	public abstract class EditorTab {
@@ -105,38 +104,6 @@ namespace comunity {
 				EditorGUILayout.HelpBox(info, MessageType.Info);
 			}
 		}
-
-		#if !INTERNAL_REORDER
-        public bool DrawObjectList<T>(List<T> list) where T: class {
-            return DrawObjectList(list, null, null, null, (ReorderableListFlags)0 );
-        }
-
-		public bool DrawObjectList<T>(List<T> list, ReorderableListFlags flags) where T: class {
-			return DrawObjectList<T>(list, null, null, null, flags);
-		}
-
-        public bool DrawObjectList<T>(List<T> list, ObjListFilter<T> filter, ReorderableListFlags flags) where T: class {
-			AndPredicate<T> predicate = filter.GetPredicate(list);
-			return DrawObjectList<T>(list, predicate.Accept, null, null, flags);
-		}
-
-		/// <summary>
-		/// Draws the object list.
-		/// </summary>
-		/// <returns><c>true</c>, if object list was drawn, <c>false</c> otherwise.</returns>
-		/// <param name="list">List.</param>
-		/// <param name="toString">default ToString is used if null</param>
-		/// <param name="predicates">Predicates.</param>
-		/// <typeparam name="T">The 1st type parameter.</typeparam>
-        public bool DrawObjectList<T>(List<T> list, Predicate<T> filter, ConvToString toString, ConvToObject toObject, ReorderableListFlags flags) where T: class {
-            ItemDrawer<T> itemDrawer = new ItemDrawer<T>();
-            itemDrawer.toStr = toString; 
-            itemDrawer.toObj = toObject;
-            ListDrawer<T> drawer = new ListDrawer<T>(list, itemDrawer);
-            drawer.Filter(filter);
-            return drawer.Draw(flags);
-		}
-		#endif
 
 		/// <summary>
 		/// Apply scene changes to prefab

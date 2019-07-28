@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using comunity;
 using System.Collections.Generic;
 using UnityEditor;
@@ -8,7 +7,7 @@ namespace convinity
 {
 	public class ShaderSearchReorderList : ReorderList<ShaderSearchItem>
 	{
-		public ShaderSearchReorderList(List<ShaderSearchItem> list) : base(null, list)
+		public ShaderSearchReorderList(List<ShaderSearchItem> list) : base(list)
 		{
 			this.displayAdd = false;
 			this.displayRemove = false;

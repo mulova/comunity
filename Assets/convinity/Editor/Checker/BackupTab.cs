@@ -78,7 +78,7 @@ namespace comunity {
 		public override void OnInspectorGUI() {
 			if (refDiffs != null) {
 				EditorGUI.indentLevel++;
-                var list = new RefDiffReorderList(null, refDiffs);
+                var list = new RefDiffReorderList(refDiffs);
                 list.Draw();
 				EditorGUI.indentLevel--;
 			}
@@ -225,12 +225,13 @@ namespace comunity {
 
     class RefDiffReorderList : ReorderList<RefDiff>
     {
-        public RefDiffReorderList(Object o, IList list) : base(o, list){
+        public RefDiffReorderList(IList list) : base(list){
             this.displayAdd = false;
         }
 
         protected override bool DrawItem(RefDiff item, Rect rect, int index, bool isActive, bool isFocused)
         {
+            Object obj = null;
             var rect1 = EditorGUIUtil.SplitRectHorizontally(rect, 0.2f);
             var rect2 = EditorGUIUtil.SplitRectHorizontally(rect1[1], 0.5f);
             EditorGUI.LabelField(rect1[0], item.name, EditorStyles.miniLabel);

@@ -14,7 +14,7 @@ namespace comunity {
 	[Serializable]
 	public class LogSnapshot {
         public LogLevel logLevel = LogLevel.WARN;
-		public LoggerData[] data = new LoggerData[0];
+        [StrEnumDrawer(strVar:"name", enumVar:"level")] public LoggerData[] data = new LoggerData[0];
 		public bool showName = false;
 		public bool showTime = false;
 		public bool showMethod = false;

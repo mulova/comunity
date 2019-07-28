@@ -5,6 +5,7 @@ using Object = UnityEngine.Object;
 using System.Collections;
 using UnityEditor;
 using System.Text.Ex;
+using System.Collections.Generic;
 
 namespace comunity
 {
@@ -13,11 +14,10 @@ namespace comunity
         public delegate T CreateItemDelegate();
         public delegate bool DrawItemDelegate(T item, Rect rect, int index, bool isActive, bool isFocused);
         public delegate void ChangeDelegate();
-        public const float HEIGHT = 18;
+        public const float HEIGHT = 21;
 
         public readonly ReorderableList drawer;
         public bool changed { get; private set; }
-        protected Object obj { get; set; }
 
         public CreateItemDelegate createItem;
         public DrawItemDelegate drawItem;
@@ -100,11 +100,10 @@ namespace comunity
             }
         }
 
-        public ReorderList(Object obj, IList list)
+        public ReorderList(IList list)
         {
-            this.obj = obj;
             this.drawer = new ReorderableList(list, typeof(T), true, false, true, true);
-            this.list = list;
+            this.list = (IList)list;
             Init();
         }
 
@@ -116,8 +115,14 @@ namespace comunity
             this.drawer.onReorderCallback = Reorder;
             this.drawer.elementHeight = HEIGHT;
             this.drawer.elementHeightCallback = GetElementHeight;
+            this.drawer.onRemoveCallback = OnRemove;
             this.createItem = CreateItem;
             this.drawItem = DrawItem;
+        }
+
+        private void OnRemove(ReorderableList list)
+        {
+            throw new NotImplementedException();
         }
 
         private float GetElementHeight(int index)
@@ -190,22 +195,13 @@ namespace comunity
 
         public void SetDirty()
         {
-            EditorUtil.SetDirty(obj);
             changed = true;
         }
 
         public bool Draw()
         {
             changed = false;
-            if (obj != null && drawer.serializedProperty == null)
-            {
-                Undo.RecordObject(obj, obj.name);
-            }
             drawer.DoLayoutList();
-            if (!changed && obj != null && drawer.serializedProperty == null)
-            {
-                Undo.ClearUndo(obj);
-            }
             if (changed)
             {
                 onChange();

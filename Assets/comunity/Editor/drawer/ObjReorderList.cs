@@ -1,16 +1,17 @@
 ﻿using UnityEngine;
 using Object = UnityEngine.Object;
-using System.Collections;
 using UnityEditor;
+using System.Collections.Generic;
+using System.Collections;
 
 namespace comunity
 {
-    public class ObjReorderList<T> : ReorderList<T> where T:UnityEngine.Object
+    public class ObjReorderList<T> : ReorderList<T> where T : Object
     {
         private bool allowSceneObjects;
         public bool editable = true;
 
-        public ObjReorderList(Object o, IList list, bool allowSceneObjects = true) : base(o, list) {
+        public ObjReorderList(IList list, bool allowSceneObjects = true) : base(list) {
             this.allowSceneObjects = allowSceneObjects;
         }
 

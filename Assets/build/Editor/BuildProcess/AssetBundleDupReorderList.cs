@@ -7,7 +7,7 @@ namespace build
 {
 	public class AssetBundleDupReorderList : ReorderList<AssetBundleDup>
     {
-		public AssetBundleDupReorderList(List<AssetBundleDup> list) : base(null, list) {
+		public AssetBundleDupReorderList(List<AssetBundleDup> list) : base(list) {
             displayAdd = false;
             displayRemove = false;
             base.drawer.elementHeightCallback = GetHeight;

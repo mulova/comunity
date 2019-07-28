@@ -5,7 +5,6 @@ using UnityEngine;
 using Object = UnityEngine.Object;
 using commons;
 using UnityEditor.SceneManagement;
-using UnityEngine.SceneManagement;
 using System;
 using comunity;
 using System.Text.Ex;
@@ -234,7 +233,7 @@ namespace convinity
             }
             if (simpleRef.Count > 0)
             {
-				var drawer = new ObjReorderList<Object>(null, simpleRef);
+				var drawer = new ObjReorderList<Object>(simpleRef);
 				drawer.Draw();
 			}
 			if (allocInfo.Count == 0 && simpleRef.Count == 0)
