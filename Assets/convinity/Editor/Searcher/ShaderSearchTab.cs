@@ -109,7 +109,7 @@ namespace convinity {
 		}
 
 		protected override void OnInspectorGUI(List<ShaderSearchItem> found) {
-			var drawer = new ShaderSearchReorderList(found);
+			var drawer = new ListDrawer<ShaderSearchItem>(found, new ShaderSearchItemDrawer());
 			drawer.Draw();
 		}
 		

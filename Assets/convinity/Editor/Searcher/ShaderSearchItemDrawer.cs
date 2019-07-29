@@ -1,8 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
 using comunity;
-using convinity;
-using System.Collections.Generic;
 using UnityEditor;
 
 namespace convinity

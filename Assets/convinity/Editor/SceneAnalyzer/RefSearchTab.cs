@@ -229,7 +229,7 @@ namespace convinity
             GUI.enabled = true;
             if (allocInfo.Count > 0)
             {
-				FieldRefReorderList drawer = new FieldRefReorderList(allocInfo);
+				ListDrawer<FieldRef> drawer = new ListDrawer<FieldRef>(allocInfo, new FieldRefDrawer());
                 drawer.Draw();
             }
             if (simpleRef.Count > 0)

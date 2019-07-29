@@ -20,7 +20,7 @@ namespace convinity
         public int compIndex;
         public FieldInfo field;
         public PropertyInfo prop;
-        private Object obj;
+        public Object obj;
         public string assetPath { get; private set; }
 
         internal Type DeclaringType

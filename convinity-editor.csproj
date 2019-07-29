@@ -77,7 +77,7 @@
     <Compile Include="Assets\convinity\Editor\NavigationHelper.cs" />
     <Compile Include="Assets\convinity\Editor\SceneAnalyzer\ComponentSearchTab.cs" />
     <Compile Include="Assets\convinity\Editor\SceneAnalyzer\FieldRef.cs" />
-    <Compile Include="Assets\convinity\Editor\SceneAnalyzer\FieldRefReorderList.cs" />
+    <Compile Include="Assets\convinity\Editor\SceneAnalyzer\FieldRefDrawer.cs" />
     <Compile Include="Assets\convinity\Editor\SceneAnalyzer\LayerSearchTab.cs" />
     <Compile Include="Assets\convinity\Editor\SceneAnalyzer\MemberInfoRegistryEx.cs" />
     <Compile Include="Assets\convinity\Editor\SceneAnalyzer\NullRefTab.cs" />
@@ -93,7 +93,6 @@
     <Compile Include="Assets\convinity\Editor\Searcher\SearchTab.cs" />
     <Compile Include="Assets\convinity\Editor\Searcher\ShaderSearchItem.cs" />
     <Compile Include="Assets\convinity\Editor\Searcher\ShaderSearchItemDrawer.cs" />
-    <Compile Include="Assets\convinity\Editor\Searcher\ShaderSearchReorderList.cs" />
     <Compile Include="Assets\convinity\Editor\Searcher\ShaderSearchTab.cs" />
     <Compile Include="Assets\convinity\Editor\Searcher\TexSearchTab.cs" />
     <None Include="Assets\convinity\Editor\convinity-editor.asmdef" />
