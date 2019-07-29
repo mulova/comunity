@@ -156,7 +156,7 @@ namespace comunity
                     AddObjects(list, drag);
                     SaveAuto();
                 }
-                var drawer = new UnityObjIdReorderList(list);
+                var drawer = new UnityObjListDrawer(list);
                 if (drawer.Draw())
                 {
                     SaveAuto();

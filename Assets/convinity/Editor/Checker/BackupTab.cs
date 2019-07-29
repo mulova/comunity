@@ -15,7 +15,6 @@ using System.Reflection;
 using commons;
 using comunity;
 using convinity;
-using System.Collections;
 using UnityEngine.Ex;
 
 namespace comunity {
@@ -78,8 +77,7 @@ namespace comunity {
 		public override void OnInspectorGUI() {
 			if (refDiffs != null) {
 				EditorGUI.indentLevel++;
-                var list = new RefDiffReorderList(refDiffs);
-                list.Draw();
+				EditorGUIUtil.ObjectFieldList(refDiffs);
 				EditorGUI.indentLevel--;
 			}
 		}	
@@ -197,9 +195,14 @@ namespace comunity {
 			}
 			return f.Name;
 		}
-	}
 
-	class RefDiff {
+		private string DrawRow(RefDiff row) {
+			row.DrawGUI();
+			return row.name;
+		}
+    }
+
+    class RefDiff {
 		public readonly Object obj;
 		public readonly Component comp;
 		public readonly FieldInfo field;
@@ -221,26 +224,13 @@ namespace comunity {
 				field.SetValue(comp, obj);
 			}
 		}
+
+		public void DrawGUI()  {
+			EditorGUILayout.LabelField(name, EditorStyles.miniLabel);
+			Type compType = comp != null? comp.GetType(): typeof(Component);
+			Type objType = obj != null? obj.GetType(): typeof(Object);
+			EditorGUILayout.ObjectField(comp, compType, true);
+			EditorGUILayout.ObjectField(obj, objType, true);
+		}
 	}
-
-    class RefDiffReorderList : ReorderList<RefDiff>
-    {
-        public RefDiffReorderList(IList list) : base(list){
-            this.displayAdd = false;
-        }
-
-        protected override bool DrawItem(RefDiff item, Rect rect, int index, bool isActive, bool isFocused)
-        {
-            Object obj = null;
-            var rect1 = EditorGUIUtil.SplitRectHorizontally(rect, 0.2f);
-            var rect2 = EditorGUIUtil.SplitRectHorizontally(rect1[1], 0.5f);
-            EditorGUI.LabelField(rect1[0], item.name, EditorStyles.miniLabel);
-            Type compType = item.comp != null? item.comp.GetType(): typeof(Component);
-            Type objType = obj != null? obj.GetType(): typeof(Object);
-            EditorGUI.ObjectField(rect2[0], item.comp, compType, true);
-            EditorGUI.ObjectField(rect2[1], obj, objType, true);
-            return false;
-        }
-    }
-
 }

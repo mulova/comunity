@@ -150,7 +150,7 @@ namespace shortcut {
 
         private bool DrawShortcutList(UnityObjList list, ObjListFilter<UnityObjId> filter) {
             AndPredicate<UnityObjId> predicate = filter.GetPredicate(list);
-			var drawer = new UnityObjIdReorderList(list);
+			var drawer = new UnityObjListDrawer(list);
             drawer.allowSceneObject = false;
             drawer.Filter(predicate.Accept);
 			return drawer.Draw();

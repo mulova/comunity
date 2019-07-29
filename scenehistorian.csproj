@@ -62,12 +62,15 @@
   <ItemGroup>
     <Compile Include="Assets\scenehistorian\SceneCamHistory.cs" />
     <Compile Include="Assets\scenehistorian\SceneCamProperty.cs" />
-    <Compile Include="Assets\scenehistorian\SceneCamReorderList.cs" />
+    <Compile Include="Assets\scenehistorian\SceneCamPropertyDrawer.cs" />
     <Compile Include="Assets\scenehistorian\SceneCamTab.cs" />
     <Compile Include="Assets\scenehistorian\SceneCamWindow.cs" />
     <Compile Include="Assets\scenehistorian\SceneHistory.cs" />
+    <Compile Include="Assets\scenehistorian\SceneHistoryDrawer.cs" />
     <Compile Include="Assets\scenehistorian\SceneHistoryItem.cs" />
+    <Compile Include="Assets\scenehistorian\SceneHistoryItemDrawer.cs" />
     <Compile Include="Assets\scenehistorian\SceneHistoryMenu.cs" />
+    <Compile Include="Assets\scenehistorian\SceneHistoryReorderList.cs" />
     <Compile Include="Assets\scenehistorian\SceneHistoryWindow.cs" />
     <Compile Include="Assets\scenehistorian\SceneViewContextMenu.cs" />
     <Compile Include="Assets\scenehistorian\SceneViewMenu.cs" />
@@ -700,6 +703,14 @@
     <ProjectReference Include="comunity-editor.csproj">
       <Project>{479F44D8-44C6-E2D7-A9E5-BF8D470EB7B3}</Project>
       <Name>comunity-editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="reorderablelist.csproj">
+      <Project>{FB580AB6-E146-7B5B-9542-DFBF6F8989DA}</Project>
+      <Name>reorderablelist</Name>
+    </ProjectReference>
+    <ProjectReference Include="reorderablelist-editor.csproj">
+      <Project>{A4813468-B41F-B15A-DC0E-F04B944ED302}</Project>
+      <Name>reorderablelist-editor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

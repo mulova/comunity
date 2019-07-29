@@ -836,6 +836,10 @@
       <Project>{4EB79D97-23E0-7B03-55C8-FC32C3859938}</Project>
       <Name>AssetBundleManager</Name>
     </ProjectReference>
+    <ProjectReference Include="reorderablelist.csproj">
+      <Project>{FB580AB6-E146-7B5B-9542-DFBF6F8989DA}</Project>
+      <Name>reorderablelist</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

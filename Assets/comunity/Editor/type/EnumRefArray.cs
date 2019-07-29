@@ -3,8 +3,10 @@
 // License: The MIT License ( http://opensource.org/licenses/MIT )
 // Copyright © 2013- mulova@gmail.com
 //----------------------------------------------
-#if ARRAY_INSPECTOR
+
 using System;
+using UnityEditor;
+using Object = UnityEngine.Object;
 using UnityEngine;
 
 namespace comunity
@@ -27,10 +29,9 @@ namespace comunity
             }
             return false;
         }
-
+        
         protected override bool IsExpanded(E data) {
             return false;
         }
     }
 }
-#endif

@@ -1,9 +1,15 @@
 ﻿
+using System.Collections.Generic;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using System;
 using comunity;
+using commons;
+using UnityEngine.SceneManagement;
+using UnityEditor.SceneManagement;
+using System.Runtime.CompilerServices;
 
 namespace scenehistorian
 {
@@ -12,7 +18,7 @@ namespace scenehistorian
     {
         private const string PATH = "Library/Shortcut/scene_cam";
         private SceneCamHistory history;
-        private ReorderList<SceneCamProperty> listDrawer;
+        private ListDrawer<SceneCamProperty> listDrawer;
 
         public SceneCamTab(object id, TabbedEditorWindow window) : base(id, window)
         {
@@ -21,18 +27,16 @@ namespace scenehistorian
         public override void OnEnable()
         {
             history = SceneCamHistory.Load(PATH);
-            var saveIcon = new GUIContent(EditorGUIUtility.FindTexture("SceneLoadIn"), "Save");
-            var loadIcon = new GUIContent(EditorGUIUtility.FindTexture("SceneLoadOut"), "Load");
-            listDrawer = new SceneCamReorderList(history.items);
+            listDrawer = new ListDrawer<SceneCamProperty>(history.items, new SceneCamPropertyDrawer());
         }
 
         public override void OnDisable()
         {
-            // Enter play mode
-            if (!Application.isPlaying)
-            {
-                history.Save(PATH);
-            }
+			// Enter play mode
+			if (!Application.isPlaying)
+			{
+				history.Save(PATH);
+			}
         }
 
         public override void OnSelected(bool sel)
@@ -45,17 +49,17 @@ namespace scenehistorian
 
         public override void OnChangePlayMode(PlayModeStateChange stateChange)
         {
-            if (BuildPipeline.isBuildingPlayer)
-            {
-                return;
-            }
-            if (stateChange == PlayModeStateChange.EnteredEditMode)
-            {
-                if (history.Count > 0)
-                {
-                    history[0].Apply();
-                }
-            }
+			if (BuildPipeline.isBuildingPlayer)
+			{
+				return;
+			}
+			if (stateChange == PlayModeStateChange.EnteredEditMode)
+			{
+				if (history.Count > 0)
+				{
+					history[0].Apply();
+				}
+			}
         }
 
         public override void OnChangeScene(string sceneName)
@@ -74,12 +78,11 @@ namespace scenehistorian
         {
             try
             {
-                if (listDrawer.Draw())
-                {
-                    history.Save(PATH);
-                }
-            }
-            catch (Exception ex)
+				if (listDrawer.Draw())
+				{
+					history.Save(PATH);
+				}
+            } catch (Exception ex)
             {
                 if (!(ex.GetBaseException() is ExitGUIException))
                 {

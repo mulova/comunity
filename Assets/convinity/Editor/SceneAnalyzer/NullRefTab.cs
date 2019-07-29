@@ -60,7 +60,7 @@ namespace convinity {
 		}
 
 		public override void OnInspectorGUI() {
-			NamedObjReorderList drawer = new NamedObjReorderList(nullRefs);
+			ListDrawer<NamedObj> drawer = new ListDrawer<NamedObj>(nullRefs.ConvertAll(t=> (NamedObj)t), new NamedObjDrawer());
 			drawer.Draw();
 		}
 		

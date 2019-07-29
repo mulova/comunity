@@ -62,7 +62,7 @@ namespace build
             }
             if (duplicates != null)
             {
-				AssetBundleDupReorderList drawer = new AssetBundleDupReorderList(duplicates);
+				ListDrawer<AssetBundleDup> drawer = new ListDrawer<AssetBundleDup>(duplicates, new AssetBundleDupDrawer());
                 drawer.Draw();
             }
 		}

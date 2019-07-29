@@ -64,7 +64,7 @@ namespace scenehistorian
         {
             OnHeaderGUI();
             scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
-            var listDrawer = new SceneCamReorderList(history.items);
+            var listDrawer = new ListDrawer<SceneCamProperty>(history.items, new SceneCamPropertyDrawer());
             try
             {
 				if (listDrawer.Draw())

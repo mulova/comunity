@@ -11,6 +11,7 @@ using Object = UnityEngine.Object;
 using commons;
 using System.Text.Ex;
 using System.Ex;
+using Rotorz.Games.Collections;
 
 namespace comunity
 {
@@ -444,6 +445,20 @@ namespace comunity
             return false;
         }
 
+        public static bool ObjectFieldReorderList<T>(List<T> list) where T : Object {
+            return ObjectFieldList<T>(list);
+        }
+
+        public static bool ObjectFieldList<T>(List<T> list) where T : class {
+			return ObjectFieldList<T>(list, null, (ReorderableListFlags)0);
+        }
+        
+		public static bool ObjectFieldList<T>(List<T> list, Predicate<T> filter, ReorderableListFlags flags) where T : class {
+            ListDrawer<T> drawer = new ListDrawer<T>(list);
+            drawer.Filter(filter);
+            return drawer.Draw(flags);
+        }
+        
         public static bool GameObjectField(string label, ref GameObject obj, bool allowSceneObjects, ref bool floating, params GUILayoutOption[] options) {
             EditorGUILayout.BeginHorizontal();
             bool changed = ObjectField<GameObject>(label, ref obj, allowSceneObjects);

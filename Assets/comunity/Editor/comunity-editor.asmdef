@@ -2,7 +2,9 @@
     "name": "comunity-editor",
     "references": [
         "commons",
-        "comunity"
+        "comunity",
+        "reorderablelist",
+        "reorderablelist-editor"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [

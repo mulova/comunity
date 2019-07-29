@@ -68,11 +68,11 @@
     <Compile Include="Assets\old\InputEventMapping.cs" />
     <Compile Include="Assets\old\InputEventSystem.cs" />
     <Compile Include="Assets\old\InputState.cs" />
-    <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>/Users/user/workspace/3rdparty/comunity/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>/Users/user/workspace/3rdparty/comunity/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.PackageManagerUI.Editor">
+      <HintPath>/Users/user/workspace/3rdparty/comunity/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
       <HintPath>/Users/user/workspace/3rdparty/comunity/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
@@ -677,10 +677,6 @@
       <Project>{59D24771-3370-2D55-90B1-627B34180EF3}</Project>
       <Name>effect</Name>
     </ProjectReference>
-    <ProjectReference Include="scenehistorian.csproj">
-      <Project>{0132F0A6-96AF-090F-BED2-235D5A1B6991}</Project>
-      <Name>scenehistorian</Name>
-    </ProjectReference>
     <ProjectReference Include="etc.csproj">
       <Project>{1C031F9F-6D2A-86C1-F16F-48BAF732DDB2}</Project>
       <Name>etc</Name>
@@ -720,6 +716,10 @@
     <ProjectReference Include="uguiex-editor.csproj">
       <Project>{2879C03D-C890-1AB9-ECC8-1A382796D80C}</Project>
       <Name>uguiex-editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="scenehistorian.csproj">
+      <Project>{0132F0A6-96AF-090F-BED2-235D5A1B6991}</Project>
+      <Name>scenehistorian</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

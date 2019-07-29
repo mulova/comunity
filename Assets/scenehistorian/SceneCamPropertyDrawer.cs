@@ -1,26 +1,28 @@
-﻿//#define CONFIRM
+﻿//#if !INTERNAL_REORDER
+//#define CONFIRM
 using UnityEngine;
 using System.Collections;
 using comunity;
 using UnityEditor;
 using System;
-using System.Collections.Generic;
 
 namespace scenehistorian
 {
-    public class SceneCamReorderList : ReorderList<SceneCamProperty>
+    public class SceneCamPropertyDrawer : ItemDrawer<SceneCamProperty>
     {
         public const int CONFIRM_PERIOD = 2;
         private GUIContent saveIcon;
         private GUIContent loadIcon;
 
-		public SceneCamReorderList(List<SceneCamProperty> list) : base(list)
+		public SceneCamPropertyDrawer()
 		{
             saveIcon = new GUIContent(EditorGUIUtility.FindTexture("SceneLoadIn"), "Save");
             loadIcon = new GUIContent(EditorGUIUtility.FindTexture("SceneLoadOut"), "Load");
 		}
 
-        protected override bool DrawItem(SceneCamProperty item, Rect rect, int index, bool isActive, bool isFocused)
+        private static DateTime time;
+        private static SceneCamProperty toSave;
+        public override bool DrawItem(Rect rect, int index, SceneCamProperty item, out SceneCamProperty newItem)
         {
             bool changed = false;
             Rect[] r1 = EditorGUIUtil.SplitRectHorizontally(rect, -100);
@@ -67,6 +69,7 @@ namespace scenehistorian
                 #endif
             }
             GUI.backgroundColor = bg;
+            newItem = item;
             if (name != item.id)
             {
                 item.id = name;
@@ -78,3 +81,4 @@ namespace scenehistorian
         }
     }
 }
+//#endif

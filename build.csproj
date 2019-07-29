@@ -69,7 +69,7 @@
     <Compile Include="Assets\build\Editor\AssetBundleImportProcessor.cs" />
     <Compile Include="Assets\build\Editor\Builder.cs" />
     <Compile Include="Assets\build\Editor\BuildProcess\AssetBuildProcess.cs" />
-    <Compile Include="Assets\build\Editor\BuildProcess\AssetBundleDupReorderList.cs" />
+    <Compile Include="Assets\build\Editor\BuildProcess\AssetBundleDupDrawer.cs" />
     <Compile Include="Assets\build\Editor\BuildProcess\BrokenAssetVerifier.cs" />
     <Compile Include="Assets\build\Editor\BuildProcess\ComponentBuildProcess.cs" />
     <Compile Include="Assets\build\Editor\BuildProcess\LexiconRegistryBuildProcessor.cs" />
