@@ -70,7 +70,6 @@
     <Compile Include="Assets\scenehistorian\SceneHistoryItem.cs" />
     <Compile Include="Assets\scenehistorian\SceneHistoryItemDrawer.cs" />
     <Compile Include="Assets\scenehistorian\SceneHistoryMenu.cs" />
-    <Compile Include="Assets\scenehistorian\SceneHistoryReorderList.cs" />
     <Compile Include="Assets\scenehistorian\SceneHistoryWindow.cs" />
     <Compile Include="Assets\scenehistorian\SceneViewContextMenu.cs" />
     <Compile Include="Assets\scenehistorian\SceneViewMenu.cs" />

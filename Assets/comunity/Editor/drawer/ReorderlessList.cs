@@ -12,7 +12,7 @@ namespace comunity
     /// <summary>
     /// Pure C# IList (non SerializableProperty array) cannot be reordered in UnityInternal ReorderableList
     /// </summary>
-    public class NonReorderList<T>
+    public class ReorderlessList<T>
     {
         public delegate T CreateItemDelegate();
         public delegate bool DrawItemDelegate(T item, Rect rect, int index, bool isActive, bool isFocused);
