@@ -234,7 +234,7 @@ namespace convinity
             }
             if (simpleRef.Count > 0)
             {
-				var drawer = new ObjReorderList<Object>(simpleRef);
+				var drawer = new ListDrawer<Object>(simpleRef, new ObjListItemDrawer<Object>());
 				drawer.Draw();
 			}
 			if (allocInfo.Count == 0 && simpleRef.Count == 0)

@@ -1,5 +1,4 @@
-﻿//#if !INTERNAL_REORDER
-//#define CONFIRM
+﻿//#define CONFIRM
 using UnityEngine;
 using System.Collections;
 using comunity;
@@ -81,4 +80,3 @@ namespace scenehistorian
         }
     }
 }
-//#endif

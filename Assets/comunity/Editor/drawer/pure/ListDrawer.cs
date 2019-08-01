@@ -41,11 +41,11 @@ namespace comunity
             }
         }
 
-        public ListDrawer(List<T> list) : this(list, new ItemDrawer<T>()) { }
+        public ListDrawer(IList<T> list) : this(list, new ItemDrawer<T>()) { }
 
-        public ListDrawer(List<T> list, IItemDrawer<T> itemDrawer)
+        public ListDrawer(IList<T> list, IItemDrawer<T> itemDrawer)
         {
-            this.list = list;
+            this.list = new List<T>(list);
             this.Count = list.Count;
             this.itemDrawer = itemDrawer; // just for reference count
             this.createItem = CreateItem;

@@ -53,7 +53,7 @@ namespace convinity {
 			}
 			if (anims.Count > 0) {
 				GUILayout.Label("AnimationCullingType.AlwaysAnimate", EditorStyles.boldLabel);
-				var drawer = new ObjReorderList<Animation>(anims);
+				var drawer = new ListDrawer<Animation>(anims, new ObjListItemDrawer<Animation>());
                 drawer.Draw();
 			}
 		}

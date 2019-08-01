@@ -366,13 +366,9 @@ namespace scenehistorian
         void OnGUI()
         {
             listDrawer = new SceneHistoryDrawer(sceneHistory);
+            listDrawer.allowSceneObject = false;
             OnHeaderGUI();
             scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
-			#if INTERNAL_REORDER
-            var listDrawer = new SceneHistoryReorderList(sceneHistory);
-            #else
-            listDrawer.allowSceneObject = false;
-            #endif
             if (nameFilter.IsNotEmpty())
             {
                 string[] filters = nameFilter.SplitEx(' ');
@@ -396,9 +392,6 @@ namespace scenehistorian
             }
             try
             {
-#if INTERNAL_REORDER
-                if (listDrawer.Draw())
-#else
                 try
                 {
                     listDrawer.Draw(ReorderableListFlags.ShowIndices | ReorderableListFlags.HideAddButton | ReorderableListFlags.DisableContextMenu);
@@ -408,7 +401,6 @@ namespace scenehistorian
                     sceneHistory.Clear();
                 }
                 if (listDrawer.changed)
-#endif
                 {
                     sceneHistory.Save(PATH);
                     changed = false;
@@ -445,11 +437,7 @@ namespace scenehistorian
                         }
                     }
                     listDrawer = new SceneHistoryDrawer(filteredScenes);
-                    #if INTERNAL_REORDER
-                    if (listDrawer.Draw())
-                    #else
                     listDrawer.Draw(ReorderableListFlags.HideAddButton | ReorderableListFlags.DisableContextMenu | ReorderableListFlags.DisableReordering | ReorderableListFlags.DisableDuplicateCommand);
-                    #endif
                 }
             } catch (Exception ex)
             {
