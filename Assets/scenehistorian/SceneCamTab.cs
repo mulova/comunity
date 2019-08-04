@@ -1,15 +1,7 @@
-﻿
-using System.Collections.Generic;
-using System.IO;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
-using Object = UnityEngine.Object;
 using System;
 using comunity;
-using commons;
-using UnityEngine.SceneManagement;
-using UnityEditor.SceneManagement;
-using System.Runtime.CompilerServices;
 
 namespace scenehistorian
 {
