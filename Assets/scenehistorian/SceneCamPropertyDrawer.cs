@@ -1,6 +1,5 @@
 ﻿//#define CONFIRM
 using UnityEngine;
-using System.Collections;
 using comunity;
 using UnityEditor;
 using System;

@@ -698,10 +698,6 @@
       <Project>{90B9F8A7-7807-C3C9-C2FF-0D7D6A09C607}</Project>
       <Name>Assembly-CSharp</Name>
     </ProjectReference>
-    <ProjectReference Include="reorderablelist-editor.csproj">
-      <Project>{A4813468-B41F-B15A-DC0E-F04B944ED302}</Project>
-      <Name>reorderablelist-editor</Name>
-    </ProjectReference>
     <ProjectReference Include="ani-editor.csproj">
       <Project>{3C002EDC-6859-498C-8C24-5CB284215728}</Project>
       <Name>ani-editor</Name>
@@ -729,10 +725,6 @@
     <ProjectReference Include="effect-editor.csproj">
       <Project>{A994C05A-592E-7E79-0D78-9ACC4675C777}</Project>
       <Name>effect-editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="reorderablelist.csproj">
-      <Project>{FB580AB6-E146-7B5B-9542-DFBF6F8989DA}</Project>
-      <Name>reorderablelist</Name>
     </ProjectReference>
     <ProjectReference Include="effect.csproj">
       <Project>{59D24771-3370-2D55-90B1-627B34180EF3}</Project>
@@ -781,6 +773,14 @@
     <ProjectReference Include="uguiex-editor.csproj">
       <Project>{2879C03D-C890-1AB9-ECC8-1A382796D80C}</Project>
       <Name>uguiex-editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="reorderablelist-editor.csproj">
+      <Project>{A4813468-B41F-B15A-DC0E-F04B944ED302}</Project>
+      <Name>reorderablelist-editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="reorderablelist.csproj">
+      <Project>{FB580AB6-E146-7B5B-9542-DFBF6F8989DA}</Project>
+      <Name>reorderablelist</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
