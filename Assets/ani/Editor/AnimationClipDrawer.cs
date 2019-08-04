@@ -11,14 +11,14 @@ namespace ani
 	[CustomPropertyDrawer(typeof(AnimationClipListingAttribute))]
     public class AnimationClipDrawer : PropertyDrawerBase
 	{
-		protected override int GetLineCount()
+		protected override int GetLineCount(SerializedProperty p)
 		{
 			return 1;
 		}
 
-		protected override void DrawGUI(GUIContent label)
-		{
-			Component c = prop.serializedObject.targetObject as Component;
+		protected override void DrawGUI(SerializedProperty p)
+        {
+            Component c = p.serializedObject.targetObject as Component;
 			Animation anim = c.GetComponent<Animation>();
 			AnimationClipListingAttribute attr = attribute as AnimationClipListingAttribute;
 			if (attr.varName.IsNotEmpty()) {
@@ -35,12 +35,12 @@ namespace ani
 			}
 			if (anim != null) {
 				AnimationClip[] clips = anim.GetAllClips().ToArray();
-				AnimationClip a = prop.objectReferenceValue as AnimationClip;
-				if (PopupNullable(GetLineRect(0), prop.name, ref a, clips)) {
-					prop.objectReferenceValue = a;
+				AnimationClip a = p.objectReferenceValue as AnimationClip;
+				if (PopupNullable(GetLineRect(0), p.name, ref a, clips)) {
+					p.objectReferenceValue = a;
 				}
 			} else {
-				EditorGUI.PropertyField(GetLineRect(0), prop, new GUIContent(prop.name));
+				EditorGUI.PropertyField(GetLineRect(0), p, new GUIContent(p.name));
 			}
 		}
 	}

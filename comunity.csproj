@@ -125,6 +125,8 @@
     <Compile Include="Assets\comunity\crypto\stringc.cs" />
     <Compile Include="Assets\comunity\di\DepData.cs" />
     <Compile Include="Assets\comunity\di\DiService.cs" />
+    <Compile Include="Assets\comunity\drawer\LineDrawerAttribute.cs" />
+    <Compile Include="Assets\comunity\drawer\StrEnumDrawerAttribute.cs" />
     <Compile Include="Assets\comunity\event\EventListAttribute.cs" />
     <Compile Include="Assets\comunity\event\EventRegistry.cs" />
     <Compile Include="Assets\comunity\event\EventScript.cs" />
@@ -206,7 +208,6 @@
     <Compile Include="Assets\comunity\type\AudioClipLoadType.cs" />
     <Compile Include="Assets\comunity\type\EGameObject.cs" />
     <Compile Include="Assets\comunity\type\RuntimePlatformEx.cs" />
-    <Compile Include="Assets\comunity\type\StrEnumDrawerAttribute.cs" />
     <Compile Include="Assets\comunity\type\TransformData.cs" />
     <Compile Include="Assets\comunity\util\ActionTimer.cs" />
     <Compile Include="Assets\comunity\util\ApplyMaterial.cs" />

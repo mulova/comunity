@@ -1,8 +1,6 @@
-using System;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEditor;
-using Object = UnityEngine.Object;
 using System.Text;
 using commons;
 namespace comunity
@@ -10,18 +8,18 @@ namespace comunity
 	[CustomPropertyDrawer(typeof(EventListAttribute))]
 	public class EventListDrawer : PropertyDrawerBase
 	{
-		protected override int GetLineCount()
+		protected override int GetLineCount(SerializedProperty p)
 		{
 			return 1;
 		}
 
-		protected override void DrawGUI(GUIContent label)
-		{
+		protected override void DrawGUI(SerializedProperty p)
+        {
 			EventListAttribute attr = attribute as EventListAttribute;
 			string[] events = EventListDrawer.GetIds(attr.listPath);
-			string eventId = prop.stringValue;
-			if (PopupNullable(GetLineRect(0), prop.name, ref eventId, events)) {
-				prop.stringValue = eventId;
+			string eventId = p.stringValue;
+			if (PopupNullable(GetLineRect(0), p.name, ref eventId, events)) {
+				p.stringValue = eventId;
 			}
 		}
 

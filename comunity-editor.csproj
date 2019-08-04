@@ -86,6 +86,7 @@
     <Compile Include="Assets\comunity\Editor\CreateNewLine.cs" />
     <Compile Include="Assets\comunity\Editor\DiMenu.cs" />
     <Compile Include="Assets\comunity\Editor\drawer\CustomEditorBase.cs" />
+    <Compile Include="Assets\comunity\Editor\drawer\LinePropertyDrawer.cs" />
     <Compile Include="Assets\comunity\Editor\drawer\ObjReorderProperty.cs" />
     <Compile Include="Assets\comunity\Editor\drawer\pure\ArrayDrawer.cs" />
     <Compile Include="Assets\comunity\Editor\drawer\pure\IItemDrawer.cs" />
@@ -93,12 +94,11 @@
     <Compile Include="Assets\comunity\Editor\drawer\pure\ListDrawer.cs" />
     <Compile Include="Assets\comunity\Editor\drawer\pure\NamedObjDrawer.cs" />
     <Compile Include="Assets\comunity\Editor\drawer\pure\ObjListItemDrawer.cs" />
-    <Compile Include="Assets\comunity\Editor\drawer\pure\StrEnumItemDrawer.cs" />
     <Compile Include="Assets\comunity\Editor\drawer\pure\UnityObjIdDrawer.cs" />
     <Compile Include="Assets\comunity\Editor\drawer\pure\UnityObjListDrawer.cs" />
     <Compile Include="Assets\comunity\Editor\drawer\ReorderlessList.cs" />
     <Compile Include="Assets\comunity\Editor\drawer\ReorderProperty.cs" />
-    <Compile Include="Assets\comunity\Editor\drawer\StrEnumPropertyDrawer.cs" />
+    <Compile Include="Assets\comunity\Editor\drawer\StrEnumItemDrawer.cs" />
     <Compile Include="Assets\comunity\Editor\drawer\StrReorderProperty.cs" />
     <Compile Include="Assets\comunity\Editor\EditorGUIUtil.cs" />
     <Compile Include="Assets\comunity\Editor\EditorTab.cs" />

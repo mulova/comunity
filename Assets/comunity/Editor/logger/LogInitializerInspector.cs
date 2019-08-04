@@ -45,11 +45,11 @@ namespace comunity
             //    changed = true;
             //}
             ScanLoggers();
-            changed |= EditorGUIUtil.PopupEnum("Log Level", ref comp.snapshot.logLevel);
-            changed |= EditorGUIUtil.Toggle("Show Name", ref comp.snapshot.showName);
-            changed |= EditorGUIUtil.Toggle("Show Time", ref comp.snapshot.showTime);
-            changed |= EditorGUIUtil.Toggle("Show Method", ref comp.snapshot.showMethod);
-            changed |= EditorGUIUtil.Toggle("Show Level", ref comp.snapshot.showLevel);
+            //changed |= EditorGUIUtil.PopupEnum("Log Level", ref comp.snapshot.logLevel);
+            //changed |= EditorGUIUtil.Toggle("Show Name", ref comp.snapshot.showName);
+            //changed |= EditorGUIUtil.Toggle("Show Time", ref comp.snapshot.showTime);
+            //changed |= EditorGUIUtil.Toggle("Show Method", ref comp.snapshot.showMethod);
+            //changed |= EditorGUIUtil.Toggle("Show Level", ref comp.snapshot.showLevel);
 
             for (int i=0; i<comp.snapshot.stacktraceTypes.Length; ++i)
             {

@@ -1,9 +1,6 @@
-using System;
 using UnityEngine;
-using System.Collections.Generic;
 using UnityEditor;
 using Object = UnityEngine.Object;
-using UnityEngine.Assertions;
 using commons;
 using System.Text.Ex;
 
@@ -14,7 +11,7 @@ namespace comunity
 	{
 		private static readonly bool DIGEST = false;
 
-		protected override int GetLineCount()
+		protected override int GetLineCount(SerializedProperty p)
 		{
             SerializedProperty guid = GetProperty("guid");
             string id = guid.stringValue;
@@ -37,9 +34,9 @@ namespace comunity
             }
 		}
 
-		protected override void DrawGUI(GUIContent label)
-		{
-			int lineCount = GetLineCount();
+		protected override void DrawGUI(SerializedProperty p)
+        {
+            int lineCount = GetLineCount(p);
 			int lineNo = 0;
 			SerializedProperty cdn = GetProperty("cdn");
 			SerializedProperty path = GetProperty("path");
@@ -72,7 +69,7 @@ namespace comunity
 			{
 				assetPath = EditorAssetUtil.GetAssetRelativePath(editorPath);
 			}
-			EditorGUI.indentLevel = prop.depth;
+			EditorGUI.indentLevel = p.depth;
 
 			Rect line1Rect = GetLineRect(lineNo);
             string refType = null;
@@ -82,7 +79,7 @@ namespace comunity
             {
                 refType = reference.objectReferenceValue != null? "O" : "X";
             }
-			string title = string.Format("{0} ({1})", label.text, refType);
+			string title = string.Format("{0} ({1})", p.name, refType);
 
 			Color oldColor = GUI.backgroundColor;
 			if (DIGEST&&EditorAssetUtil.IsModified(path.stringValue, md5.stringValue))

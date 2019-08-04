@@ -5,7 +5,7 @@ namespace comunity
 {
     public class ObjReorderProperty<T> : ReorderProperty<T> where T:UnityEngine.Object
     {
-        private bool allowSceneObjects;
+        public bool allowSceneObjects;
         public bool editable = true;
 
         public ObjReorderProperty(SerializedObject ser, string varName, bool allowSceneObjects = true) : base(ser, varName) {

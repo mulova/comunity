@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine;
-using UnityEditor;
+﻿using UnityEditor;
 using Object = UnityEngine.Object;
 
 namespace comunity
@@ -8,19 +6,19 @@ namespace comunity
     [CustomPropertyDrawer(typeof(AssetGuid))]
     public class AssetGuidDrawer : PropertyDrawerBase
     {
-        protected override int GetLineCount()
+        protected override int GetLineCount(SerializedProperty p)
         {
             return 1;
         }
 
-        protected override void DrawGUI(GUIContent label)
+        protected override void DrawGUI(SerializedProperty p)
         {
-            SerializedProperty guidProp = GetProperty("guid");
+            SerializedProperty guidProp = p.FindPropertyRelative("guid");
             string guid = guidProp.stringValue;
-            if (EditorUI.GUIDField<Object>(GetLineRect(0), prop.name, ref guid))
+            if (EditorUI.GUIDField<Object>(GetLineRect(0), p.name, ref guid))
             {
                 guidProp.stringValue = guid;
-                prop.serializedObject.ApplyModifiedProperties();
+                p.serializedObject.ApplyModifiedProperties();
             }
         }
     }

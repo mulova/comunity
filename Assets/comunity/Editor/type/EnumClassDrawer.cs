@@ -14,25 +14,25 @@ namespace comunity
 //	[CustomPropertyDrawer(typeof(EnumClass))]
 	public abstract class EnumClassDrawer<T> : PropertyDrawerBase where T: class
 	{
-		protected override int GetLineCount()
+		protected override int GetLineCount(SerializedProperty p)
 		{
 			return 1;
 		}
 
-		protected override void DrawGUI(GUIContent label)
-		{
-            prop.serializedObject.Update();
+		protected override void DrawGUI(SerializedProperty p)
+        {
+            p.serializedObject.Update();
             IList<T> values = GetValues();
-            object target = GetParent(prop);
+            object target = GetParent(p);
             if (target == null)
             {
                 return;
             }
-            T o = ReflectionUtil.GetFieldValue<T>(target, prop.name);
-            if (PopupNullable(GetLineRect(0), prop.displayName, ref o, values)) {
-                ReflectionUtil.SetFieldValue(target, prop.name, o);
-                prop.serializedObject.ApplyModifiedProperties();
-                EditorUtil.SetDirty(prop.serializedObject.targetObject);
+            T o = ReflectionUtil.GetFieldValue<T>(target, p.name);
+            if (PopupNullable(GetLineRect(0), p.displayName, ref o, values)) {
+                ReflectionUtil.SetFieldValue(target, p.name, o);
+                p.serializedObject.ApplyModifiedProperties();
+                EditorUtil.SetDirty(p.serializedObject.targetObject);
                 EditorSceneManager.SaveOpenScenes();
 			}
 		}

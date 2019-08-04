@@ -4,14 +4,18 @@ using UnityEditor;
 using Object = UnityEngine.Object;
 using System.Collections.Generic;
 using commons;
+using UnityEditorInternal;
 
 namespace comunity
 {
     public abstract class PropertyDrawerBase : PropertyDrawer
     {
-        private const int lineHeight = 16;
-        protected SerializedProperty prop;
+        private const int lineHeight = 18;
+        private SerializedProperty prop;
         protected Rect bound;
+        protected int index;
+        protected bool isActive;
+        protected bool isFocused;
 
         protected T GetAttribute<T>() where T:Attribute
         {
@@ -23,17 +27,17 @@ namespace comunity
             return prop.FindPropertyRelative(name);
         }
 
-        public override float GetPropertyHeight(SerializedProperty prop, GUIContent label)
+        public override float GetPropertyHeight(SerializedProperty p, GUIContent label)
         {
-            this.prop = prop;
-            float height = GetLineCount() * lineHeight;
+            //this.prop = p;
+            float height = GetLineCount(p) * lineHeight;
             this.prop = null;
             return height;
         }
 
-        protected abstract int GetLineCount();
+        protected abstract int GetLineCount(SerializedProperty p);
 
-        protected abstract void DrawGUI(GUIContent label);
+        protected abstract void DrawGUI(SerializedProperty p);
 
         protected Rect GetLineRect(int lineNo)
         {
@@ -43,7 +47,7 @@ namespace comunity
             return lineRect;
         }
 
-        protected Rect[] HorizontalSplitRect(Rect src, float leftWidth)
+        protected Rect[] SplitRect(Rect src, float leftWidth)
         {
             Rect left = src;
             Rect right = src;
@@ -53,7 +57,7 @@ namespace comunity
             return new Rect[] { left, right};
         }
 
-        protected Rect[] HorizontalSplit(Rect src, int count)
+        protected Rect[] SplitRectMulti(Rect src, int count)
         {
             Rect[] rects = new Rect[count];
             float width = src.width / count;
@@ -66,9 +70,14 @@ namespace comunity
             return rects;
         }
 
-        protected Rect[] HorizontalSplit(int line, float leftWidth)
+        protected Rect[] SplitLine(int line, float leftWidth)
         {
-            return HorizontalSplitRect(GetLineRect(line), leftWidth);
+            return SplitRect(GetLineRect(line), leftWidth);
+        }
+
+        protected Rect[] SplitLineMulti(int line, int count)
+        {
+            return SplitRectMulti(GetLineRect(line), count);
         }
 
         protected bool DrawObjectField<T>(Rect r, GUIContent label, ref T o, bool allowSceneObj = true) where T:Object
@@ -88,8 +97,26 @@ namespace comunity
             this.bound = rect;
             Undo.RecordObject(prop.serializedObject.targetObject, GetType().FullName);
             EditorGUI.indentLevel = prop.depth;
-            DrawGUI(label);
+            if (prop.isArray)
+            {
+                ReorderableList list = new ReorderableList(prop.serializedObject, prop);
+                list.DoList(rect);
+                list.drawElementCallback = DrawElement;
+            } else
+            {
+                DrawGUI(prop);
+            }
             this.prop = null;
+        }
+
+        private void DrawElement(Rect rect, int index, bool isActive, bool isFocused)
+        {
+            var element = prop.GetArrayElementAtIndex(index);
+            this.bound = rect;
+            this.index = index;
+            this.isActive = isActive;
+            this.isFocused = isFocused;
+            DrawGUI(element);
         }
 
         protected void DrawArray(Rect pos, SerializedProperty p, params string[] propNames)
@@ -365,6 +392,11 @@ namespace comunity
         {
             string str = p.stringValue;
             EditorGUI.LabelField(r, str, style);
+        }
+
+        protected void SetDirty()
+        {
+            prop.serializedObject.ApplyModifiedProperties();
         }
     }
 }

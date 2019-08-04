@@ -55,12 +55,12 @@ namespace comunity
     [CustomPropertyDrawer(typeof(ObjSwitchElement))]
     public class ObSwitchElementDrawer : PropertyDrawerBase
     {
-        protected override void DrawGUI(GUIContent label)
+        protected override void DrawGUI(SerializedProperty p)
         {
-            var n = GetProperty("name");
-            var objs = GetProperty("objs");
-            var trans = GetProperty("trans");
-            var pos = GetProperty("pos");
+            var n = p.FindPropertyRelative("name");
+            var objs = p.FindPropertyRelative("objs");
+            var trans = p.FindPropertyRelative("trans");
+            var pos = p.FindPropertyRelative("pos");
 
             EditorGUILayout.PropertyField(n);
             EditorGUILayout.PropertyField(objs);
@@ -68,7 +68,7 @@ namespace comunity
             EditorGUILayout.PropertyField(pos);
         }
 
-        protected override int GetLineCount()
+        protected override int GetLineCount(SerializedProperty p)
         {
             var objs = GetProperty("objs");
             var trans = GetProperty("trans");

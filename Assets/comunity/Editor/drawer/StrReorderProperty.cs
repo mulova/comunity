@@ -5,7 +5,11 @@ namespace comunity
 {
     public class StrReorderProperty : ReorderProperty<string>
     {
-        public StrReorderProperty(SerializedObject ser, string varName) : base(ser, varName) {
+        public bool editable;
+
+        public StrReorderProperty(SerializedObject ser, string varName, bool editable = true) : base(ser, varName)
+        {
+            this.editable = editable;
         }
 
         protected override string GetItem(SerializedProperty p)
@@ -21,15 +25,24 @@ namespace comunity
         protected override bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
         {
             var o1 = this[index];
-            var o2 = EditorGUI.TextField(rect, o1);
-            if (o1 != o2)
+            if (editable)
             {
-                this[index] = o2;
-                return true;
+                var o2 = EditorGUI.TextField(rect, o1);
+                if (o1 != o2)
+                {
+                    this[index] = o2;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             } else
             {
+                EditorGUI.LabelField(rect, o1);
                 return false;
             }
+
         }
     }
 }

@@ -103,7 +103,7 @@ namespace comunity
             }
         }
 
-        public NonReorderList(IList list)
+        public ReorderlessList(IList list)
         {
             this.drawer = new ReorderableList(list, typeof(T), true, false, true, true);
             this.list = (IList)list;
