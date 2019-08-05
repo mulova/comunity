@@ -60,7 +60,7 @@ namespace convinity {
 		}
 
 		public override void OnInspectorGUI() {
-			ListDrawer<NamedObj> drawer = new ListDrawer<NamedObj>(nullRefs.ConvertAll(t=> (NamedObj)t), new NamedObjDrawer());
+			var drawer = new ListDrawer<NamedObj>(nullRefs.ConvertAll(t=> (NamedObj)t), new NamedObjDrawer<NamedObj>());
 			drawer.Draw();
 		}
 		

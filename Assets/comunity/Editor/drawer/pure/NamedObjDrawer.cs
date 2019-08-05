@@ -4,23 +4,23 @@ using UnityEditor;
 
 namespace comunity
 {
-    public class NamedObjDrawer : IItemDrawer<NamedObj>
-	{
+    public class NamedObjDrawer<T> : IItemDrawer<T> where T: NamedObj
+    {
 		private bool allowSceneObjects = true;
 
-        public bool DrawItem(Rect rect, int index, NamedObj obj, out NamedObj changedObj)
+        public bool DrawItem(Rect rect, int index, T obj, out T changedObj)
         {
             EditorGUI.ObjectField(rect, obj.Obj, typeof(Object), allowSceneObjects);
             changedObj = obj;
             return false;
         }
 
-        public void DrawItemBackground(Rect position, int index, NamedObj obj)
+        public void DrawItemBackground(Rect position, int index, T obj)
         {
             throw new System.NotImplementedException();
         }
 
-        public float GetItemHeight(int index, NamedObj obj)
+        public float GetItemHeight(int index, T obj)
         {
             return 16;
         }

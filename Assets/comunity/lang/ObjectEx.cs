@@ -4,9 +4,8 @@
 // Copyright © 2013- mulova@gmail.com
 //----------------------------------------------
 
-using Object = UnityEngine.Object;
-using UnityEngine;
 using commons;
+
 using comunity;
 
 namespace UnityEngine.Ex
