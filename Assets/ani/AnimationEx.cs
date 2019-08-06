@@ -1,4 +1,4 @@
-#define ANIM_EVENT_WORKAROUND
+﻿#define ANIM_EVENT_WORKAROUND
 //----------------------------------------------
 // Unity3D common libraries and editor tools
 // License: The MIT License ( http://opensource.org/licenses/MIT )
@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using commons;
+using mulova.commons;
 using ani;
 using comunity;
 using System.Ex;

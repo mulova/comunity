@@ -1,7 +1,7 @@
 {
     "name": "convinity-editor",
     "references": [
-        "commons",
+        "mulova.commons",
         "comunity",
         "comunity-editor",
         "convinity"
@@ -11,5 +11,9 @@
         "Editor"
     ],
     "excludePlatforms": [],
-    "allowUnsafeCode": false
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
 }

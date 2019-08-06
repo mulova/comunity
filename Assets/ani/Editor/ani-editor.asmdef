@@ -1,13 +1,19 @@
 {
     "name": "ani-editor",
     "references": [
-        "commons",
+        "mulova.commons",
         "comunity",
         "comunity-editor",
         "ani"
     ],
+    "optionalUnityReferences": [],
     "includePlatforms": [
         "Editor"
     ],
-    "excludePlatforms": []
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
 }

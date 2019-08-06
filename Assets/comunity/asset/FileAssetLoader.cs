@@ -1,4 +1,4 @@
-//#define ASSETBUNDLE_MANAGER
+﻿//#define ASSETBUNDLE_MANAGER
 #if !UNITY_WEBGL
 using System;
 using System.IO;
@@ -7,7 +7,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Text;
 using Object = UnityEngine.Object;
-using commons;
+using mulova.commons;
 using System.Text.Ex;
 using System.Collections.Generic.Ex;
 #if ASSETBUNDLE_MANAGER

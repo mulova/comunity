@@ -1,13 +1,19 @@
 {
     "name": "uguiex-editor",
     "references": [
-        "commons",
+        "mulova.commons",
         "comunity",
         "uguiex",
         "comunity-editor"
     ],
+    "optionalUnityReferences": [],
     "includePlatforms": [
         "Editor"
     ],
-    "excludePlatforms": []
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
 }

@@ -1,4 +1,4 @@
-//----------------------------------------------
+﻿//----------------------------------------------
 // Unity3D common libraries and editor tools
 // License: The MIT License ( http://opensource.org/licenses/MIT )
 // Copyright © 2013- mulova@gmail.com
@@ -6,7 +6,7 @@
 
 using System;
 using System.Text.Ex;
-using commons;
+using mulova.commons;
 
 namespace comunity
 {

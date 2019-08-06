@@ -1,4 +1,4 @@
-// Messenger.cs v1.0 by Magnus Wolffelt, magnus.wolffelt@gmail.com
+﻿// Messenger.cs v1.0 by Magnus Wolffelt, magnus.wolffelt@gmail.com
 //
 // Inspired by and based on Rod Hyde's Messenger:
 // http://www.unifycommunity.com/wiki/index.php?title=CSharpMessenger
@@ -16,7 +16,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using commons;
+using mulova.commons;
 using System.Collections.Generic.Ex;
 using System.Ex;
 

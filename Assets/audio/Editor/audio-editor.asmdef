@@ -1,14 +1,20 @@
 {
     "name": "audio-editor",
     "references": [
+        "mulova.commons",
         "comunity-editor",
         "audio",
         "build",
-        "commons",
         "comunity"
     ],
+    "optionalUnityReferences": [],
     "includePlatforms": [
         "Editor"
     ],
-    "excludePlatforms": []
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
 }

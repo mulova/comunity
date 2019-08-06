@@ -1,9 +1,15 @@
 {
     "name": "audio",
     "references": [
-        "commons",
+        "mulova.commons",
         "comunity"
     ],
+    "optionalUnityReferences": [],
     "includePlatforms": [],
-    "excludePlatforms": []
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
 }

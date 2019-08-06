@@ -1,14 +1,14 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
 using System;
 using Object = UnityEngine.Object;
-using commons;
+using mulova.commons;
 
 namespace comunity
 {
 	public class InputListenerStack : SingletonBehaviour<InputListenerStack>
 	{
-		private WeakStack<InputListener> stack = new WeakStack<InputListener> ();
+		private mulova.commons.WeakStack<InputListener> stack = new mulova.commons.WeakStack<InputListener> ();
 		private InputListener defaultListener;
 
 		public void OnButton(KeyCode button, ButtonState state)
@@ -78,7 +78,7 @@ namespace comunity
 		
 		public Object GetActiveTopmost()
 		{
-			foreach (commons.WeakReference<InputListener> e in stack) {
+			foreach (mulova.commons.WeakReference<InputListener> e in stack) {
 				Object o = e.Target as Object;
 				if (e != null) {
 					MonoBehaviour c = o as MonoBehaviour;
@@ -106,8 +106,8 @@ namespace comunity
 		
 		public void ForEach(Predicate<InputListener> predicate)
 		{
-            List<commons.WeakReference<InputListener>> copy = new List<commons.WeakReference<InputListener>> (stack);
-            foreach (commons.WeakReference<InputListener> r in copy) {
+            List<mulova.commons.WeakReference<InputListener>> copy = new List<mulova.commons.WeakReference<InputListener>> (stack);
+            foreach (mulova.commons.WeakReference<InputListener> r in copy) {
 				InputListener l = r.Target;
 				if (l != null) {
 					if (!predicate (l)) {

@@ -1,10 +1,12 @@
 {
     "name": "comunity-editor",
     "references": [
-        "commons",
+        "mulova.commons",
         "comunity",
         "reorderablelist",
-        "reorderablelist-editor"
+        "reorderablelist-editor",
+        "mulova.drawer",
+        "mulova.drawer.Editor"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [

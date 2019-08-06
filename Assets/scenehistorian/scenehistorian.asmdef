@@ -1,7 +1,7 @@
 {
     "name": "scenehistorian",
     "references": [
-        "commons",
+        "mulova.commons",
         "comunity",
         "comunity-editor",
         "reorderablelist",
@@ -12,5 +12,9 @@
         "Editor"
     ],
     "excludePlatforms": [],
-    "allowUnsafeCode": false
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
 }

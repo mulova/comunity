@@ -1,9 +1,10 @@
 {
     "name": "comunity",
     "references": [
-        "commons",
+        "mulova.commons",
         "AssetBundleManager",
-        "reorderablelist"
+        "reorderablelist",
+        "mulova.drawer"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],

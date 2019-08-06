@@ -1,13 +1,19 @@
 {
     "name": "effect-editor",
     "references": [
-        "commons",
+        "mulova.commons",
         "comunity",
         "comunity-editor",
         "effect"
     ],
+    "optionalUnityReferences": [],
     "includePlatforms": [
         "Editor"
     ],
-    "excludePlatforms": []
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
 }
