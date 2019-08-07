@@ -297,21 +297,6 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>/Applications/Visual Studio.app/Contents/Resources/lib/monodevelop/AddIns/MonoDevelop.Unity/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor.Advertisements">
-      <HintPath>/Users/user/workspace/3rdparty/comunity/Library/PackageCache/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>/Users/user/workspace/3rdparty/comunity/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Analytics.Editor">
-      <HintPath>/Users/user/workspace/3rdparty/comunity/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>/Users/user/workspace/3rdparty/comunity/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.Purchasing">
-      <HintPath>/Users/user/workspace/3rdparty/comunity/Library/PackageCache/com.unity.purchasing@2.0.3/Editor/UnityEditor.Purchasing.dll</HintPath>
-    </Reference>
     <Reference Include="netstandard">
       <HintPath>/Applications/Unity/Hub/Editor/2018.4.5f1/Unity.app/Contents/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
     </Reference>
