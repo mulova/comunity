@@ -12,7 +12,7 @@ namespace comunity
     /// Singleton should not be disabled
     /// </summary>
     [System.Diagnostics.DebuggerStepThrough]
-    public abstract class SceneSingleton<T> : Script where T : SceneSingleton<T>
+    public abstract class SceneSingleton<T> : InternalScript where T : SceneSingleton<T>
     {
         protected virtual string activeScene { get; private set; }
 

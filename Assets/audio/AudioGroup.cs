@@ -15,7 +15,7 @@ namespace audio
     /// if the downloader is set, assets are downloaded and loaded automatically.
     /// else loaded by db at Start().
     /// </summary>
-    public class AudioGroup : Script
+    public class AudioGroup : InternalScript
     {
         public AssetGuid assetDir;
         private static Dictionary<string, AudioGroup> pool = new Dictionary<string, AudioGroup>();

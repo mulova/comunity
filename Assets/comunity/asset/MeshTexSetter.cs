@@ -7,7 +7,7 @@ using System.Collections.Generic.Ex;
 namespace comunity
 {
     [RequireComponent(typeof(MeshTexLoader))]
-    public class MeshTexSetter : Script
+    public class MeshTexSetter : InternalScript
     {
         public List<AssetRef> textures = new List<AssetRef>();
         private MeshTexLoader _texLoader;
@@ -60,18 +60,14 @@ namespace comunity
             } else
             {
                 #if UNITY_EDITOR
-                i = MathUtil.Clamp(i, 0, textures.Count);
+                i = i.Clamp(0, textures.Count);
                 if (texLoader.rend != null)
                 {
                     AssetRef r = textures[i];
                     r.LoadAsset<Texture>(t =>
                     {
                         texLoader.tex = t;
-                        #if UNITY_5_3_OR_NEWER
                         UnityEditor.SceneManagement.EditorSceneManager.MarkAllScenesDirty();
-                        #else
-                UnityEditor.EditorUtility.SetDirty(texLoader.gameObject);
-                        #endif
                     });
                 }
                 #else

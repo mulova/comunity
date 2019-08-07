@@ -8,7 +8,7 @@ namespace audio
     /// if the downloader is set, assets are downloaded and loaded automatically.
     /// else loaded by db at Start().
     /// </summary>
-    public class AudioPlayer : Script, IComparable<AudioPlayer>
+    public class AudioPlayer : InternalScript, IComparable<AudioPlayer>
     {
         public AudioSource source;
         [Range(0, 1)] public float volume = 1;

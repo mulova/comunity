@@ -4,7 +4,7 @@ using UnityEngine;
 namespace comunity
 {
     [ExecuteInEditMode]
-    public class SyncTrans : Script
+    public class SyncTrans : InternalScript
     {
         public Transform syncTarget;
         public bool useDelta = true;

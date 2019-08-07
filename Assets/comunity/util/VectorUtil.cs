@@ -137,18 +137,6 @@ namespace comunity {
 			return Vector3.zero;
 		}
 		
-		public static bool Equals(Vector3 v1, Vector3 v2, float tolerance) {
-			return Equals(v1.x, v2.x, tolerance) && Equals(v1.y, v2.y, tolerance) && Equals(v1.z, v2.z, tolerance);
-		}
-		
-		public static bool Equals(Vector2 v1, Vector2 v2, float tolerance) {
-			return Equals(v1.x, v2.x, tolerance) && Equals(v1.y, v2.y, tolerance);
-		}
-		
-		public static bool Equals(float f1, float f2, float tolerance) {
-			return Mathf.Abs(f1 - f2) <= tolerance;
-		}
-
 		public static Vector3 Divide(Vector3 dividend, Vector3 divisor) {
 			Vector3 result = new Vector3();
 			result.x = Divide(dividend.x, divisor.x);

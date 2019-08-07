@@ -718,10 +718,6 @@
       <Project>{7C10F73D-0E99-7C37-D6C3-12E75BEC6814}</Project>
       <Name>audio-editor</Name>
     </ProjectReference>
-    <ProjectReference Include="mulova.drawer.Editor.csproj">
-      <Project>{8525AE01-263B-ECB3-6EB5-E8F1EBD43E0B}</Project>
-      <Name>mulova.drawer.Editor</Name>
-    </ProjectReference>
     <ProjectReference Include="build.csproj">
       <Project>{BE8E0CBF-53B9-7F9D-DFA9-EF65BE486403}</Project>
       <Name>build</Name>
@@ -761,10 +757,6 @@
     <ProjectReference Include="ani.csproj">
       <Project>{4D4B7033-4B33-4137-980A-25DE9E26C05B}</Project>
       <Name>ani</Name>
-    </ProjectReference>
-    <ProjectReference Include="mulova.drawer.csproj">
-      <Project>{3E2CCD7B-D1BC-0CDC-FE49-BB15E5BF3DF0}</Project>
-      <Name>mulova.drawer</Name>
     </ProjectReference>
     <ProjectReference Include="comunity-editor.csproj">
       <Project>{479F44D8-44C6-E2D7-A9E5-BF8D470EB7B3}</Project>

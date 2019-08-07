@@ -3,8 +3,7 @@
     "references": [
         "mulova.commons",
         "AssetBundleManager",
-        "reorderablelist",
-        "mulova.drawer"
+        "reorderablelist"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],

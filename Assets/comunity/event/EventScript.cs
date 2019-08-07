@@ -9,7 +9,7 @@ using System;
 
 namespace comunity
 {
-    public abstract class EventScript: Script
+    public abstract class EventScript: InternalScript
     {
         protected abstract void InitEvents(EventRegistry reg);
         

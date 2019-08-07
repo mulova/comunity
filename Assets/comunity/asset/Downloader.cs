@@ -30,7 +30,7 @@ namespace comunity
 /// - line: file_name(\t version)
 /// - comment: starts with '#'
 /// </summary>
-    public class Downloader : Script
+    public class Downloader : InternalScript
     {
         public const string VER_SEPARATOR = "#";
         public int timeoutSec = 10;

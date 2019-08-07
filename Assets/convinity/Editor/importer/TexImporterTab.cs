@@ -77,7 +77,7 @@ namespace convinity {
 						}
 						DrawSpriteMenu(s);
 						setting.alphaIsTransparency = EditorGUILayout.Toggle("AlphaIsTransparency", setting.alphaIsTransparency);
-						setting.aniso = MathUtil.Clamp(EditorGUILayout.IntField("Aniso Level", setting.aniso), 1, 9);
+						setting.aniso = EditorGUILayout.IntField("Aniso Level", setting.aniso).Clamp(1, 9);
 						setting.convertToNormalMap = EditorGUILayout.Toggle("Convert To NormalMap", setting.convertToNormalMap);
 						setting.generateCubemap = (TextureImporterGenerateCubemap)EditorGUILayout.EnumPopup("Generate CubeMap", setting.generateCubemap);
 						setting.heightmapScale = EditorGUILayout.FloatField("HightMap Scale", setting.heightmapScale);

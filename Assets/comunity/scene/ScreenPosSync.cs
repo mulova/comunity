@@ -4,7 +4,7 @@ using System.Collections;
 namespace comunity
 {
     [ExecuteInEditMode]
-    public class ScreenPosSync : Script
+    public class ScreenPosSync : InternalScript
     {
         public Transform srcObj;
         public Vector3 offset;

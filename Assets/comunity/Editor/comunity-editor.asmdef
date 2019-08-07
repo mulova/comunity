@@ -4,9 +4,7 @@
         "mulova.commons",
         "comunity",
         "reorderablelist",
-        "reorderablelist-editor",
-        "mulova.drawer",
-        "mulova.drawer.Editor"
+        "reorderablelist-editor"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [

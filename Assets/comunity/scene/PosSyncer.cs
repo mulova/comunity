@@ -4,8 +4,8 @@ using UnityEngine.Ex;
 
 namespace comunity
 {
-	public class PosSyncer : Script
-	{
+	public class PosSyncer : InternalScript
+    {
         public Camera srcCam;
         public Transform[] objs;
 

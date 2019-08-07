@@ -80,11 +80,26 @@
     <Compile Include="Assets\comunity\Editor\asset\TextureImporterFormatEx.cs" />
     <Compile Include="Assets\comunity\Editor\asset\TextureTrimmer.cs" />
     <Compile Include="Assets\comunity\Editor\asset\UnityObjId.cs" />
+    <Compile Include="Assets\comunity\Editor\asset\UnityObjIdDrawer.cs" />
     <Compile Include="Assets\comunity\Editor\asset\UnityObjList.cs" />
+    <Compile Include="Assets\comunity\Editor\asset\UnityObjListDrawer.cs" />
     <Compile Include="Assets\comunity\Editor\CommandLineReader.cs" />
     <Compile Include="Assets\comunity\Editor\config\PlatformEditorEx.cs" />
     <Compile Include="Assets\comunity\Editor\CreateNewLine.cs" />
     <Compile Include="Assets\comunity\Editor\DiMenu.cs" />
+    <Compile Include="Assets\comunity\Editor\drawer\CustomEditorBase.cs" />
+    <Compile Include="Assets\comunity\Editor\drawer\LinePropertyDrawer.cs" />
+    <Compile Include="Assets\comunity\Editor\drawer\ObjReorderProperty.cs" />
+    <Compile Include="Assets\comunity\Editor\drawer\PropertyDrawerBase.cs" />
+    <Compile Include="Assets\comunity\Editor\drawer\pure\ArrayDrawer.cs" />
+    <Compile Include="Assets\comunity\Editor\drawer\pure\IItemDrawer.cs" />
+    <Compile Include="Assets\comunity\Editor\drawer\pure\ItemDrawer.cs" />
+    <Compile Include="Assets\comunity\Editor\drawer\pure\ListDrawer.cs" />
+    <Compile Include="Assets\comunity\Editor\drawer\pure\ObjListItemDrawer.cs" />
+    <Compile Include="Assets\comunity\Editor\drawer\ReorderlessList.cs" />
+    <Compile Include="Assets\comunity\Editor\drawer\ReorderProperty.cs" />
+    <Compile Include="Assets\comunity\Editor\drawer\StrEnumItemDrawer.cs" />
+    <Compile Include="Assets\comunity\Editor\drawer\StrReorderProperty.cs" />
     <Compile Include="Assets\comunity\Editor\EditorGUIUtil.cs" />
     <Compile Include="Assets\comunity\Editor\EditorTab.cs" />
     <Compile Include="Assets\comunity\Editor\EditorTraversal.cs" />
@@ -99,7 +114,6 @@
     <Compile Include="Assets\comunity\Editor\inspector\MeshFilterInspector.cs" />
     <Compile Include="Assets\comunity\Editor\inspector\MethodCallInspector.cs" />
     <Compile Include="Assets\comunity\Editor\inspector\MethodInspector.cs" />
-    <Compile Include="Assets\comunity\Editor\inspector\PropertyDrawerBase.cs" />
     <Compile Include="Assets\comunity\Editor\inspector\PropertyUI.cs" />
     <Compile Include="Assets\comunity\Editor\inspector\ScriptableObjectGen.cs" />
     <Compile Include="Assets\comunity\Editor\LibManager.cs" />
@@ -128,6 +142,7 @@
     <Compile Include="Assets\comunity\Editor\type\EnumRefArray.cs" />
     <Compile Include="Assets\comunity\Editor\type\EnumWrapperRefArray.cs" />
     <Compile Include="Assets\comunity\Editor\type\NamedObj.cs" />
+    <Compile Include="Assets\comunity\Editor\type\NamedObjDrawer.cs" />
     <Compile Include="Assets\comunity\Editor\type\ObjArrInspector.cs" />
     <Compile Include="Assets\comunity\Editor\type\ObjectRefArray.cs" />
     <Compile Include="Assets\comunity\Editor\type\PartialEnumObjArrInspector.cs" />
@@ -773,14 +788,6 @@
     <ProjectReference Include="reorderablelist-editor.csproj">
       <Project>{A4813468-B41F-B15A-DC0E-F04B944ED302}</Project>
       <Name>reorderablelist-editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="mulova.drawer.csproj">
-      <Project>{3E2CCD7B-D1BC-0CDC-FE49-BB15E5BF3DF0}</Project>
-      <Name>mulova.drawer</Name>
-    </ProjectReference>
-    <ProjectReference Include="mulova.drawer.Editor.csproj">
-      <Project>{8525AE01-263B-ECB3-6EB5-E8F1EBD43E0B}</Project>
-      <Name>mulova.drawer.Editor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

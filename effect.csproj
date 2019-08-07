@@ -62,7 +62,6 @@
   <ItemGroup>
     <Compile Include="Assets\effect\particle\Effect.cs" />
     <Compile Include="Assets\effect\particle\EffectPool.cs" />
-    <Compile Include="Assets\effect\particle\InternalScript.cs" />
     <Compile Include="Assets\effect\particle\ParticleControl.cs" />
     <Compile Include="Assets\effect\particle\ParticleLoader.cs" />
     <Compile Include="Assets\effect\particle\ParticleManager.cs" />

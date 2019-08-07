@@ -108,12 +108,15 @@
     <Compile Include="\Users\user\workspace\3rdparty\commons\Assets\Runtime\commons\lang\DelegateSupport.cs" />
     <Compile Include="\Users\user\workspace\3rdparty\commons\Assets\Runtime\commons\lang\DirectoryInfoEx.cs" />
     <Compile Include="\Users\user\workspace\3rdparty\commons\Assets\Runtime\commons\lang\Dispatcher.cs" />
+    <Compile Include="\Users\user\workspace\3rdparty\commons\Assets\Runtime\commons\lang\DoubleEx.cs" />
     <Compile Include="\Users\user\workspace\3rdparty\commons\Assets\Runtime\commons\lang\EnumEx.cs" />
     <Compile Include="\Users\user\workspace\3rdparty\commons\Assets\Runtime\commons\lang\EventDispatcher.cs" />
+    <Compile Include="\Users\user\workspace\3rdparty\commons\Assets\Runtime\commons\lang\FloatEx.cs" />
     <Compile Include="\Users\user\workspace\3rdparty\commons\Assets\Runtime\commons\lang\GCNotification.cs" />
     <Compile Include="\Users\user\workspace\3rdparty\commons\Assets\Runtime\commons\lang\I18N.cs" />
     <Compile Include="\Users\user\workspace\3rdparty\commons\Assets\Runtime\commons\lang\IDictionaryEx.cs" />
     <Compile Include="\Users\user\workspace\3rdparty\commons\Assets\Runtime\commons\lang\IEnumerableEx.cs" />
+    <Compile Include="\Users\user\workspace\3rdparty\commons\Assets\Runtime\commons\lang\IntEx.cs" />
     <Compile Include="\Users\user\workspace\3rdparty\commons\Assets\Runtime\commons\lang\ListEx.cs" />
     <Compile Include="\Users\user\workspace\3rdparty\commons\Assets\Runtime\commons\lang\ObjectEx.cs" />
     <Compile Include="\Users\user\workspace\3rdparty\commons\Assets\Runtime\commons\lang\PredicateEx.cs" />
@@ -165,14 +168,6 @@
     <Compile Include="\Users\user\workspace\3rdparty\commons\Assets\Runtime\commons\util\Singleton.cs" />
     <Compile Include="\Users\user\workspace\3rdparty\commons\Assets\Runtime\commons\util\StringUtil.cs" />
     <Compile Include="\Users\user\workspace\3rdparty\commons\Assets\Runtime\commons\util\TextReplacer.cs" />
-    <Compile Include="\Users\user\workspace\3rdparty\commons\Assets\Runtime\ext\ComponentEx.cs" />
-    <Compile Include="\Users\user\workspace\3rdparty\commons\Assets\Runtime\ext\GameObjectEx.cs" />
-    <Compile Include="\Users\user\workspace\3rdparty\commons\Assets\Runtime\ext\ObjectEx.cs" />
-    <Compile Include="\Users\user\workspace\3rdparty\commons\Assets\Runtime\ext\Physics2DEx.cs" />
-    <Compile Include="\Users\user\workspace\3rdparty\commons\Assets\Runtime\ext\QuaternionEx.cs" />
-    <Compile Include="\Users\user\workspace\3rdparty\commons\Assets\Runtime\ext\TransformData.cs" />
-    <Compile Include="\Users\user\workspace\3rdparty\commons\Assets\Runtime\ext\TransformEx.cs" />
-    <Compile Include="\Users\user\workspace\3rdparty\commons\Assets\Runtime\ext\Vector3Ex.cs" />
     <None Include="\Users\user\workspace\3rdparty\commons\Assets\Runtime\mulova.commons.asmdef" />
     <Reference Include="UnityEngine.AIModule">
       <HintPath>/Applications/Unity/Hub/Editor/2018.4.5f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

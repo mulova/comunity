@@ -131,6 +131,14 @@
     <Compile Include="Assets\comunity\event\Messenger.cs" />
     <Compile Include="Assets\comunity\event\SceneEvent.cs" />
     <Compile Include="Assets\comunity\event\UIEventGen.cs" />
+    <Compile Include="Assets\comunity\ext\ComponentEx.cs" />
+    <Compile Include="Assets\comunity\ext\GameObjectEx.cs" />
+    <Compile Include="Assets\comunity\ext\ObjectEx.cs" />
+    <Compile Include="Assets\comunity\ext\Physics2DEx.cs" />
+    <Compile Include="Assets\comunity\ext\QuaternionEx.cs" />
+    <Compile Include="Assets\comunity\ext\TransformData.cs" />
+    <Compile Include="Assets\comunity\ext\TransformEx.cs" />
+    <Compile Include="Assets\comunity\ext\VectorEx.cs" />
     <Compile Include="Assets\comunity\i18n\LangSwitch.cs" />
     <Compile Include="Assets\comunity\i18n\SystemLanguageEx.cs" />
     <Compile Include="Assets\comunity\i18n\Translator.cs" />
@@ -196,7 +204,9 @@
     <Compile Include="Assets\comunity\thread\Threading.cs" />
     <Compile Include="Assets\comunity\type\AudioClipLoadType.cs" />
     <Compile Include="Assets\comunity\type\EGameObject.cs" />
+    <Compile Include="Assets\comunity\type\LineDrawerAttribute.cs" />
     <Compile Include="Assets\comunity\type\RuntimePlatformEx.cs" />
+    <Compile Include="Assets\comunity\type\StrEnumDrawerAttribute.cs" />
     <Compile Include="Assets\comunity\util\ActionTimer.cs" />
     <Compile Include="Assets\comunity\util\ApplyMaterial.cs" />
     <Compile Include="Assets\comunity\util\ComponentUtil.cs" />
@@ -205,6 +215,7 @@
     <Compile Include="Assets\comunity\util\Dummy.cs" />
     <Compile Include="Assets\comunity\util\GUIUtil.cs" />
     <Compile Include="Assets\comunity\util\IgnoreScaleTimer.cs" />
+    <Compile Include="Assets\comunity\util\InternalScript.cs" />
     <Compile Include="Assets\comunity\util\Invoker.cs" />
     <Compile Include="Assets\comunity\util\Lexicon.cs" />
     <Compile Include="Assets\comunity\util\LexiconRegistry.cs" />
@@ -829,10 +840,6 @@
     <ProjectReference Include="reorderablelist.csproj">
       <Project>{FB580AB6-E146-7B5B-9542-DFBF6F8989DA}</Project>
       <Name>reorderablelist</Name>
-    </ProjectReference>
-    <ProjectReference Include="mulova.drawer.csproj">
-      <Project>{3E2CCD7B-D1BC-0CDC-FE49-BB15E5BF3DF0}</Project>
-      <Name>mulova.drawer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

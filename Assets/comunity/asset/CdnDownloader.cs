@@ -6,7 +6,7 @@ using mulova.commons;
 
 namespace comunity
 {
-    public class CdnDownloader : Script
+    public class CdnDownloader : InternalScript
     {
         public const string PREF_CDN_RES_VER = "cdn_res_ver";
         public const string PREF_CLIENT_RES_VER = "client_res_ver";

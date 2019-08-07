@@ -7,7 +7,7 @@ using System.Ex;
 namespace comunity
 {
     [RequireComponent(typeof(Renderer))]
-    public class MeshTexLoader : Script, IReleasable
+    public class MeshTexLoader : InternalScript, IReleasable
     {
         public Renderer rend;
         public bool shared;

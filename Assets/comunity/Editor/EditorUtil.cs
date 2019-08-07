@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using Object = UnityEngine.Object;
 using UnityEditor.SceneManagement;
 using System.Text.Ex;
+using UnityEngine.SceneManagement;
 
 namespace comunity
 {
@@ -141,8 +142,8 @@ namespace comunity
 		public static List<GameObject> GetSceneRoots()
 		{
 			var list = new List<GameObject>();
-			for (int i = 0; i < EditorSceneManager.sceneCount; ++i) {
-				list.AddRange(EditorSceneManager.GetSceneAt(i).GetRootGameObjects());
+			for (int i = 0; i < SceneManager.sceneCount; ++i) {
+				list.AddRange(SceneManager.GetSceneAt(i).GetRootGameObjects());
 			}
 			return list;
 		}
