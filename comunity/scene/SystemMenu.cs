@@ -98,6 +98,8 @@ namespace comunity
             string filename = string.Format("LineUp_{0}.png" , DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss"));
             ScreenCapture.CaptureScreenshot(filename);
             StartCoroutine(ShowScreenshotMessage());
+#else
+            Debug.LogError("ScreenCapture is disabled");
 #endif
         }
         IEnumerator ShowScreenshotMessage() {
