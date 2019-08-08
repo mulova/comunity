@@ -1,11 +1,11 @@
 
 {
-	"name": "com.mulova.commons",
-	"displayName": "mulova commons",
+	"name": "com.mulova.comunity",
+	"displayName": "com.mulova.comunity",
 	"version": "0.0.1",
 	"unity": "2018.1",
-	"description": "mulova commons",
-	"keywords": ["mulova", "commons"],
+	"description": "common unity library",
+	"keywords": ["mulova", "comunity"],
 	"category": "mulova",
 	"dependencies": {
 	}
