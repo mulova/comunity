@@ -25,8 +25,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "build", "build.csproj", "{B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssetBundleManagerEditor", "AssetBundleManagerEditor.csproj", "{EE58A0C2-BA6C-B22C-81A9-E791EEFA4072}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "scenehistorian", "scenehistorian.csproj", "{0132F0A6-96AF-090F-BED2-235D5A1B6991}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shortcut", "Shortcut.csproj", "{16E36A82-E710-1092-576D-338CC7E8217C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "uguiex-editor", "uguiex-editor.csproj", "{2879C03D-C890-1AB9-ECC8-1A382796D80C}"
@@ -85,10 +83,6 @@ Global
 		{EE58A0C2-BA6C-B22C-81A9-E791EEFA4072}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE58A0C2-BA6C-B22C-81A9-E791EEFA4072}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE58A0C2-BA6C-B22C-81A9-E791EEFA4072}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0132F0A6-96AF-090F-BED2-235D5A1B6991}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0132F0A6-96AF-090F-BED2-235D5A1B6991}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0132F0A6-96AF-090F-BED2-235D5A1B6991}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0132F0A6-96AF-090F-BED2-235D5A1B6991}.Release|Any CPU.Build.0 = Release|Any CPU
 		{16E36A82-E710-1092-576D-338CC7E8217C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{16E36A82-E710-1092-576D-338CC7E8217C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16E36A82-E710-1092-576D-338CC7E8217C}.Release|Any CPU.ActiveCfg = Release|Any CPU

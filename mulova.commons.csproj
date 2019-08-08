@@ -190,17 +190,11 @@
     <Reference Include="UnityEngine.BaselibModule">
       <HintPath>/Applications/Unity/Hub/Editor/2018.4.5f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.BaselibModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.ClothModule">
-      <HintPath>/Applications/Unity/Hub/Editor/2018.4.5f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.ClothModule.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>/Applications/Unity/Hub/Editor/2018.4.5f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.CoreModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CrashReportingModule">
       <HintPath>/Applications/Unity/Hub/Editor/2018.4.5f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.CrashReportingModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.DirectorModule">
-      <HintPath>/Applications/Unity/Hub/Editor/2018.4.5f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.DirectorModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.FileSystemHttpModule">
       <HintPath>/Applications/Unity/Hub/Editor/2018.4.5f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.FileSystemHttpModule.dll</HintPath>
@@ -228,9 +222,6 @@
     </Reference>
     <Reference Include="UnityEngine.LocalizationModule">
       <HintPath>/Applications/Unity/Hub/Editor/2018.4.5f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.LocalizationModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.ParticleSystemModule">
-      <HintPath>/Applications/Unity/Hub/Editor/2018.4.5f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.ParticleSystemModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.PerformanceReportingModule">
       <HintPath>/Applications/Unity/Hub/Editor/2018.4.5f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.PerformanceReportingModule.dll</HintPath>
@@ -292,14 +283,8 @@
     <Reference Include="UnityEngine.UIModule">
       <HintPath>/Applications/Unity/Hub/Editor/2018.4.5f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.UIModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.UIElementsModule">
-      <HintPath>/Applications/Unity/Hub/Editor/2018.4.5f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.UIElementsModule.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.UNETModule">
       <HintPath>/Applications/Unity/Hub/Editor/2018.4.5f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.UNETModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UmbraModule">
-      <HintPath>/Applications/Unity/Hub/Editor/2018.4.5f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.UmbraModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UnityAnalyticsModule">
       <HintPath>/Applications/Unity/Hub/Editor/2018.4.5f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.UnityAnalyticsModule.dll</HintPath>
@@ -327,21 +312,6 @@
     </Reference>
     <Reference Include="UnityEngine.VFXModule">
       <HintPath>/Applications/Unity/Hub/Editor/2018.4.5f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.VFXModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.VRModule">
-      <HintPath>/Applications/Unity/Hub/Editor/2018.4.5f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.VRModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.VehiclesModule">
-      <HintPath>/Applications/Unity/Hub/Editor/2018.4.5f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.VehiclesModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.VideoModule">
-      <HintPath>/Applications/Unity/Hub/Editor/2018.4.5f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.VideoModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.WindModule">
-      <HintPath>/Applications/Unity/Hub/Editor/2018.4.5f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.WindModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.XRModule">
-      <HintPath>/Applications/Unity/Hub/Editor/2018.4.5f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Locator">
       <HintPath>/Applications/Unity/Hub/Editor/2018.4.5f1/Unity.app/Contents/Managed/Unity.Locator.dll</HintPath>
