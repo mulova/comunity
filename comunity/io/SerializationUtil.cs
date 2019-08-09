@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using mulova.commons;
 
@@ -96,5 +95,5 @@ namespace comunity {
 			return false;
 			#endif
 		}
-	}
+    }
 }

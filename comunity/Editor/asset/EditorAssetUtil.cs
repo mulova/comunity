@@ -855,11 +855,14 @@ namespace comunity
         public static bool IsModified(string path, string hash)
         {
             string absPath = PathUtil.Combine(PathUtil.GetParent(Application.dataPath), path);
-            if (!System.IO.File.Exists(absPath))
+            if (!File.Exists(absPath))
             {
                 return false;
             }
-            return HashFunction.Compute(new System.IO.FileStream(absPath, System.IO.FileMode.Open)) != hash;
+            using (var s = new FileStream(absPath, System.IO.FileMode.Open))
+            {
+                return s.ComputeHash() != hash;
+            }
         }
 
         public static void ExportToPNG(Texture2D tex, string path, TextureImporterFormat format)
@@ -878,7 +881,7 @@ namespace comunity
 
         public static void SetTextureFormat(string path, TextureImporterFormat format)
         {
-            TextureImporter importer = TextureImporter.GetAtPath(path) as TextureImporter;
+            TextureImporter importer = AssetImporter.GetAtPath(path) as TextureImporter;
             importer.SetFormat(format);
             AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceUpdate);
         }
@@ -887,7 +890,7 @@ namespace comunity
         public static Texture2D[] SplitTexAlpha(Texture2D src)
         {
             string srcPath = AssetDatabase.GetAssetPath(src);
-            TextureImporter importer = TextureImporter.GetAtPath(srcPath) as TextureImporter;
+            TextureImporter importer = AssetImporter.GetAtPath(srcPath) as TextureImporter;
             if (!importer.isReadable)
             {
                 importer.isReadable = true;

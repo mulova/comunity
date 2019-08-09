@@ -1,6 +1,9 @@
 ﻿#if !UNITY_WEBGL
 using System.Text.Ex;
 using mulova.commons;
+using System.Security.Cryptography;
+using System.Text;
+using System;
 
 namespace comunity {
 	internal class RemotePathConverter
@@ -61,8 +64,8 @@ namespace comunity {
 	{
 		public string Convert(string remote)
 		{
-			string filename = HashFunction.Compute(remote);
-			return PathUtil.Combine(Platform.downloadPath, filename.Substring(0, 2), filename);
+            string filename = remote.ComputeHash();
+            return PathUtil.Combine(Platform.downloadPath, filename.Substring(0, 2), filename);
 		}
 	}
 }
