@@ -16,16 +16,16 @@ namespace comunity
         public ConvToString toStr = o=> o?.ToString();
         public ConvToObject toObj = o=> o as Object;
 
-        public virtual void DrawItemBackground(Rect position, int index, T obj)
+        public virtual void DrawItemBackground(Rect bound, int index, T obj)
         {
         }
 
-        public virtual bool DrawItem(Rect position, int index, T obj, out T newObj)
+        public virtual bool DrawItem(Rect bound, int index, T obj, out T newObj)
         {
             try
             {
                 Object o = toObj(obj);
-                newObj = EditorGUI.ObjectField(position, o, typeof(T), true) as T;
+                newObj = EditorGUI.ObjectField(bound, o, typeof(T), true) as T;
                 return obj != newObj;
             } catch (Exception ex)
             {

@@ -5,10 +5,11 @@ using Object = UnityEngine.Object;
 using UnityEngine;
 using mulova.commons;
 using Rotorz.Games.Collections;
+using System.Collections.Generic.Ex;
 
 namespace comunity
 {
-    public class ListDrawer<T> : IReorderableListAdaptor where T:class
+    public class ListDrawer<T> : IReorderableListAdaptor where T : class
     {
         protected List<T> list;
 
@@ -25,13 +26,18 @@ namespace comunity
         public bool allowSelection = true;
         public bool horizontal;
         public Object undoTarget;
-        public Func<T> createDefaultValue = ()=> default(T);
+        public Func<T> createDefaultValue = () => default(T);
         public Func<Object, T> createItem;
         protected IItemDrawer<T> itemDrawer;
         public ReorderableListFlags flags;
 
-        private int[] indexer; // used for filtering
-        public int Count { get; private set; }
+        public int Count
+        {
+            get
+            {
+                return list.GetCount();
+            }
+        }
 
         public T this[int i]
         {
@@ -46,7 +52,6 @@ namespace comunity
         public ListDrawer(IList<T> list, IItemDrawer<T> itemDrawer)
         {
             this.list = new List<T>(list);
-            this.Count = list.Count;
             this.itemDrawer = itemDrawer; // just for reference count
             this.createItem = CreateItem;
         }
@@ -74,7 +79,8 @@ namespace comunity
                         onInsert?.Invoke(list.Count - 1, o);
                     }
                 }
-            } else
+            }
+            else
             {
                 Insert(Count);
             }
@@ -88,57 +94,53 @@ namespace comunity
 
         public void Insert(int index)
         {
-            int i0 = GetActualIndex(index);
             var objs = GetSelected();
             if (objs != null && addSelected)
             {
-                for (int i=0; i<objs.Count; ++i)
+                for (int i = 0; i < objs.Count; ++i)
                 {
                     if (allowDuplicate || !list.Contains(objs[i]))
                     {
-                        list.Insert(i0+i, objs[i]);
+                        list.Insert(index + i, objs[i]);
                         if (onInsert != null)
                         {
-                            onInsert(i0+i, objs[i]);
+                            onInsert(index + i, objs[i]);
                         }
                     }
                 }
-            } else
+            }
+            else
             {
                 var defaultVale = createDefaultValue();
-                list.Insert(i0, defaultVale);
-                onInsert(i0, defaultVale);
+                list.Insert(index, defaultVale);
+                onInsert(index, defaultVale);
             }
             changed = true;
         }
 
         public void Duplicate(int index)
         {
-            int i = GetActualIndex(index);
-            T obj = list[GetActualIndex(index)];
-            list.Insert(i, obj);
-            onDuplicate?.Invoke(i, obj);
+            T obj = list[index];
+            list.Insert(index, obj);
+            onDuplicate?.Invoke(index, obj);
             changed = true;
         }
 
         public void Remove(int index)
         {
-            int i = GetActualIndex(index);
-            T obj = list[i];
-            list.RemoveAt(i);
-            onRemove?.Invoke(i, obj);
+            T obj = list[index];
+            list.RemoveAt(index);
+            onRemove?.Invoke(index, obj);
             changed = true;
             Refresh();
         }
 
-        public void Move(int sourceIndex, int destIndex)
+        public void Move(int srcIndex, int dstIndex)
         {
-            int si = GetActualIndex(sourceIndex);
-            int di = GetActualIndex(destIndex);
-            list.Insert(di, list[si]);
-            int si2 = si > di? si+1: si;
+            list.Insert(dstIndex, list[srcIndex]);
+            int si2 = srcIndex > dstIndex ? srcIndex + 1 : srcIndex;
             list.RemoveAt(si2);
-            onMove?.Invoke(si, di, list[si]);
+            onMove?.Invoke(srcIndex, dstIndex, list[srcIndex]);
             changed = true;
             Refresh();
         }
@@ -159,19 +161,22 @@ namespace comunity
 
         public void DrawItemBackground(UnityEngine.Rect position, int index)
         {
-//            int i = GetActualIndex(index);
+            //            int i = GetActualIndex(index);
         }
 
-        public void DrawItem(UnityEngine.Rect position, int index)
+        public void DrawItem(Rect bound, int index)
         {
-            int i = GetActualIndex(index);
-            T obj = list[i];
+            if (bound.height <= 0)
+            {
+                return;
+            }
+            T obj = list[index];
             T changedObj = default(T);
 
-            if (itemDrawer.DrawItem(position, index, obj, out changedObj))
+            if (itemDrawer.DrawItem(bound, index, obj, out changedObj))
             {
                 changed = true;
-                list[i] = changedObj;
+                list[index] = changedObj;
                 if (onChange != null)
                 {
                     onChange(index, changedObj);
@@ -181,43 +186,17 @@ namespace comunity
 
         public float GetItemHeight(int index)
         {
-//            int i = GetActualIndex(index);
-            return itemHeight;
-        }
-
-        private int GetActualIndex(int index)
-        {
-            if (indexer != null && index < indexer.Length)
+            if (match != null && !match(list[index]))
             {
-                return indexer[index];
-            } else
-            {
-                return index;
+                return -4;
             }
+            return itemDrawer.GetItemHeight(index, list[index]);
         }
 
         private Predicate<T> match;
         public void Filter(Predicate<T> match)
         {
             this.match = match;
-            if (match != null)
-            {
-                indexer = new int[list.Count];
-                int n = 0;
-                for (int i=0; i<list.Count; ++i)
-                {
-                    if (match(list[i]))
-                    {
-                        indexer[n] = i;
-                        n++;
-                    }
-                }
-                Count = n;
-            } else
-            {
-                indexer = null;
-                Count = list.Count;
-            }
         }
 
         public bool Draw()
@@ -254,14 +233,17 @@ namespace comunity
                 if (c != null)
                 {
                     return c as T;
-                } else if (typeof(T).IsAssignableFrom(o.GetType()))
+                }
+                else if (typeof(T).IsAssignableFrom(o.GetType()))
                 {
                     return o as T;
-                } else
+                }
+                else
                 {
                     return default(T);
                 }
-            } else
+            }
+            else
             {
                 return o as T;
             }
@@ -269,7 +251,7 @@ namespace comunity
 
         protected virtual IList<T> GetSelected()
         {
-            List<T> list = new List<T>();
+            List<T> l = new List<T>();
             Object[] selObjs = Selection.objects;
             if (allowSelection || (selObjs != null && selObjs.Length > 1))
             {
@@ -277,32 +259,32 @@ namespace comunity
                 {
                     foreach (Object o in Selection.objects)
                     {
-                        list.Add(createItem(o));
+                        l.Add(createItem(o));
                     }
-                } else
+                }
+                else
                 {
                     foreach (var guid in Selection.assetGUIDs)
                     {
                         var sel = AssetDatabase.LoadAssetAtPath<Object>(AssetDatabase.GUIDToAssetPath(guid));
                         if (sel != null)
                         {
-                            list.Add(createItem(sel));
+                            l.Add(createItem(sel));
                         }
                     }
                 }
             }
 
-            if (list.IsEmpty())
+            if (l.IsEmpty())
             {
-                list.Add(default(T));
+                l.Add(default(T));
             }
-            return list;
+            return l;
         }
 
         public virtual void Add(T item)
         {
             list.Add(item);
-            Count = list.Count;
             changed = true;
         }
     }
