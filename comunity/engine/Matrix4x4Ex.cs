@@ -4,10 +4,7 @@
 // Copyright © 2013- mulova@gmail.com
 //----------------------------------------------
 
-using System;
-using UnityEngine;
-
-namespace comunity {
+namespace UnityEngine.Ex {
 	public static class Matrix4x4Ex {
 		public static Quaternion GetRotation(this Matrix4x4 m) {
 			// Adapted from: http://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToQuaternion/index.htm
