@@ -78,7 +78,7 @@ namespace comunity
             EditorGUILayout.LabelField(label, GUILayout.Width(50));
             EditorGUIUtil.TextField(null, ref filter, EditorStyles.toolbarTextField);
             IList<T> filtered = null;
-            if (filter.IsNotEmpty()) {
+            if (!filter.IsEmpty()) {
                 filtered = new List<T>(items.Count);
                 foreach (T i in items) {
                     if (i.ToString().Contains(filter)) {
@@ -415,8 +415,8 @@ namespace comunity
         
         public static bool GUIDField<T>(string label, ref string guid, params GUILayoutOption[] options) where T:Object {
             T o = null;
-            string assetPath = guid.IsNotEmpty()? AssetDatabase.GUIDToAssetPath(guid): null;
-            if (assetPath.IsNotEmpty()) {
+            string assetPath = !guid.IsEmpty()? AssetDatabase.GUIDToAssetPath(guid): null;
+            if (!assetPath.IsEmpty()) {
                 o = AssetDatabase.LoadAssetAtPath<T>(assetPath);
             }
             T newObj = EditorGUILayout.ObjectField(label, o, typeof(T), false, options) as T;

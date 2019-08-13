@@ -117,7 +117,7 @@ namespace comunity
                 return;
             }
             assetCache[url] = asset;
-            if (alias.IsNotEmpty())
+            if (!alias.IsEmpty())
             {
                 // If the asset for the alias exists, destroy it and set new one
                 IdObject old = exclusiveCache.Get(alias);
@@ -144,7 +144,7 @@ namespace comunity
         public void GetAsset<T>(string alias, string url, Action<T> callback, bool asyncHint = false) where T: Object
         {
             VerifyUrl(url);
-            if (url.IsNotEmpty())
+            if (!url.IsEmpty())
             {
                 T o = assetCache.Get(url) as T;
                 if (o != null)
@@ -180,7 +180,7 @@ namespace comunity
         public void GetBytes(string url, Action<byte[]> callback)
         {
             VerifyUrl(url);
-            if (url.IsNotEmpty())
+            if (!url.IsEmpty())
             {
                 log.Debug("Loading {0}", url);
                 loader.GetBytes(pathConverter(url), callback);
@@ -194,7 +194,7 @@ namespace comunity
         public void GetAudio(string url, AudioClipLoadType loadType, Action<AudioClip> callback, string alias = null)
         {
             VerifyUrl(url);
-            if (url.IsNotEmpty())
+            if (!url.IsEmpty())
             {
                 AudioClip c = assetCache.Get(url) as AudioClip;
                 if (c != null)
@@ -236,7 +236,7 @@ namespace comunity
         public void GetTexture(string url, Action<Texture> callback, string alias = null)
         {
             VerifyUrl(url);
-            if (url.IsNotEmpty())
+            if (!url.IsEmpty())
             {
                 Texture t = assetCache.Get(url) as Texture;
                 if (t != null)
@@ -277,7 +277,7 @@ namespace comunity
 
         public static string VerifyUrl(string url)
         {
-            if (Platform.isEditor && url.IsNotEmpty())
+            if (Platform.isEditor && !url.IsEmpty())
             {
                 for (int i = url.Length-1; i >= 0; i--)
                 {

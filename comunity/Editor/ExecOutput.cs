@@ -25,13 +25,13 @@ namespace comunity
 		}
 		
 		public bool IsError() {
-			return stderr.IsNotEmpty() || ex != null;
+			return !stderr.IsEmpty() || ex != null;
 		}
 		
 		public string GetResult() {
 			if (ex != null) {
 				return ex.StackTrace;
-			} else if (stderr.IsNotEmpty()) {
+			} else if (!stderr.IsEmpty()) {
 				return stderr;
 			} else {
 				return stdout;

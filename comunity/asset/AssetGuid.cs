@@ -10,7 +10,7 @@ namespace comunity
         [HideInInspector]
         public string guid;
 
-        public bool isValid => guid.IsNotEmpty();
+        public bool isValid => !guid.IsEmpty();
 
         public static implicit operator string(AssetGuid a)
         {

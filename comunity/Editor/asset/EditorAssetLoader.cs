@@ -145,7 +145,7 @@ namespace comunity
         public void GetAssetBundle(string url, bool unload, Action<AssetBundle> callback)
         {
             string path = GetEditorAssetPath<AssetBundle>(url);
-            if (path.IsNotEmpty())
+            if (!path.IsEmpty())
             {
                 AssetBundle ab = AssetBundle.LoadFromFile(path);
                 if (ab != null)

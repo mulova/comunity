@@ -68,7 +68,7 @@ namespace comunity
             try {
                 if (access == FileAccess.Write || access == FileAccess.ReadWrite) {
                     string dir = PathUtil.GetDirectory (path);
-                    if (dir.IsNotEmpty () && !Directory.Exists (dir)) {
+                    if (!dir.IsEmpty () && !Directory.Exists (dir)) {
                         Directory.CreateDirectory (dir);
                     }
                     stream = new FileStream (path, FileMode.OpenOrCreate, FileAccess.Write);
@@ -183,7 +183,7 @@ namespace comunity
                 try {
                     stream.Flush ();
                     stream.Close ();
-                    if (path.IsNotEmpty ()) {
+                    if (!path.IsEmpty ()) {
                         PlatformMethods.inst.SetNoBackupFlag (path);
                     }
                     stream = null;

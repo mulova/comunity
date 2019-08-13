@@ -13,12 +13,12 @@ namespace comunity
 			return 1;
 		}
 
-		protected override void DrawGUI(SerializedProperty p)
+		protected override void DrawProperty(SerializedProperty p, Rect bound)
         {
 			EventListAttribute attr = attribute as EventListAttribute;
 			string[] events = EventListDrawer.GetIds(attr.listPath);
 			string eventId = p.stringValue;
-			if (PopupNullable(GetLineRect(0), p.name, ref eventId, events)) {
+			if (PopupNullable(bound, p.name, ref eventId, events)) {
 				p.stringValue = eventId;
 			}
 		}

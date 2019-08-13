@@ -16,6 +16,7 @@ namespace comunity
 {
     public class ObjSwitch : MonoBehaviour
     {
+        [SerializeField] public ObjSwitchElement s;
         [SerializeField] public ObjSwitchElement[] switches = new ObjSwitchElement[0];
         [SerializeField] public string enumType;
         [SerializeField] public ObjSwitchPreset[] preset;
@@ -215,7 +216,7 @@ namespace comunity
         }
     }
 
-    [System.Serializable, Constructor]
+    [System.Serializable]
     public class ObjSwitchElement : ICloneable
     {
         public string name = string.Empty;
@@ -240,7 +241,7 @@ namespace comunity
         }
     }
 
-    [System.Serializable, ConstructorAttribute]
+    [System.Serializable]
     public class ObjSwitchPreset : ICloneable
     {
         public string presetName;

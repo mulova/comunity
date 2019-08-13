@@ -1,4 +1,5 @@
 ﻿using UnityEditor;
+using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace comunity
@@ -11,11 +12,11 @@ namespace comunity
             return 1;
         }
 
-        protected override void DrawGUI(SerializedProperty p)
+        protected override void DrawProperty(SerializedProperty p, Rect bound)
         {
             SerializedProperty guidProp = p.FindPropertyRelative("guid");
             string guid = guidProp.stringValue;
-            if (EditorUI.GUIDField<Object>(GetLineRect(0), p.name, ref guid))
+            if (EditorUI.GUIDField<Object>(bound, p.name, ref guid))
             {
                 guidProp.stringValue = guid;
                 p.serializedObject.ApplyModifiedProperties();

@@ -80,7 +80,7 @@ namespace comunity
         
         private HashSet<string> change = new HashSet<string>();
         public bool OnInspectorGUI() {
-            if (error.IsNotEmpty()) {
+            if (!error.IsEmpty()) {
                 EditorGUILayout.HelpBox(error, MessageType.Error);
                 return false;
             }

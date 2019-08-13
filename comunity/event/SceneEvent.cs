@@ -21,7 +21,7 @@ namespace comunity
         }
         
         private void SendEventImpl(string eventId, object data) {
-            if (eventId.IsNotEmpty()) {
+            if (!eventId.IsEmpty()) {
                 try {
                     dispatcher1.Broadcast(eventId, data);
                     dispatcherOneShot1.Broadcast(eventId, data);
@@ -46,37 +46,37 @@ namespace comunity
         }
         
         public void RegisterListener(string eventId, Action<object> callback) {
-            if (eventId.IsNotEmpty()) {
+            if (!eventId.IsEmpty()) {
                 dispatcher1.Add(eventId, callback);
             }
         }
         
         public void RegisterListener(string eventId, Action callback) {
-            if (eventId.IsNotEmpty()) {
+            if (!eventId.IsEmpty()) {
                 dispatcher0.Add(eventId, callback);
             }
         }
         
         public void DeregisterListener(string eventId, Action<object> callback) {
-            if (eventId.IsNotEmpty()) {
+            if (!eventId.IsEmpty()) {
                 dispatcher1.Remove(eventId, callback);
             }
         }
         
         public void DeregisterListener(string eventId, Action callback) {
-            if (eventId.IsNotEmpty()) {
+            if (!eventId.IsEmpty()) {
                 dispatcher0.Remove(eventId, callback);
             }
         }
         
         public void RegisterOneShotListener(string eventId, Action<object> callback) {
-            if (eventId.IsNotEmpty()) {
+            if (!eventId.IsEmpty()) {
                 dispatcherOneShot1.Add(eventId, callback);
             }
         }
         
         public void RegisterOneShotListener(string eventId, Action callback) {
-            if (eventId.IsNotEmpty()) {
+            if (!eventId.IsEmpty()) {
                 dispatcherOneShot0.Add(eventId, callback);
             }
         }

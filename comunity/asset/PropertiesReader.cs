@@ -248,7 +248,7 @@ namespace comunity
             } else
             {
                 string dir = PathUtil.GetDirectory (filePath);
-                if (dir.IsNotEmpty() && !Directory.Exists (dir)) {
+                if (!dir.IsEmpty() && !Directory.Exists (dir)) {
                     Directory.CreateDirectory (dir);
                 }
                 File.WriteAllText(filePath, ToString());
@@ -262,7 +262,7 @@ namespace comunity
 			foreach (KeyValuePair<string, string> pair in dic)
 			{
                 str.Append(pair.Key).Append('=');
-                if (pair.Value.IsNotEmpty())
+                if (!pair.Value.IsEmpty())
                 {
                     str.Append(pair.Value);
                 }

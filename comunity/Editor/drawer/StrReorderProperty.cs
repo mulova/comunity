@@ -3,7 +3,7 @@ using UnityEditor;
 
 namespace comunity
 {
-    public class StrReorderProperty : ReorderProperty<string>
+    public class StrReorderProperty : ReorderSerialized<string>
     {
         public bool editable;
 

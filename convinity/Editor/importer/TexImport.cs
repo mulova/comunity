@@ -78,16 +78,16 @@ namespace convinity {
 
 		public int CompareTo(TexImport that)
 		{
-			if (path.IsNotEmpty()) 
+			if (!path.IsEmpty()) 
 			{
-				if (that.path.IsNotEmpty())
+				if (!that.path.IsEmpty())
 				{
 					return -path.CompareTo(that.path);
 				} else
 				{
 					return -1;
 				}
-			} else if (that.path.IsNotEmpty())
+			} else if (!that.path.IsEmpty())
 			{
 				return 1;
 			} else {

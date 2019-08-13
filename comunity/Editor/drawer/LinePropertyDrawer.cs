@@ -6,10 +6,10 @@ namespace comunity
     [CustomPropertyDrawer(typeof(LineDrawerAttribute))]
     public class LinePropertyDrawer : PropertyDrawerBase
     {
-        protected override void DrawGUI(SerializedProperty p)
+        protected override void DrawProperty(SerializedProperty p, Rect bound)
         {
             var attr = attribute as LineDrawerAttribute;
-            Rect[] r = SplitLineMulti(0, attr.names.Length);
+            Rect[] r = bound.SplitHorizontally(attr.names.Length);
             for (int i=0; i<r.Length; ++i)
             {
                 var n = attr.names[i];

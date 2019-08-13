@@ -99,7 +99,7 @@ namespace comunity
 			Entry e = url2local.Get(url);
 			if (e == null)
 			{
-				if (version > 0&&Cdn.Path.IsNotEmpty())
+				if (version > 0 && !Cdn.Path.IsEmpty())
 				{
 					// find local cdn first
 					string absPath = url.Replace(Cdn.Path, Root);

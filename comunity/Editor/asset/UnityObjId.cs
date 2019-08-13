@@ -38,7 +38,7 @@ namespace comunity
                 if (asset)
                 {
                     string uid = AssetDatabase.GUIDToAssetPath(id);
-                    if (uid.IsNotEmpty())
+                    if (!uid.IsEmpty())
                     {
                         return AssetDatabase.LoadAssetAtPath<Object>(uid);
                     }
@@ -56,7 +56,7 @@ namespace comunity
             set
             {
                 string assetPath = AssetDatabase.GetAssetPath(value);
-                if (assetPath.IsNotEmpty())
+                if (!assetPath.IsEmpty())
                 {
                     this.id = AssetDatabase.AssetPathToGUID(assetPath);
                     this.asset = true;

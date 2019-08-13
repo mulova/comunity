@@ -70,10 +70,10 @@ namespace comunity
         
         public static string ToRelativePath(string fullPath)
         {
-            if (rootPath.IsNotEmpty())
+            if (!rootPath.IsEmpty())
             {
                 string relative = PathUtil.GetRelativePath(fullPath, rootPath);
-                if (relative.IsNotEmpty())
+                if (!relative.IsEmpty())
                 {
                     return relative;
                 } else

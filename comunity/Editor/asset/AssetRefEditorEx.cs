@@ -11,7 +11,7 @@ namespace comunity
         public static string GetPath(Object o)
         {
             string assetPath = AssetDatabase.GetAssetPath(o);
-            if (assetPath.IsNotEmpty())
+            if (!assetPath.IsEmpty())
             {
                 Assert.IsTrue(assetPath.StartsWith("Assets/"));
                 string path = assetPath.Substring("Assets/".Length);
@@ -40,15 +40,15 @@ namespace comunity
         
         public static string GetEditorPath(this AssetRef r)
         {
-            if (r.guid.IsNotEmpty())
+            if (!r.guid.IsEmpty())
             {
                 string path = AssetDatabase.GUIDToAssetPath(r.guid);
-                if (path.IsNotEmpty())
+                if (!path.IsEmpty())
                 {
                     return path;
                 }
             }
-            if (r.path.IsNotEmpty())
+            if (!r.path.IsEmpty())
             {
                 return "Assets/"+r.path;
             } else

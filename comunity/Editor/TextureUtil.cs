@@ -32,7 +32,7 @@ namespace comunity
 
 		public static bool IsValid()
 		{
-			return IMAGE_MAGICK.IsNotEmpty();
+			return !IMAGE_MAGICK.IsEmpty();
 		}
 
 		private static string AppendPrefix(string src, string prefix)

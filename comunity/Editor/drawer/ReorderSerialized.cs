@@ -7,16 +7,15 @@ using System.Text.Ex;
 
 namespace comunity
 {
-    public class ReorderProperty<T>
+    public class ReorderSerialized<T>
     {
-        public const float HEIGHT = 21;
         public delegate void FillNewItemDelegate(object item);
         public delegate bool DrawItemDelegate(Rect rect, int index, bool isActive, bool isFocused);
         public delegate T GettemDelegate(SerializedProperty p);
         public delegate void SetItemDelegate(SerializedProperty p, T value);
         public delegate void ChangeDelegate();
 
-        public readonly ReorderableList drawer;
+        public ReorderableList drawer { get; private set; }
         public bool changed { get; private set; }
 
         public FillNewItemDelegate fillNewItem;
@@ -25,13 +24,18 @@ namespace comunity
         public SetItemDelegate setItem;
         public ChangeDelegate onChange = () => { };
 
+        // backup
+        private float elementHeight;
+        private float headerHeight;
+        private float footerHeight;
+
         private string _title;
         public string title
         {
             set
             {
                 _title = value;
-                drawer.headerHeight = _title.IsEmpty()? 0: HEIGHT;
+                drawer.headerHeight = _title.IsEmpty()? 0: headerHeight;
             }
         }
 
@@ -99,26 +103,35 @@ namespace comunity
             }
         }
 
-        public ReorderProperty(SerializedObject ser, string propPath)
+        public ReorderSerialized(SerializedObject ser, string propPath)
         {
             var prop = ser.FindProperty(propPath);
-            this.drawer = new ReorderableList(ser, prop, true, false, true, true);
-            this.title = propPath;
-            this.getItem = GetItem;
-            this.setItem = SetItem;
-            Init();
+            Init(prop);
         }
 
-        private void Init()
+        public ReorderSerialized(SerializedProperty prop)
         {
+            Init(prop);
+        }
+
+
+        private void Init(SerializedProperty prop)
+        {
+            this.drawer = new ReorderableList(prop.serializedObject, prop, true, false, true, true);
+            this.title = prop.propertyPath;
+            this.getItem = GetItem;
+            this.setItem = SetItem;
             this.drawer.onAddCallback = _OnAdd;
             this.drawer.drawHeaderCallback = DrawHeader;
             this.drawer.drawElementCallback = _DrawItem;
             this.drawer.onReorderCallback = Reorder;
-            this.drawer.elementHeight = HEIGHT;
             this.drawer.elementHeightCallback = GetElementHeight;
             this.fillNewItem = FillNewItem;
             this.drawItem = DrawItem;
+            // backup
+            elementHeight = this.drawer.elementHeight;
+            headerHeight = this.drawer.headerHeight;
+            footerHeight = this.drawer.footerHeight;
         }
 
         private float GetElementHeight(int index)
@@ -135,7 +148,7 @@ namespace comunity
 
         private void DrawHeader(Rect rect)
         {
-            if (_title != null)
+            if (!_title.IsEmpty())
             {
                 EditorGUI.LabelField(rect, new GUIContent(ObjectNames.NicifyVariableName(_title)));
             }
@@ -197,12 +210,22 @@ namespace comunity
 
         public bool Draw()
         {
+            return DrawInternal(drawer.DoLayoutList);
+        }
+
+        public bool Draw(Rect rect)
+        {
+            return DrawInternal(()=>drawer.DoList(rect));
+        }
+
+        private bool DrawInternal(Action drawAction)
+        {
             changed = false;
             if (obj != null && drawer.serializedProperty == null)
             {
                 Undo.RecordObject(obj, obj.name);
             }
-            drawer.DoLayoutList();
+            drawAction();
             if (!changed && obj != null && drawer.serializedProperty == null)
             {
                 Undo.ClearUndo(obj);

@@ -23,7 +23,7 @@ namespace comunity
         
         protected override WebRequest GetWebRequest(Uri address) {
             WebRequest req = base.GetWebRequest(address);
-            if (reqMethod.IsNotEmpty()) {
+            if (!reqMethod.IsEmpty()) {
                 req.Method = reqMethod;
             }
             if (req is HttpWebRequest) {

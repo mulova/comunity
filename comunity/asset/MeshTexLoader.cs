@@ -139,7 +139,7 @@ namespace comunity
         {
             log.Info("Download for {0} INTERRUPTED", newUrl);
             // remove pending if exists
-            if (newUrl.IsNotEmpty())
+            if (!newUrl.IsEmpty())
             {
                 loadedCallback = null;
             }
@@ -215,7 +215,7 @@ namespace comunity
             if (recoverOnEnable)
             {
                 // reload texture when enabled again
-                if (curUrl.IsNotEmpty())
+                if (!curUrl.IsEmpty())
                 {
                     newUrl = curUrl;
                     status = TexLoaderStatus.Idle;

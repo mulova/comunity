@@ -85,7 +85,7 @@ namespace comunity
         
         public static void SendEvent(string eventId, object data)
         {
-            if (eventId.IsNotEmpty())
+            if (!eventId.IsEmpty())
             {
                 try
                 {
@@ -118,7 +118,7 @@ namespace comunity
         
         public static void RegisterListener(string eventId, Action<object> callback)
         {
-            if (eventId.IsNotEmpty())
+            if (!eventId.IsEmpty())
             {
                 dispatcher1.Add(eventId, callback);
             }
@@ -126,7 +126,7 @@ namespace comunity
         
         public static void RegisterListener(string eventId, Action callback)
         {
-            if (eventId.IsNotEmpty())
+            if (!eventId.IsEmpty())
             {
                 dispatcher0.Add(eventId, callback);
             }
@@ -134,7 +134,7 @@ namespace comunity
         
         public static void DeregisterListener(string eventId, Action<object> callback)
         {
-            if (eventId.IsNotEmpty())
+            if (!eventId.IsEmpty())
             {
                 dispatcher1.Remove(eventId, callback);
             }
@@ -142,7 +142,7 @@ namespace comunity
         
         public static void DeregisterListener(string eventId, Action callback)
         {
-            if (eventId.IsNotEmpty())
+            if (!eventId.IsEmpty())
             {
                 dispatcher0.Remove(eventId, callback);
             }
@@ -150,7 +150,7 @@ namespace comunity
         
         public static void RegisterOneShotListener(string eventId, Action<object> callback)
         {
-            if (eventId.IsNotEmpty())
+            if (!eventId.IsEmpty())
             {
                 dispatcherOneShot1.Add(eventId, callback);
             }
@@ -158,7 +158,7 @@ namespace comunity
         
         public static void RegisterOneShotListener(string eventId, Action callback)
         {
-            if (eventId.IsNotEmpty())
+            if (!eventId.IsEmpty())
             {
                 dispatcherOneShot0.Add(eventId, callback);
             }

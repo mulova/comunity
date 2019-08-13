@@ -54,7 +54,7 @@ namespace comunity
 						Selection.activeObject = o;
 					}
 				}
-			} else if (name.IsNotEmpty()){
+			} else if (!name.IsEmpty()){
 				EditorGUILayout.LabelField(name, EditorStyles.miniLabel);
 			}
 			return name;

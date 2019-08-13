@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace comunity
 {
-    [CustomEditor(typeof(ObjSwitch))]
+    //[CustomEditor(typeof(ObjSwitch))]
 	public class ObjSwitchInspector : Editor
 	{
 		private ObjSwitch objSwitch;
-        private ReorderProperty<ObjSwitch> elementInspector;
-		private ReorderProperty<ObjSwitch> presetInspector;
+        private ReorderSerialized<ObjSwitch> elementInspector;
+		private ReorderSerialized<ObjSwitch> presetInspector;
 		internal static bool exclusive = true;
         private SerializedObject ser;
 
@@ -18,8 +18,8 @@ namespace comunity
 		{
             ser = new SerializedObject(target);
 			objSwitch = (ObjSwitch)target;
-            elementInspector = new ReorderProperty<ObjSwitch>(ser, nameof(objSwitch.switches));
-            presetInspector = new ReorderProperty<ObjSwitch>(ser, nameof(objSwitch.preset));
+            elementInspector = new ReorderSerialized<ObjSwitch>(ser, nameof(objSwitch.switches));
+            presetInspector = new ReorderSerialized<ObjSwitch>(ser, nameof(objSwitch.preset));
 		}
 	
 		public override void OnInspectorGUI()
@@ -55,27 +55,29 @@ namespace comunity
     [CustomPropertyDrawer(typeof(ObjSwitchElement))]
     public class ObSwitchElementDrawer : PropertyDrawerBase
     {
-        protected override void DrawGUI(SerializedProperty p)
+        private ReorderSerialized<GameObject> objs;
+        private ReorderSerialized<Transform> trans;
+        private ReorderSerialized<Vector3> pos;
+
+        protected override void DrawProperty(SerializedProperty p, Rect bound)
         {
             var n = p.FindPropertyRelative("name");
-            var objs = p.FindPropertyRelative("objs");
-            var trans = p.FindPropertyRelative("trans");
-            var pos = p.FindPropertyRelative("pos");
+            if (objs == null)
+            {
+                objs = new ReorderSerialized<GameObject>(p.FindPropertyRelative("objs"));
+                trans = new ReorderSerialized<Transform>(p.FindPropertyRelative("trans"));
+                pos = new ReorderSerialized<Vector3>(p.FindPropertyRelative("pos"));
+            }
 
-            EditorGUILayout.PropertyField(n);
-            EditorGUILayout.PropertyField(objs);
-            EditorGUILayout.PropertyField(trans);
-            EditorGUILayout.PropertyField(pos);
+            EditorGUI.PropertyField(GetLineRect(0), n);
+            objs.Draw(bound);
+            trans.Draw(bound);
+            pos.Draw(bound);
         }
 
-        protected override int GetLineCount(SerializedProperty p)
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            var objs = GetProperty("objs");
-            var trans = GetProperty("trans");
-            var pos = GetProperty("pos");
-
-            var size = objs.arraySize + trans.arraySize + pos.arraySize;
-            return size;
+            return 200;
         }
     }
 }

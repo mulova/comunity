@@ -39,7 +39,7 @@ namespace comunity
             if (formatParam.IsEmpty()) {
                 return msg;
             }
-            if (msg.IsNotEmpty()) {
+            if (!msg.IsEmpty()) {
                 try {
                     return string.Format (msg, formatParam);
                 } catch (System.Exception fex) {
@@ -89,7 +89,7 @@ namespace comunity
         public static string FindAltKey(string msg)
         {
             string key = pages.FindKey(msg);
-            if (key.IsNotEmpty())
+            if (!key.IsEmpty())
             {
                 return invAltMap.Get(key, string.Empty);
             }

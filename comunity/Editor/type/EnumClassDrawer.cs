@@ -19,7 +19,7 @@ namespace comunity
 			return 1;
 		}
 
-		protected override void DrawGUI(SerializedProperty p)
+		protected override void DrawProperty(SerializedProperty p, Rect bound)
         {
             p.serializedObject.Update();
             IList<T> values = GetValues();
@@ -29,7 +29,7 @@ namespace comunity
                 return;
             }
             T o = ReflectionUtil.GetFieldValue<T>(target, p.name);
-            if (PopupNullable(GetLineRect(0), p.displayName, ref o, values)) {
+            if (PopupNullable(bound, p.displayName, ref o, values)) {
                 ReflectionUtil.SetFieldValue(target, p.name, o);
                 p.serializedObject.ApplyModifiedProperties();
                 EditorUtil.SetDirty(p.serializedObject.targetObject);

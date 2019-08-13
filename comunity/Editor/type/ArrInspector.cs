@@ -292,7 +292,7 @@ namespace comunity
                 showArray = true;
             }
             if (Length == 0) {
-                if (GUILayout.Button("Add "+(title.IsNotEmpty()?title:fieldName), EditorStyles.toolbarButton)) {
+                if (GUILayout.Button("Add "+(!title.IsEmpty()?title:fieldName), EditorStyles.toolbarButton)) {
                     if (typeof(UnityEngine.Object).IsAssignableFrom(typeof(T))) {
                         list.Add(GetDefault());
                     } else {

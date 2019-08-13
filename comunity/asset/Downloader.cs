@@ -182,7 +182,7 @@ namespace comunity
                 if (readOnly&&IsPathTagged(file))
                 {
                     filesDownloaded.Add(file);
-                } else if (file.IsNotEmpty())
+                } else if (!file.IsEmpty())
                 {
                     filesToDownload.Enqueue(file);
                 }

@@ -17,7 +17,7 @@ namespace comunity {
         protected virtual void OnEnable() {
 			CreateTabs();
 			string tabName = EditorPrefs.GetString(GetWindowId());
-			if (tabName.IsNotEmpty()) {
+			if (!tabName.IsEmpty()) {
 				foreach (TabData t in tabs) {
 					if (tabName == t.tab.id.ToString()) {
 						selected = t;

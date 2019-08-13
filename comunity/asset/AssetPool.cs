@@ -61,7 +61,7 @@ namespace comunity {
 
 		public void Preload(string id, Action<T> callback)
 		{
-            string url = urlFormat.IsNotEmpty()? string.Format(urlFormat, id): id;
+            string url = !urlFormat.IsEmpty()? string.Format(urlFormat, id): id;
             assetLoader(url, a=> {
                 if (a != null) {
                     pool[id] = a;

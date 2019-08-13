@@ -65,7 +65,7 @@ namespace comunity
         public static bool IsFolder(Object o)
         {
             string path = AssetDatabase.GetAssetPath(o);
-            return path.IsNotEmpty()&&Directory.Exists(GetAssetFileFullPath(path));
+            return !path.IsEmpty()&&Directory.Exists(GetAssetFileFullPath(path));
         }
 
         /**
@@ -309,7 +309,7 @@ namespace comunity
             try
             {
                 string dir = PathUtil.GetDirectory(path);
-                if (dir.IsNotEmpty()&&!Directory.Exists(dir))
+                if (!dir.IsEmpty()&&!Directory.Exists(dir))
                 {
                     Directory.CreateDirectory(dir);
                 }
@@ -817,7 +817,7 @@ namespace comunity
                 o = (o as MonoBehaviour).gameObject;
             }
             string path = AssetDatabase.GetAssetPath(o);
-            if (path.IsNotEmpty())
+            if (!path.IsEmpty())
             {
                 return AssetDatabase.AssetPathToGUID(path);
             }
@@ -827,7 +827,7 @@ namespace comunity
         public static T GUID2Obj<T>(string guid) where T: Object
         {
             string path = AssetDatabase.GUIDToAssetPath(guid);
-            if (path.IsNotEmpty())
+            if (!path.IsEmpty())
             {
                 return AssetDatabase.LoadAssetAtPath(path, typeof(Object)) as T;
             }

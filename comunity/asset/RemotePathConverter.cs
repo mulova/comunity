@@ -41,7 +41,7 @@ namespace comunity {
 				return remote;
 			}
 			string url = DetachParams(remote);
-			if (Cdn.Path.IsNotEmpty() && url.StartsWith(Cdn.Path)) {
+			if (!Cdn.Path.IsEmpty() && url.StartsWith(Cdn.Path)) {
 				return url.Replace(Cdn.Path, cdnLocalDir);
 			} else {
 				return PathUtil.Combine(cdnLocalDir, pathEncoder.Replace(url));

@@ -30,7 +30,7 @@ namespace comunity
             if (fontSize > 0) {
                 str.Append("<size=").Append(fontSize).Append(">");
             }
-            if (color.IsNotEmpty()) {
+            if (!color.IsEmpty()) {
                 str.Append("<color=").Append(color).Append(">");
             }
             if (bold) {
@@ -41,7 +41,7 @@ namespace comunity
                 if (bold) {
                     str.Append("</b>");
                 }
-                if (color.IsNotEmpty()) {
+                if (!color.IsEmpty()) {
                     str.Append("</color>");
                 }
                 if (fontSize > 0) {

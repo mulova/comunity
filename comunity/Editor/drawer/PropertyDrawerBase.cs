@@ -10,12 +10,17 @@ namespace comunity
 {
     public abstract class PropertyDrawerBase : PropertyDrawer
     {
-        private const int lineHeight = 18;
+        private int lineHeight;
         private SerializedProperty prop;
         protected Rect bound;
         protected int index;
         protected bool isActive;
         protected bool isFocused;
+
+        protected virtual int GetLineCount(SerializedProperty p)
+        {
+            return -1;
+        }
 
         protected T GetAttribute<T>() where T:Attribute
         {
@@ -27,23 +32,25 @@ namespace comunity
             return prop.FindPropertyRelative(name);
         }
 
-        public override float GetPropertyHeight(SerializedProperty p, GUIContent label)
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            //this.prop = p;
-            float height = GetLineCount(p) * lineHeight;
-            this.prop = null;
-            return height;
+            int lineCount = GetLineCount(property);
+            if (lineCount > 0)
+            {
+                return lineCount * base.GetPropertyHeight(property, label);
+            } else
+            {
+                return base.GetPropertyHeight(property, label);
+            }
         }
 
-        protected abstract int GetLineCount(SerializedProperty p);
+        protected abstract void DrawProperty(SerializedProperty p, Rect bound);
 
-        protected abstract void DrawGUI(SerializedProperty p);
-
-        protected Rect GetLineRect(int lineNo)
+        protected Rect GetLineRect(int lineNo, int lineCount = 1)
         {
             Rect lineRect = bound;
             lineRect.y += lineHeight * lineNo;
-            lineRect.height = lineHeight;
+            lineRect.height = lineHeight*lineCount;
             return lineRect;
         }
 
@@ -57,19 +64,6 @@ namespace comunity
             return new Rect[] { left, right};
         }
 
-        protected Rect[] SplitRectMulti(Rect src, int count)
-        {
-            Rect[] rects = new Rect[count];
-            float width = src.width / count;
-            for (int i=0; i<count; ++i)
-            {
-                rects[i] = src;
-                rects[i].x = src.x+i * width;
-                rects[i].width = width;
-            }
-            return rects;
-        }
-
         protected Rect[] SplitLine(int line, float leftWidth)
         {
             return SplitRect(GetLineRect(line), leftWidth);
@@ -77,7 +71,7 @@ namespace comunity
 
         protected Rect[] SplitLineMulti(int line, int count)
         {
-            return SplitRectMulti(GetLineRect(line), count);
+            return GetLineRect(line).SplitHorizontally(count);
         }
 
         protected bool DrawObjectField<T>(Rect r, GUIContent label, ref T o, bool allowSceneObj = true) where T:Object
@@ -90,33 +84,33 @@ namespace comunity
             o = EditorGUI.ObjectField(refRect, o, typeof(T), allowSceneObj) as T;
             return o != old;
         }
-        
-        public override void OnGUI(Rect rect, SerializedProperty prop, GUIContent label)
+
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            this.prop = prop;
-            this.bound = rect;
-            Undo.RecordObject(prop.serializedObject.targetObject, GetType().FullName);
-            EditorGUI.indentLevel = prop.depth;
-            if (prop.isArray)
+            this.prop = property;
+            this.bound = position;
+            Undo.RecordObject(property.serializedObject.targetObject, GetType().FullName);
+            EditorGUI.indentLevel = property.depth;
+            if (property.isArray)
             {
-                ReorderableList list = new ReorderableList(prop.serializedObject, prop);
-                list.DoList(rect);
+                ReorderableList list = new ReorderableList(property.serializedObject, property);
+                list.DoList(position);
                 list.drawElementCallback = DrawElement;
             } else
             {
-                DrawGUI(prop);
+                DrawProperty(property, position);
             }
             this.prop = null;
         }
 
-        private void DrawElement(Rect rect, int index, bool isActive, bool isFocused)
+        private void DrawElement(Rect rect, int idx, bool active, bool focused)
         {
-            var element = prop.GetArrayElementAtIndex(index);
+            var element = prop.GetArrayElementAtIndex(idx);
             this.bound = rect;
-            this.index = index;
-            this.isActive = isActive;
-            this.isFocused = isFocused;
-            DrawGUI(element);
+            this.index = idx;
+            this.isActive = active;
+            this.isFocused = focused;
+            DrawProperty(element, rect);
         }
 
         protected void DrawArray(Rect pos, SerializedProperty p, params string[] propNames)
@@ -154,9 +148,6 @@ namespace comunity
             }
         }
         
-        /**
-     * Draw each properties line by line
-     */
         protected void DrawProperties(Rect pos, SerializedProperty p, params string[] propNames)
         {
             for (int i=0; i<propNames.Length; i++)

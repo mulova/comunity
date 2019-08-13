@@ -50,7 +50,7 @@ namespace comunity
 		{
 			string saved = EditorPrefs.GetString(title, "Assets/");
 			string file = EditorUtility.OpenFilePanel(title, saved, ext);
-			if (file.IsNotEmpty()) {
+			if (!file.IsEmpty()) {
 				EditorPrefs.SetString(title, file);
 			}
 			return file;
@@ -62,7 +62,7 @@ namespace comunity
 			string parent = PathUtil.GetParent(saved);
 			string dir = Path.GetFileName(saved);
 			string folder = EditorUtility.OpenFolderPanel(title, parent, dir);
-			if (folder.IsNotEmpty()) {
+			if (!folder.IsEmpty()) {
 				EditorPrefs.SetString(title, folder);
 			}
 			return folder;

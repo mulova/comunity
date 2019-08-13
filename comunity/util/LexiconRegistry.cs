@@ -54,7 +54,7 @@ namespace comunity
             if (IsValidLanguage(l.ToString()))
             {
                 return l;
-            } else if (BuildConfig.LANGUAGE.IsNotEmpty())
+            } else if (!BuildConfig.LANGUAGE.IsEmpty())
             {
                 // return first language in 'lang' value in platform_data.bytes
                 return BuildConfig.LANGUAGE.SplitCSV()[0].ParseEnum<SystemLanguage>(SystemLanguage.English);
@@ -71,7 +71,7 @@ namespace comunity
             {
                 langs = new HashSet<string>();
                 string langStr = BuildConfig.LANGUAGE;
-                if (langStr.IsNotEmpty())
+                if (!langStr.IsEmpty())
                 {
                     langs.AddAll(langStr.SplitCSV());
                 }

@@ -128,8 +128,8 @@ namespace comunity
 
         public static bool GUIDField<T>(Rect rect, string label, ref string guid) where T:Object {
             T o = null;
-            string assetPath = guid.IsNotEmpty()? AssetDatabase.GUIDToAssetPath(guid): null;
-            if (assetPath.IsNotEmpty()) {
+            string assetPath = !guid.IsEmpty()? AssetDatabase.GUIDToAssetPath(guid): null;
+            if (!assetPath.IsEmpty()) {
                 o = AssetDatabase.LoadAssetAtPath<T>(assetPath);
             }
             T newObj = EditorGUI.ObjectField(rect, label, o, typeof(T), false) as T;

@@ -34,9 +34,10 @@ namespace comunity
             }
 		}
 
-		protected override void DrawGUI(SerializedProperty p)
+        protected override void DrawProperty(SerializedProperty p, Rect bound)
         {
             int lineCount = GetLineCount(p);
+            var bounds = bound.SplitHorizontally(lineCount);
 			int lineNo = 0;
 			SerializedProperty cdn = GetProperty("cdn");
 			SerializedProperty path = GetProperty("path");
@@ -65,13 +66,12 @@ namespace comunity
 				}
 			}
 			string assetPath = string.Empty;
-			if (editorPath.IsNotEmpty())
+			if (!editorPath.IsEmpty())
 			{
 				assetPath = EditorAssetUtil.GetAssetRelativePath(editorPath);
 			}
 			EditorGUI.indentLevel = p.depth;
 
-			Rect line1Rect = GetLineRect(lineNo);
             string refType = null;
             if (assetPath.IsResourcesPath()) {
                 refType = "R";
@@ -86,7 +86,7 @@ namespace comunity
 			{
 				GUI.backgroundColor = Color.red;
 			}
-			Object newRef = EditorGUI.ObjectField(line1Rect, title, obj, typeof(Object), true);
+			Object newRef = EditorGUI.ObjectField(bounds[lineNo], title, obj, typeof(Object), true);
 			if (newRef != obj||path.stringValue != assetPath||(cdn.boolValue^reference.objectReferenceValue == null))
 			{
 				Set(cdn, path, reference, guid, newRef);
@@ -97,7 +97,7 @@ namespace comunity
             {
                 if (newRef != null)
                 {
-                    Rect pathRect = GetLineRect(lineNo);
+                    Rect pathRect = bounds[lineNo];
                     EditorGUI.SelectableLabel(pathRect, path.stringValue);
                     lineNo++;
                 }
@@ -107,7 +107,7 @@ namespace comunity
 			if (lineNo < lineCount && cdn.boolValue == true)
 			{
 				// draw alias
-				Rect aliasRect = GetLineRect(lineNo);
+				Rect aliasRect = bounds[lineNo];
 				string newAlias = EditorGUI.TextField(aliasRect, exclusiveId.name, exclusiveId.stringValue);
 				if (newAlias != exclusiveId.stringValue)
 				{

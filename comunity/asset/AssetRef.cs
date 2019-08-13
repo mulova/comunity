@@ -71,7 +71,7 @@ namespace comunity
                 {
                     return string.Empty;
                 }
-                if (cdn&&path.IsNotEmpty())
+                if (cdn && !path.IsEmpty())
                 {
                     return PathUtil.Combine(Cdn.Path, path);
                 } else if (path.IsResourcesPath())

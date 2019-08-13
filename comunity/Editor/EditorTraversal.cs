@@ -67,7 +67,7 @@ namespace comunity
                 EditorSceneBridge.OpenScene(s.path);
                 log.Debug("Processing Scene '{0}'", s.path);
                 string error = func(EditorSceneManager.GetActiveScene().GetRootGameObjects().Convert(o=>o.transform));
-                if (error.IsNotEmpty())
+                if (!error.IsEmpty())
                 {
                     errors.Add(error);
                 }
@@ -114,7 +114,7 @@ namespace comunity
                     }
                     try {
                         string error = func(p);
-                        if (error.IsNotEmpty())
+                        if (!error.IsEmpty())
                         {
                             err.Append(error).Append("\n");
                         }
