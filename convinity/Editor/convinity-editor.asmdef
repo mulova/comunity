@@ -3,8 +3,7 @@
     "references": [
         "mulova.commons",
         "comunity",
-        "comunity-editor",
-        "convinity"
+        "comunity-editor"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [
