@@ -157,6 +157,7 @@ namespace comunity
                     SaveAuto();
                 }
                 var drawer = new UnityObjListDrawer(list);
+                drawer.allowSceneObject = false;
                 if (drawer.Draw())
                 {
                     SaveAuto();

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using UnityEditor;
+using System.Text.Ex;
 
 namespace comunity
 {
@@ -8,13 +9,19 @@ namespace comunity
 	{
 		public UnityObjListDrawer(List<UnityObjId> list) : base(list, new UnityObjIdDrawer())
 		{
-			this.createDefaultValue = () => new UnityObjId(Selection.activeObject);
+			this.createDefaultValue = () => CreateItem(Selection.activeObject);
 			this.createItem = CreateItem;
 		}
 		
 		private UnityObjId CreateItem(Object o)
 		{
-			return new UnityObjId(o);
-		}
+            if (allowSceneObject || !AssetDatabase.GetAssetPath(o).IsEmpty())
+            {
+                return new UnityObjId(o);
+            } else
+            {
+               return new UnityObjId((string)null);
+            }
+        }
 	}
 }

@@ -232,7 +232,7 @@ namespace comunity
                 }
                 else
                 {
-                    return default(T);
+                    return createDefaultValue();
                 }
             }
             else
@@ -269,7 +269,7 @@ namespace comunity
 
             if (l.IsEmpty())
             {
-                l.Add(default(T));
+                l.Add(createDefaultValue());
             }
             return l;
         }
