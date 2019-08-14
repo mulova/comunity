@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEditor;
-using Object = UnityEngine.Object;
-using UnityEngine;
+using System.Collections.Generic.Ex;
 using mulova.commons;
 using Rotorz.Games.Collections;
-using System.Collections.Generic.Ex;
+using UnityEditor;
+using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace comunity
 {
@@ -47,11 +47,11 @@ namespace comunity
             }
         }
 
-        public ListDrawer(IList<T> list) : this(list, new ItemDrawer<T>()) { }
+        public ListDrawer(List<T> list) : this(list, new ItemDrawer<T>()) { }
 
-        public ListDrawer(IList<T> list, IItemDrawer<T> itemDrawer)
+        public ListDrawer(List<T> list, IItemDrawer<T> itemDrawer)
         {
-            this.list = new List<T>(list);
+            this.list = list;
             this.itemDrawer = itemDrawer; // just for reference count
             this.createItem = CreateItem;
         }
@@ -84,12 +84,6 @@ namespace comunity
             {
                 Insert(Count);
             }
-            Refresh();
-        }
-
-        private void Refresh()
-        {
-            Filter(match);
         }
 
         public void Insert(int index)
@@ -132,7 +126,6 @@ namespace comunity
             list.RemoveAt(index);
             onRemove?.Invoke(index, obj);
             changed = true;
-            Refresh();
         }
 
         public void Move(int srcIndex, int dstIndex)
@@ -142,7 +135,6 @@ namespace comunity
             list.RemoveAt(si2);
             onMove?.Invoke(srcIndex, dstIndex, list[srcIndex]);
             changed = true;
-            Refresh();
         }
 
         public void Clear()
