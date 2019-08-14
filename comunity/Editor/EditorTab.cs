@@ -144,16 +144,19 @@ namespace comunity {
 			bool changed = false;
 			HashSet<GameObject> saved = new HashSet<GameObject>();
 			foreach (GameObject o in col) {
-				GameObject objRoot = PrefabUtility.FindPrefabRoot(o);
-				if (objRoot != null && !saved.Contains(objRoot) && PrefabUtility.GetPrefabType(objRoot) == PrefabType.PrefabInstance) {
-					saved.Add(objRoot);
-					#if UNITY_2018_2_OR_NEWER
-					PrefabUtility.ReplacePrefab(objRoot, PrefabUtility.GetCorrespondingObjectFromSource(objRoot), ReplacePrefabOptions.ConnectToPrefab);
-					#else
-					PrefabUtility.ReplacePrefab(objRoot, PrefabUtility.GetPrefabParent(objRoot), ReplacePrefabOptions.ConnectToPrefab);
-					#endif
-				}
-				changed = true;
+                if (PrefabUtility.IsPartOfAnyPrefab(o))
+                {
+                    GameObject objRoot = PrefabUtility.GetOutermostPrefabInstanceRoot(o);
+                    if (objRoot != null && !saved.Contains(objRoot) && PrefabUtility.IsAnyPrefabInstanceRoot(objRoot)) {
+                        saved.Add(objRoot);
+                        var path = PrefabUtility.GetPrefabAssetPathOfNearestInstanceRoot(objRoot);
+                        PrefabUtility.SaveAsPrefabAsset(objRoot, path, out var result);
+                        if (result)
+                        {
+                            changed = true;
+                        }
+                    }
+                }
 			}
 			if (changed) {
 				EditorSceneBridge.SaveScene();

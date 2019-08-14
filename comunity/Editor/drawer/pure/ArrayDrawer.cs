@@ -11,20 +11,15 @@ namespace comunity
         private object target;
         private string fieldName;
 
-        public ArrayDrawer(Object target, string fieldName) : this(target, target, fieldName, new ItemDrawer<T>())
+        public ArrayDrawer(Object target, string fieldName) : this(target, fieldName, new ItemDrawer<T>())
         {
         }
 
-        public ArrayDrawer(Object unityObj, object target, string fieldName) : this(unityObj, target, fieldName, new ItemDrawer<T>())
-        {
-        }
-
-        public ArrayDrawer(Object unityObj, object target, string fieldName, IItemDrawer<T> itemDrawer)
+        public ArrayDrawer(object target, string fieldName, IItemDrawer<T> itemDrawer)
             : base(new List<T>(ReflectionUtil.GetFieldValue<T[]>(target, fieldName)), itemDrawer)
         {
             this.target = target;
             this.fieldName = fieldName;
-            this.undoTarget = unityObj;
             onDuplicate += Refresh;
             onInsert += Refresh;
             onMove += Refresh;

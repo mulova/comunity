@@ -10,7 +10,7 @@ namespace comunity
 {
     public abstract class PropertyDrawerBase : PropertyDrawer
     {
-        private int lineHeight;
+        private const float lineHeight = 16;
         private SerializedProperty prop;
         protected Rect bound;
         protected int index;

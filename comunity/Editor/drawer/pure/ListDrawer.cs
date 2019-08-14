@@ -25,7 +25,6 @@ namespace comunity
         public bool addSelected = true;
         public bool allowSelection = true;
         public bool horizontal;
-        public Object undoTarget;
         public Func<T> createDefaultValue = () => default(T);
         public Func<Object, T> createItem;
         protected IItemDrawer<T> itemDrawer;
@@ -169,10 +168,7 @@ namespace comunity
             {
                 changed = true;
                 list[index] = changedObj;
-                if (onChange != null)
-                {
-                    onChange(index, changedObj);
-                }
+                onChange?.Invoke(index, changedObj);
             }
         }
 
@@ -198,15 +194,7 @@ namespace comunity
 
         public bool Draw(ReorderableListFlags flags)
         {
-            if (undoTarget != null)
-            {
-                Undo.RecordObject(undoTarget, undoTarget.name);
-            }
             ReorderableListGUI.ListField(this, flags);
-            if (undoTarget != null && !changed)
-            {
-                Undo.ClearUndo(undoTarget);
-            }
             bool ret = changed;
             changed = false;
             return ret;
