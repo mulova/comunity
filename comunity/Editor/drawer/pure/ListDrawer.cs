@@ -22,7 +22,6 @@ namespace comunity
         public event Action<int, int, T> onMove;
         public bool allowDuplicate = false;
         public bool addSelected = true;
-        public bool allowSceneObject = true;
         public bool allowSelection = true;
         public bool horizontal;
         public Func<T> createDefaultValue = () => default(T);
@@ -233,7 +232,7 @@ namespace comunity
             Object[] selObjs = Selection.objects;
             if (allowSelection || (selObjs != null && selObjs.Length > 1))
             {
-                if (allowSceneObject && Selection.objects.IsNotEmpty())
+                if (Selection.objects.IsNotEmpty())
                 {
                     foreach (Object o in Selection.objects)
                     {

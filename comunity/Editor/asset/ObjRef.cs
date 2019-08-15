@@ -70,7 +70,11 @@ namespace comunity
                     }
                     this.asset = false;
                 }
-                this.type = value.GetType();
+                if (value != null)
+                {
+                    this.type = value.GetType();
+                }
+
             }
         }
 
