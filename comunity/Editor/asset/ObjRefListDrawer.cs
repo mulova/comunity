@@ -5,24 +5,24 @@ using System.Text.Ex;
 
 namespace comunity
 {
-	public class UnityObjListDrawer : ListDrawer<UnityObjId>
+	public class ObjRefListDrawer : ListDrawer<ObjRef>
 	{
         public bool allowSceneObject = true;
 
-        public UnityObjListDrawer(List<UnityObjId> list) : base(list, new UnityObjIdDrawer())
+        public ObjRefListDrawer(List<ObjRef> list) : base(list, new ObjRefDrawer())
 		{
 			this.createDefaultValue = () => CreateItem(Selection.activeObject);
 			this.createItem = CreateItem;
 		}
 		
-		private UnityObjId CreateItem(Object o)
+		private ObjRef CreateItem(Object o)
 		{
             if (allowSceneObject || !AssetDatabase.GetAssetPath(o).IsEmpty())
             {
-                return new UnityObjId(o);
+                return new ObjRef(o);
             } else
             {
-               return new UnityObjId(null);
+               return new ObjRef(null);
             }
         }
 	}

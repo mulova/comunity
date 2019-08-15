@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using comunity;
 using UnityEditor;
 using mulova.commons;
 using System;
@@ -11,7 +9,7 @@ using UnityEngine.Ex;
 namespace comunity
 {
     [System.Serializable]
-    public class UnityObjId
+    public class ObjRef
     {
         [SerializeField] public string _id;
         [SerializeField] private bool _asset;
@@ -91,7 +89,7 @@ namespace comunity
             }
         }
 
-        public UnityObjId(Object o)
+        public ObjRef(Object o)
         {
             if (o != null)
             {
@@ -102,7 +100,7 @@ namespace comunity
 
         public override bool Equals(object obj)
         {
-            UnityObjId that = obj as UnityObjId;
+            ObjRef that = obj as ObjRef;
             if (that != null)
             {
                 return this.id == that.id;

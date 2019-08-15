@@ -15,8 +15,8 @@ namespace comunity
     {
         public const string PATH = "asset_builder/ab_path";
         [SerializeField]
-        private List<UnityObjId> _dirs = new List<UnityObjId>();
-        public List<UnityObjId> dirs
+        private List<ObjRef> _dirs = new List<ObjRef>();
+        public List<ObjRef> dirs
         {
             get
             {
@@ -24,8 +24,8 @@ namespace comunity
             }
         }
 
-        private List<UnityObjId> _rawDirs = new List<UnityObjId>();
-        public List<UnityObjId> rawDirs
+        private List<ObjRef> _rawDirs = new List<ObjRef>();
+        public List<ObjRef> rawDirs
         {
             get
             {
@@ -89,9 +89,9 @@ namespace comunity
             return IsRawCdnPath(AssetDatabase.GetAssetPath(o));
         }
         
-        private bool IsCdnPath(List<UnityObjId> dirs, string path)
+        private bool IsCdnPath(List<ObjRef> dirs, string path)
         {
-            foreach (UnityObjId dir in dirs)
+            foreach (ObjRef dir in dirs)
             {
                 if (path.StartsWith(dir.path))
                 {
@@ -128,11 +128,11 @@ namespace comunity
             EditorGUILayout.EndHorizontal();
         }
 
-        private void AddObjects(List<UnityObjId> list, params Object[] objs)
+        private void AddObjects(List<ObjRef> list, params Object[] objs)
         {
             foreach (Object o in objs)
             {
-                UnityObjId obj = new UnityObjId(o);
+                ObjRef obj = new ObjRef(o);
                 if (o == null)
                 {
                     continue;
@@ -144,7 +144,7 @@ namespace comunity
             }
         }
 
-        private void DrawAssetDir(string title, List<UnityObjId> list, bool raw)
+        private void DrawAssetDir(string title, List<ObjRef> list, bool raw)
         {
             bool foldout = EditorUI.DrawHeader(title);
             if (foldout)
@@ -156,7 +156,7 @@ namespace comunity
                     AddObjects(list, drag);
                     SaveAuto();
                 }
-                var drawer = new UnityObjListDrawer(list);
+                var drawer = new ObjRefListDrawer(list);
                 drawer.allowSceneObject = false;
                 if (drawer.Draw())
                 {

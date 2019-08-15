@@ -6,11 +6,11 @@ using System.IO;
 namespace comunity
 {
     [System.Serializable]
-    public class UnityObjList : List<UnityObjId>
+    public class ObjRefList : List<ObjRef>
     {
         public void Add(Object obj)
         {
-            Add(new UnityObjId(obj));
+            Add(new ObjRef(obj));
         }
 
         public int IndexOf(Object obj)
@@ -27,7 +27,7 @@ namespace comunity
 
         public void Insert(int index, Object obj)
         {
-            Insert(index, new UnityObjId(obj));
+            Insert(index, new ObjRef(obj));
         }
 
         public void Remove(Object obj)
@@ -53,21 +53,21 @@ namespace comunity
             return IndexOf(obj) >= 0;
         }
 
-        public static UnityObjList Load(string path)
+        public static ObjRefList Load(string path)
         {
             if (File.Exists(path))
             {
                 BinarySerializer reader = new BinarySerializer(path, FileAccess.Read);
-                UnityObjList list = reader.Deserialize<UnityObjList>();
+                ObjRefList list = reader.Deserialize<ObjRefList>();
                 reader.Close();
                 if (list == null)
                 {
-                    list = new UnityObjList();
+                    list = new ObjRefList();
                 }
                 return list;
             } else
             {
-                return new UnityObjList();
+                return new ObjRefList();
             }
         }
 

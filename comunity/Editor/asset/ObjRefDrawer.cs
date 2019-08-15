@@ -3,11 +3,11 @@ using UnityEditor;
 
 namespace comunity
 {
-	public class UnityObjIdDrawer : ItemDrawer<UnityObjId>
+	public class ObjRefDrawer : ItemDrawer<ObjRef>
 	{
 		public bool allowSceneObject = true;
 
-		public override bool DrawItem(Rect rect, int index, UnityObjId item, out UnityObjId newItem)
+		public override bool DrawItem(Rect rect, int index, ObjRef item, out ObjRef newItem)
 		{
 			Rect[] area = EditorGUIUtil.SplitRectHorizontally(rect, (int)rect.width-15);
 			Object obj = item?.reference;
