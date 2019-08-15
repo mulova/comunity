@@ -21,8 +21,8 @@ namespace comunity
         public event Action<int, T> onDuplicate;
         public event Action<int, int, T> onMove;
         public bool allowDuplicate = false;
-        public bool allowSceneObject = true;
         public bool addSelected = true;
+        public bool allowSceneObject = true;
         public bool allowSelection = true;
         public bool horizontal;
         public Func<T> createDefaultValue = () => default(T);
@@ -74,6 +74,7 @@ namespace comunity
                 {
                     if (allowDuplicate || !list.Contains(o))
                     {
+                        changed = true;
                         list.Add(o);
                         onInsert?.Invoke(list.Count - 1, o);
                     }
@@ -95,10 +96,7 @@ namespace comunity
                     if (allowDuplicate || !list.Contains(objs[i]))
                     {
                         list.Insert(index + i, objs[i]);
-                        if (onInsert != null)
-                        {
-                            onInsert(index + i, objs[i]);
-                        }
+                        onInsert?.Invoke(index + i, objs[i]);
                     }
                 }
             }
@@ -150,9 +148,9 @@ namespace comunity
         {
         }
 
-        public void DrawItemBackground(UnityEngine.Rect position, int index)
+        public void DrawItemBackground(Rect position, int index)
         {
-            //            int i = GetActualIndex(index);
+            itemDrawer.DrawItemBackground(position, index, list[index]);
         }
 
         public void DrawItem(Rect bound, int index)

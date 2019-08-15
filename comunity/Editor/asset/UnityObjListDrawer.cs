@@ -7,7 +7,9 @@ namespace comunity
 {
 	public class UnityObjListDrawer : ListDrawer<UnityObjId>
 	{
-		public UnityObjListDrawer(List<UnityObjId> list) : base(list, new UnityObjIdDrawer())
+        public bool allowSceneObject = true;
+
+        public UnityObjListDrawer(List<UnityObjId> list) : base(list, new UnityObjIdDrawer())
 		{
 			this.createDefaultValue = () => CreateItem(Selection.activeObject);
 			this.createItem = CreateItem;
@@ -20,7 +22,7 @@ namespace comunity
                 return new UnityObjId(o);
             } else
             {
-               return new UnityObjId((string)null);
+               return new UnityObjId(null);
             }
         }
 	}

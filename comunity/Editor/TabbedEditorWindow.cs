@@ -14,6 +14,14 @@ namespace comunity {
 		private bool closable;
 		private static bool reloadStatic;
 
+        protected EditorTab activeTab
+        {
+            get
+            {
+                return selected?.tab;
+            }
+        }
+
         protected virtual void OnEnable() {
 			CreateTabs();
 			string tabName = EditorPrefs.GetString(GetWindowId());

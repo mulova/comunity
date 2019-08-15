@@ -14,8 +14,23 @@ namespace UnityEngine.Ex
     public static class ObjectEx {
         
         private static WeakHashSet<Object> prefabPool = new WeakHashSet<Object>();
-        
-        
+
+        public static GameObject GetGameObject(this Object o)
+        {
+            if (o is GameObject)
+            {
+                return o as GameObject;
+            }
+            else if (o is Component)
+            {
+                return ((Component)o).gameObject;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public static void DestroyEx(this Object o) {
             if (o == null) {
                 return;
