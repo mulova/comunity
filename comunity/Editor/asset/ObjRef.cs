@@ -11,14 +11,14 @@ namespace comunity
     [System.Serializable]
     public class ObjRef
     {
-        [SerializeField] public string _id;
+        [SerializeField] private string _id;
         [SerializeField] private bool _asset;
-        [SerializeField] private Type _type;
+        [SerializeField] private string _type;
 
         // guid for asset, scene path for scene object
         public string id { get { return _id; } private set { this._id = value; } }
         public bool asset { get { return _asset; } private set { _asset = value; } }
-        public Type type { get { return _type; } private set { _type = value; } }
+        public Type type { get { return !_type.IsEmpty()? ReflectionUtil.GetType(_type): null; } private set { _type = value.FullName; } }
 
         public Object reference
         {
@@ -29,7 +29,7 @@ namespace comunity
                     string uid = AssetDatabase.GUIDToAssetPath(id);
                     if (!uid.IsEmpty())
                     {
-                        return AssetDatabase.LoadAssetAtPath(uid, _type);
+                        return AssetDatabase.LoadAssetAtPath(uid, type);
                     }
                     else
                     {
@@ -44,7 +44,8 @@ namespace comunity
                         if (type == typeof(GameObject))
                         {
                             return t.gameObject;
-                        } else
+                        }
+                        else
                         {
                             return t.GetComponent(type);
                         }
@@ -98,7 +99,6 @@ namespace comunity
             if (o != null)
             {
                 reference = o;
-                type = o.GetType();
             }
         }
 

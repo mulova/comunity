@@ -22,7 +22,6 @@ namespace comunity
         public event Action<int, int, T> onMove;
         public bool allowDuplicate = false;
         public bool addSelected = true;
-        public bool allowSelection = true;
         public bool horizontal;
         public Func<T> createDefaultValue = () => default(T);
         public Func<Object, T> createItem;
@@ -230,7 +229,7 @@ namespace comunity
         {
             List<T> l = new List<T>();
             Object[] selObjs = Selection.objects;
-            if (allowSelection || (selObjs != null && selObjs.Length > 1))
+            if (selObjs != null && selObjs.Length > 1)
             {
                 if (Selection.objects.IsNotEmpty())
                 {
