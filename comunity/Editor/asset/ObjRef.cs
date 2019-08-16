@@ -45,7 +45,7 @@ namespace comunity
                         {
                             return t.gameObject;
                         }
-                        else
+                        else if (type != null)
                         {
                             return t.GetComponent(type);
                         }
