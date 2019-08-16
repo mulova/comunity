@@ -123,7 +123,7 @@ namespace comunity
 
         public override string ToString()
         {
-            return id;
+            return path;
         }
     }
 }
