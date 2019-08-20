@@ -12,7 +12,11 @@ namespace comunity {
 		private TabData selected;
 		private List<TabData> tabs = new List<TabData>();
 		private bool closable;
-		private static bool reloadStatic;
+
+        public Color activeTabBgColor = Color.red;
+        public Color activeTabContentColor = Color.green;
+        public Color inactiveTabBgColor = Color.black;
+        public Color inactiveTabContentColor = Color.gray;
 
         protected EditorTab activeTab
         {
@@ -22,12 +26,29 @@ namespace comunity {
             }
         }
 
+        private bool isContextMenu
+        {
+            get
+            {
+                Event currentEvent = Event.current;
+                return currentEvent.type == EventType.ContextClick;
+            }
+        }
+
+        public int tabCount
+        {
+            get
+            {
+                return tabs.Count;
+            }
+        }
+
         protected virtual void OnEnable() {
 			CreateTabs();
 			string tabName = EditorPrefs.GetString(GetWindowId());
 			if (!tabName.IsEmpty()) {
 				foreach (TabData t in tabs) {
-					if (tabName == t.tab.id.ToString()) {
+					if (tabName == t.tab.ToString()) {
 						selected = t;
 						break;
 					}
@@ -81,15 +102,29 @@ namespace comunity {
 			Repaint();
 			selected.tab.OnSelectionChange();
         }
-        
+
+        private GenericMenu _contextMenu;
+        public GenericMenu contextMenu
+        {
+            get
+            {
+                if (_contextMenu == null)
+                {
+                    _contextMenu = new GenericMenu();
+                }
+                return _contextMenu;
+            }
+        }
+
         protected void OnGUI() {
 			try {
+                _contextMenu = null;
 				if (showAllTab) {
 					EditorGUILayout.BeginHorizontal();
 					for (int i=0; i<tabs.Count; ++i) {
 						EditorGUILayout.BeginVertical();
 						TabData t = tabs[i];
-						GUILayout.Label(t.tab.id.ToString(), EditorStyles.boldLabel);
+						GUILayout.Label(t.tab.ToString(), EditorStyles.boldLabel);
 						t.tab.OnHeaderGUI();
 						t.tab.ShowResult();
 						t.scrollPos = EditorGUILayout.BeginScrollView(t.scrollPos);
@@ -97,44 +132,52 @@ namespace comunity {
 						EditorGUILayout.EndScrollView();
 						t.tab.OnFooterGUI();
 						EditorGUILayout.EndVertical();
-					}
-					EditorGUILayout.EndHorizontal();
-				} else {
-                    Color bgColor = GUI.backgroundColor;
-                    Color contentColor = GUI.contentColor;
-					EditorGUILayout.BeginHorizontal();
-					for (int i=0; i<tabs.Count; ++i) {
-						TabData t = tabs[i];
-						bool sel = t == selected;
-						if (sel) {
-                            GUI.backgroundColor = Color.white;
-                            GUI.contentColor = Color.gray;
-                            GUILayout.Button(t.tab.id.ToString(), EditorStyles.toolbarButton);
-                            if (closable && GUILayout.Button("x", EditorStyles.toolbarButton, GUILayout.Width(15))) {
-                                selected.tab.OnDisable();
-                                tabs.Remove(selected);
-                                i = Math.Max(0, i-1);
-                                if (tabs.Count > 0) {
-                                    selected = tabs[i];
-                                } else {
-                                    selected = null;
-                                }
-                            }
-                        } else {
-                            GUI.backgroundColor = Color.gray;
-                            GUI.contentColor = Color.white;
-                            if (GUILayout.Button(t.tab.id.ToString(), EditorStyles.toolbarButton)) {
-                                selected.tab.OnSelected(false);
-                                selected = t;
-                                selected.tab.OnSelected(true);
-                                sel = true;
-                                EditorPrefs.SetString(GetWindowId(), t.tab.id.ToString());
-                            }
+                        if (isContextMenu)
+                        {
+                            selected.tab.AddContextMenu();
                         }
                     }
-                    EditorGUILayout.EndHorizontal();
-                    GUI.backgroundColor = bgColor;
-                    GUI.contentColor = contentColor;
+					EditorGUILayout.EndHorizontal();
+				} else {
+                    if (tabs.Count > 1)
+                    {
+                        Color bgColor = GUI.backgroundColor;
+                        Color contentColor = GUI.contentColor;
+                        EditorGUILayout.BeginHorizontal();
+                        for (int i=0; i<tabs.Count; ++i) {
+                            TabData t = tabs[i];
+                            bool sel = t == selected;
+                            if (sel) {
+                                GUI.backgroundColor = activeTabBgColor;
+                                GUI.contentColor = activeTabContentColor;
+                                GUILayout.Button(t.tab.ToString(), EditorStyles.toolbarButton);
+                                if (closable && GUILayout.Button("x", EditorStyles.toolbarButton, GUILayout.Width(15))) {
+                                    selected.tab.OnDisable();
+                                    selected.tab.Remove();
+                                    tabs.Remove(selected);
+                                    i = Math.Max(0, i-1);
+                                    if (tabs.Count > 0) {
+                                        selected = tabs[i];
+                                    } else {
+                                        selected = null;
+                                    }
+                                }
+                            } else {
+                                GUI.backgroundColor = inactiveTabBgColor;
+                                GUI.contentColor = inactiveTabContentColor;
+                                if (GUILayout.Button(t.tab.ToString(), EditorStyles.toolbarButton)) {
+                                    selected.tab.OnSelected(false);
+                                    selected = t;
+                                    selected.tab.OnSelected(true);
+                                    sel = true;
+                                    EditorPrefs.SetString(GetWindowId(), t.tab.ToString());
+                                }
+                            }
+                        }
+                        EditorGUILayout.EndHorizontal();
+                        GUI.backgroundColor = bgColor;
+                        GUI.contentColor = contentColor;
+                    }
 					if (selected != null) {
 						selected.tab.OnHeaderGUI();
 						selected.tab.ShowResult();
@@ -142,10 +185,18 @@ namespace comunity {
 						selected.tab.OnInspectorGUI();
 						EditorGUILayout.EndScrollView();
 						selected.tab.OnFooterGUI();
+                        if (isContextMenu)
+                        {
+                            selected.tab.AddContextMenu();
+                        }
 					}
 				}
 
-                CheckContextMenu();
+                if (isContextMenu)
+                {
+                    AddContextMenu();
+                    _contextMenu.ShowAsContext();
+                }
 			} catch (Exception ex) {
 				Exception e = ex;
 				if (e.InnerException != null) {
@@ -156,17 +207,8 @@ namespace comunity {
 			}
 		}
 
-        protected virtual void ShowContextMenu() { }
+        protected virtual void AddContextMenu() { }
 
-        private void CheckContextMenu()
-        {
-            Event currentEvent = Event.current;
-            if (currentEvent.type == EventType.ContextClick)
-            {
-                ShowContextMenu();
-            }
-        }
-		
 		protected void OnFocus() {
 			sceneName = SceneName;
 			foreach (TabData tab in tabs) {
@@ -228,8 +270,27 @@ namespace comunity {
 				selected = tabs[0];
 			}
 		}
-		
-		public EditorTab GetSelected() {
+
+        public void RemoveTab(EditorTab tab)
+        {
+            int index = tabs.FindIndex(t => t.tab == tab);
+            tabs.RemoveAt(index);
+            if (selected != null && selected.tab == tab)
+            {
+                tab.OnSelected(false);
+                if (index > 0)
+                {
+                    selected = tabs[index - 1];
+                } else if (tabs.Count > 0)
+                {
+                    selected = tabs[0];
+                }
+                selected.tab.OnSelected(true);
+            }
+            tab.OnDisable();
+        }
+
+        public EditorTab GetSelected() {
 			return selected.tab;
 		}
 		

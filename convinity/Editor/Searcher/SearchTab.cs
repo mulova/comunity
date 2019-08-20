@@ -172,13 +172,5 @@ namespace convinity
         public override void OnDisable()
         {
         }
-
-        public object Id
-        {
-            get
-            {
-                return id;
-            }
-        }
     }
 }

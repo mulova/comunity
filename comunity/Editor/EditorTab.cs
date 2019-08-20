@@ -1,24 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEditor;
-using Object = UnityEngine.Object;
 using UnityEngine;
 using mulova.commons;
 using Rotorz.Games.Collections;
 
 namespace comunity {
 	public abstract class EditorTab {
-		
-		public readonly object id;
-		private string error = string.Empty;
-		private string warning = string.Empty;
-		private string info = string.Empty;
-		private TabbedEditorWindow window;
-		
-		public EditorTab(object id, TabbedEditorWindow window) {
-			this.id = id;
-			this.window = window;
-		}
+
+        private object id;
+        private string error = string.Empty;
+        private string warning = string.Empty;
+        private string info = string.Empty;
+        protected TabbedEditorWindow window { get; private set; }
+
+        public EditorTab(TabbedEditorWindow window)
+        {
+            this.id = GetType().Name;
+            this.window = window;
+        }
+
+        public EditorTab(object id, TabbedEditorWindow window) {
+            this.id = id;
+            this.window = window;
+        }
 
 		protected float GetWidth() {
 			return position.width;
@@ -27,12 +32,21 @@ namespace comunity {
 			return window;
 		}
 
-		public abstract void OnEnable();
+        protected GenericMenu contextMenu
+        {
+            get
+            {
+                return window.contextMenu;
+            }
+        }
+
+        public abstract void OnEnable();
 		public abstract void OnHeaderGUI();
 		public abstract void OnInspectorGUI();
 		public abstract void OnFooterGUI();
-		public abstract void OnDisable();
-		public abstract void OnChangePlayMode(PlayModeStateChange stateChange);
+        public abstract void OnDisable();
+		public virtual void Remove() { }
+        public abstract void OnChangePlayMode(PlayModeStateChange stateChange);
 		public abstract void OnChangeScene(string sceneName);
 		public abstract void OnSelected(bool sel);
 		/// <summary>
@@ -93,8 +107,10 @@ namespace comunity {
 				this.info = string.Format(format, param);
 			}
 		}
-		
-		public void ShowResult() {
+
+        public virtual void AddContextMenu() { }
+
+        public void ShowResult() {
 			if (!string.IsNullOrEmpty(error)) {
 				EditorGUILayout.HelpBox(error, MessageType.Error);
 			}
@@ -163,7 +179,12 @@ namespace comunity {
 				AssetDatabase.SaveAssets();
 			}
 		}
-	}
+
+        public override string ToString()
+        {
+            return id.ToString();
+        }
+    }
 }
 
 
