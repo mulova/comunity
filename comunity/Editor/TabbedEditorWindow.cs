@@ -24,6 +24,17 @@ namespace comunity {
             {
                 return selected?.tab;
             }
+            set
+            {
+                foreach (var t in tabs)
+                {
+                    if (t.tab == value)
+                    {
+                        selected = t;
+                        break;
+                    }
+                }
+            }
         }
 
         private bool isContextMenu
