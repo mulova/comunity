@@ -10,7 +10,7 @@ namespace comunity
 {
     public abstract class PropertyDrawerBase : PropertyDrawer
     {
-        private const float lineHeight = 16;
+        public const int lineHeight = 16;
         private SerializedProperty prop;
         protected Rect bound;
         protected int index;
@@ -64,16 +64,6 @@ namespace comunity
             return new Rect[] { left, right};
         }
 
-        protected Rect[] SplitLine(int line, float leftWidth)
-        {
-            return SplitRect(GetLineRect(line), leftWidth);
-        }
-
-        protected Rect[] SplitLineMulti(int line, int count)
-        {
-            return GetLineRect(line).SplitHorizontally(count);
-        }
-
         protected bool DrawObjectField<T>(Rect r, GUIContent label, ref T o, bool allowSceneObj = true) where T:Object
         {
             Rect controlRect = EditorGUI.PrefixLabel(r, label);
@@ -95,7 +85,7 @@ namespace comunity
             {
                 ReorderableList list = new ReorderableList(property.serializedObject, property);
                 list.DoList(position);
-                list.drawElementCallback = DrawElement;
+                list.drawElementCallback = DrawArrayElement;
             } else
             {
                 DrawProperty(property, position);
@@ -103,7 +93,7 @@ namespace comunity
             this.prop = null;
         }
 
-        private void DrawElement(Rect rect, int idx, bool active, bool focused)
+        private void DrawArrayElement(Rect rect, int idx, bool active, bool focused)
         {
             var element = prop.GetArrayElementAtIndex(idx);
             this.bound = rect;

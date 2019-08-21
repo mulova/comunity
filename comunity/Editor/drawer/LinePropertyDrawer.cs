@@ -9,7 +9,7 @@ namespace comunity
         protected override void DrawProperty(SerializedProperty p, Rect bound)
         {
             var attr = attribute as LineDrawerAttribute;
-            Rect[] r = bound.SplitHorizontally(attr.names.Length);
+            Rect[] r = bound.SplitByHeightCount(attr.names.Length);
             for (int i=0; i<r.Length; ++i)
             {
                 var n = attr.names[i];

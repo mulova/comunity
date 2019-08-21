@@ -39,6 +39,8 @@ namespace comunity
             }
         }
 
+        public bool displayIndex;
+
 
         public bool displayAdd
         {
@@ -156,7 +158,16 @@ namespace comunity
 
         protected virtual bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
         {
-            return false;
+            var item = drawer.serializedProperty.GetArrayElementAtIndex(index);
+            if (displayIndex)
+            {
+                var rects = rect.SplitByWidths(20);
+                EditorGUI.LabelField(rects[0], index.ToString(), EditorStyles.boldLabel);
+                return EditorGUI.PropertyField(rects[1], item, new GUIContent(""));
+            } else
+            {
+                return EditorGUI.PropertyField(rect, item, new GUIContent(""));
+            }
         }
 
         private void _DrawItem(Rect rect, int index, bool isActive, bool isFocused)

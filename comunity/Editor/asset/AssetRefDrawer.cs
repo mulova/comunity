@@ -37,7 +37,7 @@ namespace comunity
         protected override void DrawProperty(SerializedProperty p, Rect bound)
         {
             int lineCount = GetLineCount(p);
-            var bounds = bound.SplitHorizontally(lineCount);
+            var bounds = bound.SplitByHeights(lineHeight);
 			int lineNo = 0;
 			SerializedProperty cdn = GetProperty("cdn");
 			SerializedProperty path = GetProperty("path");
