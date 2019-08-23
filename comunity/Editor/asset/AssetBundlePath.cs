@@ -150,7 +150,7 @@ namespace comunity
             if (foldout)
             {
                 EditorUI.BeginContents();
-                Object[] drag = EditorGUIUtil.DnD(EditorGUILayout.GetControlRect());
+                Object[] drag = EditorGUILayoutUtil.DnD(EditorGUILayout.GetControlRect());
                 if (drag != null)
                 {
                     AddObjects(list, drag);

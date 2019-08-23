@@ -94,7 +94,7 @@ namespace convinity {
 			}
 			protected override void DrawInspectorImpl()
 			{
-				EditorGUIUtil.TextField("Name Filter", ref audioName);
+				EditorGUILayoutUtil.TextField("Name Filter", ref audioName);
 			}
 			public override void Apply(List<AudioClip> found) {}
 		}
@@ -111,7 +111,7 @@ namespace convinity {
 			protected abstract bool FilterImpl(AudioImporter importer, AudioClip clip);
 			public void DrawInspector() {
 				EditorGUILayout.BeginHorizontal();
-				EditorGUIUtil.Toggle(null, ref enabled, GUILayout.Width(40));
+				EditorGUILayoutUtil.Toggle(null, ref enabled, GUILayout.Width(40));
 				DrawInspectorImpl();
 				EditorGUILayout.EndHorizontal();
 			}

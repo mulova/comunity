@@ -33,7 +33,7 @@ namespace comunity
                 changed = true;
             }
             O obj = ReflectionUtil.GetFieldValue<O>(t, objVar);
-            if (EditorGUIUtil.ObjectField<O>(ref obj, allowSceneObj)) {
+            if (EditorGUILayoutUtil.ObjectField<O>(ref obj, allowSceneObj)) {
                 ReflectionUtil.SetFieldValue<O>(t, objVar, obj);
                 changed = true;
             }

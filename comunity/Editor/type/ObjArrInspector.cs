@@ -24,7 +24,7 @@ namespace comunity
         protected override bool OnInspectorGUI(T obj, int i)
         {
             float width = GetWidth();
-            if (EditorGUIUtil.ObjectField<T>(ref obj, allowSceneObj, GUILayout.MinWidth(width * 0.4F)))
+            if (EditorGUILayoutUtil.ObjectField<T>(ref obj, allowSceneObj, GUILayout.MinWidth(width * 0.4F)))
             {
                 this[i] = obj;
                 return true;

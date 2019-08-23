@@ -114,7 +114,7 @@ namespace comunity
         public static void PreferenceMenu()
         {
             bool di = DiService.enableDi;
-            if (EditorGUIUtil.Toggle("enable DI", ref di))
+            if (EditorGUILayoutUtil.Toggle("enable DI", ref di))
             {
                 DiService.enableDi = di;
                 Save();

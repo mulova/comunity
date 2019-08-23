@@ -17,26 +17,26 @@ namespace comunity
 {
     public class EditorGUIUtil {
         
-        public static bool PopupNullable<T>(string label, ref T selection, IList<T> items, params GUILayoutOption[] options) {
+        public static bool PopupNullable<T>(Rect bound, string label, ref T selection, IList<T> items) {
             T sel = selection;
-            bool changed = PopupNullable<T>(label, ref sel, items, ObjToString.ScenePathToString, options);
+            bool changed = PopupNullable<T>(bound, label, ref sel, items, ObjToString.ScenePathToString);
             selection = sel;
             return changed;
         }
         
-        public static bool PopupNullable<T>(string label, ref T selection, IList<T> items, ToString toString, params GUILayoutOption[] options) {
+        public static bool PopupNullable<T>(Rect bound, string label, ref T selection, IList<T> items, ToString toString) {
             if (items.Count == 0) {
                 bool changed = false;
                 Color old = GUI.backgroundColor;
                 GUI.backgroundColor = Color.red;
                 if (label == null) {
-                    int i = EditorGUILayout.Popup(1, new string[] {"-", selection.ToText()}, options);
+                    int i = EditorGUI.Popup(bound, 1, new string[] {"-", selection.ToText()});
                     if (i == 0) {
                         selection = default(T);
                         changed = true;
                     }
                 } else {
-                    int i = EditorGUILayout.Popup(label, 1, new string[] {"-", selection.ToText()}, options);
+                    int i = EditorGUI.Popup(bound, label, 1, new string[] {"-", selection.ToText()});
                     if (i == 0) {
                         selection = default(T);
                         changed = true;
@@ -57,9 +57,9 @@ namespace comunity
             }
             int newIndex = 0;
             if (label == null) {
-                newIndex = EditorGUILayout.Popup(index, str, options);
+                newIndex = EditorGUI.Popup(bound, index, str);
             } else {
-                newIndex = EditorGUILayout.Popup(label, index, str, options);
+                newIndex = EditorGUI.Popup(bound, label, index, str);
             }
             if (newIndex == 0) {
                 selection = default(T);
@@ -73,10 +73,10 @@ namespace comunity
         /// Draws the selector.
         /// </summary>
         /// <returns><c>true</c>, if selection was changed, <c>false</c> otherwise.</returns>
-        public static bool PopupFiltered<T>(string label, ref T selection, IList<T> items, ref string filter, params GUILayoutOption[] options) {
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField(label, GUILayout.Width(50));
-            EditorGUIUtil.TextField(null, ref filter, EditorStyles.toolbarTextField);
+        public static bool PopupFiltered<T>(Rect bound, string label, ref T selection, IList<T> items, ref string filter) {
+            var bounds = bound.SplitByWidths(50);
+            EditorGUI.LabelField(bounds[0], label);
+            TextField(bounds[1], null, ref filter, EditorStyles.toolbarTextField);
             IList<T> filtered = null;
             if (!filter.IsEmpty()) {
                 filtered = new List<T>(items.Count);
@@ -88,61 +88,58 @@ namespace comunity
             } else {
                 filtered = items;
             }
-            bool changed = EditorGUIUtil.PopupNullable<T>(null, ref selection, filtered);
-            EditorGUILayout.EndHorizontal();
+            bool changed = PopupNullable<T>(bounds[1], null, ref selection, filtered);
             return changed;
         }
         
-        public static bool SearchField(string label, ref string str) {
+        public static bool SearchField(Rect bound, string label, ref string str) {
+            var bounds = bound.SplitByWidths((int)bound.width - 18);
             string s = str;
-            EditorGUILayout.BeginHorizontal();
-            EditorGUIUtil.TextField("", ref s, new GUIStyle("SearchTextField"));
-            if (GUILayout.Button("", "SearchCancelButton", GUILayout.Width(18f)))
+            TextField(bounds[0], "", ref s, new GUIStyle("SearchTextField"));
+            if (GUI.Button(bounds[1], "", "SearchCancelButton"))
             {
                 s = "";
                 GUIUtility.keyboardControl = 0;
             }
-            EditorGUILayout.EndHorizontal();
             bool changed = s != str;
             str = s;
             return changed;
         }
 
-        public static bool TextField(string label, ref string str, params GUILayoutOption[] options) {
-            return TextField(label, ref str, EditorStyles.textField, options);
+        public static bool TextField(Rect bound, string label, ref string str) {
+            return TextField(bound, label, ref str, EditorStyles.textField);
         }
         
-        public static bool TextField(string label, ref string str, GUIStyle style, params GUILayoutOption[] options) {
+        public static bool TextField(Rect bound, string label, ref string str, GUIStyle style) {
             if (str == null) {
                 str = "";
             }
             string newStr = label == null?
-                EditorGUILayout.TextField(str, style, options):
-                EditorGUILayout.TextField(label, str, style, options);
+                EditorGUI.TextField(bound, str, style):
+                EditorGUI.TextField(bound, label, str, style);
             bool changed = newStr != str;
             str = newStr;
             return changed;
         }
         
-        public static bool TextArea(string title, ref string str, params GUILayoutOption[] options) {
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.PrefixLabel(title);
-            bool changed = TextArea(ref str, options);
-            EditorGUILayout.EndHorizontal();
+        public static bool TextArea(Rect bound, string title, ref string str) {
+            var bounds = bound.SplitByWidths(50);
+            EditorGUI.PrefixLabel(bounds[0], new GUIContent(title));
+            bool changed = TextArea(bounds[1], ref str);
             return changed;
         }
         
-        public static bool TextArea(ref string str, params GUILayoutOption[] options) {
-            return TextArea(ref str, null, options);
+        public static bool TextArea(Rect bound, ref string str) {
+            return TextArea(bound, ref str, null);
         }
         
-        public static bool TextArea(ref string str, GUIStyle style, params GUILayoutOption[] options) {
+        public static bool TextArea(Rect bound, ref string str, GUIStyle style) {
             if (str == null) {
                 str = "";
             }
             string newStr = style != null?
-                EditorGUILayout.TextArea(str, style, options):
-                EditorGUILayout.TextArea(str, options);
+                EditorGUI.TextArea(bound, str, style):
+                EditorGUI.TextArea(bound, str);
             if (newStr != str) {
                 str = newStr;
                 return true;
@@ -150,45 +147,45 @@ namespace comunity
             return false;
         }
         
-        public static bool PopupEnum(Type type, string label, ref Enum selection, params GUILayoutOption[] options) {
+        public static bool PopupEnum(Rect bound, Type type, string label, ref Enum selection) {
             Array arr = Enum.GetValues(type);
             Enum[] values = new Enum[arr.Length];
             for (int i=0; i<values.Length; ++i) {
                 values[i] = (Enum)arr.GetValue(i);
             }
-            return Popup<Enum>(label, ref selection, values, options);
+            return Popup<Enum>(bound, label, ref selection, values);
         }
 
-        public static bool PopupEnum<T>(string label, ref T selection, IList<T> list, params GUILayoutOption[] options) where T: struct, IComparable, IConvertible, IFormattable {
-            return Popup<T>(label, ref selection, list, ObjToString.DefaultToString, null, options);
+        public static bool PopupEnum<T>(Rect bound, string label, ref T selection, IList<T> list) where T: struct, IComparable, IConvertible, IFormattable {
+            return Popup<T>(bound, label, ref selection, list, ObjToString.DefaultToString, null);
         }
         
-        public static bool PopupEnum<T>(string label, ref T selection, params GUILayoutOption[] options) where T: struct, IComparable, IConvertible, IFormattable {
-            return Popup<T>(label, ref selection, EnumUtil.Values<T>(), ObjToString.DefaultToString, null, options);
+        public static bool PopupEnum<T>(Rect bound, string label, ref T selection) where T: struct, IComparable, IConvertible, IFormattable {
+            return Popup<T>(bound, label, ref selection, EnumUtil.Values<T>(), ObjToString.DefaultToString, null);
         }
         
-        public static bool PopupEnum<T>(string label, ref T selection, GUIStyle style, params GUILayoutOption[] options) where T: struct, IComparable, IConvertible, IFormattable {
-            bool ret = Popup<T>(label, ref selection, EnumUtil.Values<T>(), ObjToString.DefaultToString, style, options);
+        public static bool PopupEnum<T>(Rect bound, string label, ref T selection, GUIStyle style) where T: struct, IComparable, IConvertible, IFormattable {
+            bool ret = Popup<T>(bound, label, ref selection, EnumUtil.Values<T>(), ObjToString.DefaultToString, style);
             return ret;
         }
         
-        public static bool Popup<T>(ref T selection, IList<T> items, params GUILayoutOption[] options) {
-            bool ret = Popup<T>(null, ref selection, items, ObjToString.DefaultToString, options);
+        public static bool Popup<T>(Rect bound, ref T selection, IList<T> items) {
+            bool ret = Popup<T>(bound, null, ref selection, items, ObjToString.DefaultToString);
             return ret;
         }
         
-        public static bool Popup<T>(string label, ref T selection, IList<T> items, params GUILayoutOption[] popupOptions) {
-            return Popup<T>(label, ref selection, items, ObjToString.DefaultToString, popupOptions);
+        public static bool Popup<T>(Rect bound, string label, ref T selection, IList<T> items) {
+            return Popup<T>(bound, label, ref selection, items, ObjToString.DefaultToString);
         }
         
-        public static bool Popup<T>(string label, ref T selection, IList<T> items, ToString toString, params GUILayoutOption[] popupOptions) {
-            return Popup<T>(label, ref selection, items, toString, null, popupOptions);
+        public static bool Popup<T>(Rect bound, string label, ref T selection, IList<T> items, ToString toString) {
+            return Popup<T>(bound, label, ref selection, items, toString, null);
         }
         /**
         * @param label null이면 출력하지 않는다.
         * @return 선택이 되었으면 true
         */
-        public static bool Popup<T>(string label, ref T selection, IList<T> items, ToString toString, GUIStyle style, params GUILayoutOption[] popupOptions) {
+        public static bool Popup<T>(Rect bound, string label, ref T selection, IList<T> items, ToString toString, GUIStyle style) {
             if (items.Count == 0) {
                 return false;
             }
@@ -204,27 +201,22 @@ namespace comunity
             // Show if current value is not the member of popup list
             Color c = GUI.contentColor;
             if (index < 0 && selection != null) {
-                EditorGUILayout.BeginVertical();
                 GUI.contentColor = Color.red;
-                EditorGUILayout.LabelField("Invalid: "+selection.ToString(), EditorStyles.miniBoldLabel);
                 index = 0;
             }
             GUI.contentColor = c;
             if (style != null) {
                 if (label != null) {
-                    newIndex = EditorGUILayout.Popup(label, index, str, style, popupOptions);
+                    newIndex = EditorGUI.Popup(bound, label, index, str, style);
                 } else {
-                    newIndex = EditorGUILayout.Popup(index, str, style, popupOptions);
+                    newIndex = EditorGUI.Popup(bound, index, str, style);
                 }
             } else {
                 if (label != null) {
-                    newIndex = EditorGUILayout.Popup(label, index, str, popupOptions);
+                    newIndex = EditorGUI.Popup(bound, label, index, str);
                 } else {
-                    newIndex = EditorGUILayout.Popup(index, str, popupOptions);
+                    newIndex = EditorGUI.Popup(bound, index, str);
                 }
-            }
-            if (index < 0 && selection != null) {
-                EditorGUILayout.EndVertical();
             }
             if (index != newIndex) {
                 selection = items[newIndex];
@@ -233,23 +225,23 @@ namespace comunity
             return false;
         }
         
-        public static bool Toggle(string label, ref bool b, params GUILayoutOption[] options) {
-            return Toggle(label, ref b, null, options);
+        public static bool Toggle(Rect bound, string label, ref bool b) {
+            return Toggle(bound, label, ref b, null);
         }
         
-        public static bool Toggle(string label, ref bool b, GUIStyle style, params GUILayoutOption[] options) {
+        public static bool Toggle(Rect bound, string label, ref bool b, GUIStyle style) {
             bool newb = false;
             if (label == null) {
                 if (style != null) {
-                    newb = EditorGUILayout.Toggle(b, style, options);
+                    newb = EditorGUI.Toggle(bound, b, style);
                 } else {
-                    newb = EditorGUILayout.Toggle(b, options);
+                    newb = EditorGUI.Toggle(bound, b);
                 }
             } else {
                 if (style != null) {
-                    newb = EditorGUILayout.Toggle(label, b, style, options);
+                    newb = EditorGUI.Toggle(bound, label, b, style);
                 } else {
-                    newb = EditorGUILayout.Toggle(label, b, options);
+                    newb = EditorGUI.Toggle(bound, label, b);
                 }
             }
             if (newb != b) {
@@ -259,38 +251,38 @@ namespace comunity
             return false;
         }
         
-        public static bool IntField(string label, ref float f, params GUILayoutOption[] options) {
+        public static bool IntField(string label, ref float f) {
             int i = (int)f;
-            bool ret = IntField(label, ref i, options);
+            bool ret = IntField(label, ref i);
             f = i;
             return ret;
         }
         
-        public static bool IntField(string label, ref int i, params GUILayoutOption[] options) {
-            return IntField(label, ref i, null, int.MinValue, int.MaxValue, options);
+        public static bool IntField(string label, ref int i) {
+            return IntField(label, ref i, null, int.MinValue, int.MaxValue);
         }
         
-        public static bool IntField(string label, ref int i, GUIStyle style, params GUILayoutOption[] options) {
-            return IntField(label, ref i, style, int.MinValue, int.MaxValue, options);
+        public static bool IntField(string label, ref int i, GUIStyle style) {
+            return IntField(label, ref i, style, int.MinValue, int.MaxValue);
         }
         
-        public static bool IntField(string label, ref int i, int min, int max, params GUILayoutOption[] options) {
-            return IntField(label, ref i, null, min, max, options);
+        public static bool IntField(string label, ref int i, int min, int max) {
+            return IntField(label, ref i, null, min, max);
         }
         
-        public static bool IntField(string label, ref int i, GUIStyle style, int min, int max, params GUILayoutOption[] options) {
+        public static bool IntField(string label, ref int i, GUIStyle style, int min, int max) {
             int newi = i;
             if (label != null) {
                 if (style != null) {
-                    newi = EditorGUILayout.IntField(label, i, style, options);
+                    newi = EditorGUILayout.IntField(label, i, style);
                 } else {
-                    newi = EditorGUILayout.IntField(label, i, options);
+                    newi = EditorGUILayout.IntField(label, i);
                 }
             } else {
                 if (style != null) {
-                    newi = EditorGUILayout.IntField(i, style, options);
+                    newi = EditorGUILayout.IntField(i, style);
                 } else {
-                    newi = EditorGUILayout.IntField(i, options);
+                    newi = EditorGUILayout.IntField(i);
                 }
             }
             newi = Mathf.Clamp(newi, min, max);
@@ -462,7 +454,7 @@ namespace comunity
         public static bool GameObjectField(string label, ref GameObject obj, bool allowSceneObjects, ref bool floating, params GUILayoutOption[] options) {
             EditorGUILayout.BeginHorizontal();
             bool changed = ObjectField<GameObject>(label, ref obj, allowSceneObjects);
-            EditorGUIUtil.Toggle(null, ref floating, GUILayout.Width(30));
+            EditorGUILayoutUtil.Toggle(null, ref floating, GUILayout.Width(30));
             if (floating && Selection.activeGameObject!=null) {
                 if (obj!=Selection.activeGameObject) {
                     obj = Selection.activeGameObject;
@@ -476,7 +468,7 @@ namespace comunity
         public static bool ComponentField<T>(string label, ref T obj, bool allowSceneObjects, ref bool floating, params GUILayoutOption[] options) where T : Component {
             EditorGUILayout.BeginHorizontal();
             bool changed = ObjectField<T>(label, ref obj, allowSceneObjects);
-            EditorGUIUtil.Toggle(null, ref floating, GUILayout.Width(30));
+            EditorGUILayoutUtil.Toggle(null, ref floating, GUILayout.Width(30));
             if (floating && Selection.activeGameObject!=null) {
                 T selObj = Selection.activeGameObject.GetComponent<T>();
                 if (selObj != null && obj!=selObj) {

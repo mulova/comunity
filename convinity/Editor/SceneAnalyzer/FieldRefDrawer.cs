@@ -54,7 +54,7 @@ namespace convinity
                 string displayName = item.scenePath == null ?
                     string.Format("{0} [{1}]", item.assetPath, item.GetSignature()) :
                     string.Format("{0} [{1}]", item.scenePath, item.GetSignature());
-                Rect[] rects = EditorGUIUtil.SplitRectHorizontally(position, 0.3f);
+                Rect[] rects = EditorGUILayoutUtil.SplitRectHorizontally(position, 0.3f);
                 EditorGUI.ObjectField(rects[0], item.obj, typeof(Object), true);
                 EditorGUI.SelectableLabel(rects[1], displayName);
             }

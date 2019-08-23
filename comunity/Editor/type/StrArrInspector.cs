@@ -26,7 +26,7 @@ namespace comunity
         {
             float width = GetWidth();
             if (preset != null) {
-                if (EditorGUIUtil.PopupNullable<string>(null, ref obj, preset, GUILayout.MinWidth(width*0.4F))) {
+                if (EditorGUILayoutUtil.PopupNullable<string>(null, ref obj, preset, GUILayout.MinWidth(width*0.4F))) {
                     this[i] = obj;
                     return true;
                 }

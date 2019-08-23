@@ -36,12 +36,12 @@ namespace comunity {
 			AndPredicate<T> predicate = new AndPredicate<T>();
 			EditorGUILayout.BeginHorizontal();
 			bool selected = GUILayout.Button(title, EditorStyles.toolbarButton, GUILayout.MaxWidth(100));
-			EditorGUIUtil.TextField(null, ref filter);
+			EditorGUILayoutUtil.TextField(null, ref filter);
 			if (!filter.IsEmpty()) {
 				predicate.AddPredicate(new ToStringFilter(toString, filter).Filter<T>);
 			}
 			if (asset) {
-				EditorGUIUtil.PopupEnum(null, ref fileType);
+				EditorGUILayoutUtil.PopupEnum(null, ref fileType);
 			}
 			EditorGUILayout.EndHorizontal();
 			for (int i=0; i<predicates.Length; ++i) {

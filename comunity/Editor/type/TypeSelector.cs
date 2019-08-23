@@ -9,7 +9,6 @@ using UnityEngine;
 using UnityEditor;
 using Object = UnityEngine.Object;
 using System.Collections.Generic;
-using System.Reflection;
 using mulova.commons;
 using System.Collections.Generic.Ex;
 using System.Text.Ex;
@@ -18,8 +17,9 @@ namespace comunity
 {
     public class TypeSelector
     {
-        private string typeStr;
-        private Type sel = typeof(Object);
+        public bool fullNameSearch = false;
+        private string typeName;
+        public Type type = typeof(Object);
         private Dictionary<string, Type> types;
         private List<Type> typeMatches = new List<Type>();
         private Type[] typeMatchesArr = new Type[0];
@@ -31,13 +31,9 @@ namespace comunity
         
         public void SetSelected(Type type) {
             if (type != null) {
-                this.sel = type;
-                this.typeStr = type.FullName;
+                this.type = type;
+                this.typeName = type.FullName;
             }
-        }
-        
-        public Type GetSelected() {
-            return sel;
         }
         
         public void SetBaseType(Type baseType) {
@@ -48,32 +44,89 @@ namespace comunity
                 types[t.FullName] = t;
             }
         }
-        
+
+        public bool DrawSelector(ref string typeStr)
+        {
+            typeName = typeStr;
+            bool ret = DrawSelector();
+            typeStr = typeName;
+            return ret;
+        }
+
         /// <summary>
         /// Draws the selector.
         /// </summary>
         /// <returns><c>true</c>, if selection was changed, <c>false</c> otherwise.</returns>
         public bool DrawSelector() {
-            Type oldType = sel;
+            Type oldType = type;
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Type", GUILayout.Width(50));
-            if (((sel == null && EditorGUIUtil.TextField(null, ref typeStr))
-                || (sel != null && EditorGUIUtil.TextField(null, ref typeStr, EditorStyles.toolbarTextField)))
-                && typeStr.Length > 0) {
-                sel = types.Get(typeStr);
-                if (!typeStr.IsEmpty() && typeStr.Length >= 2) {
+            if (((type == null && EditorGUILayoutUtil.TextField(null, ref typeName))
+                || (type != null && EditorGUILayoutUtil.TextField(null, ref typeName, EditorStyles.toolbarTextField)))
+                && typeName.Length > 0) {
+                type = types.Get(typeName);
+                if (!typeName.IsEmpty() && typeName.Length >= 2) {
                     typeMatches.Clear();
                     foreach (KeyValuePair<string, Type> pair in types) {
-                        if (pair.Key.IndexOf(typeStr, StringComparison.OrdinalIgnoreCase) >= 0) {
+                        var index = pair.Key.LastIndexOf(typeName, StringComparison.OrdinalIgnoreCase);
+                        if (index >= 0 && (fullNameSearch
+                            || (!fullNameSearch && index >= pair.Key.LastIndexOf('.'))))
+                        {
                             typeMatches.Add(pair.Value);
                         }
                     }
                     typeMatchesArr = typeMatches.ToArray();
                 }
             }
-            EditorGUIUtil.PopupNullable<Type>(null, ref sel, typeMatchesArr);
+            Type newType = type;
+            EditorGUILayoutUtil.PopupNullable<Type>(null, ref newType, typeMatchesArr);
+            if (newType != null)
+            {
+                type = newType;
+            }
             EditorGUILayout.EndHorizontal();
-            return oldType != sel;
+            return oldType != type;
+        }
+
+        public bool DrawSelector(Rect bound, SerializedProperty p)
+        {
+            Type oldType = type;
+            var bounds = bound.SplitByWidths((int)EditorGUIUtility.labelWidth, (int)(bound.width- EditorGUIUtility.labelWidth)/2);
+            EditorGUI.LabelField(bounds[0], p.displayName);
+            var textStyle = type != null ? EditorStyles.toolbarTextField : EditorStyles.textField;
+            p.stringValue = EditorGUI.TextField(bounds[1], p.stringValue, textStyle);
+            if (typeName != p.stringValue && p.stringValue.Length > 0)
+            {
+                typeName = p.stringValue;
+                type = types.Get(typeName);
+                if (!typeName.IsEmpty() && typeName.Length >= 2)
+                {
+                    typeMatches.Clear();
+                    foreach (KeyValuePair<string, Type> pair in types)
+                    {
+                        var index = pair.Key.LastIndexOf(typeName, StringComparison.OrdinalIgnoreCase);
+                        bool exactMatch = index == 0 && typeName.Length == pair.Key.Length;
+                        bool fullNameFound = index >= 0 && fullNameSearch;
+                        bool nameFound = index >= 0 && !fullNameSearch && index >= pair.Key.LastIndexOf('.');
+                        if (exactMatch || fullNameFound || nameFound)
+                        {
+                            typeMatches.Add(pair.Value);
+                        }
+                    }
+                    typeMatchesArr = typeMatches.ToArray();
+                }
+            }
+            if (EditorGUIUtil.PopupNullable<Type>(bounds[2], null, ref type, typeMatchesArr))
+            {
+                if (type != null)
+                {
+                    p.stringValue = type.FullName;
+                } else
+                {
+                    p.stringValue = "";
+                }
+            }
+            return oldType != type;
         }
     }
 }

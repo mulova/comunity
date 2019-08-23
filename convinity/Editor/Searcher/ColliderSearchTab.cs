@@ -23,7 +23,7 @@ namespace convinity {
 			{
 				cam = cams[0];
 			}
-			EditorGUIUtil.Popup<Camera>("Camera", ref cam, cams);
+			EditorGUILayoutUtil.Popup<Camera>("Camera", ref cam, cams);
 		}
 		
 		protected override List<Collider> SearchResource()

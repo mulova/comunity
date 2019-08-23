@@ -32,7 +32,7 @@ namespace convinity
 
         protected override List<Object> SearchResource()
         {
-            Type type = selector.GetSelected();
+            Type type = selector.type;
             List<Object> list = new List<Object>();
 			foreach (var root in roots)
 			{

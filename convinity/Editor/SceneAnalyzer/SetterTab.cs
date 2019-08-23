@@ -50,12 +50,12 @@ namespace convinity {
 			EditorGUILayout.BeginHorizontal();
 			EditorGUILayout.BeginVertical();
 			bool changed = false;
-			changed |= EditorGUIUtil.Toggle("Apply On Selection", ref applyOnSelection);
+			changed |= EditorGUILayoutUtil.Toggle("Apply On Selection", ref applyOnSelection);
 			if (!applyOnSelection) {
-				changed |= EditorGUIUtil.ObjectField<Transform>("Root", ref root, true);
+				changed |= EditorGUILayoutUtil.ObjectField<Transform>("Root", ref root, true);
 			}
 			changed |= typeSelector.DrawSelector();
-			Type type = typeSelector.GetSelected();
+			Type type = typeSelector.type;
 			if (typeSelector.GetType() != null) {
 				if (fieldInspector.DrawFieldPopup(type, ref field)) {
 					changed = true;
@@ -97,7 +97,7 @@ namespace convinity {
 		public override void OnInspectorGUI() {
 			foreach (Type type in targets.Keys) {
 				EditorGUILayout.TextField(type.FullName, EditorStyles.toolbarTextField, GUILayout.ExpandWidth(false));
-				EditorGUIUtil.ObjectFieldReorderList(targets[type]);
+				EditorGUILayoutUtil.ObjectFieldReorderList(targets[type]);
 			}
 		}
 		
@@ -112,31 +112,31 @@ namespace convinity {
 
 			if (fieldType != null) {
 				if (fieldType == typeof(int)) {
-					EditorGUIUtil.IntField("Value", ref intVal);
+					EditorGUILayoutUtil.IntField("Value", ref intVal);
 					val = intVal;
 				} else if (fieldType == typeof(bool)) {
-					EditorGUIUtil.Toggle("Value", ref boolVal);
+					EditorGUILayoutUtil.Toggle("Value", ref boolVal);
 					val = boolVal;
 				} else if (fieldType == typeof(Vector2)) {
-					EditorGUIUtil.Vector2Field("Value", ref vec2Val);
+					EditorGUILayoutUtil.Vector2Field("Value", ref vec2Val);
 					val = vec2Val;
 				} else if (fieldType == typeof(Vector3)) {
-					EditorGUIUtil.Vector3Field("Value", ref vec3Val);
+					EditorGUILayoutUtil.Vector3Field("Value", ref vec3Val);
 					val = vec3Val;
 				} else if (fieldType == typeof(Vector4)) {
-					EditorGUIUtil.Vector4Field("Value", ref vec4Val);
+					EditorGUILayoutUtil.Vector4Field("Value", ref vec4Val);
 					val = vec4Val;
 				} else if (fieldType == typeof(Color)) {
-					EditorGUIUtil.ColorField("Value", ref colorVal);
+					EditorGUILayoutUtil.ColorField("Value", ref colorVal);
 					val = colorVal;
 				} else if (fieldType == typeof(string)) {
-					EditorGUIUtil.TextField("Value", ref strVal);
+					EditorGUILayoutUtil.TextField("Value", ref strVal);
 					val = strVal;
 				} else if (fieldType.IsEnum) {
-					EditorGUIUtil.PopupEnum(fieldType, "Value", ref enumVal);
+					EditorGUILayoutUtil.PopupEnum(fieldType, "Value", ref enumVal);
 					val = enumVal;
 				} else {
-					EditorGUIUtil.ObjectField<Object>("Value", ref objVal, true);
+					EditorGUILayoutUtil.ObjectField<Object>("Value", ref objVal, true);
 					val = objVal;
 					if (objVal != null) {
 						if (objVal is GameObject && !fieldType.IsInstanceOfType(val)) {

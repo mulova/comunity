@@ -63,9 +63,9 @@ namespace comunity
             string val = str;
             bool changed = false;
             if (enums == null || enums.Length == 0) {
-                changed |= EditorGUIUtil.TextField(null, ref val, options);
+                changed |= EditorGUILayoutUtil.TextField(null, ref val, options);
             } else {
-                changed |= EditorGUIUtil.PopupNullable<string>(null, ref val, enums, options);
+                changed |= EditorGUILayoutUtil.PopupNullable<string>(null, ref val, enums, options);
             }
             str = val;
             return changed;

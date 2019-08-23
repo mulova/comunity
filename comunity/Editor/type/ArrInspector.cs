@@ -24,6 +24,7 @@ namespace comunity
         
         public object obj { get; private set; }
         private bool showArray = true;
+        private string typeName;
         private string fieldName;
         private int minLength;
         private int maxLength = int.MaxValue;
@@ -183,7 +184,7 @@ namespace comunity
         /// <param name="type">Type.</param>
         public bool DrawEnumTypeSelector(out Type type) {
             if (Length == 0) {
-                type = enumTypeSelector.GetSelected();
+                type = enumTypeSelector.type;
                 return false;
             }
             if (enumTypeSelector == null) {
@@ -191,8 +192,8 @@ namespace comunity
                 Assert.Fail(null, "Call InitTypeSelector() first");
                 return false;
             } else {
-                bool changed = enumTypeSelector.DrawSelector();
-                type = enumTypeSelector.GetSelected();
+                bool changed = enumTypeSelector.DrawSelector(ref typeName);
+                type = enumTypeSelector.type;
                 if (changed && enumTypeFieldName != null) {
                     if (type != null) {
                         ReflectionUtil.SetFieldValue<string>(obj, enumTypeFieldName, type.FullName);
@@ -211,8 +212,8 @@ namespace comunity
         public bool DrawEnum(ref string str, params GUILayoutOption[] options) {
             string str2 = str;
             // Create Another EnumParser if new type is selected
-            if (enumTypeSelector != null && enumTypeSelector.GetSelected() != enumParser.enumType) {
-                SetEnum(enumTypeSelector.GetSelected());
+            if (enumTypeSelector != null && enumTypeSelector.type != enumParser.enumType) {
+                SetEnum(enumTypeSelector.type);
             }
             if (enumParser.OnInspectorGUI(ref str2, options)) {
                 str = str2;

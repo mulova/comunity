@@ -30,8 +30,8 @@ namespace convinity {
 		private Camera cam;
 		private GameObject obj;
 		public override void OnInspectorGUI() {
-			EditorGUIUtil.ObjectField<GameObject>("GameObject", ref obj, true);
-			EditorGUIUtil.Popup<Camera>("Camera", ref cam, Camera.allCameras);
+			EditorGUILayoutUtil.ObjectField<GameObject>("GameObject", ref obj, true);
+			EditorGUILayoutUtil.Popup<Camera>("Camera", ref cam, Camera.allCameras);
 			
 			if (obj != null) {
 				Renderer[] renderers = obj.GetComponentsInChildren<Renderer>();

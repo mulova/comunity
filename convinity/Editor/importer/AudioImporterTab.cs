@@ -34,7 +34,7 @@ namespace convinity {
 					EditorUI.BeginContents();
 					GUILayout.BeginHorizontal();
 					Object obj = AssetDatabase.LoadAssetAtPath(s.path, typeof(Object));
-					if (EditorGUIUtil.ObjectField<Object>(ref obj, false)) {
+					if (EditorGUILayoutUtil.ObjectField<Object>(ref obj, false)) {
 						if (obj != null) {
 							s.path = AssetDatabase.GetAssetPath(obj);
 						} else {
@@ -45,9 +45,9 @@ namespace convinity {
 						remove = s;
 					}
 					GUILayout.EndHorizontal();
-					EditorGUIUtil.Toggle("Apply", ref s.apply);
+					EditorGUILayoutUtil.Toggle("Apply", ref s.apply);
 					GUI.enabled = s.apply;
-					EditorGUIUtil.Toggle("Force To Mono", ref s.forceToMono);
+					EditorGUILayoutUtil.Toggle("Force To Mono", ref s.forceToMono);
 					EditorUI.EndContents();
 					GUI.enabled = true;
 				}

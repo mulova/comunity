@@ -32,12 +32,12 @@ namespace comunity
             float width = GetWidth();
             bool changed = false;
             E e = ReflectionUtil.GetFieldValue<E>(o, enumVarName);
-            if (EditorGUIUtil.PopupEnum<E>(null, ref e, GUILayout.MinWidth(width*0.3f))) {
+            if (EditorGUILayoutUtil.PopupEnum<E>(null, ref e, GUILayout.MinWidth(width*0.3f))) {
                 ReflectionUtil.SetFieldValue<E>(o, enumVarName, e);
                 changed = true;
             }
             O obj = ReflectionUtil.GetFieldValue<O>(o, objVarName);
-            if (EditorGUIUtil.ObjectField<O>(ref obj, true, GUILayout.MinWidth(width*0.7f))) {
+            if (EditorGUILayoutUtil.ObjectField<O>(ref obj, true, GUILayout.MinWidth(width*0.7f))) {
                 ReflectionUtil.SetFieldValue<O>(o, objVarName, obj);
                 changed = true;
             }

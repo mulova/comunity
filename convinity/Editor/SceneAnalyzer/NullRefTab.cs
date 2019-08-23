@@ -44,10 +44,10 @@ namespace convinity {
 		public override void OnHeaderGUI() {
 			EditorGUILayout.BeginHorizontal();
 			EditorGUILayout.BeginVertical();
-			if (EditorGUIUtil.ObjectField<Object>("Root", ref root, true)) {
+			if (EditorGUILayoutUtil.ObjectField<Object>("Root", ref root, true)) {
 				SearchNullRefs();
 			}
-			if (EditorGUIUtil.ObjectField<TextAsset>("Exclude", ref excludeDesc, false)) {
+			if (EditorGUILayoutUtil.ObjectField<TextAsset>("Exclude", ref excludeDesc, false)) {
 				SetExcludes();
 				SearchNullRefs();
 			}

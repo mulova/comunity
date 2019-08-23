@@ -38,10 +38,10 @@ namespace comunity
             bool changed = false;
             
             EditorGUILayout.BeginVertical();
-            changed |= EditorGUIUtil.ObjectField<MethodCall>("Method", ref d.method, true);
-            changed |= EditorGUIUtil.FloatField("Duration", ref d.duration);
-            changed |= EditorGUIUtil.Toggle("Repeat", ref d.repeat);
-            changed |= EditorGUIUtil.Toggle("Enabled", ref d.enabled);
+            changed |= EditorGUILayoutUtil.ObjectField<MethodCall>("Method", ref d.method, true);
+            changed |= EditorGUILayoutUtil.FloatField("Duration", ref d.duration);
+            changed |= EditorGUILayoutUtil.Toggle("Repeat", ref d.repeat);
+            changed |= EditorGUILayoutUtil.Toggle("Enabled", ref d.enabled);
             
             if (Application.isPlaying) {
                 float time = timer[i].RemainingTime;

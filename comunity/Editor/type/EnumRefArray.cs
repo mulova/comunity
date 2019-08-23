@@ -5,8 +5,6 @@
 //----------------------------------------------
 
 using System;
-using UnityEditor;
-using Object = UnityEngine.Object;
 using UnityEngine;
 
 namespace comunity
@@ -23,7 +21,7 @@ namespace comunity
         }
         
         public override bool DrawValue(int i, E e) {
-            if (EditorGUIUtil.Popup<E>(ref e, preset, layout)) {
+            if (EditorGUILayoutUtil.Popup<E>(ref e, preset, layout)) {
                 this[i] = e;
                 return true;
             }

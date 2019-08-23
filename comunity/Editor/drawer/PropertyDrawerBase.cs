@@ -103,38 +103,12 @@ namespace comunity
             DrawProperty(element, rect);
         }
 
-        protected void DrawArray(Rect pos, SerializedProperty p, params string[] propNames)
-        {
-            int length = p.arraySize;
-            for (int i=0; i<length; i++)
-            {
-                float height = 1F / propNames.Length;
-                Rect rect = GetRect(pos, 0F, i * height, 1F, height);
-                SerializedProperty prop = p.GetArrayElementAtIndex(i);
-                DrawRow(rect, prop, propNames);
-            }
-        }
-        
         protected void DrawTitles(Rect pos, params string[] propNames)
         {
             for (int i=0; i<propNames.Length; i++)
             {
                 float width = 1F / propNames.Length;
                 DrawLabel(propNames[i], GetRect(pos, i * width, 0F, width, 1F));
-            }
-        }
-        
-        /**
-     * Draw properties in a row without property names
-     */
-        protected void DrawRow(Rect pos, SerializedProperty p, params string[] propNames)
-        {
-            for (int i=0; i<propNames.Length; i++)
-            {
-                SerializedProperty prop = p.FindPropertyRelative(propNames[i]);
-                float width = 1F / propNames.Length;
-                Rect rect = GetRect(pos, i * width, 0F, width, 1F);
-                DrawProperty(rect, prop, false);
             }
         }
         

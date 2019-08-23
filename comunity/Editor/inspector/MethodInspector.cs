@@ -53,10 +53,10 @@ namespace comunity
         }
         
         public bool DrawComponentPopup(ref GameObject obj, ref MonoBehaviour comp) {
-            bool changed = EditorGUIUtil.ObjectField<GameObject>("GameObject", ref obj, true);
+            bool changed = EditorGUILayoutUtil.ObjectField<GameObject>("GameObject", ref obj, true);
             if (obj != null) {
                 MonoBehaviour[] comps = obj.GetComponents<MonoBehaviour>();
-                changed |= EditorGUIUtil.PopupNullable<MonoBehaviour>(null, ref comp, comps, ToStringScript);
+                changed |= EditorGUILayoutUtil.PopupNullable<MonoBehaviour>(null, ref comp, comps, ToStringScript);
             }
             return changed;
         }
@@ -64,7 +64,7 @@ namespace comunity
         public bool DrawMethodPopup(Object obj, ref string methodName) {
             ListMethods(obj, methodName);
             if (methodList != null) {
-                if (EditorGUIUtil.PopupNullable<MethodInfo>("Method Name", ref method, methodList, MethodToString)) {
+                if (EditorGUILayoutUtil.PopupNullable<MethodInfo>("Method Name", ref method, methodList, MethodToString)) {
                     if (method == null) {
                         methodName = "";
                     } else {

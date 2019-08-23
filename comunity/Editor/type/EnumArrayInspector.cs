@@ -127,7 +127,7 @@ namespace comunity
                         }
                     }
                     EditorGUI.indentLevel += indent;
-                    changed |= EditorGUIUtil.Popup<T>(ref selected, list.ToArray());
+                    changed |= EditorGUILayoutUtil.Popup<T>(ref selected, list.ToArray());
                     EditorGUI.indentLevel -= indent;
                     changed |= OnInspectorGUI(selected, index[selected]);
                 }

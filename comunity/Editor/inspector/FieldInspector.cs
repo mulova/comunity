@@ -60,10 +60,10 @@ namespace comunity
         
         
         public bool DrawComponentPopup(ref GameObject obj, ref MonoBehaviour comp) {
-            bool changed = EditorGUIUtil.ObjectField<GameObject>("GameObject", ref obj, true);
+            bool changed = EditorGUILayoutUtil.ObjectField<GameObject>("GameObject", ref obj, true);
             if (obj != null) {
                 MonoBehaviour[] comps = obj.GetComponents<MonoBehaviour>();
-                changed |= EditorGUIUtil.PopupNullable<MonoBehaviour>(null, ref comp, comps, ToStringScript);
+                changed |= EditorGUILayoutUtil.PopupNullable<MonoBehaviour>(null, ref comp, comps, ToStringScript);
             }
             return changed;
         }
@@ -71,7 +71,7 @@ namespace comunity
         public bool DrawFieldPopup(Type type, ref FieldInfo field) {
             ListFields(type);
             if (fieldArr != null) {
-                if (EditorGUIUtil.PopupNullable<FieldInfo>("Field Name", ref field, fieldArr, FieldToString)) {
+                if (EditorGUILayoutUtil.PopupNullable<FieldInfo>("Field Name", ref field, fieldArr, FieldToString)) {
                     return true;
                 }
             }
@@ -81,7 +81,7 @@ namespace comunity
         public bool DrawPropertyPopup(Type type, ref PropertyInfo prop) {
             ListFields(type);
             if (propArr != null) {
-                if (EditorGUIUtil.PopupNullable<PropertyInfo>("Property Name", ref prop, propArr, PropertyToString)) {
+                if (EditorGUILayoutUtil.PopupNullable<PropertyInfo>("Property Name", ref prop, propArr, PropertyToString)) {
                     return true;
                 }
             }
