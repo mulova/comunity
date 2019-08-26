@@ -22,7 +22,7 @@ namespace comunity
             p.stringValue = value;
         }
 
-        protected override bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
+        protected override bool DrawItem(SerializedProperty item, Rect rect, int index, bool isActive, bool isFocused)
         {
             var o1 = this[index];
             if (editable)

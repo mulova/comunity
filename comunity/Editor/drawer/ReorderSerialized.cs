@@ -9,8 +9,8 @@ namespace comunity
 {
     public class ReorderSerialized<T>
     {
-        public delegate void FillNewItemDelegate(object item);
-        public delegate bool DrawItemDelegate(Rect rect, int index, bool isActive, bool isFocused);
+        public delegate void FillNewItemDelegate(int index);
+        public delegate bool DrawItemDelegate(SerializedProperty item, Rect rect, int index, bool isActive, bool isFocused);
         public delegate T GettemDelegate(SerializedProperty p);
         public delegate void SetItemDelegate(SerializedProperty p, T value);
         public delegate void ChangeDelegate();
@@ -18,10 +18,10 @@ namespace comunity
         public ReorderableList drawer { get; private set; }
         public bool changed { get; private set; }
 
-        public FillNewItemDelegate fillNewItem;
-        public DrawItemDelegate drawItem;
-        public GettemDelegate getItem;
-        public SetItemDelegate setItem;
+        public FillNewItemDelegate fillNewItem { private get; set; }
+        public DrawItemDelegate drawItem { private get; set; }
+        public GettemDelegate getItem { private get; set; }
+        public SetItemDelegate setItem { private get; set; }
         public ChangeDelegate onChange = () => { };
 
         // backup
@@ -156,18 +156,9 @@ namespace comunity
             }
         }
 
-        protected virtual bool DrawItem(Rect rect, int index, bool isActive, bool isFocused)
+        protected virtual bool DrawItem(SerializedProperty item, Rect rect, int index, bool isActive, bool isFocused)
         {
-            var item = drawer.serializedProperty.GetArrayElementAtIndex(index);
-            if (displayIndex)
-            {
-                var rects = rect.SplitByWidths(20);
-                EditorGUI.LabelField(rects[0], index.ToString(), EditorStyles.boldLabel);
-                return EditorGUI.PropertyField(rects[1], item, new GUIContent(""));
-            } else
-            {
-                return EditorGUI.PropertyField(rect, item, new GUIContent(""));
-            }
+            return EditorGUI.PropertyField(rect, item, new GUIContent(""));
         }
 
         private void _DrawItem(Rect rect, int index, bool isActive, bool isFocused)
@@ -177,7 +168,16 @@ namespace comunity
                 Rect r = rect;
                 r.y += 1;
                 r.height -= 2;
-                if (drawItem(r, index, isActive, isFocused))
+
+                var item = drawer.serializedProperty.GetArrayElementAtIndex(index);
+                if (displayIndex)
+                {
+                    var rects = rect.SplitByWidths(20);
+                    EditorGUI.LabelField(rects[0], index.ToString(), EditorStyles.boldLabel);
+                    r = rects[1];
+                }
+
+                if (drawItem(item, r, index, isActive, isFocused))
                 {
                     changed = true;
                     SetDirty();
@@ -185,7 +185,7 @@ namespace comunity
             }
         }
 
-        protected virtual void FillNewItem(object o)
+        protected virtual void FillNewItem(int index)
         {
         }
 
@@ -208,7 +208,7 @@ namespace comunity
         {
             drawer.serializedProperty.InsertArrayElementAtIndex(drawer.serializedProperty.arraySize);
             drawer.index = drawer.serializedProperty.arraySize - 1;
-            fillNewItem(drawer.serializedProperty.GetArrayElementAtIndex(drawer.index));
+            fillNewItem(drawer.index);
             SetDirty();
             onChange();
         }
