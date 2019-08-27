@@ -1,18 +1,21 @@
 ﻿using UnityEngine;
 
-public class HideIfNullAttribute : PropertyAttribute
+namespace comunity
 {
-    public readonly string nullPropertyName;
-    public readonly bool hide;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="nullPropertyName"></param>
-    /// <param name="hide">If false, just disable </param>
-    public HideIfNullAttribute(string nullPropertyName, bool hide = true)
+    public class HideIfNullAttribute : PropertyAttribute
     {
-        this.nullPropertyName = nullPropertyName;
-        this.hide = hide;
+        public readonly string nullPropertyName;
+        public readonly bool hide;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nullPropertyName"></param>
+        /// <param name="hide">If false, just disable </param>
+        public HideIfNullAttribute(string nullPropertyName, bool hide = true)
+        {
+            this.nullPropertyName = nullPropertyName;
+            this.hide = hide;
+        }
     }
 }

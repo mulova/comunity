@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
-public class NonNullableFieldAttribute : PropertyAttribute
+namespace comunity
 {
+    public class NonNullableFieldAttribute : PropertyAttribute { }
 }

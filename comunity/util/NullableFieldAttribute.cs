@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
-public class NullableFieldAttribute : PropertyAttribute
+namespace comunity
 {
+    public class NullableFieldAttribute : PropertyAttribute { }
 }

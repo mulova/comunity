@@ -1,57 +1,61 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 
-public static class Device
+namespace comunity
 {
-    public static string model
+    public static class Device
     {
-        get
+        public static string model
         {
-            if (Application.isEditor)
+            get
             {
-                return ProjPrefs.device;
-            } else
-            {
-                return SystemInfo.deviceModel;
+                if (Application.isEditor)
+                {
+                    return ProjPrefs.device;
+                } else
+                {
+                    return SystemInfo.deviceModel;
+                }
             }
         }
-    }
 
-    private static int _width;
-    private static int _height;
-    public static int width
-    {
-        get
+        private static int _width;
+        private static int _height;
+        public static int width
         {
-            if (_width == 0)
+            get
             {
-                _width = Screen.width;
-                _height = Screen.height;
+                if (_width == 0)
+                {
+                    _width = Screen.width;
+                    _height = Screen.height;
+                }
+                return _width;
             }
-            return _width;
         }
-    }
-    public static int height
-    {
-        get
+        public static int height
         {
-            if (_height == 0)
+            get
             {
-                _width = Screen.width;
-                _height = Screen.height;
+                if (_height == 0)
+                {
+                    _width = Screen.width;
+                    _height = Screen.height;
+                }
+                return _height;
             }
-            return _height;
         }
-    }
 
-    public static bool supportASTC
-    {
-        get
+        public static bool supportASTC
         {
-            if (Application.isEditor)
+            get
             {
-                return true;
+                if (Application.isEditor)
+                {
+                    return true;
+                }
+                return SystemInfo.SupportsTextureFormat(TextureFormat.ASTC_RGBA_8x8);
             }
-            return SystemInfo.SupportsTextureFormat(TextureFormat.ASTC_RGBA_8x8);
         }
     }
 }

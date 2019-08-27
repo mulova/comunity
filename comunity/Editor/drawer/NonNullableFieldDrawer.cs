@@ -1,20 +1,23 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-[CustomPropertyDrawer(typeof(NonNullableFieldAttribute))]
-public class NonNullableFieldDrawer : PropertyDrawer
+namespace comunity
 {
-    public override void OnGUI(Rect rect, SerializedProperty property, GUIContent label)
+    [CustomPropertyDrawer(typeof(NonNullableFieldAttribute))]
+    public class NonNullableFieldDrawer : PropertyDrawer
     {
-        Color old = GUI.color;
-        if (property.objectReferenceValue == null)
+        public override void OnGUI(Rect rect, SerializedProperty property, GUIContent label)
         {
-            GUI.color = Color.red;
-        }
-        EditorGUI.PropertyField(rect, property);
-        if (property.objectReferenceValue == null)
-        {
-            GUI.color = old;
+            Color old = GUI.color;
+            if (property.objectReferenceValue == null)
+            {
+                GUI.color = Color.red;
+            }
+            EditorGUI.PropertyField(rect, property);
+            if (property.objectReferenceValue == null)
+            {
+                GUI.color = old;
+            }
         }
     }
 }
