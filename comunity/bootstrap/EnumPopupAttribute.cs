@@ -2,10 +2,10 @@
 
 public class EnumPopupAttribute : PropertyAttribute
 {
-    public readonly string enumVar;
+    public readonly string enumTypeVar;
 
     public EnumPopupAttribute(string enumVar)
     {
-        this.enumVar = enumVar;
+        this.enumTypeVar = enumVar;
     }
 }

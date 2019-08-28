@@ -1,56 +1,54 @@
 ﻿using System;
 using UnityEditor;
 using UnityEngine;
-using mulova.commons;
 using comunity;
+using mulova.commons;
+using System.Text.Ex;
 
 [CustomPropertyDrawer(typeof(EnumPopupAttribute))]
 public class EnumPopupDrawer : PropertyDrawer
 {
-    private TypeSelector typeSelector;
-    private string GetTypeString(SerializedProperty property)
-    {
-        EnumPopupAttribute attr = attribute as EnumPopupAttribute;
-        var variable = property.serializedObject.FindProperty(attr.enumVar);
-        if (variable == null)
-        {
-            return null;
-        }
-        return variable.stringValue;
-    }
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
-        if (typeSelector == null)
+        EnumPopupAttribute attr = attribute as EnumPopupAttribute;
+        var typeVar = property.serializedObject.FindProperty(attr.enumTypeVar);
+        if (typeVar != null)
         {
-            typeSelector = new TypeSelector(typeof(Enum));
+            var enumType = ReflectionUtil.GetType(typeVar.stringValue);
+            bool isEnum = false;
+            if (enumType != null)
+            {
+                try
+                {
+                    Enum e1 = (Enum)enumType.GetEnumValues().GetValue(0);
+                    if (!property.stringValue.IsEmpty())
+                    {
+                        e1 = (Enum)Enum.Parse(enumType, property.stringValue, true);
+                    }
+                    Enum e2 = EditorGUI.EnumPopup(position, label, e1);
+                    if (e1 != e2)
+                    {
+                        property.stringValue = e2.ToString();
+                    }
+                    isEnum = true;
+                }
+                #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
+                catch
+                {
+                }
+                #pragma warning restore RECS0022 // A catch clause that catches System.Exception and has an empty body
+            }
+            if (!isEnum)
+            {
+                var newStr = EditorGUI.TextField(position, label, property.stringValue);
+                if (newStr != property.stringValue)
+                {
+                    property.stringValue = newStr;
+                }
+            }
+        } else
+        {
+            EditorGUI.HelpBox(position, "Invalid EnumType Variable Name: " + attr.enumTypeVar, MessageType.Error);
         }
-        typeSelector.DrawSelector(position, property);
-        //var enumStr = property.stringValue;
-        //var enumType = ReflectionUtil.GetType(GetTypeString(property));
-        //if (enumType != null && enumType.IsEnum)
-        //{
-        //    Enum old = null;
-        //    try
-        //    {
-        //        old = (Enum)Enum.Parse(enumType, enumStr, true);
-        //    } catch (Exception ex)
-        //    {
-        //        old = (Enum)Enum.GetValues(enumType).GetValue(0);
-        //    }
-        //    Enum val = EditorGUI.EnumPopup(position, old);
-        //    if (val != old)
-        //    {
-        //        property.stringValue = val.ToString();
-        //        property.serializedObject.ApplyModifiedProperties();
-        //    }
-        //} else
-        //{
-        //    var val = EditorGUI.TextField(position, enumStr);
-        //    if (val != enumStr)
-        //    {
-        //        property.stringValue = val.ToString();
-        //        property.serializedObject.ApplyModifiedProperties();
-        //    }
-        //}
     }
 }

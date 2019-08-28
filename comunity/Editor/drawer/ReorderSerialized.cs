@@ -4,6 +4,7 @@ using System;
 using Object = UnityEngine.Object;
 using UnityEditor;
 using System.Text.Ex;
+using static UnityEditorInternal.ReorderableList;
 
 namespace comunity
 {
@@ -23,6 +24,7 @@ namespace comunity
         public GettemDelegate getItem { private get; set; }
         public SetItemDelegate setItem { private get; set; }
         public ChangeDelegate onChange = () => { };
+        public ElementHeightCallbackDelegate getElementHeight;
 
         // backup
         private float elementHeight;
@@ -139,7 +141,13 @@ namespace comunity
         {
             if (match == null || match(this[index]))
             {
-                return drawer.elementHeight;
+                if (getElementHeight != null)
+                {
+                    return getElementHeight(index);
+                } else
+                {
+                    return EditorGUI.GetPropertyHeight(drawer.serializedProperty.GetArrayElementAtIndex(index));
+                }
             }
             else
             {
@@ -165,8 +173,8 @@ namespace comunity
             if (match == null || match(this[index]))
             {
                 Rect r = rect;
-                r.y += 1;
-                r.height -= 2;
+                //r.y += 1;
+                //r.height -= 2;
 
                 var item = drawer.serializedProperty.GetArrayElementAtIndex(index);
                 if (displayIndex)

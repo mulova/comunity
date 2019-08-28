@@ -16,8 +16,7 @@ namespace comunity
 {
     public class ObjSwitch : MonoBehaviour
     {
-        [HideInInspector, SerializeField] private string enumType;
-        [EnumPopup("enumType")] public string enumValue;
+        [SerializeField, EnumType] private string enumType;
         [SerializeField] public ObjSwitchElement[] switches = new ObjSwitchElement[0];
         [SerializeField] public ObjSwitchPreset[] preset;
         public bool overwrite = false;
@@ -219,7 +218,7 @@ namespace comunity
     [System.Serializable]
     public class ObjSwitchElement : ICloneable
     {
-        public string name = string.Empty;
+        [EnumPopup("enumType")]public string name = string.Empty;
         public GameObject[] objs = new GameObject[0];
         public Transform[] trans = new Transform[0];
         public Vector3[] pos = new Vector3[0];
