@@ -13,10 +13,10 @@ namespace comunity {
 		private List<TabData> tabs = new List<TabData>();
 		private bool closable;
 
-        public Color activeTabBgColor = Color.red;
-        public Color activeTabContentColor = Color.green;
+        public Color activeTabBgColor = Color.green;
+        public Color activeTabContentColor = Color.white;
         public Color inactiveTabBgColor = Color.black;
-        public Color inactiveTabContentColor = Color.gray;
+        public Color inactiveTabContentColor = Color.green;
 
         protected EditorTab activeTab
         {

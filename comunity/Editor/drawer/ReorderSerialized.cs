@@ -41,7 +41,6 @@ namespace comunity
 
         public bool displayIndex;
 
-
         public bool displayAdd
         {
             get {
