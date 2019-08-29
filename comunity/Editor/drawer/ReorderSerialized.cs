@@ -121,7 +121,10 @@ namespace comunity
         private void Init(SerializedProperty prop)
         {
             this.drawer = new ReorderableList(prop.serializedObject, prop, true, false, true, true);
-            this.title = prop.propertyPath;
+            elementHeight = this.drawer.elementHeight;
+            headerHeight = this.drawer.headerHeight;
+            footerHeight = this.drawer.footerHeight;
+
             this.getItem = GetItem;
             this.setItem = SetItem;
             this.drawer.onAddCallback = _OnAdd;
@@ -131,10 +134,9 @@ namespace comunity
             this.drawer.elementHeightCallback = GetElementHeight;
             this.fillNewItem = FillNewItem;
             this.drawItem = DrawItem;
+
+            this.title = prop.displayName;
             // backup
-            elementHeight = this.drawer.elementHeight;
-            headerHeight = this.drawer.headerHeight;
-            footerHeight = this.drawer.footerHeight;
         }
 
         private float GetElementHeight(int index)
@@ -159,7 +161,7 @@ namespace comunity
         {
             if (!_title.IsEmpty())
             {
-                EditorGUI.LabelField(rect, new GUIContent(ObjectNames.NicifyVariableName(_title)));
+                EditorGUI.LabelField(rect, new GUIContent(_title));
             }
         }
 

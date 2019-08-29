@@ -11,6 +11,7 @@ using mulova.commons;
 using System.Text.Ex;
 using System.Collections.Generic.Ex;
 using System.Ex;
+using System.Linq;
 
 namespace comunity
 {
@@ -19,6 +20,7 @@ namespace comunity
         [SerializeField, EnumType] private string enumType;
         [SerializeField] public ObjSwitchElement[] switches = new ObjSwitchElement[0];
         [SerializeField] public ObjSwitchPreset[] preset;
+
         public bool overwrite = false;
         private ObjSwitchElement DUMMY = new ObjSwitchElement();
         private HashSet<string> keySet = new HashSet<string>();
@@ -63,6 +65,21 @@ namespace comunity
             {
                 keySet.Remove(Normalize(o));
             }
+        }
+
+        public bool Remove(GameObject o)
+        {
+            bool changed = false;
+            foreach (var s in switches)
+            {
+                var newArr = s.objs.Remove(o);
+                if (s.objs != newArr)
+                {
+                    s.objs = newArr;
+                    changed = true;
+                }
+            }
+            return changed;
         }
 
         public void ToggleSwitch(object key)
@@ -113,6 +130,21 @@ namespace comunity
         private string Normalize(object o)
         {
             return o.ToString().ToLower();
+        }
+
+        public List<GameObject> GetAllObjects()
+        {
+            var list = new List<GameObject>();
+            foreach (var s in switches)
+            {
+                list.UnionWith(s.objs);
+            }
+            return list;
+        }
+
+        public string[] GetAllKeys()
+        {
+            return switches.Convert(s => s.name);
         }
 
         public void Apply()
