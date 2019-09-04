@@ -93,8 +93,10 @@ namespace comunity
             return v;
         }
 
+#if SWITCH_TRANSFORM
         private ReorderSerialized<Transform> trans;
         private ReorderSerialized<Vector3> pos;
+#endif
 
         protected override void DrawProperty(SerializedProperty p, Rect bound)
         {
@@ -123,6 +125,7 @@ namespace comunity
             objBound.height = visibility.drawer.GetHeight();
             visibility.Draw(objBound);
 
+#if SWITCH_TRANSFORM
             // Draw Visibility
             var tBound = objBound;
             tBound.height = trans.drawer.GetHeight();
@@ -132,6 +135,7 @@ namespace comunity
             pBound.height = pos.drawer.GetHeight();
             pBound.y += tBound.height;
             pos.Draw(pBound);
+#endif
         }
 
         //public override bool CanCacheInspectorGUI(SerializedProperty property)
@@ -143,9 +147,15 @@ namespace comunity
         {
             var visibility = GetVisibility(p);
             var separator = 10;
+#if SWITCH_TRANSFORM
             trans = new ReorderSerialized<Transform>(p.FindPropertyRelative("trans"));
             pos = new ReorderSerialized<Vector3>(p.FindPropertyRelative("pos"));
-            return visibility.drawer.GetHeight() + trans.drawer.GetHeight() + pos.drawer.GetHeight()+ lineHeight + separator;
+#endif
+            return visibility.drawer.GetHeight()
+#if SWITCH_TRANSFORM
+            + trans.drawer.GetHeight() + pos.drawer.GetHeight()
+#endif
+                + lineHeight + separator;
         }
 
         private bool IsDuplicate(SerializedProperty arr, Object o)
