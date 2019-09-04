@@ -18,7 +18,7 @@ namespace comunity
     public class UISwitch : MonoBehaviour
     {
         [SerializeField, EnumType] private string enumType;
-        [SerializeField] public List<GameObject> objs = new List<GameObject>();
+        [SerializeField, HideInInspector] public List<GameObject> objs = new List<GameObject>();
         [SerializeField] public List<UISwitchSect> switches = new List<UISwitchSect>();
         [SerializeField] public UISwitchPreset[] preset;
 
