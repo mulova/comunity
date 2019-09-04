@@ -15,14 +15,15 @@ using System.Linq;
 
 namespace comunity
 {
-    public class ObjSwitch : MonoBehaviour
+    public class UISwitch : MonoBehaviour
     {
         [SerializeField, EnumType] private string enumType;
-        [SerializeField] public ObjSwitchElement[] switches = new ObjSwitchElement[0];
-        [SerializeField] public ObjSwitchPreset[] preset;
+        [SerializeField] public List<GameObject> objs = new List<GameObject>();
+        [SerializeField] public List<UISwitchSect> switches = new List<UISwitchSect>();
+        [SerializeField] public UISwitchPreset[] preset;
 
         public bool overwrite = false;
-        private ObjSwitchElement DUMMY = new ObjSwitchElement();
+        private UISwitchSect DUMMY = new UISwitchSect();
         private HashSet<string> keySet = new HashSet<string>();
 
         private ILogger log
@@ -69,17 +70,20 @@ namespace comunity
 
         public bool Remove(GameObject o)
         {
-            bool changed = false;
-            foreach (var s in switches)
+            int i = objs.IndexOf(o);
+            if (i >= 0)
             {
-                var newArr = s.objs.Remove(o);
-                if (s.objs != newArr)
+                foreach (var s in switches)
                 {
-                    s.objs = newArr;
-                    changed = true;
+                    s.RemoveAt(i);
                 }
+
+                objs.RemoveAt(i);
+                return true;
+            } else
+            {
+                return false;
             }
-            return changed;
         }
 
         public void ToggleSwitch(object key)
@@ -97,8 +101,8 @@ namespace comunity
         public void SetAction(object key, Action action)
         {
             string k = Normalize(key);
-            ObjSwitchElement s = switches.Find(e => e.name.EqualsIgnoreCase(k));
-            if (s != null)
+            UISwitchSect s = switches.Find(e => e.name.EqualsIgnoreCase(k));
+            if (s.isValid)
             {
                 s.action = action;
             } else
@@ -132,33 +136,24 @@ namespace comunity
             return o.ToString().ToLower();
         }
 
-        public List<GameObject> GetAllObjects()
+        public List<string> GetAllKeys()
         {
-            var list = new List<GameObject>();
-            foreach (var s in switches)
-            {
-                list.UnionWith(s.objs);
-            }
-            return list;
-        }
-
-        public string[] GetAllKeys()
-        {
-            return switches.Convert(s => s.name);
+            return switches.ConvertAll(s => s.name);
         }
 
         public void Apply()
         {
-            HashSet<GameObject> on = new HashSet<GameObject>();
-            HashSet<GameObject> off = new HashSet<GameObject>();
-		
+            var visible = new bool[objs.Count];
             int match = 0;
-            foreach (ObjSwitchElement e in switches)
+            foreach (UISwitchSect e in switches)
             {
                 if (keySet.Contains(Normalize(e.name)))
                 {
                     // groups objects to switch on and off
-                    on.AddAll<GameObject>(e.objs);
+                    for (int i=0; i<e.visibility.Count; ++i)
+                    {
+                        visible[i] |= e.visibility[i];
+                    }
                     match++;
                     // set positions
                     for (int i = 0; i < e.trans.Length; ++i)
@@ -172,28 +167,14 @@ namespace comunity
                     {
                         log.Error(ex);
                     }
-                } else
-                {
-                    off.AddAll<GameObject>(e.objs);
                 }
             }
 
-            off.RemoveAll(on);
-		
-            foreach (GameObject o in on)
+            for (int i=0; i<objs.Count; ++i)
             {
-                if (o != null)
-                {
-                    o.SetActive(true);
-                }
+                objs[i].SetActive(visible[i]);
             }
-            foreach (GameObject o in off)
-            {
-                if (o != null)
-                {
-                    o.SetActive(false);
-                }
-            }
+
             if (log.IsLoggable(LogType.Log))
             {
                 log.Debug("ObjSwitch {0}: {1}", name, keySet.Join(","));
@@ -207,36 +188,32 @@ namespace comunity
         public GameObject GetObject(object key, string name)
         {
             // Get Switch slot
-            ObjSwitchElement slot = GetSwitchSlot(key);
-            foreach (GameObject o in slot.objs)
-            {
-                if (o.name.EqualsIgnoreCase(name))
-                {
-                    return o;
-                }
-            }
-            return null;
+            UISwitchSect slot = GetSwitchSlot(key);
+            return slot.FindObject(objs, o => o.name.EqualsIgnoreCase(name));
         }
 
         public T GetComponent<T>(object key) where T: Component
         {
             // Get Switch slot
-            ObjSwitchElement slot = GetSwitchSlot(key);
-            foreach (GameObject o in slot.objs)
+            UISwitchSect slot = GetSwitchSlot(key);
+            for (int i=0; i<slot.visibility.Count; ++i)
             {
-                T c = o.GetComponent<T>();
-                if (c != null)
+                if (slot.visibility[i])
                 {
-                    return c;
+                    T c = objs[i].GetComponent<T>();
+                    if (c != null)
+                    {
+                        return c;
+                    }
                 }
             }
             return null;
         }
 
-        private ObjSwitchElement GetSwitchSlot(object key)
+        private UISwitchSect GetSwitchSlot(object key)
         {
             string id = Normalize(key);
-            foreach (ObjSwitchElement e in switches)
+            foreach (UISwitchSect e in switches)
             {
                 if (e.name.EqualsIgnoreCase(id))
                 {
@@ -248,19 +225,27 @@ namespace comunity
     }
 
     [System.Serializable]
-    public class ObjSwitchElement : ICloneable
+    public struct UISwitchSect : ICloneable
     {
-        [EnumPopup("enumType")]public string name = string.Empty;
-        public GameObject[] objs = new GameObject[0];
-        public Transform[] trans = new Transform[0];
-        public Vector3[] pos = new Vector3[0];
+        [EnumPopup("enumType")]public string name;
+        public List<bool> visibility;
+        public Transform[] trans;
+        public Vector3[] pos;
         [NonSerialized] public Action action;
+
+        public bool isValid
+        {
+            get
+            {
+                return !name.IsEmpty() && visibility != null;
+            }
+        }
 
         public object Clone()
         {
-            ObjSwitchElement e = new ObjSwitchElement();
+            UISwitchSect e = new UISwitchSect();
             e.name = this.name;
-            e.objs = (GameObject[])objs.Clone();
+            e.visibility = new List<bool>(visibility);
             e.trans = (Transform[])trans.Clone();
             e.pos = (Vector3[])pos.Clone();
             return e;
@@ -270,17 +255,45 @@ namespace comunity
         {
             return name;
         }
+
+        internal GameObject FindObject(List<GameObject> objs, Func<GameObject, bool> predicate)
+        {
+            for (int i=0; i<visibility.Count; ++i)
+            {
+                if (visibility[i] && predicate(objs[i]))
+                {
+                    return objs[i];
+                }
+            }
+            return null;
+        }
+
+        internal void ForEach(List<GameObject> objs, Action<GameObject> func)
+        {
+            for (int i = 0; i < visibility.Count; ++i)
+            {
+                if (visibility[i])
+                {
+                    func(objs[i]);
+                }
+            }
+        }
+
+        internal void RemoveAt(int i)
+        {
+            visibility.RemoveAt(i);
+        }
     }
 
     [System.Serializable]
-    public class ObjSwitchPreset : ICloneable
+    public class UISwitchPreset : ICloneable
     {
         public string presetName;
         public string[] keys = new string[0];
 
         public object Clone()
         {
-            ObjSwitchPreset p = new ObjSwitchPreset();
+            UISwitchPreset p = new UISwitchPreset();
             p.keys = ArrayUtil.Clone(keys);
             return p;
         }
@@ -288,7 +301,7 @@ namespace comunity
 
     public static class ObjSwitchEx
     {
-        public static void SetEx(this ObjSwitch s, params object[] param)
+        public static void SetEx(this UISwitch s, params object[] param)
         {
             if (s == null)
             {

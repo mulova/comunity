@@ -8,7 +8,7 @@ using UnityEngine.Ex;
 
 namespace comunity
 {
-    [System.Serializable]
+    [Serializable]
     public class ObjRef
     {
         [SerializeField] private string _id;
@@ -24,34 +24,7 @@ namespace comunity
         {
             get
             {
-                if (asset)
-                {
-                    string uid = AssetDatabase.GUIDToAssetPath(id);
-                    if (!uid.IsEmpty())
-                    {
-                        return AssetDatabase.LoadAssetAtPath(uid, type);
-                    }
-                    else
-                    {
-                        return null;
-                    }
-                }
-                else
-                {
-                    var t = TransformUtil.Search(id);
-                    if (t != null)
-                    {
-                        if (type == typeof(GameObject))
-                        {
-                            return t.gameObject;
-                        }
-                        else if (type != null)
-                        {
-                            return t.GetComponent(type);
-                        }
-                    }
-                    return t;
-                }
+                return GetReference(_id, _asset, _type);
             }
 
             set
@@ -75,7 +48,6 @@ namespace comunity
                 {
                     this.type = value.GetType();
                 }
-
             }
         }
 
@@ -99,6 +71,40 @@ namespace comunity
             if (o != null)
             {
                 reference = o;
+            }
+        }
+
+
+        public static Object GetReference(string id, bool isAsset, string typeStr)
+        {
+            var type = ReflectionUtil.GetType(typeStr);
+            if (isAsset)
+            {
+                string uid = AssetDatabase.GUIDToAssetPath(id);
+                if (!uid.IsEmpty())
+                {
+                    return AssetDatabase.LoadAssetAtPath(uid, type);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                var t = TransformUtil.Search(id);
+                if (t != null)
+                {
+                    if (type == typeof(GameObject))
+                    {
+                        return t.gameObject;
+                    }
+                    else if (type != null)
+                    {
+                        return t.GetComponent(type);
+                    }
+                }
+                return t;
             }
         }
 

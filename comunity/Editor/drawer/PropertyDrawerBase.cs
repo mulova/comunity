@@ -13,9 +13,6 @@ namespace comunity
         public const int lineHeight = 16;
         private SerializedProperty prop;
         protected Rect bound;
-        protected int index;
-        protected bool isActive;
-        protected bool isFocused;
 
         protected virtual int GetLineCount(SerializedProperty p)
         {
@@ -97,9 +94,6 @@ namespace comunity
         {
             var element = prop.GetArrayElementAtIndex(idx);
             this.bound = rect;
-            this.index = idx;
-            this.isActive = active;
-            this.isFocused = focused;
             DrawProperty(element, rect);
         }
 

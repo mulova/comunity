@@ -10,26 +10,35 @@ namespace comunity
 {
     public class ReorderSerialized<T>
     {
-        public delegate void FillNewItemDelegate(int index);
-        public delegate bool DrawItemDelegate(SerializedProperty item, Rect rect, int index, bool isActive, bool isFocused);
+        public delegate T CreateItemDelegate();
+        public delegate void DrawItemDelegate(SerializedProperty item, Rect rect, int index, bool isActive, bool isFocused);
         public delegate T GettemDelegate(SerializedProperty p);
         public delegate void SetItemDelegate(SerializedProperty p, T value);
+        public delegate void AddDelegate(int index);
+        public delegate void RemoveDelegate(int index);
+        public delegate void ReorderDelegate(int i1, int i2);
         public delegate void ChangeDelegate();
+        public delegate bool CanAddDelegate();
 
         public ReorderableList drawer { get; private set; }
-        public bool changed { get; private set; }
 
-        public FillNewItemDelegate fillNewItem { private get; set; }
+        public CreateItemDelegate createItem { private get; set; }
         public DrawItemDelegate drawItem { private get; set; }
         public GettemDelegate getItem { private get; set; }
         public SetItemDelegate setItem { private get; set; }
+        public AddDelegate onAdd = i => { };
+        public RemoveDelegate onRemove = i => { };
         public ChangeDelegate onChange = () => { };
+        public ReorderDelegate onReorder = (i1,i2) => { };
         public ElementHeightCallbackDelegate getElementHeight;
+        public CanAddDelegate canAdd = () => true;
 
         // backup
         private float elementHeight;
         private float headerHeight;
         private float footerHeight;
+
+        private Predicate<T> match;
 
         private string _title;
         public string title
@@ -87,7 +96,6 @@ namespace comunity
                 }
                 var e = drawer.serializedProperty.GetArrayElementAtIndex(i);
                 setItem(e, value);
-                SetDirty();
             }
         }
 
@@ -117,7 +125,6 @@ namespace comunity
             Init(prop);
         }
 
-
         private void Init(SerializedProperty prop)
         {
             this.drawer = new ReorderableList(prop.serializedObject, prop, true, false, true, true);
@@ -125,18 +132,23 @@ namespace comunity
             headerHeight = this.drawer.headerHeight;
             footerHeight = this.drawer.footerHeight;
 
-            this.getItem = GetItem;
-            this.setItem = SetItem;
-            this.drawer.onAddCallback = _OnAdd;
-            this.drawer.drawHeaderCallback = DrawHeader;
-            this.drawer.drawElementCallback = _DrawItem;
-            this.drawer.onReorderCallback = Reorder;
-            this.drawer.elementHeightCallback = GetElementHeight;
-            this.fillNewItem = FillNewItem;
             this.drawItem = DrawItem;
+            this.drawer.onAddCallback = _OnAdd;
+            this.drawer.onRemoveCallback = _OnRemove;
+            this.drawer.drawHeaderCallback = _OnDrawHeader;
+            this.drawer.drawElementCallback = _OnDrawItem;
+            this.drawer.onReorderCallbackWithDetails = _OnReorder;
+            this.drawer.elementHeightCallback = GetElementHeight;
+            this.drawer.onCanAddCallback = _CanAdd;
+            this.createItem = () => default(T);
 
             this.title = prop.displayName;
             // backup
+        }
+
+        private bool _CanAdd(ReorderableList list)
+        {
+            return canAdd();
         }
 
         private float GetElementHeight(int index)
@@ -148,7 +160,7 @@ namespace comunity
                     return getElementHeight(index);
                 } else
                 {
-                    return EditorGUI.GetPropertyHeight(drawer.serializedProperty.GetArrayElementAtIndex(index));
+                    return EditorGUI.GetPropertyHeight(drawer.serializedProperty.GetArrayElementAtIndex(index))+5;
                 }
             }
             else
@@ -157,7 +169,7 @@ namespace comunity
             }
         }
 
-        private void DrawHeader(Rect rect)
+        private void _OnDrawHeader(Rect rect)
         {
             if (!_title.IsEmpty())
             {
@@ -165,19 +177,16 @@ namespace comunity
             }
         }
 
-        protected virtual bool DrawItem(SerializedProperty item, Rect rect, int index, bool isActive, bool isFocused)
+        protected virtual void DrawItem(SerializedProperty item, Rect rect, int index, bool isActive, bool isFocused)
         {
-            return EditorGUI.PropertyField(rect, item, new GUIContent(""));
+            EditorGUI.PropertyField(rect, item, new GUIContent(""));
         }
 
-        private void _DrawItem(Rect rect, int index, bool isActive, bool isFocused)
+        private void _OnDrawItem(Rect rect, int index, bool isActive, bool isFocused)
         {
             if (match == null || match(this[index]))
             {
                 Rect r = rect;
-                //r.y += 1;
-                //r.height -= 2;
-
                 var item = drawer.serializedProperty.GetArrayElementAtIndex(index);
                 if (displayIndex)
                 {
@@ -185,83 +194,52 @@ namespace comunity
                     EditorGUI.LabelField(rects[0], index.ToString(), EditorStyles.boldLabel);
                     r = rects[1];
                 }
-
-                if (drawItem(item, r, index, isActive, isFocused))
+                r.y += 1;
+                r.height -= 5;
+                EditorGUI.BeginChangeCheck();
+                drawItem(item, r, index, isActive, isFocused);
+                if (EditorGUI.EndChangeCheck())
                 {
-                    changed = true;
-                    SetDirty();
+                    Undo.RecordObject(item.serializedObject.targetObject, item.displayName);
+                    item.serializedObject.ApplyModifiedProperties();
+                    drawer.index = index;
                 }
             }
         }
 
-        protected virtual void FillNewItem(int index)
+        protected virtual void _OnReorder(ReorderableList list, int oldIndex, int newIndex)
         {
-        }
-
-        protected virtual T GetItem(SerializedProperty p)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected virtual void SetItem(SerializedProperty p, T value)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected virtual void Reorder(ReorderableList list)
-        {
-            SetDirty();
-        }
-
-        private void _OnAdd(ReorderableList reorderList)
-        {
-            drawer.serializedProperty.InsertArrayElementAtIndex(drawer.serializedProperty.arraySize);
-            drawer.index = drawer.serializedProperty.arraySize - 1;
-            fillNewItem(drawer.index);
-            SetDirty();
+            onReorder(oldIndex, newIndex);
             onChange();
         }
 
-        public void SetDirty()
+        private void _OnAdd(ReorderableList list)
         {
-            EditorUtil.SetDirty(obj);
-            changed = true;
+            var index = list.index+1;
+            list.serializedProperty.InsertArrayElementAtIndex(index);
+            list.index = index;
+            setItem?.Invoke(list.serializedProperty.GetArrayElementAtIndex(index), createItem());
+            onAdd(index);
+            onChange();
         }
 
-        public bool Draw()
+        private void _OnRemove(ReorderableList list)
         {
-            return DrawInternal(drawer.DoLayoutList);
+            int index = list.index;
+            defaultBehaviours.DoRemoveButton(list);
+            onRemove(index);
         }
 
-        public bool Draw(Rect rect)
+        public void Draw()
         {
-            return DrawInternal(()=>drawer.DoList(rect));
+            drawer.DoLayoutList();
         }
 
-        private bool DrawInternal(Action drawAction)
+        public void Draw(Rect rect)
         {
-            changed = false;
-            if (obj != null && drawer.serializedProperty == null)
-            {
-                Undo.RecordObject(obj, obj.name);
-            }
-            drawAction();
-            if (!changed && obj != null && drawer.serializedProperty == null)
-            {
-                Undo.ClearUndo(obj);
-            }
-            if (changed)
-            {
-                onChange();
-                SetDirty();
-                return true;
-            } else
-            {
-                return false;
-            }
+            drawer.DoList(rect);
         }
 
-        private Predicate<T> match;
         public void Filter(Predicate<T> match)
         {
             this.match = match;

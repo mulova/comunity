@@ -10,19 +10,21 @@ namespace comunity
         public StrReorderProperty(SerializedObject ser, string varName, bool editable = true) : base(ser, varName)
         {
             this.editable = editable;
+            this.setItem = SetItem;
+            this.getItem = GetItem;
         }
 
-        protected override string GetItem(SerializedProperty p)
+        private string GetItem(SerializedProperty p)
         {
             return p.stringValue;
         }
 
-        protected override void SetItem(SerializedProperty p, string value)
+        private void SetItem(SerializedProperty p, string value)
         {
             p.stringValue = value;
         }
 
-        protected override bool DrawItem(SerializedProperty item, Rect rect, int index, bool isActive, bool isFocused)
+        protected override void DrawItem(SerializedProperty item, Rect rect, int index, bool isActive, bool isFocused)
         {
             var o1 = this[index];
             if (editable)
@@ -31,16 +33,10 @@ namespace comunity
                 if (o1 != o2)
                 {
                     this[index] = o2;
-                    return true;
-                }
-                else
-                {
-                    return false;
                 }
             } else
             {
                 EditorGUI.LabelField(rect, o1);
-                return false;
             }
 
         }
