@@ -82,6 +82,14 @@ namespace comunity
             }
         }
 
+        public SerializedProperty property
+        {
+            get
+            {
+                return drawer.serializedProperty;
+            }
+        }
+
         public T this[int i]
         {
             get {
@@ -215,7 +223,8 @@ namespace comunity
 
         private void _OnAdd(ReorderableList list)
         {
-            var index = list.index+1;
+            var index = list.index >= 0? list.index+1: list.count;
+            index = Math.Min(index, list.count);
             list.serializedProperty.InsertArrayElementAtIndex(index);
             list.index = index;
             setItem?.Invoke(list.serializedProperty.GetArrayElementAtIndex(index), createItem());
@@ -243,6 +252,11 @@ namespace comunity
         public void Filter(Predicate<T> match)
         {
             this.match = match;
+        }
+
+        public float GetHeight()
+        {
+            return drawer.GetHeight();
         }
     }
 }

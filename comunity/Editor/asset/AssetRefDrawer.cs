@@ -34,7 +34,7 @@ namespace comunity
             }
 		}
 
-        protected override void DrawProperty(SerializedProperty p, Rect bound)
+        protected override void OnGUI(SerializedProperty p, Rect bound)
         {
             int lineCount = GetLineCount(p);
             var bounds = bound.SplitByHeights(lineHeight);

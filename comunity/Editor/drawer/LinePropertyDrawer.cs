@@ -6,7 +6,7 @@ namespace comunity
     [CustomPropertyDrawer(typeof(LineDrawerAttribute))]
     public class LinePropertyDrawer : PropertyDrawerBase
     {
-        protected override void DrawProperty(SerializedProperty p, Rect bound)
+        protected override void OnGUI(SerializedProperty p, Rect bound)
         {
             var attr = attribute as LineDrawerAttribute;
             Rect[] r = bound.SplitByHeightCount(attr.names.Length);

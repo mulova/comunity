@@ -19,7 +19,7 @@ namespace comunity
 			return 1;
 		}
 
-		protected override void DrawProperty(SerializedProperty p, Rect bound)
+		protected override void OnGUI(SerializedProperty p, Rect bound)
         {
             p.serializedObject.Update();
             IList<T> values = GetValues();

@@ -12,7 +12,7 @@ namespace comunity
 			return 3;
 		}
 
-		protected override void DrawProperty(SerializedProperty p, Rect bound)
+		protected override void OnGUI(SerializedProperty p, Rect bound)
         {
 			SerializedProperty mat = p.FindPropertyRelative("material");
             SerializedProperty tex1 = p.FindPropertyRelative("tex1");

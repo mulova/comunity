@@ -13,7 +13,7 @@ namespace comunity
 			return 1;
 		}
 
-		protected override void DrawProperty(SerializedProperty p, Rect bound)
+		protected override void OnGUI(SerializedProperty p, Rect bound)
         {
 			EventListAttribute attr = attribute as EventListAttribute;
 			string[] events = EventListDrawer.GetIds(attr.listPath);

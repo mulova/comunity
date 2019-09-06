@@ -41,7 +41,7 @@ namespace comunity
             }
         }
 
-        protected abstract void DrawProperty(SerializedProperty p, Rect bound);
+        protected abstract void OnGUI(SerializedProperty p, Rect bound);
 
         protected Rect GetLineRect(int lineNo, int lineCount = 1)
         {
@@ -76,7 +76,7 @@ namespace comunity
         {
             this.prop = property;
             this.bound = position;
-            Undo.RecordObject(property.serializedObject.targetObject, GetType().FullName);
+            Undo.RecordObject(property.serializedObject.targetObject, property.propertyPath);
             EditorGUI.indentLevel = property.depth;
             if (property.isArray)
             {
@@ -85,7 +85,7 @@ namespace comunity
                 list.drawElementCallback = DrawArrayElement;
             } else
             {
-                DrawProperty(property, position);
+                OnGUI(property, position);
             }
             this.prop = null;
         }
@@ -94,7 +94,7 @@ namespace comunity
         {
             var element = prop.GetArrayElementAtIndex(idx);
             this.bound = rect;
-            DrawProperty(element, rect);
+            OnGUI(element, rect);
         }
 
         protected void DrawTitles(Rect pos, params string[] propNames)
