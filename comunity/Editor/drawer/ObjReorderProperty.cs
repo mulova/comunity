@@ -3,7 +3,7 @@ using UnityEditor;
 
 namespace comunity
 {
-    public class ObjReorderProperty<T> : ReorderSerialized<T> where T:UnityEngine.Object
+    public class ObjReorderProperty<T> : PropertyReorder<T> where T:UnityEngine.Object
     {
         public bool allowSceneObjects = true;
         public bool editable = true;

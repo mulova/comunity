@@ -8,7 +8,7 @@ using static UnityEditorInternal.ReorderableList;
 
 namespace comunity
 {
-    public class ReorderSerialized<T>
+    public class PropertyReorder<T>
     {
         public delegate T CreateItemDelegate();
         public delegate void DrawItemDelegate(SerializedProperty item, Rect rect, int index, bool isActive, bool isFocused);
@@ -114,13 +114,13 @@ namespace comunity
             }
         }
 
-        public ReorderSerialized(SerializedObject ser, string propPath)
+        public PropertyReorder(SerializedObject ser, string propPath)
         {
             var prop = ser.FindProperty(propPath);
             Init(prop);
         }
 
-        public ReorderSerialized(SerializedProperty prop)
+        public PropertyReorder(SerializedProperty prop)
         {
             Init(prop);
         }
