@@ -2,7 +2,7 @@
 using System.Ex;
 using mulova.commons;
 
-namespace comunity
+namespace mulova.comunity
 {
 	public static class ActionDelayEx
 	{

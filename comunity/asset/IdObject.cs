@@ -1,7 +1,7 @@
 ﻿using System;
 using Object = UnityEngine.Object;
 
-namespace comunity
+namespace mulova.comunity
 {
 	public class IdObject
 	{

@@ -1,9 +1,9 @@
-using System;
+﻿using System;
 using System.Globalization;
 using System.Text;
 using UnityEngine;
 
-namespace comunity
+namespace mulova.comunity
 {
     public static class BuildInfo
     {

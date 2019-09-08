@@ -1,4 +1,4 @@
-//----------------------------------------------
+﻿//----------------------------------------------
 // Unity3D common libraries and editor tools
 // License: The MIT License ( http://opensource.org/licenses/MIT )
 // Copyright © 2013- mulova@gmail.com
@@ -9,7 +9,7 @@ using System.Reflection;
 using Object = UnityEngine.Object;
 using UnityEngine;
 
-namespace comunity {
+namespace mulova.comunity {
 	public static class ObjectUtil {
 
 		public static bool EqualsEx(object o1, object o2) {

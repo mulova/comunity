@@ -1,8 +1,8 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.Ex;
 
-namespace comunity
+namespace mulova.comunity
 {
 	public class PosSyncer : InternalScript
     {

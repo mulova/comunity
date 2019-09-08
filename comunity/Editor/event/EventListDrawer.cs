@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using System.Text;
 using mulova.commons;
-namespace comunity
+namespace mulova.comunity
 {
 	[CustomPropertyDrawer(typeof(EventListAttribute))]
 	public class EventListDrawer : PropertyDrawerBase

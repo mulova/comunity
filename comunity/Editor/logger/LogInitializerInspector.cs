@@ -8,7 +8,7 @@ using UnityEditor;
 using UnityEngine;
 using mulova.commons;
 
-namespace comunity
+namespace mulova.comunity
 {
     [CustomEditor(typeof(LogInitializer))]
     public class LogInitializerInspector : Editor

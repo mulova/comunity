@@ -1,4 +1,4 @@
-//----------------------------------------------
+﻿//----------------------------------------------
 // Unity3D common libraries and editor tools
 // License: The MIT License ( http://opensource.org/licenses/MIT )
 // Copyright © 2013- mulova@gmail.com
@@ -13,7 +13,7 @@ using System;
 /**
 * Draw Enum Popup UI if the enum class source is set correctly
 */
-namespace comunity
+namespace mulova.comunity
 {
     public sealed class EnumParser
     {

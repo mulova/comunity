@@ -1,4 +1,4 @@
-//----------------------------------------------
+﻿//----------------------------------------------
 // Unity3D common libraries and editor tools
 // License: The MIT License ( http://opensource.org/licenses/MIT )
 // Copyright © 2013- mulova@gmail.com
@@ -10,7 +10,7 @@ using System;
 
 
 
-namespace comunity {
+namespace mulova.comunity {
 	public class Threading : SingletonBehaviour<Threading> {
 		private ActionQueue queue = new ActionQueue();
 

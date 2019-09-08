@@ -3,7 +3,7 @@ using System;
 using mulova.commons;
 
 
-namespace comunity
+namespace mulova.comunity
 {
     public class LogInitializer : Lifecycle
     {

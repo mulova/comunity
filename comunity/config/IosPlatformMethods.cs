@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Diagnostics;
 
 
-namespace comunity
+namespace mulova.comunity
 {
 	public class IosPlatformMethods : IPlatformMethods
 	{

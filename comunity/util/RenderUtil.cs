@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using mulova.commons;
 
-namespace comunity {
+namespace mulova.comunity {
 	public class RenderUtil {
 		
 		

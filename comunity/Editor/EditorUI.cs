@@ -3,7 +3,7 @@ using UnityEditor;
 using mulova.commons;
 using System.Text.Ex;
 
-namespace comunity
+namespace mulova.comunity
 {
 	/// <summary>
 	/// From NGUIEditorTools

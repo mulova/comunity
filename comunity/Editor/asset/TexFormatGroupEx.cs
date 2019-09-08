@@ -13,7 +13,7 @@ using mulova.commons;
 using System.Text.Ex;
 using UnityEngine.Ex;
 
-namespace comunity
+namespace mulova.comunity
 {
 	public static class TexFormatGroupEx
 	{

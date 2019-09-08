@@ -1,4 +1,4 @@
-//----------------------------------------------
+﻿//----------------------------------------------
 // Unity3D common libraries and editor tools
 // License: http://opensource.org/licenses/GPL-3.0
 // Copyright © 2013- mulova@gmail.com
@@ -6,7 +6,7 @@
 using Object = UnityEngine.Object;
 using System.IO;
 
-namespace comunity
+namespace mulova.comunity
 {
 	public class Web
 	{

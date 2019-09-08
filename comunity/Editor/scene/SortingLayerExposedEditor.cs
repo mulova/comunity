@@ -1,9 +1,9 @@
-// Put this file into a folder named "Editor"
+﻿// Put this file into a folder named "Editor"
 
 using UnityEngine;
 using UnityEditor;
 
-namespace comunity
+namespace mulova.comunity
 {
 	
 	

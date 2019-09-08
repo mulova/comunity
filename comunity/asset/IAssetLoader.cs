@@ -1,9 +1,9 @@
-using System;
+﻿using System;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using System.Collections.Generic;
 
-namespace comunity {
+namespace mulova.comunity {
 
 	public interface IAssetLoader
 	{

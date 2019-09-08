@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace comunity
+namespace mulova.comunity
 {
     public class AssetPropertyAttribute : Attribute
     {

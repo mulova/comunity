@@ -6,7 +6,7 @@ using System.Text;
 using System.IO;
 using System.Collections.Generic;
 
-namespace comunity
+namespace mulova.comunity
 {
 	public class WarningRemover : ScriptableWizard
 	{

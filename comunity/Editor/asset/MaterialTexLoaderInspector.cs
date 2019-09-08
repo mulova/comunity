@@ -6,7 +6,7 @@ using UnityEngine;
 using System.IO;
 using mulova.commons;
 
-namespace comunity {
+namespace mulova.comunity {
 	[CustomEditor(typeof(MaterialTexLoader))]
 	public class MaterialTexLoaderInspector : Editor {
 		

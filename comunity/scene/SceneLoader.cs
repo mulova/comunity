@@ -5,11 +5,11 @@ using System.Collections.Generic;
 using System.Collections;
 
 using UnityEngine.SceneManagement;
-using comunity;
+using mulova.comunity;
 using mulova.commons;
 using System.Ex;
 
-namespace comunity
+namespace mulova.comunity
 {
     public class SceneLoader : SingletonBehaviour<SceneLoader>
     {

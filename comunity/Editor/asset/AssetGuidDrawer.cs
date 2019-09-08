@@ -2,7 +2,7 @@
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace comunity
+namespace mulova.comunity
 {
     [CustomPropertyDrawer(typeof(AssetGuid))]
     public class AssetGuidDrawer : PropertyDrawerBase

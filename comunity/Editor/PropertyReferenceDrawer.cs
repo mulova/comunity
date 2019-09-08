@@ -1,4 +1,4 @@
-#if FULL
+﻿#if FULL
 //----------------------------------------------
 //            NGUI: Next-Gen UI kit
 // Copyright © 2011-2014 Tasharen Entertainment
@@ -13,7 +13,7 @@ using System.Reflection;
 /// <summary>
 /// Generic property binding drawer.
 /// </summary>
-namespace comunity
+namespace mulova.comunity
 {
 
 [CustomPropertyDrawer(typeof(PropertyReference))]

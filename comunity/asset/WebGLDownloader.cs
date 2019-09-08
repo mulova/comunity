@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Collections;
 
-namespace comunity
+namespace mulova.comunity
 {
     public class WebGLDownloader : Script
 	{

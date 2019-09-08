@@ -4,7 +4,7 @@ using mulova.commons;
 using System.Text.Ex;
 using System.Ex;
 
-namespace comunity
+namespace mulova.comunity
 {
     [RequireComponent(typeof(Renderer))]
     public class MeshTexLoader : InternalScript, IReleasable

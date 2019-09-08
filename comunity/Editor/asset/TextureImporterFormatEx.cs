@@ -1,7 +1,7 @@
-﻿using comunity;
+﻿using mulova.comunity;
 using UnityEditor;
 
-namespace comunity
+namespace mulova.comunity
 {
 	public static class TextureImporterFormatEx
 	{

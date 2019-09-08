@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System;
 
-namespace comunity {
+namespace mulova.comunity {
 	internal class RemotePathConverter
 	{
 		/// <summary>

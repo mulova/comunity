@@ -10,7 +10,7 @@ using Object = UnityEngine.Object;
 using UnityEditor;
 using mulova.commons;
 
-namespace comunity
+namespace mulova.comunity
 {
     public class PartialEnumObjArrInspector<E, O> : ArrInspector<O> 
         where E:struct, IComparable, IConvertible, IFormattable

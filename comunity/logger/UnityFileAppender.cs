@@ -12,7 +12,7 @@ using Object = UnityEngine.Object;
 using mulova.commons;
 using System.IO.Ex;
 
-namespace comunity
+namespace mulova.comunity
 {
     public class UnityFileAppender : LogAppender {
         

@@ -9,7 +9,7 @@ using UnityEngine;
 using Object = UnityEngine.Object;
 using mulova.commons;
 
-namespace comunity
+namespace mulova.comunity
 {
     public class StrStrArrInspector<T> : ArrInspector<T> {
         private string keyVar;

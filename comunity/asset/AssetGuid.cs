@@ -2,7 +2,7 @@
 using mulova.commons;
 using UnityEngine;
 
-namespace comunity
+namespace mulova.comunity
 {
     [System.Serializable]
     public class AssetGuid

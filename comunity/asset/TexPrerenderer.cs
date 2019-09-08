@@ -1,10 +1,10 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
 using System.Collections;
 using Object = UnityEngine.Object;
 
-namespace comunity
+namespace mulova.comunity
 {
     /// <summary>
     /// TexListener is called after loaded texture is set to UITexture.

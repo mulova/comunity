@@ -1,4 +1,4 @@
-//----------------------------------------------
+﻿//----------------------------------------------
 // Unity3D common libraries and editor tools
 // License: The MIT License ( http://opensource.org/licenses/MIT )
 // Copyright © 2013- mulova@gmail.com
@@ -7,7 +7,7 @@
 using UnityEngine;
 using System.Collections;
 
-namespace comunity
+namespace mulova.comunity
 {
     /**
     * 하위 노드들의 위치를 Gizmo로 표시한다.

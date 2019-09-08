@@ -8,7 +8,7 @@ using System;
 using System.Text.Ex;
 using mulova.commons;
 
-namespace comunity
+namespace mulova.comunity
 {
 	public class ExecOutput {
 		public string stdout;

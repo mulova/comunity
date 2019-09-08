@@ -1,8 +1,8 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using comunity;
+using mulova.comunity;
 
 namespace convinity {
 	class ColliderSearchTab : SearchTab<Collider>

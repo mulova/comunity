@@ -9,7 +9,7 @@ using System.Collections;
 using UnityEditor.SceneManagement;
 using mulova.commons;
 
-namespace comunity
+namespace mulova.comunity
 {
 //	[CustomPropertyDrawer(typeof(EnumClass))]
 	public abstract class EnumClassDrawer<T> : PropertyDrawerBase where T: class

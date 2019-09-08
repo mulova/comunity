@@ -1,7 +1,7 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
 
-namespace comunity
+namespace mulova.comunity
 {
 	public class PolyLine : MonoBehaviour {
 		

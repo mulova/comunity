@@ -20,7 +20,7 @@ using mulova.commons;
 using System.Collections.Generic.Ex;
 using System.Ex;
 
-namespace comunity
+namespace mulova.comunity
 {
     public static class Messenger
     {

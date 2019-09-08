@@ -1,5 +1,5 @@
-
-namespace comunity
+﻿
+namespace mulova.comunity
 {
 	public enum SimulationMode {
 		ReleaseBuild, DebugBuild, Editor

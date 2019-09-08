@@ -4,7 +4,7 @@ using System.Reflection;
 using UnityEngine.SceneManagement;
 using mulova.commons;
 
-namespace comunity
+namespace mulova.comunity
 {
 
     /// <summary>

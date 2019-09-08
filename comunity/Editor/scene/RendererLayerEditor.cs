@@ -1,4 +1,4 @@
-//  RendererLayerEditor.cs
+﻿//  RendererLayerEditor.cs
 //   Author:
 //       Yves J. Albuquerque <yves.albuquerque@gmail.com>
 //  Last Update:
@@ -12,7 +12,7 @@ using UnityEditorInternal;
 using System.Reflection;
 using System.Collections.Generic;
 
-namespace comunity
+namespace mulova.comunity
 {
 	
 	

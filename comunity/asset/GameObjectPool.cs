@@ -4,7 +4,7 @@ using mulova.commons;
 using System.Collections.Generic.Ex;
 using UnityEngine.Ex;
 
-namespace comunity
+namespace mulova.comunity
 {
     public class GOPoolElement 
     {

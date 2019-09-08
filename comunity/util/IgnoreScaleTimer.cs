@@ -4,7 +4,7 @@ using System.Collections;
 using mulova.commons;
 using System.Ex;
 
-namespace comunity
+namespace mulova.comunity
 {
     public class IgnoreScaleTimer : MonoBehaviour
     {

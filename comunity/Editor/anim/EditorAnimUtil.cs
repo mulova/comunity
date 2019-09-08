@@ -9,7 +9,7 @@ using UnityEditor.Animations;
 using UnityEditor;
 using mulova.commons;
 
-namespace comunity {
+namespace mulova.comunity {
 	public static class EditorAnimUtil {
 		public static string[] GetAnimatorParameters(Animator anim, AnimatorControllerParameterType paramType) {
 			if (anim != null) {

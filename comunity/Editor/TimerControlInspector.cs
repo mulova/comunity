@@ -1,9 +1,9 @@
-
+﻿
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace comunity
+namespace mulova.comunity
 {
     [CustomEditor(typeof(TimerControl))]
     public class TimerControlInspector : Editor {

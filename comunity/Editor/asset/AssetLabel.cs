@@ -2,7 +2,7 @@
 using UnityEditor;
 using mulova.commons;
 
-namespace comunity
+namespace mulova.comunity
 {
     public class AssetLabel : EnumClass<AssetLabel> {
         public static readonly AssetLabel ALPHA_SD = new AssetLabel("Alpha_sd");

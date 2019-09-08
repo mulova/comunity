@@ -5,7 +5,7 @@ using UnityEngine;
 using mulova.commons;
 using Rotorz.Games.Collections;
 
-namespace comunity {
+namespace mulova.comunity {
 	public abstract class EditorTab {
 
         private object id;

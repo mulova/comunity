@@ -5,7 +5,7 @@ using Object = UnityEngine.Object;
 using System.Reflection;
 using mulova.commons;
 
-namespace comunity
+namespace mulova.comunity
 {
     public class MethodInspector {
         private HashSet<Type> excludeCompTypes = new HashSet<Type>();

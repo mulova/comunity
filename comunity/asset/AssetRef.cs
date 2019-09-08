@@ -5,7 +5,7 @@ using UnityEngine.Serialization;
 using mulova.commons;
 using System.Text.Ex;
 
-namespace comunity
+namespace mulova.comunity
 {
     /// <summary>
     /// Assets in Resources/ directory is not strongly referenced.

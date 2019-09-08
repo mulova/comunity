@@ -1,6 +1,6 @@
-using System;
+﻿using System;
 
-namespace comunity
+namespace mulova.comunity
 {
     /// <summary>
     /// Test configuration values.

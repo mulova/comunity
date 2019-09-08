@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 using UnityEditor;
 using mulova.commons;
 
-namespace comunity
+namespace mulova.comunity
 {
 	public class TexFormatGroupData : EnumClass<TexFormatGroupData>
 	{

@@ -1,7 +1,7 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
-namespace comunity
+namespace mulova.comunity
 {
     [ExecuteInEditMode]
     public class ScreenPosSync : InternalScript

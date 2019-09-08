@@ -10,7 +10,7 @@ using UnityEngine;
 using mulova.commons;
 using System.Ex;
 
-namespace comunity {
+namespace mulova.comunity {
 	[Serializable]
 	public class LogSnapshot {
         public LogLevel logLevel = LogLevel.WARN;

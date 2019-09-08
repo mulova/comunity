@@ -4,7 +4,7 @@ using mulova.commons;
 using UnityEngine.Ex;
 using System.Collections.Generic.Ex;
 
-namespace comunity
+namespace mulova.comunity
 {
     [RequireComponent(typeof(MeshTexLoader))]
     public class MeshTexSetter : InternalScript

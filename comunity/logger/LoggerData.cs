@@ -1,7 +1,7 @@
 ﻿using System;
 using mulova.commons;
 
-namespace comunity
+namespace mulova.comunity
 {
     [System.Serializable]
     public class LoggerData : ICloneable

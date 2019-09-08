@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Threading;
 using mulova.commons;
 
-namespace comunity
+namespace mulova.comunity
 {
     public class UnzipQueue
     {

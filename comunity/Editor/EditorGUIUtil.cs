@@ -13,7 +13,7 @@ using System.Text.Ex;
 using System.Ex;
 using Rotorz.Games.Collections;
 
-namespace comunity
+namespace mulova.comunity
 {
     public class EditorGUIUtil {
 

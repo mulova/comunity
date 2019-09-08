@@ -1,6 +1,6 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace comunity
+namespace mulova.comunity
 {
 	public class EventListAttribute : PropertyAttribute {
 		

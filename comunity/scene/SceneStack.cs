@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 using mulova.commons;
 using System.Ex;
 
-namespace comunity
+namespace mulova.comunity
 {
     /// <summary>
     /// Track the scene changes

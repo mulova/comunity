@@ -3,7 +3,7 @@ using System;
 using mulova.commons;
 using System.Text.Ex;
 
-namespace comunity
+namespace mulova.comunity
 {
     public class SceneEvent : SingletonBehaviour<SceneEvent>
     {

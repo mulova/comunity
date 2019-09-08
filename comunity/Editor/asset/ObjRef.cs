@@ -6,7 +6,7 @@ using Object = UnityEngine.Object;
 using System.Text.Ex;
 using UnityEngine.Ex;
 
-namespace comunity
+namespace mulova.comunity
 {
     [Serializable]
     public class ObjRef

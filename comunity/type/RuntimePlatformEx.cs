@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-using comunity;
+using mulova.comunity;
 
-namespace comunity
+namespace mulova.comunity
 {
 	public static class RuntimePlatformEx
 	{

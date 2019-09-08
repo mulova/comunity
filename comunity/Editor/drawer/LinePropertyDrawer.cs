@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-namespace comunity
+namespace mulova.comunity
 {
     [CustomPropertyDrawer(typeof(LineDrawerAttribute))]
     public class LinePropertyDrawer : PropertyDrawerBase

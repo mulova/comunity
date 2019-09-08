@@ -1,9 +1,9 @@
-//AlmostLogical Software - http://www.almostlogical.com
+﻿//AlmostLogical Software - http://www.almostlogical.com
 using UnityEngine;
 using UnityEditor;
 using System.Collections;
 
-namespace comunity
+namespace mulova.comunity
 {
     public class CreateNewLine : EditorWindow
     {

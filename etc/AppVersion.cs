@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using comunity;
+using mulova.comunity;
 using UnityEngine.Ex;
 
 namespace etc

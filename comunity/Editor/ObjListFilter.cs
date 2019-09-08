@@ -6,7 +6,7 @@ using UnityEngine;
 using mulova.commons;
 using System.Text.Ex;
 
-namespace comunity {
+namespace mulova.comunity {
 	public class ObjListFilter<T> where T:class {
 
 		private string title;

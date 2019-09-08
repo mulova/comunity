@@ -1,11 +1,11 @@
-#if FULL
+﻿#if FULL
 using System.Collections.Generic;
-using comunity;
+using mulova.comunity;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
 
-namespace comunity {
+namespace mulova.comunity {
 	/// <summary>
 	/// 동일한 이름의 resource이면서 _01, _02 같은 suffix가 붙어있는 resource의 list를 관리한다.
 	/// Groups resources by suffix removed names.

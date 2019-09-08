@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace comunity
+namespace mulova.comunity
 {
     [CustomPropertyDrawer(typeof(IfAttribute))]
     public class IfDrawer : PropertyDrawer

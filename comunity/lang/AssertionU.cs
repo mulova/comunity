@@ -7,7 +7,7 @@
 using mulova.commons;
 using UnityEngine;
 
-namespace comunity
+namespace mulova.comunity
 {
     public static class AssertionU
 	{

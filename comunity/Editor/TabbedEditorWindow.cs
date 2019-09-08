@@ -6,7 +6,7 @@ using System.IO;
 using mulova.commons;
 using System.Text.Ex;
 
-namespace comunity {
+namespace mulova.comunity {
 	public abstract class TabbedEditorWindow : EditorWindow {
 		
 		private TabData selected;

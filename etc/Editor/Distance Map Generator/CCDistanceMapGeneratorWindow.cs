@@ -1,4 +1,4 @@
-/*
+﻿/*
 	Copyright 2012, Jasper Flick
 	http://catlikecoding.com/
 	Version 1.0.1
@@ -23,7 +23,7 @@
 using System.IO;
 using UnityEditor;
 using UnityEngine;
-using comunity;
+using mulova.comunity;
 
 namespace etc
 {

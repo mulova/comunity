@@ -14,7 +14,7 @@ using System.Collections.Generic.Ex;
 using AssetBundles;
 #endif
 
-namespace comunity
+namespace mulova.comunity
 {
     public class FileAssetLoader : IAssetLoader
     {

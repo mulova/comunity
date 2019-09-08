@@ -2,7 +2,7 @@
 using UnityEditor;
 using System;
 
-namespace comunity
+namespace mulova.comunity
 {
     public static class TextureImporterEx
     {

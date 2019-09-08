@@ -7,7 +7,7 @@ using UnityEditor;
 using System.Text.Ex;
 using System.Collections.Generic;
 
-namespace comunity
+namespace mulova.comunity
 {
     /// <summary>
     /// Pure C# IList (non SerializableProperty array) cannot be reordered in UnityInternal ReorderableList

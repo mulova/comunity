@@ -7,7 +7,7 @@ using UnityEngine;
 using System.IO;
 using UnityEditor.Build;
 
-namespace comunity
+namespace mulova.comunity
 {
     [InitializeOnLoad]
     public class LibManager

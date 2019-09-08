@@ -1,4 +1,4 @@
-#if FULL
+﻿#if FULL
 //----------------------------------------------
 //            NGUI: Next-Gen UI kit
 // Copyright © 2011-2014 Tasharen Entertainment
@@ -15,7 +15,7 @@ using System.Diagnostics;
 
 using UnityEngine;
 using System;
-namespace comunity {
+namespace mulova.comunity {
 /// <summary>
 /// Reference to a specific field or property that can be set via inspector.
 /// </summary>

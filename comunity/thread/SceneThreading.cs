@@ -8,7 +8,7 @@ using UnityEngine;
 using System.Collections;
 using System;
 
-namespace comunity {
+namespace mulova.comunity {
 	public class SceneThreading : SingletonBehaviour<SceneThreading> {
 		private ActionQueue queue = new ActionQueue();
 

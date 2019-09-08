@@ -10,7 +10,7 @@ using System.Collections;
 using Object = UnityEngine.Object;
 using mulova.commons;
 
-namespace comunity
+namespace mulova.comunity
 {
 	public static class WWWEx
 	{

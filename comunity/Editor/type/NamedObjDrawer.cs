@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEditor;
 
-namespace comunity
+namespace mulova.comunity
 {
     public class NamedObjDrawer<T> : IItemDrawer<T> where T: NamedObj
     {

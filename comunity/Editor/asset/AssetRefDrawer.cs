@@ -4,7 +4,7 @@ using Object = UnityEngine.Object;
 using mulova.commons;
 using System.Text.Ex;
 
-namespace comunity
+namespace mulova.comunity
 {
 	[CustomPropertyDrawer(typeof(AssetRef))]
 	public class AssetRefDrawer : PropertyDrawerBase

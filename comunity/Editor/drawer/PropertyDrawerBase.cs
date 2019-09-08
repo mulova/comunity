@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using mulova.commons;
 using UnityEditorInternal;
 
-namespace comunity
+namespace mulova.comunity
 {
     public abstract class PropertyDrawerBase : PropertyDrawer
     {

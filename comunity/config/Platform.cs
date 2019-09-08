@@ -8,7 +8,7 @@ using UnityEngine;
 using System.IO;
 using mulova.commons;
 
-namespace comunity
+namespace mulova.comunity
 {
 	public static class Platform {
 		public static SimulationMode simulationMode = SimulationMode.Editor;

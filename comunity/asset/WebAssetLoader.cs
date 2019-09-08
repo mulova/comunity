@@ -6,7 +6,7 @@ using System.IO;
 using Object = UnityEngine.Object;
 using mulova.commons;
 
-namespace comunity
+namespace mulova.comunity
 {
 	/// <summary>
 	/// TODOM AssetBundle version is not used.

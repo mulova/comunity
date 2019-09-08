@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using System.Text.RegularExpressions;
 
-namespace comunity
+namespace mulova.comunity
 {
     [CustomPropertyDrawer(typeof(EnumArrayAttribute))]
     public class EnumArrayDrawer : PropertyDrawer

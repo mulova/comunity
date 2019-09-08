@@ -1,4 +1,4 @@
-#if FULL
+﻿#if FULL
 //----------------------------------------------
 // Unity3D common libraries and editor tools
 // License: The MIT License ( http://opensource.org/licenses/MIT )
@@ -12,7 +12,7 @@ using UnityEngine;
 /// From http://docs.unity3d.com/Documentation/Manual/DollyZoom.html
 /// </summary>
 
-namespace comunity
+namespace mulova.comunity
 {
 	public class DollyZoom : MonoBehaviour
 	{

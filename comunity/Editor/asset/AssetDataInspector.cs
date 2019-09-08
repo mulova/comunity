@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
@@ -10,7 +10,7 @@ using System;
 
 
 
-namespace comunity {
+namespace mulova.comunity {
 	public class AssetDataInspector
 	{
 //		private AssetRefInspector cache = new AssetRefInspector();

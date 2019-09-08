@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using mulova.commons;
 using System.Text.Ex;
 
-namespace comunity
+namespace mulova.comunity
 {
     [CreateAssetMenu(menuName="Scriptable Object/Lexicon Registry", fileName="Lexicon")]
     public class LexiconRegistry : ScriptableObject

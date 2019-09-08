@@ -10,7 +10,7 @@ using UnityEngine;
 using System;
 using mulova.commons;
 
-namespace comunity {
+namespace mulova.comunity {
 	/**
 	 * Copy object's property, field values.
 	 * Exclude() to exclude specific type's properties/fields

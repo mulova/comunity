@@ -3,7 +3,7 @@ using Object = UnityEngine.Object;
 using mulova.commons;
 using System.Text.Ex;
 
-namespace comunity
+namespace mulova.comunity
 {
     public class FileTypeFilter
     {

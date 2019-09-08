@@ -18,7 +18,7 @@ using System.Collections.Generic.Ex;
 /**
 * - title이 null이면 folding을 하지 않는다.
 */
-namespace comunity
+namespace mulova.comunity
 {
     public abstract class ArrInspector<T> {
         

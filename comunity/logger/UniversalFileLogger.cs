@@ -4,7 +4,7 @@ using System.IO;
 using mulova.commons;
 using System.IO.Ex;
 
-namespace comunity
+namespace mulova.comunity
 {
     public class UniversalFileLogger : MonoBehaviour {
         public bool stackTrace;

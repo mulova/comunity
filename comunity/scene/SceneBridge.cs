@@ -6,7 +6,7 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace comunity
+namespace mulova.comunity
 {
 	public static class SceneBridge
 	{

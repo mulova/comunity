@@ -10,7 +10,7 @@ using Object = UnityEngine.Object;
 using mulova.commons;
 
 
-namespace comunity
+namespace mulova.comunity
 {
 	
 	[CustomEditor(typeof(MeshFilter))]

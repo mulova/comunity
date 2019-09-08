@@ -5,7 +5,7 @@ using Object = UnityEngine.Object;
 using mulova.commons;
 using System.Ex;
 
-namespace comunity {
+namespace mulova.comunity {
     public class DummyAssetLoader : IAssetLoader
 	{
         public static readonly Loggerx log = AssetCache.log;

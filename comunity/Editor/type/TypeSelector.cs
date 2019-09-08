@@ -13,7 +13,7 @@ using mulova.commons;
 using System.Collections.Generic.Ex;
 using System.Text.Ex;
 
-namespace comunity
+namespace mulova.comunity
 {
     public class TypeSelector
     {

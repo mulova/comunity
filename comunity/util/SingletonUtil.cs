@@ -9,7 +9,7 @@ using Object = UnityEngine.Object;
 using mulova.commons;
 using UnityEngine.Ex;
 
-namespace comunity {
+namespace mulova.comunity {
 	public static class SingletonUtil {
 		
 		public static void Awake<T>(ref T singleton, T instance) where T:Component {

@@ -15,7 +15,7 @@ using UnityEditor.SceneManagement;
 using System.Text.Ex;
 using UnityEngine.SceneManagement;
 
-namespace comunity
+namespace mulova.comunity
 {
 	public static class EditorUtil
 	{

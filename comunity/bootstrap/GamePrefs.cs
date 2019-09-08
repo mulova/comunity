@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace comunity
+namespace mulova.comunity
 {
     public class GamePrefs
     {

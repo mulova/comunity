@@ -12,7 +12,7 @@ using System.Collections;
 using mulova.commons;
 
 
-namespace comunity
+namespace mulova.comunity
 {
     /**
     * SerializedObject를 사용하지 않는 ArrayInspector

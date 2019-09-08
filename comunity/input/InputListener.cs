@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace comunity {
+namespace mulova.comunity {
 	public interface InputListener {
 		void OnButton(KeyCode button, ButtonState state);
 		/// <summary>

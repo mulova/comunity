@@ -1,9 +1,9 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System;
 using System.Collections.Generic;
 
-namespace comunity
+namespace mulova.comunity
 {
     public class TimerControl : MonoBehaviour
     {

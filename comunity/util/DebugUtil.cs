@@ -1,4 +1,4 @@
-//----------------------------------------------
+﻿//----------------------------------------------
 // Unity3D common libraries and editor tools
 // License: The MIT License ( http://opensource.org/licenses/MIT )
 // Copyright © 2013- mulova@gmail.com
@@ -9,7 +9,7 @@ using System.Text;
 using UnityEngine;
 
 
-namespace comunity {
+namespace mulova.comunity {
 	public class DebugUtil {
 		/**
 		 * @trim x, y, z 각 요소의 string 길이

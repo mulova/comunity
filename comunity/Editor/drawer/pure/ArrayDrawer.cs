@@ -4,7 +4,7 @@ using UnityEngine;
 using mulova.commons;
 using System;
 
-namespace comunity
+namespace mulova.comunity
 {
     public class ArrayDrawer<T> : ListDrawer<T> where T:class
     {

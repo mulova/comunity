@@ -1,5 +1,5 @@
 ﻿#if UNITY_ANDROID
-namespace comunity
+namespace mulova.comunity
 {
 	public class AndroidPlatformMethods : IPlatformMethods
 	{

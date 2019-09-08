@@ -12,7 +12,7 @@ using mulova.commons;
 using System.Text.Ex;
 using UnityEngine.Ex;
 
-namespace comunity
+namespace mulova.comunity
 {
 	
 	public delegate string ToString(object o);

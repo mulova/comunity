@@ -9,7 +9,7 @@ using System.Collections;
 using System;
 using mulova.commons;
 
-namespace comunity
+namespace mulova.comunity
 {
     /// <summary>
     /// 지정된 시간후에 ShowType event를 수행한다.

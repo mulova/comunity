@@ -1,4 +1,4 @@
-﻿using comunity;
+﻿using mulova.comunity;
 
 public static class PlatformConfig
 {

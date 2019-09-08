@@ -8,7 +8,7 @@ using mulova.commons;
 using System.Text.Ex;
 using System.Collections.Generic.Ex;
 
-namespace comunity
+namespace mulova.comunity
 {
     public static class Cdn
     {

@@ -1,9 +1,9 @@
-using System;
+﻿using System;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 
-namespace comunity
+namespace mulova.comunity
 {
     public class Lifecycle : MonoBehaviour
     {

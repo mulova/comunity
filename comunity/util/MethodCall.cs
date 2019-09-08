@@ -11,7 +11,7 @@ using System;
 using mulova.commons;
 using UnityEngine.Ex;
 
-namespace comunity
+namespace mulova.comunity
 {
 	public class MethodCall : MonoBehaviour
 	{

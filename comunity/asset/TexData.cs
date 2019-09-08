@@ -1,7 +1,7 @@
-using System.IO;
+﻿using System.IO;
 using UnityEngine;
 
-namespace comunity
+namespace mulova.comunity
 {
 	public struct TexData
 	{

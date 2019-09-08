@@ -1,7 +1,7 @@
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using comunity;
+using mulova.comunity;
 
 namespace convinity {
     public class AssetSearchWindow : TabbedEditorWindow

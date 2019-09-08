@@ -1,8 +1,8 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using UnityEditor;
 
-namespace comunity {
+namespace mulova.comunity {
 	[CustomEditor(typeof(SixWayCam))]
 	public class SixWayCamInspector : Editor {
 		private SixWayCam comp;

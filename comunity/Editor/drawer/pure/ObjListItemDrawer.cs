@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-namespace comunity
+namespace mulova.comunity
 {
     public class ObjListItemDrawer<T> : IItemDrawer<T> where T:Object
     {

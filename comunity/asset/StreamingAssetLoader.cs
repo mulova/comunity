@@ -10,7 +10,7 @@ using System.Text.Ex;
 using System.Collections.Generic.Ex;
 using System.Ex;
 
-namespace comunity
+namespace mulova.comunity
 {
 
 	public class StreamingAssetLoader : IAssetLoader

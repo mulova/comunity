@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 
-namespace comunity
+namespace mulova.comunity
 {
     [System.Serializable]
     public class ObjRefList : List<ObjRef>

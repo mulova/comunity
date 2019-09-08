@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using mulova.commons;
 
-namespace comunity
+namespace mulova.comunity
 {
     public class ReleasablePool
     {

@@ -7,7 +7,7 @@
 using UnityEngine;
 using mulova.commons;
 
-namespace comunity {
+namespace mulova.comunity {
 
     public class ApplyMaterialColor : Apply<Material> {
 		private string name;

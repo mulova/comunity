@@ -13,7 +13,7 @@ using System.Text;
 using mulova.commons;
 using System.Text.Ex;
 
-namespace comunity
+namespace mulova.comunity
 {
     public class UnityConsoleAppender : LogAppender {
         

@@ -1,8 +1,8 @@
-using System;
+﻿using System;
 using System.Reflection;
 using System.Collections.Generic;
 
-namespace comunity {
+namespace mulova.comunity {
 	public class DeepEquals
 	{
 		private readonly MemberInfoRegistry registry = new MemberInfoRegistry();

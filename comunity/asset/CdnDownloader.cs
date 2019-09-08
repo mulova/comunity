@@ -4,7 +4,7 @@ using System.Collections.Generic.Ex;
 using System.IO;
 using mulova.commons;
 
-namespace comunity
+namespace mulova.comunity
 {
     public class CdnDownloader : InternalScript
     {

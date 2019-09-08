@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 using UnityEngine;
 using mulova.commons;
 
-namespace comunity {
+namespace mulova.comunity {
 	public class SerializationUtil  {
 		public static Color ReadColor(string name, SerializationInfo info, StreamingContext context) {
 			Color c;

@@ -1,8 +1,8 @@
-#if FULL
+﻿#if FULL
 using UnityEngine;
 using System.Collections;
 
-namespace comunity
+namespace mulova.comunity
 {
 	public class NestedPrefab : MonoBehaviour {
 		public bool instantiateOnStart;	

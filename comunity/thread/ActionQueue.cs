@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Ex;
 using mulova.commons;
 
-namespace comunity
+namespace mulova.comunity
 {
 	public class ActionQueue
 	{

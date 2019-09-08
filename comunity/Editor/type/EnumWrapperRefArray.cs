@@ -10,7 +10,7 @@ using Object = UnityEngine.Object;
 using UnityEngine;
 using mulova.commons;
 
-namespace comunity
+namespace mulova.comunity
 {
     /**
     * @E enum type

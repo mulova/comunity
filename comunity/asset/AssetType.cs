@@ -1,7 +1,7 @@
-
+﻿
 using UnityEngine;
 
-namespace comunity {
+namespace mulova.comunity {
 
 	public enum AssetType {
 		Asset,

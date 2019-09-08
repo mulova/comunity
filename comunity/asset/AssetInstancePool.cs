@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using mulova.commons;
 using UnityEngine.Ex;
 
-namespace comunity {
+namespace mulova.comunity {
 	/// <summary>
 	/// instantiate or get asset from instance pool
 	/// </summary>

@@ -1,4 +1,4 @@
-//  SortLayerRendererExtension.cs
+﻿//  SortLayerRendererExtension.cs
 //   Author:
 //       Yves J. Albuquerque <yves.albuquerque@gmail.com>
 //  Last Update:
@@ -11,7 +11,7 @@ using UnityEditor;
 using UnityEditorInternal;
 using System.Reflection;
 
-namespace comunity
+namespace mulova.comunity
 {
 	
 	[CanEditMultipleObjects()]

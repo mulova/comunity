@@ -8,7 +8,7 @@ using mulova.commons;
 using System.Text.Ex;
 using System.Ex;
 
-namespace comunity {
+namespace mulova.comunity {
 	/// <summary>
 	/// Preload assets and pooling
 	/// </summary>

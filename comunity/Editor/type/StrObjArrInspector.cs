@@ -9,7 +9,7 @@ using UnityEngine;
 using Object = UnityEngine.Object;
 using mulova.commons;
 
-namespace comunity
+namespace mulova.comunity
 {
     public class StrObjArrInspector<T, O> : ArrInspector<T> where T:ICloneable, new() where O : Object {
         private string stringVar;

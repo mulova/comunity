@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using mulova.commons;
 
-namespace comunity
+namespace mulova.comunity
 {
 	public class TexFormatGroup : EnumClass<TexFormatGroup>
 	{

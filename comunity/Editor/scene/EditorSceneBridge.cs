@@ -4,7 +4,7 @@
 
 using UnityEditor.SceneManagement;
 
-namespace comunity
+namespace mulova.comunity
 {
 	public static class EditorSceneBridge
 	{

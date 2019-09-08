@@ -5,7 +5,7 @@ using System;
 using System.Text;
 using System.Collections;
 
-namespace comunity
+namespace mulova.comunity
 {
     public class PropertiesReader : IEnumerable<KeyValuePair<string, string>>
     {

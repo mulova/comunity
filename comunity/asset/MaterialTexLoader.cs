@@ -3,7 +3,7 @@ using UnityEngine;
 using mulova.commons;
 using System.Ex;
 
-namespace comunity
+namespace mulova.comunity
 {
     public class MaterialTexLoader : MonoBehaviour
     {

@@ -5,7 +5,7 @@ using System.Text.Ex;
 using mulova.commons;
 using UnityEngine;
 
-namespace comunity
+namespace mulova.comunity
 {
     /// <summary>
     /// Game preference.

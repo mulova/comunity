@@ -5,7 +5,7 @@ using System.Reflection;
 using mulova.commons;
 using System.Collections;
 
-namespace comunity
+namespace mulova.comunity
 {
     /**
 	 * Search the member variable's value

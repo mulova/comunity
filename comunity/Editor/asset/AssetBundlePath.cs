@@ -8,7 +8,7 @@ using System;
 using mulova.commons;
 using System.Text.Ex;
 
-namespace comunity
+namespace mulova.comunity
 {
     [System.Serializable]
     public class AssetBundlePath

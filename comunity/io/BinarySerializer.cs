@@ -7,7 +7,7 @@ using UnityEngine;
 using mulova.commons;
 using System.Text.Ex;
 
-namespace comunity
+namespace mulova.comunity
 {
 	
     /**

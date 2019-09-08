@@ -3,10 +3,10 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.SceneManagement;
-using comunity;
+using mulova.comunity;
 using mulova.commons;
 
-namespace comunity
+namespace mulova.comunity
 {
     public class InputBlocker : InternalScript
     {

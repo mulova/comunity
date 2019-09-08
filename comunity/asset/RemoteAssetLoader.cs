@@ -8,7 +8,7 @@ using System.ComponentModel;
 using System.Collections;
 using mulova.commons;
 
-namespace comunity
+namespace mulova.comunity
 {
 
     /// <summary>

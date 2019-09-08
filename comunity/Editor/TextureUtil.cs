@@ -11,7 +11,7 @@ using System.Collections.Generic.Ex;
 using System.Ex;
 using UnityEngine.Ex;
 
-namespace comunity
+namespace mulova.comunity
 {
     public static class TextureUtil
     {

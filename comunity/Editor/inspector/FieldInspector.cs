@@ -5,7 +5,7 @@ using Object = UnityEngine.Object;
 using System.Reflection;
 using mulova.commons;
 
-namespace comunity
+namespace mulova.comunity
 {
     public class FieldInspector {
         private HashSet<Type> excludeDeclaringTypes = new HashSet<Type>();

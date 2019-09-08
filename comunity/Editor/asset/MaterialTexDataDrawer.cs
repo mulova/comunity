@@ -1,8 +1,8 @@
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEditor;
 
-namespace comunity
+namespace mulova.comunity
 {
 	[CustomPropertyDrawer(typeof(MaterialTexData))]
 	public class MaterialTexDataDrawer : PropertyDrawerBase

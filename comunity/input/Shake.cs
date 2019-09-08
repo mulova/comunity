@@ -1,7 +1,7 @@
-using System;
+﻿using System;
 using UnityEngine;
 
-namespace comunity
+namespace mulova.comunity
 {
     public class Shake : MonoBehaviour
     {

@@ -1,6 +1,6 @@
-using System;
+﻿using System;
 
-namespace comunity
+namespace mulova.comunity
 {
 	public interface IPlatformMethods
 	{

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using Object = UnityEngine.Object;
 
-namespace comunity
+namespace mulova.comunity
 {
 	
 	[CustomEditor(typeof(NestedPrefab))]

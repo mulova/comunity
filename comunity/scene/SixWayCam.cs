@@ -1,4 +1,4 @@
-//----------------------------------------------
+﻿//----------------------------------------------
 // Unity3D common libraries and editor tools
 // License: The MIT License ( http://opensource.org/licenses/MIT )
 // Copyright © 2013-2014 mulova@gmail.com
@@ -6,7 +6,7 @@
 using UnityEngine;
 using UnityEngine.Ex;
 
-namespace comunity {
+namespace mulova.comunity {
 	public class SixWayCam : MonoBehaviour
 	{
 		public Camera front;

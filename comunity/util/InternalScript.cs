@@ -1,10 +1,10 @@
 ﻿using System;
 using UnityEngine;
 using mulova.commons;
-using comunity;
+using mulova.comunity;
 using UnityEngine.Ex;
 
-namespace comunity
+namespace mulova.comunity
 {
 	public class InternalScript : MonoBehaviour
 	{

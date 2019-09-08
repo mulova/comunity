@@ -4,7 +4,7 @@ using System;
 using Object = UnityEngine.Object;
 using mulova.commons;
 
-namespace comunity
+namespace mulova.comunity
 {
 	public class InputListenerStack : SingletonBehaviour<InputListenerStack>
 	{

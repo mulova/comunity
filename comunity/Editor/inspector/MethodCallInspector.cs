@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using UnityEditor;
 using System.Reflection;
@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System;
 using Object = System.Object;
 
-namespace comunity
+namespace mulova.comunity
 {
     [CustomEditor(typeof(MethodCall))]
     public class MethodCallInspector : Editor {

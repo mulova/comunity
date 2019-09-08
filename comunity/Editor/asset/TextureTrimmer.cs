@@ -1,10 +1,10 @@
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using System;
 using System.IO;
 
-namespace comunity {
+namespace mulova.comunity {
 	public class TextureTrimmer {
 		
 		[MenuItem("Assets/Trim Texture")]

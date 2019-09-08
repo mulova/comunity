@@ -51,7 +51,7 @@ using UnityEngine;
 using mulova.commons;
 using System.Collections.Generic.Ex;
 
-namespace comunity
+namespace mulova.comunity
 {
 	public class CommandLineReader
 	{

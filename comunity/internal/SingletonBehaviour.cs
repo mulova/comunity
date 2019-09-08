@@ -3,7 +3,7 @@ using System.Collections;
 using System.Reflection;
 using mulova.commons;
 
-namespace comunity {
+namespace mulova.comunity {
 
 	/// <summary>
 	/// Singleton should not be disabled

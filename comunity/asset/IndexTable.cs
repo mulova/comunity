@@ -4,7 +4,7 @@ using System;
 using mulova.commons;
 using System.Collections.Generic.Ex;
 
-namespace comunity
+namespace mulova.comunity
 {
     public abstract class IndexTable<R> : Loggable, IEnumerable<KeyValuePair<string, R>> where R:class, new()
     {
