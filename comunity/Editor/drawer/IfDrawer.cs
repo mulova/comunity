@@ -48,17 +48,12 @@ namespace comunity
             IfAttribute attr = attribute as IfAttribute;
             var action = GetAction(property);
 
-            if (action == IfAction.Disable)
+            using (new EditorGUI.DisabledScope(action == IfAction.Disable))
             {
-                GUI.enabled = false;
-            }
-            if (action != IfAction.Hide)
-            {
-                EditorGUI.PropertyField(position, property);
-            }
-            if (action == IfAction.Disable)
-            {
-                GUI.enabled = true;
+                if (action != IfAction.Hide)
+                {
+                    EditorGUI.PropertyField(position, property);
+                }
             }
         }
 

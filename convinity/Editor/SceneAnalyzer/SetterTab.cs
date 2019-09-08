@@ -148,12 +148,13 @@ namespace convinity {
 					}
 				}
 			}
-			GUI.enabled = (applyOnSelection || root != null) && fieldType != null;
-			if (GUILayout.Button("Allocate")) {
-				Allocate();
-			}
+            using (new EditorGUI.DisabledScope((applyOnSelection || root != null) && fieldType != null))
+            {
+                if (GUILayout.Button("Allocate")) {
+                    Allocate();
+                }
+            }
 			EditorGUILayout.EndHorizontal();
-			GUI.enabled = true;
 		}
 
 		private void Allocate() {

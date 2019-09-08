@@ -16,7 +16,52 @@ using Rotorz.Games.Collections;
 namespace comunity
 {
     public class EditorGUIUtil {
-        
+
+        public class ColorScope : IDisposable
+        {
+            private Color old;
+            public ColorScope(Color c)
+            {
+                old = GUI.color;
+                GUI.color = c;
+            }
+
+            public void Dispose()
+            {
+                GUI.color = old;
+            }
+        }
+
+        public class ContentColorScope : IDisposable
+        {
+            private Color old;
+            public ContentColorScope(Color c)
+            {
+                old = GUI.contentColor;
+                GUI.contentColor = c;
+            }
+
+            public void Dispose()
+            {
+                GUI.contentColor = old;
+            }
+        }
+
+        public class BgColorScope : IDisposable
+        {
+            private Color old;
+            public BgColorScope(Color c)
+            {
+                old = GUI.backgroundColor;
+                GUI.backgroundColor = c;
+            }
+
+            public void Dispose()
+            {
+                GUI.backgroundColor = old;
+            }
+        }
+
         public static bool PopupNullable<T>(Rect bound, string label, ref T selection, IList<T> items) {
             T sel = selection;
             bool changed = PopupNullable<T>(bound, label, ref sel, items, ObjToString.ScenePathToString);
