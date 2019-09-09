@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using mulova.commons;
 using System.Text.Ex;
 using System.Collections.Generic.Ex;
+using UnityEngine.Ex;
 
 namespace mulova.comunity
 {
@@ -308,21 +309,6 @@ namespace mulova.comunity
         public IAssetLoader GetImpl()
         {
             return loader;
-        }
-
-        public static string GetAssetCategory(RuntimePlatform platform, TexFormatGroup group)
-        {
-            string dir = platform.IsStandalone()? "pc" : platform.GetPlatformName();
-            if (group != TexFormatGroup.AUTO)
-            {
-                dir = string.Concat(dir, "_", group.id);
-            }
-            return dir;
-        }
-
-        public static string GetAssetCategory()
-        {
-            return GetAssetCategory(Platform.platform, TexFormatGroup.GetBest());
         }
     }
 }

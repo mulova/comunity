@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using mulova.commons;
+using UnityEngine.Ex;
 
 namespace mulova.comunity
 {
@@ -52,6 +53,21 @@ namespace mulova.comunity
 			return AUTO;
 #endif
 		}
-	}
+
+        public string GetAbCategory(RuntimePlatform platform)
+        {
+            string dir = platform.IsStandalone() ? "pc" : platform.GetPlatformName();
+            if (this != TexFormatGroup.AUTO)
+            {
+                dir = string.Concat(dir, "_", id);
+            }
+            return dir;
+        }
+
+        public string GetAbCategory()
+        {
+            return GetAbCategory(Platform.platform);
+        }
+    }
 }
 

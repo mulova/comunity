@@ -10,10 +10,8 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using System.Text;
 using System.Reflection;
 using mulova.commons;
-using mulova.comunity;
 using convinity;
 using UnityEngine.Ex;
 
@@ -77,7 +75,8 @@ namespace mulova.comunity {
 		public override void OnInspectorGUI() {
 			if (refDiffs != null) {
 				EditorGUI.indentLevel++;
-				EditorGUILayoutUtil.ObjectFieldList(refDiffs);
+                ListDrawer<RefDiff> drawer = new ListDrawer<RefDiff>(refDiffs);
+                drawer.Draw();
 				EditorGUI.indentLevel--;
 			}
 		}	

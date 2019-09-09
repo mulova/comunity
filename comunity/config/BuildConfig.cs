@@ -82,8 +82,31 @@ namespace mulova.comunity
             UNITY_VER = c.GetString(nameof(UNITY_VER), string.Empty);
             TEST = c.GetBool(nameof(TEST), false);
 
-            string[] langs = BuildConfig.LANGUAGE.SplitCSV();
+            string[] langs = LANGUAGE.SplitCSV();
             SYSTEM_LANGUAGES = langs.Convert(l=>l.ParseEnum<SystemLanguage>(SystemLanguage.English));
+        }
+
+        public static string GetPlatformName(this RuntimePlatform platform)
+        {
+            switch (platform)
+            {
+                case RuntimePlatform.Android:
+                    return TARGET_ANDROID;
+                case RuntimePlatform.OSXEditor:
+                case RuntimePlatform.OSXPlayer:
+                    return TARGET_OSX;
+                case RuntimePlatform.WindowsPlayer:
+                case RuntimePlatform.WindowsEditor:
+                    return TARGET_WIN;
+                case RuntimePlatform.IPhonePlayer:
+                    return TARGET_IOS;
+                case RuntimePlatform.LinuxPlayer:
+                    return TARGET_LINUX;
+                case RuntimePlatform.WebGLPlayer:
+                    return TARGET_WEBGL;
+                default:
+                    return "none";
+            }
         }
     }
 }

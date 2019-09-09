@@ -97,7 +97,8 @@ namespace convinity {
 		public override void OnInspectorGUI() {
 			foreach (Type type in targets.Keys) {
 				EditorGUILayout.TextField(type.FullName, EditorStyles.toolbarTextField, GUILayout.ExpandWidth(false));
-				EditorGUILayoutUtil.ObjectFieldReorderList(targets[type]);
+                ListDrawer<Component> drawer = new ListDrawer<Component>(targets[type]);
+                drawer.Draw();
 			}
 		}
 		

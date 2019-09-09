@@ -4,11 +4,8 @@
 // Copyright © 2013- mulova@gmail.com
 //----------------------------------------------
 using UnityEngine;
-using System;
-using System.Collections.Generic;
 using UnityEditor;
 using System.Text.RegularExpressions;
-using Object = UnityEngine.Object;
 using mulova.commons;
 using System.Text.Ex;
 using UnityEngine.Ex;
@@ -167,6 +164,6 @@ namespace mulova.comunity
 				AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceUpdate | ImportAssetOptions.ForceSynchronousImport);
 			}
 		}
-	}
+    }
 }
 

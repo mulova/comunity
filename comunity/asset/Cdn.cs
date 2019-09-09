@@ -55,7 +55,7 @@ namespace mulova.comunity
         
         public static string GetPath(string root, string zone, RuntimePlatform platform, TexFormatGroup texFormat)
         {
-            return PathUtil.Combine(root, BuildConfig.BUILD_ID, zone, platform.GetAbCategory(texFormat), BuildConfig.RES_VERSION);
+            return PathUtil.Combine(root, BuildConfig.BUILD_ID, zone, texFormat.GetAbCategory(platform), BuildConfig.RES_VERSION);
         }
         
         public static string ToFullPath(string relativePath)
@@ -122,7 +122,7 @@ namespace mulova.comunity
         
         public static void GetResourceVersion(Action<string> callback)
         {
-            string verUrl = string.Format("{0}/version_{1}.txt", Path, Platform.platform.GetAbCategory(TexFormatGroup.GetBest()));
+            string verUrl = string.Format("{0}/version_{1}.txt", Path, TexFormatGroup.GetBest().GetAbCategory(Platform.platform));
             Web.noCache.GetBytes(verUrl, bytes =>
                                  {
                 if (bytes != null)

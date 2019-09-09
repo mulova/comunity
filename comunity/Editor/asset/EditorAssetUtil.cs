@@ -5,22 +5,21 @@
 //----------------------------------------------
 using System;
 using System.Collections.Generic;
+using System.Ex;
 using System.IO;
+using System.Reflection;
 using System.Text;
+using System.Text.Ex;
+using mulova.commons;
 using UnityEditor;
 using UnityEngine;
-using Object = UnityEngine.Object;
-using System.Reflection;
-using mulova.commons;
-using UnityEditor.SceneManagement;
-using System.Collections;
-using System.Text.Ex;
-using System.Ex;
 using UnityEngine.Ex;
+using Object = UnityEngine.Object;
+using UnityEngine.SceneManagement;
 
 namespace mulova.comunity
 {
-	
+
     /**
 	 * Editor에서만 사용되는 Asset 관련 Util methods
 	 */
@@ -736,14 +735,14 @@ namespace mulova.comunity
 
         public static string GetCurrentScene()
         {
-            string scene = Application.isPlaying? SceneBridge.loadedLevelName : EditorSceneBridge.currentScene;
+            string scene = SceneManager.GetActiveScene().name;
             return Path.GetFileNameWithoutExtension(scene);
         }
 
         public static List<string> GetPlayingAnimationList(Animation anim)
         {
             List<string> playing = new List<string>();
-            foreach (AnimationClip c in UnityEditor.AnimationUtility.GetAnimationClips(anim.gameObject))
+            foreach (AnimationClip c in AnimationUtility.GetAnimationClips(anim.gameObject))
             {
                 if (anim.IsPlaying(c.name))
                 {
@@ -757,11 +756,11 @@ namespace mulova.comunity
         {
             AnimationClip newClip = new AnimationClip();
             #pragma warning disable 0618
-            UnityEditor.AnimationClipCurveData[] curveDatas = UnityEditor.AnimationUtility.GetAllCurves(src, true);
+            UnityEditor.AnimationClipCurveData[] curveDatas = AnimationUtility.GetAllCurves(src, true);
             for (int j = 0; j < curveDatas.Length; j++)
             {
                 // TODOM fix warning
-                UnityEditor.AnimationUtility.SetEditorCurve(
+                AnimationUtility.SetEditorCurve(
                     newClip,
                     curveDatas[j].path,
                     curveDatas[j].type,
@@ -770,8 +769,8 @@ namespace mulova.comunity
                 );
             }
             #pragma warning restore 0618
-            AnimationEvent[] events = UnityEditor.AnimationUtility.GetAnimationEvents(src);
-            UnityEditor.AnimationUtility.SetAnimationEvents(newClip, events);
+            AnimationEvent[] events = AnimationUtility.GetAnimationEvents(src);
+            AnimationUtility.SetAnimationEvents(newClip, events);
             return newClip;
         }
 
@@ -784,17 +783,17 @@ namespace mulova.comunity
         {
             string relative = null;
             src = src.ToUnixPath();
-            if (src.StartsWith("Assets/"))
+            if (src.StartsWith("Assets/", StringComparison.Ordinal))
             {
                 relative = src.Substring("Assets/".Length);
-            } else if (src.StartsWith(Application.dataPath))
+            } else if (src.StartsWith(Application.dataPath, StringComparison.Ordinal))
             {
                 relative = src.Substring(Application.dataPath.Length);
             } else
             {
                 relative = src;
             }
-            if (relative.StartsWith("/"))
+            if (relative.StartsWith("/", StringComparison.Ordinal))
             {
                 relative = relative.Substring(1);
             }
@@ -936,7 +935,7 @@ namespace mulova.comunity
         public static void ReduceImageImportSize(string assetPath, int scaleDown)
         {
             // make alpha texture size as half
-            TextureImporter aImporter = TextureImporter.GetAtPath(assetPath) as TextureImporter;
+            TextureImporter aImporter = AssetImporter.GetAtPath(assetPath) as TextureImporter;
             int[] size = aImporter.GetOriginalTextureSize();
             aImporter.maxTextureSize = Math.Max(size[0], size[1]) / scaleDown;
             AssetDatabase.ImportAsset(assetPath, ImportAssetOptions.ForceUpdate);

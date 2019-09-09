@@ -3,6 +3,7 @@ using UnityEditor;
 using Object = UnityEngine.Object;
 using mulova.commons;
 using System.Text.Ex;
+using UnityEngine.Ex;
 
 namespace mulova.comunity
 {
@@ -24,7 +25,7 @@ namespace mulova.comunity
             {
                 return 1;
             }
-            AssetPropertyAttribute attr = GetAttribute<AssetPropertyAttribute>();
+            AssetPropertyAttribute attr = attribute as AssetPropertyAttribute;
             if (attr != null && attr.exclusive)
             {
                 return 3;

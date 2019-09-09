@@ -1,8 +1,8 @@
-﻿using System;
+﻿using UnityEngine;
 
 namespace mulova.comunity
 {
-    public class AssetPropertyAttribute : Attribute
+    public class AssetPropertyAttribute : PropertyAttribute
     {
         public bool exclusive;
     }

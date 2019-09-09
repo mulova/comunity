@@ -37,7 +37,7 @@ namespace etc
                 {
                     zone = "D";
                 }
-                version.SetText(string.Format("{0}{1}  {2}", BuildConfig.VERSION, zone, buildTimeStr));
+                version.text = string.Format("{0}{1}  {2}", BuildConfig.VERSION, zone, buildTimeStr);
             }
         }
         

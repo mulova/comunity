@@ -1,8 +1,9 @@
 {
-    "name": "etc",
+    "name": "mulova.etc",
     "references": [
         "mulova.commons",
-        "comunity"
+        "mulova.unicore",
+        "mulova.comunity"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],
