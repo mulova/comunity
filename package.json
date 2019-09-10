@@ -1,7 +1,7 @@
 
 {
 	"name": "com.mulova.comunity",
-	"displayName": "mulova comunity",
+	"displayName": "mulova.comunity",
 	"version": "0.0.1",
 	"unity": "2018.1",
 	"description": "common unity library",

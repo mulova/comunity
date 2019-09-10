@@ -1,0 +1,22 @@
+{
+    "name": "mulova.convinity.editor",
+    "references": [
+        "mulova.commons",
+        "mulova.unicore",
+        "mulova.comunity",
+        "mulova.unicore.editor",
+        "mulova.comunity.editor",
+        "reorderablelist",
+        "reorderablelist.editor"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
+}
