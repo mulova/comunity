@@ -11,7 +11,7 @@ namespace mulova.comunity {
 	/// <summary>
 	/// instantiate or get asset from instance pool
 	/// </summary>
-	public class AssetInstancePool : InternalScript {
+	public class AssetInstancePool : LogBehaviour {
         public LayerMask hideLayer; // if set, do not deactivate instance, but just move to the behind the cam
 		private AssetPool<GameObject> assetPool;
 		private MultiMap<string, GameObject> instancePool = new MultiMap<string, GameObject>();

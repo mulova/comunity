@@ -9,7 +9,7 @@ using System;
 
 namespace mulova.comunity
 {
-    public abstract class EventScript: InternalScript
+    public abstract class EventScript: LogBehaviour
     {
         protected abstract void InitEvents(EventRegistry reg);
         

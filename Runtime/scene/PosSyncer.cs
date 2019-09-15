@@ -4,7 +4,7 @@ using UnityEngine.Ex;
 
 namespace mulova.comunity
 {
-	public class PosSyncer : InternalScript
+	public class PosSyncer : LogBehaviour
     {
         public Camera srcCam;
         public Transform[] objs;

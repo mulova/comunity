@@ -5,7 +5,7 @@ using UnityEngine.Ex;
 namespace mulova.comunity
 {
     [ExecuteInEditMode]
-    public class SyncTrans : InternalScript
+    public class SyncTrans : LogBehaviour
     {
         public Transform syncTarget;
         public bool useDelta = true;
@@ -20,7 +20,7 @@ namespace mulova.comunity
             {
                 if (_srcCam == null)
                 {
-                    _srcCam = CameraEx.GetCamera(go.layer);
+                    _srcCam = CameraEx.GetCamera(gameObject.layer);
                 }
                 return _srcCam;
             }

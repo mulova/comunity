@@ -26,7 +26,7 @@ namespace mulova.comunity
             SceneManager.sceneLoaded += OnSceneLoad;
             if (transit == null)
             {
-                transit = go.AddComponent<DummySceneTransit>();
+                transit = gameObject.AddComponent<DummySceneTransit>();
             }
         }
 

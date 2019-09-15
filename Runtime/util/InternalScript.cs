@@ -1,39 +1,14 @@
 ﻿using System;
 using UnityEngine;
 using mulova.commons;
-using mulova.comunity;
 using UnityEngine.Ex;
 
 namespace mulova.comunity
 {
-	public class InternalScript : MonoBehaviour
+	public class LogBehaviour : MonoBehaviour
 	{
 		private Loggerx _log;
 		private Invoker invoker;
-
-		private GameObject _go;
-		public GameObject go
-		{
-			get {
-				if (_go == null)
-				{
-					_go = gameObject;
-				}
-				return _go;
-			}
-		}
-
-		private Transform _trans;
-		public Transform trans
-		{
-			get {
-				if (_trans == null)
-				{
-					_trans = transform;
-				}
-				return _trans;
-			}
-		}
 
 		public Loggerx log
 		{

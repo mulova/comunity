@@ -9,7 +9,7 @@ namespace mulova.comunity {
 	/// Singleton should not be disabled
 	/// </summary>
 	[System.Diagnostics.DebuggerStepThrough]
-	public abstract class SingletonBehaviour<T> : InternalScript where T : SingletonBehaviour<T>
+	public abstract class SingletonBehaviour<T> : LogBehaviour where T : SingletonBehaviour<T>
 	{
 		protected static T singleton;
 

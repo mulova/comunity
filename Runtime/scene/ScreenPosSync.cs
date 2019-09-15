@@ -5,7 +5,7 @@ using UnityEngine.Ex;
 namespace mulova.comunity
 {
     [ExecuteInEditMode]
-    public class ScreenPosSync : InternalScript
+    public class ScreenPosSync : MonoBehaviour
     {
         public Transform srcObj;
         public Vector3 offset;
@@ -34,7 +34,7 @@ namespace mulova.comunity
             {
                 if (_dstCam == null)
                 {
-                    _dstCam = CameraEx.GetCamera(go.layer);
+                    _dstCam = CameraEx.GetCamera(gameObject.layer);
                 }
                 return _dstCam;
             }

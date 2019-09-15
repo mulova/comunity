@@ -7,7 +7,7 @@ using System.Collections.Generic.Ex;
 namespace mulova.comunity
 {
     [RequireComponent(typeof(MeshTexLoader))]
-    public class MeshTexSetter : InternalScript
+    public class MeshTexSetter : LogBehaviour
     {
         public List<AssetRef> textures = new List<AssetRef>();
         private MeshTexLoader _texLoader;

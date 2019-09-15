@@ -12,7 +12,7 @@ namespace mulova.comunity
     /// Singleton should not be disabled
     /// </summary>
     [System.Diagnostics.DebuggerStepThrough]
-    public abstract class SceneSingleton<T> : InternalScript where T : SceneSingleton<T>
+    public abstract class SceneSingleton<T> : LogBehaviour where T : SceneSingleton<T>
     {
         protected virtual string activeScene { get; private set; }
 
@@ -54,7 +54,7 @@ namespace mulova.comunity
 
         private void Init()
         {
-            DontDestroyOnLoad(go);
+            DontDestroyOnLoad(gameObject);
             hideFlags = HideFlags.HideAndDontSave;
             activeScene = SceneManager.GetActiveScene().name;
         }
@@ -62,7 +62,7 @@ namespace mulova.comunity
         private void OnSceneChange(Scene s1, Scene s2)
         {
             SceneManager.activeSceneChanged -= OnSceneChange;
-            Destroy(go);
+            Destroy(gameObject);
         }
 
         protected virtual void Awake()

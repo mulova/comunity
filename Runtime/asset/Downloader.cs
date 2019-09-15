@@ -13,24 +13,24 @@ using System.Ex;
 
 namespace mulova.comunity
 {
-/// <summary>
-/// Download and unzip files
-/// 
-/// prerequisite: Threading
-/// 
-/// [Event In] begin download when event arrived. 
-/// [Event Out] send event when download ends or canceled.
-/// 
-/// 1. Check the version of the list (srcListUrl + ".ver")
-/// 2. if the version mismatch from the client, remove old entries and download new files.
-///    each file can have its own version (divided by tab)
-/// 3. if downloaded file is 'zip' archive, it is unzipped in the directory named by zip file name
-/// 
-/// file list format
-/// - line: file_name(\t version)
-/// - comment: starts with '#'
-/// </summary>
-    public class Downloader : InternalScript
+    /// <summary>
+    /// Download and unzip files
+    /// 
+    /// prerequisite: Threading
+    /// 
+    /// [Event In] begin download when event arrived. 
+    /// [Event Out] send event when download ends or canceled.
+    /// 
+    /// 1. Check the version of the list (srcListUrl + ".ver")
+    /// 2. if the version mismatch from the client, remove old entries and download new files.
+    ///    each file can have its own version (divided by tab)
+    /// 3. if downloaded file is 'zip' archive, it is unzipped in the directory named by zip file name
+    /// 
+    /// file list format
+    /// - line: file_name(\t version)
+    /// - comment: starts with '#'
+    /// </summary>
+    public class Downloader : LogBehaviour
     {
         public const string VER_SEPARATOR = "#";
         public int timeoutSec = 10;
@@ -42,14 +42,14 @@ namespace mulova.comunity
         public float retryDelay = 0.5f;
         public bool preserveProgress = true;
         // count already downloaded files in download progress
-        
+
         private static string dstDir;
         // root folder where downloaded files are saved.
         private Action<Exception> onComplete;
         private DownloadStep step = DownloadStep.Null;
         private int initialDownloadSize;
         private int totalDownloadSize;
-		// web variables
+        // web variables
 #if UNITY_WEBGL
 		[SerializeField] WebGLDownloader _webGL;
         public WebGLDownloader webGL
@@ -64,7 +64,7 @@ namespace mulova.comunity
             }
         }
 #endif
-        
+
         private Exception webException;
         private string srcRoot;
         // non-web variables
@@ -74,9 +74,9 @@ namespace mulova.comunity
         private UnzipQueue unzipQueue;
         public UnzipQueue.UnzipMethod unzipMethod;
 #endif
-        
+
         private static GamePref _tags;
-        private static GamePref tags 
+        private static GamePref tags
         {
             get
             {
@@ -87,24 +87,24 @@ namespace mulova.comunity
                 return _tags;
             }
         }
-        
-        
+
+
         private Queue<string> filesToDownload = new Queue<string>();
         // updated list of files
         private List<string> filesDownloaded = new List<string>();
-        
+
         class FileCallbackParam
         {
             public string src;
             public string dst;
-            
+
             public FileCallbackParam(string src, string dst)
             {
                 this.src = src;
                 this.dst = dst;
             }
         }
-        
+
         /// <summary>
         /// Download fileList from rootUrl.
         /// if fileList entry is downloaded once, it doesn't retryed even even if the rootUrl changes when readOnly flag is true
@@ -136,18 +136,18 @@ namespace mulova.comunity
             SetFiles(fileList, preserveProgress);
             DownloadNext();
         }
-        
+
         private void InitTags(IEnumerable<string> files)
         {
             foreach (string f in files)
             {
-                if (readOnly&&IsPathTagged(f))
+                if (readOnly && IsPathTagged(f))
                 {
                     TagPath(f, false);
                 }
             }
         }
-        
+
         internal void TagPath(string cdnRelativePath, bool save = true)
         {
             string id = string.Concat(BuildConfig.RES_VERSION, "/", cdnRelativePath);
@@ -157,13 +157,13 @@ namespace mulova.comunity
                 tags.Save();
             }
         }
-        
+
         internal bool IsPathTagged(string cdnRelativePath)
         {
             string id = string.Concat(BuildConfig.RES_VERSION, "/", cdnRelativePath);
             return tags.GetBool(id, false);
         }
-        
+
         /// <summary>
         /// Remove already downloaded files from file list if files are read-only
         /// </summary>
@@ -179,23 +179,24 @@ namespace mulova.comunity
             foreach (string f in files)
             {
                 string file = f.Trim();
-                if (readOnly&&IsPathTagged(file))
+                if (readOnly && IsPathTagged(file))
                 {
                     filesDownloaded.Add(file);
-                } else if (!file.IsEmpty())
+                }
+                else if (!file.IsEmpty())
                 {
                     filesToDownload.Enqueue(file);
                 }
             }
             tags.Save();
-            
+
             if (!preserveFileCount)
             {
                 filesDownloaded.Clear();
             }
             initialDownloadSize = filesDownloaded.Count;
-            totalDownloadSize = filesToDownload.Count+filesDownloaded.Count;
-            
+            totalDownloadSize = filesToDownload.Count + filesDownloaded.Count;
+
 #if UNITY_WEBGL
             webGL.DownloadFileCompleted += OnWWWFileCallback;
             webGL.DownloadProgressChanged += OnWWWProgressCallback;
@@ -204,22 +205,23 @@ namespace mulova.comunity
             web.DownloadFileCompleted += OnDownloadFileCallback;
             web.DownloadProgressChanged += OnProgress;
             web.Timeout = timeoutSec * 1000;
-            
+
             if (unzipMethod != null)
             {
                 this.unzipQueue = new UnzipQueue(unzipMethod);
-            } else
+            }
+            else
             {
                 this.unzipQueue = null;
             }
 #endif
         }
-        
+
         public DownloadStep GetStep()
         {
             return step;
         }
-        
+
         public Exception GetException()
         {
 #if UNITY_WEBGL
@@ -232,23 +234,23 @@ namespace mulova.comunity
             return unzipException;
 #endif
         }
-        
+
         public int GetTotalFileCount()
         {
             return totalDownloadSize;
         }
-        
+
         /// <summary>
         /// Gets the downloaded file count
         /// </summary>
         /// <returns>The downloaded file count. includes currently file in progress.</returns>
         public int GetDownloadFileCount()
         {
-            return totalDownloadSize-filesToDownload.Count;
+            return totalDownloadSize - filesToDownload.Count;
         }
-        
+
         private float fileProgress;
-        
+
         /// <summary>
         /// Gets the download progress of the current file.
         /// </summary>
@@ -268,21 +270,24 @@ namespace mulova.comunity
             else if (step == DownloadStep.Canceled)
             {
                 return 0;
-            } else
+            }
+            else
             {
                 return 1;
             }
         }
-        
+
         public float GetTotalProgress()
         {
             if (step == DownloadStep.Null)
             {
                 return 0;
-            } else if (step == DownloadStep.Done)
+            }
+            else if (step == DownloadStep.Done)
             {
                 return 1;
-            } else
+            }
+            else
             {
                 if (totalDownloadSize == 0)
                 {
@@ -291,19 +296,21 @@ namespace mulova.comunity
 #if !UNITY_WEBGL
                 if (unzipQueue != null)
                 {
-                    return (unzipQueue.GetCompleteCount()+initialDownloadSize) / (float)totalDownloadSize;
-                } else
+                    return (unzipQueue.GetCompleteCount() + initialDownloadSize) / (float)totalDownloadSize;
+                }
+                else
 #endif
                     if (GetDownloadFileCount() < totalDownloadSize)
                 {
-                    return (GetDownloadFileCount()+fileProgress) / totalDownloadSize;
-                } else
+                    return (GetDownloadFileCount() + fileProgress) / totalDownloadSize;
+                }
+                else
                 {
                     return 1f;
                 }
             }
         }
-        
+
 #if !UNITY_WEBGL
         public static string GetCacheRoot()
         {
@@ -314,14 +321,14 @@ namespace mulova.comunity
             return dstDir;
         }
 #endif
-        
+
         void OnDisable()
         {
             Cleanup();
             onComplete = null;
             step = DownloadStep.Canceled;
         }
-        
+
         /// <summary>
         /// Cleanup connections.
         /// </summary>
@@ -397,16 +404,17 @@ namespace mulova.comunity
                 WebDownloadFails (new System.Exception (param.dst));
             } else
 #endif
-                if (e.Error != null)
+            if (e.Error != null)
             {
                 //          DeleteFile (param.dst);
                 log.Error(e.Error, param.src);
                 WebDownloadFails(e.Error);
-            } else if (e.Cancelled)
+            }
+            else if (e.Cancelled)
             {
                 //          DeleteFile (param.dst);
                 WebDownloadFails(new InvalidOperationException("Download is canceled"));
-            }  
+            }
 #if !UNITY_WEBGL
             else if (unzipException != null)
             {
@@ -430,7 +438,8 @@ namespace mulova.comunity
                         {
                             unzipQueue.Add(param.dst, unzipTargetDir, OnUnzipComplete);
                         }
-                    } else
+                    }
+                    else
                     {
                         File.Move(param.dst, split[0]);
                     }
@@ -439,16 +448,17 @@ namespace mulova.comunity
                     fileProgress = 0;
                     retryLeft = retry;
                     DownloadNext();
-                } catch (Exception ex)
+                }
+                catch (Exception ex)
                 {
                     WebDownloadFails(ex);
                 }
             }
         }
-        
+
         private string unzipTargetDir;
-        
-        
+
+
         private void WebDownloadFails(Exception ex)
         {
             if (webException != ex)
@@ -457,11 +467,11 @@ namespace mulova.comunity
             }
             webException = ex;
             SetStep(DownloadStep.Canceled);
-            
+
 #if UNITY_WEBGL
             bool over = true;
 #else
-            bool over = unzipQueue == null||unzipQueue.IsOver();
+            bool over = unzipQueue == null || unzipQueue.IsOver();
 #endif
             if (over)
             {
@@ -470,7 +480,7 @@ namespace mulova.comunity
                     retryLeft--;
                     LogWarn("Retry {0}", downloadSrcPath);
                     List<string> fileList = new List<string>();
-                    
+
 #if !UNITY_WEBGL
                     Thread.Sleep((int)(retryDelay * 1000));
                     if (unzipMethod != null)
@@ -483,14 +493,15 @@ namespace mulova.comunity
                     Cleanup();
                     SetFiles(fileList, true);
                     DownloadNext();
-                } else
+                }
+                else
                 {
                     Complete(DownloadStep.Canceled);
                 }
             }
-            
+
         }
-        
+
         private void UnzipFails(Exception ex)
         {
 #if UNITY_WEBGL
@@ -508,30 +519,30 @@ namespace mulova.comunity
             }
 #endif
         }
-        
-        
+
+
         private void Complete(DownloadStep s)
         {
             SetStep(s);
             Threading.InvokeLater(() =>
                                   {
-                Cleanup();
-                
-                if (log.IsLoggable(LogLevel.INFO)&&filesDownloaded.Count > 0)
-                {
-                    StringBuilder str = new StringBuilder(1024);
-                    str.Append("ChangeSet\n");
-                    foreach (string path in filesDownloaded)
-                    {
-                        str.Append("\t").Append(path).Append("\n");
-                    }
-                    log.Info(str.ToString());
-                }
-                ActionEx.CallAfterRelease(ref onComplete, GetException());
-            });
+                                      Cleanup();
+
+                                      if (log.IsLoggable(LogLevel.INFO) && filesDownloaded.Count > 0)
+                                      {
+                                          StringBuilder str = new StringBuilder(1024);
+                                          str.Append("ChangeSet\n");
+                                          foreach (string path in filesDownloaded)
+                                          {
+                                              str.Append("\t").Append(path).Append("\n");
+                                          }
+                                          log.Info(str.ToString());
+                                      }
+                                      ActionEx.CallAfterRelease(ref onComplete, GetException());
+                                  });
         }
-        
-        
+
+
         internal static string[] SplitVersion(string path)
         {
             path = path.Trim();
@@ -544,14 +555,15 @@ namespace mulova.comunity
             if (index > 0)
             {
                 ret[0] = path.Substring(0, index);
-                ret[1] = path.Substring(index+1, path.Length-index-1);
-            } else
+                ret[1] = path.Substring(index + 1, path.Length - index - 1);
+            }
+            else
             {
                 ret[0] = path;
             }
             return ret;
         }
-        
+
         private void DeleteFile(string path)
         {
             try
@@ -561,18 +573,19 @@ namespace mulova.comunity
                     File.Delete(path);
                     log.Debug("Removed {0}", path);
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 log.context = this;
                 log.Error(ex);
             }
         }
-        
+
         private string downloadSrcPath;
 #if !UNITY_WEBGL
         private string downloadDstPath;
 #endif
-        
+
         private void DownloadNext()
         {
             webException = null;
@@ -596,43 +609,45 @@ namespace mulova.comunity
                     SetNoBackUpFlag(downloadDstPath);
                     web.DownloadFileAsyncEx(new Uri(downloadSrcPath), downloadDstPath, new FileCallbackParam(downloadSrcPath, downloadDstPath));
 #endif
-                } catch (Exception ex)
+                }
+                catch (Exception ex)
                 {
                     WebDownloadFails(ex);
                 }
-            } 
+            }
 #if UNITY_WEBGL
             else {
                 Complete(DownloadStep.Done);
             }
 #else
-            else if (unzipQueue == null||unzipQueue.IsEmpty())
+            else if (unzipQueue == null || unzipQueue.IsEmpty())
             {
                 Complete(DownloadStep.Done);
-            } else
+            }
+            else
             {
                 SetStep(DownloadStep.Unzip);
             }
 #endif
         }
-        
+
         private void SetNoBackUpFlag(string path)
         {
 #if !UNITY_5_5_OR_NEWER
             Threading.InvokeLater(() =>
                                   {
 #endif
-                PlatformMethods.inst.SetNoBackupFlag(path);
+                                      PlatformMethods.inst.SetNoBackupFlag(path);
 #if !UNITY_5_5_OR_NEWER
-            });
+                                  });
 #endif
         }
-        
+
         private void OnProgress(object sender, DownloadProgressChangedEventArgs e)
         {
             fileProgress = e.BytesReceived / (float)e.TotalBytesToReceive;
         }
-        
+
 #if !UNITY_WEBGL
         internal bool Exists(string path)
         {
@@ -641,17 +656,18 @@ namespace mulova.comunity
             {
                 string dir = PathUtil.ReplaceExtension(absPath, "");
                 return Directory.Exists(dir);
-            } else
+            }
+            else
             {
                 return File.Exists(absPath);
             }
         }
-        
+
         public static string GetAbsolutePath(string path)
         {
             return PathUtil.Combine(GetCacheRoot(), path);
         }
-        
+
         private void OnUnzipComplete(UnzipQueue.UnzipResult r)
         {
             if (unzipQueue == null)
@@ -661,10 +677,12 @@ namespace mulova.comunity
             if (r.ex != null)
             {
                 UnzipFails(r.ex);
-            } else if (webException != null)
+            }
+            else if (webException != null)
             {
                 WebDownloadFails(webException);
-            } else
+            }
+            else
             {
                 LogDebug("Unzipped {0}", r.zipFile);
                 if (readOnly)
@@ -672,51 +690,51 @@ namespace mulova.comunity
                     string key = PathUtil.GetRelativePath(r.zipFile, GetCacheRoot());
                     TagPath(key);
                 }
-                if ((unzipQueue == null||unzipQueue.IsEmpty())&&filesToDownload.Count == 0)
+                if ((unzipQueue == null || unzipQueue.IsEmpty()) && filesToDownload.Count == 0)
                 {
                     Complete(DownloadStep.Done);
                 }
             }
         }
 #endif
-        
+
         private void SetStep(DownloadStep step)
         {
             this.step = step;
         }
-        
+
         private void LogError(Exception e, string format, params object[] param)
         {
             if (log.IsLoggable(LogLevel.ERROR))
             {
                 Threading.InvokeLater(() =>
                                       {
-                    log.context = this;
-                    log.Error(e, format, param);
-                });
+                                          log.context = this;
+                                          log.Error(e, format, param);
+                                      });
             }
         }
-        
+
         private void LogWarn(string format, params object[] param)
         {
             if (log.IsLoggable(LogLevel.WARN))
             {
                 Threading.InvokeLater(() =>
                                       {
-                    log.context = this;
-                    log.Warn(format, param);
-                });
+                                          log.context = this;
+                                          log.Warn(format, param);
+                                      });
             }
         }
-        
+
         private void LogDebug(string format, params object[] param)
         {
             if (log.IsLoggable(LogLevel.DEBUG))
             {
                 Threading.InvokeLater(() =>
                                       {
-                    log.Debug(format, param);
-                });
+                                          log.Debug(format, param);
+                                      });
             }
         }
     }

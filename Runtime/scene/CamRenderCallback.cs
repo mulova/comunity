@@ -5,7 +5,7 @@ using mulova.comunity;
 namespace mulova.comunity
 {
     [RequireComponent(typeof(Camera))]
-    public class CamRenderCallback : InternalScript
+    public class CamRenderCallback : LogBehaviour
     {
         public event Action postRender;
         

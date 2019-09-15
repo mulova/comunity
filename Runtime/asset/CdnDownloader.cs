@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Collections.Generic.Ex;
 using System.IO;
-using mulova.commons;
+using UnityEngine;
 
 namespace mulova.comunity
 {
-    public class CdnDownloader : InternalScript
+    public class CdnDownloader : LogBehaviour
     {
         public const string PREF_CDN_RES_VER = "cdn_res_ver";
         public const string PREF_CLIENT_RES_VER = "client_res_ver";
@@ -33,7 +33,7 @@ namespace mulova.comunity
         {
             if (listDownloader == null)
             {
-                listDownloader = go.AddComponent<Downloader>();
+                listDownloader = gameObject.AddComponent<Downloader>();
             }
 #if UNITY_WEBGL
             listDownloader.webGL.caching = false;
@@ -41,7 +41,7 @@ namespace mulova.comunity
             listDownloader.readOnly = false;
             if (fileDownloader == null)
             {
-                fileDownloader = go.AddComponent<Downloader>();
+                fileDownloader = gameObject.AddComponent<Downloader>();
             }
 #if UNITY_WEBGL
             fileDownloader.webGL.caching = true;

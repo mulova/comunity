@@ -7,7 +7,7 @@ using System.Ex;
 namespace mulova.comunity
 {
     [RequireComponent(typeof(Renderer))]
-    public class MeshTexLoader : InternalScript, IReleasable
+    public class MeshTexLoader : LogBehaviour, IReleasable
     {
         public Renderer rend;
         public bool shared;
@@ -61,12 +61,14 @@ namespace mulova.comunity
                 if (shared)
                 {
                     return propertyTex;
-                } else
+                }
+                else
                 {
                     if (Application.isPlaying)
                     {
                         return rend.material.mainTexture;
-                    } else
+                    }
+                    else
                     {
                         return rend.sharedMaterial.mainTexture;
                     }
@@ -81,7 +83,8 @@ namespace mulova.comunity
                     {
                         UpdatePropertyBlock();
                     }
-                } else
+                }
+                else
                 {
                     rend.material.mainTexture = value;
                 }
@@ -90,12 +93,13 @@ namespace mulova.comunity
 
         public void Load(AssetRef asset, Action<Texture> callback)
         {
-            if (rend != null&&!asset.isEmpty)
+            if (rend != null && !asset.isEmpty)
             {
                 if (asset.cdn)
                 {
                     Load(asset.path, callback);
-                } else if (asset.GetReference() != null)
+                }
+                else if (asset.GetReference() != null)
                 {
                     this.loadedCallback = callback;
                     SetTexture(asset.GetReference() as Texture);
@@ -112,10 +116,11 @@ namespace mulova.comunity
         {
             this.loadedCallback = callback;
             this.cdn = cdn;
-            if (url == curUrl&&status == TexLoaderStatus.Idle)
+            if (url == curUrl && status == TexLoaderStatus.Idle)
             { // same as now
                 Finish();
-            } else if (url == newUrl&&status == TexLoaderStatus.Download)
+            }
+            else if (url == newUrl && status == TexLoaderStatus.Download)
             { // same as previous request
                 return;
             }
@@ -127,7 +132,8 @@ namespace mulova.comunity
             if (url.IsEmpty())
             {
                 Clear();
-            } else
+            }
+            else
             {
                 this.newUrl = url;
                 status = TexLoaderStatus.Download;
@@ -148,7 +154,7 @@ namespace mulova.comunity
 
         void Update()
         {
-            if (status != TexLoaderStatus.Download&&curUrl != newUrl)
+            if (status != TexLoaderStatus.Download && curUrl != newUrl)
             {
                 LoadAsync();
             }
@@ -175,7 +181,7 @@ namespace mulova.comunity
         {
             log.Debug("<{0}> loads texture {1}", name, newUrl);
             string url = newUrl;
-            AssetCache cache = cdn? Cdn.cache : Web.cache;
+            AssetCache cache = cdn ? Cdn.cache : Web.cache;
             cache.GetTexture(url, tex =>
             {
                 if (url == newUrl)
@@ -184,7 +190,8 @@ namespace mulova.comunity
                     if (tex != null)
                     {
                         SetTexture(tex);
-                    } else
+                    }
+                    else
                     {
                         log.Info("Can't access {0}", url);
                         Clear();
@@ -222,7 +229,8 @@ namespace mulova.comunity
                 }
                 curUrl = null;
                 RemoveTexture();
-            } else if (removeOnDisable)
+            }
+            else if (removeOnDisable)
             {
                 Clear();
             }
@@ -250,7 +258,8 @@ namespace mulova.comunity
             {
                 log.Info("<{0}> set texture {1}", name, t.name);
                 tex = t;
-            } else
+            }
+            else
             {
                 Clear();
             }
@@ -267,7 +276,8 @@ namespace mulova.comunity
             if (shared)
             {
                 return propertyBlock.GetFloat(id);
-            } else
+            }
+            else
             {
                 return rend.material.GetFloat(id);
             }
@@ -278,29 +288,32 @@ namespace mulova.comunity
             if (shared)
             {
                 return propertyBlock.GetTexture(id);
-            } else
+            }
+            else
             {
                 return rend.material.GetTexture(id);
             }
         }
-        
+
         public Vector4 GetInt(int id)
         {
             if (shared)
             {
                 return propertyBlock.GetVector(id);
-            } else
+            }
+            else
             {
                 return rend.material.GetVector(id);
             }
         }
-        
+
         public Matrix4x4 GetMatrix(int id)
         {
             if (shared)
             {
                 return propertyBlock.GetMatrix(id);
-            } else
+            }
+            else
             {
                 return rend.material.GetMatrix(id);
             }

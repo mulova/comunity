@@ -8,7 +8,7 @@ using mulova.commons;
 
 namespace mulova.comunity
 {
-    public class InputBlocker : InternalScript
+    public class InputBlocker : LogBehaviour
     {
         public GameObject ui;
         private HashSet<object> keys = new HashSet<object>();
