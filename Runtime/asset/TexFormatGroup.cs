@@ -4,16 +4,13 @@
 // License: The MIT License ( http://opensource.org/licenses/MIT )
 // Copyright © 2013- mulova@gmail.com
 //----------------------------------------------
-using UnityEngine;
-using System;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using mulova.commons;
+using UnityEngine;
 using UnityEngine.Ex;
 
 namespace mulova.comunity
 {
-	public class TexFormatGroup : EnumClass<TexFormatGroup>
+    public class TexFormatGroup : EnumClass<TexFormatGroup>
 	{
 		public static readonly TexFormatGroup ASTC = new TexFormatGroup("astc");
 		public static readonly TexFormatGroup ETC2 = new TexFormatGroup("etc2");
