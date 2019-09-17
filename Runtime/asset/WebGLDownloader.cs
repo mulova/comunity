@@ -4,7 +4,7 @@ using System.Collections;
 
 namespace mulova.comunity
 {
-    public class WebGLDownloader : Script
+    public class WebGLDownloader : LogBehaviour
 	{
 		public bool caching = true;
 		public delegate void DownloadProgressHandler(WWW www, float progress);

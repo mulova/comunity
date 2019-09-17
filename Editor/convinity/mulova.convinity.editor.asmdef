@@ -6,8 +6,7 @@
         "mulova.comunity",
         "mulova.unicore.editor",
         "mulova.comunity.editor",
-        "reorderablelist",
-        "reorderablelist.editor"
+        "reorderablelist"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [
