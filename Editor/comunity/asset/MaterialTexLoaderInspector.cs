@@ -5,6 +5,7 @@ using UnityEngine;
 
 using System.IO;
 using mulova.commons;
+using mulova.unicore;
 
 namespace mulova.comunity {
 	[CustomEditor(typeof(MaterialTexLoader))]

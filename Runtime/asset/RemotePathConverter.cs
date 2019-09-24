@@ -4,6 +4,7 @@ using mulova.commons;
 using System.Security.Cryptography;
 using System.Text;
 using System;
+using mulova.unicore;
 
 namespace mulova.comunity {
 	internal class RemotePathConverter

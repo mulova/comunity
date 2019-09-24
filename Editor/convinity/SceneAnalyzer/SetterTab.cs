@@ -5,18 +5,17 @@
 //----------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using UnityEditor;
-using UnityEngine;
-using Object = UnityEngine.Object;
-using System.Text;
 using System.Reflection;
 using mulova.commons;
 using mulova.comunity;
+using mulova.unicore;
+using UnityEditor;
+using UnityEngine;
+using Object = UnityEngine.Object;
 
-namespace convinity {
-	class SetterTab : EditorTab {
+namespace convinity
+{
+    class SetterTab : EditorTab {
 		
 		public SetterTab(TabbedEditorWindow window) : base("Setter", window) {
 		}

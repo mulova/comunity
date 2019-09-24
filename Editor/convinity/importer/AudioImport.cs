@@ -1,14 +1,12 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Collections.Generic;
-using System;
-using Object = UnityEngine.Object;
-using mulova.comunity;
+using mulova.unicore;
+using UnityEditor;
 
-namespace convinity {
-	
-	[System.Serializable]
+namespace convinity
+{
+
+    [System.Serializable]
 	public class AudioImport {
 		public bool apply = true;
 		public string path;

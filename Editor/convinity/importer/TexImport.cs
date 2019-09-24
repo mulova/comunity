@@ -1,16 +1,16 @@
-﻿using UnityEditor;
-using UnityEngine;
-using System.IO;
+﻿using System;
 using System.Collections.Generic;
-using System;
-using Object = UnityEngine.Object;
-using mulova.comunity;
-using mulova.commons;
+using System.IO;
 using System.Text.Ex;
+using mulova.commons;
+using mulova.unicore;
+using UnityEditor;
+using UnityEngine;
 
-namespace convinity {
-	
-	[System.Serializable]
+namespace convinity
+{
+
+    [System.Serializable]
 	public class TexImport : IComparable<TexImport> {
 		public bool apply = true;
 		public SpriteImportMode spriteImportMode = SpriteImportMode.None;

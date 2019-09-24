@@ -1,13 +1,11 @@
-﻿using UnityEditor;
+﻿using System.Collections.Generic;
+using mulova.unicore;
+using UnityEditor;
 using UnityEngine;
-using System.IO;
-using System.Collections.Generic;
-using System;
-using Object = UnityEngine.Object;
-using mulova.comunity;
 
-namespace convinity {
-	public class CustomAssetPostprocessor : AssetPostprocessor {
+namespace convinity
+{
+    public class CustomAssetPostprocessor : AssetPostprocessor {
 		public static List<TexImport> texSettings;
 		public static List<AudioImport> audioSettings;
 		public static List<ModelImport> modelSettings;
@@ -37,8 +35,9 @@ namespace convinity {
 	}
 }
 
-namespace convinity {
-	public class AssetImporterWindow : TabbedEditorWindow {
+namespace convinity
+{
+    public class AssetImporterWindow : TabbedEditorWindow {
 		protected override void CreateTabs() {
 			AddTab(new TexImporterTab(this));
 			AddTab(new ModelImporterTab(this));

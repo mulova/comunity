@@ -7,6 +7,7 @@ using System.Reflection;
 using mulova.commons;
 using mulova.comunity;
 using System.Text.Ex;
+using mulova.unicore;
 
 namespace etc
 {

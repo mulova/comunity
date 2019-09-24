@@ -5,13 +5,14 @@
 //----------------------------------------------
 
 
+using mulova.unicore;
 using UnityEditor;
 using UnityEngine;
-using mulova.comunity;
 using UnityEngine.Ex;
 
-namespace convinity {
-	class VisibilityCheckTab : EditorTab {
+namespace convinity
+{
+    class VisibilityCheckTab : EditorTab {
 		
 		public VisibilityCheckTab(TabbedEditorWindow window) : base("Visibility", window) {}
 		

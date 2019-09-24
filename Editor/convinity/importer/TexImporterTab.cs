@@ -1,11 +1,12 @@
-﻿using UnityEditor;
+﻿using System.Collections.Generic;
+using mulova.unicore;
+using UnityEditor;
 using UnityEngine;
-using System.Collections.Generic;
-using mulova.comunity;
 
-namespace convinity {
+namespace convinity
+{
 
-	public class TexImporterTab : EditorTab {
+    public class TexImporterTab : EditorTab {
 		private static List<TexImport> settings = new List<TexImport>();
 		
 		public TexImporterTab(TabbedEditorWindow window) : base("Texture", window) {}

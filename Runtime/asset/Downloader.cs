@@ -1,15 +1,15 @@
 ﻿//#define TEST
-using UnityEngine;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Ex;
 using System.IO;
 using System.Net;
 using System.Text;
-using System;
-using System.ComponentModel;
-using System.Collections.Generic;
+using System.Text.Ex;
 using System.Threading;
 using mulova.commons;
-using System.Text.Ex;
-using System.Ex;
+using mulova.unicore;
 
 namespace mulova.comunity
 {
@@ -58,7 +58,7 @@ namespace mulova.comunity
             {
                 if (_webGL == null)
                 {
-                    _webGL = go.GetComponentEx<WebGLDownloader>();
+                    _webGL = go.FindComponent<WebGLDownloader>();
                 }
                 return _webGL;
             }

@@ -4,6 +4,7 @@ using Object = UnityEngine.Object;
 using UnityEngine;
 using mulova.commons;
 using System.Text.Ex;
+using mulova.unicore;
 
 namespace mulova.comunity
 {

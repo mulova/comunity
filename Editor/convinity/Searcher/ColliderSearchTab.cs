@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
+using mulova.unicore;
 using UnityEditor;
 using UnityEngine;
-using Object = UnityEngine.Object;
-using mulova.comunity;
 
-namespace convinity {
-	class ColliderSearchTab : SearchTab<Collider>
+namespace convinity
+{
+    class ColliderSearchTab : SearchTab<Collider>
 	{
 		private Camera cam;
 		private Ray ray;

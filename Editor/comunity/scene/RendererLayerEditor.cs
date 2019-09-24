@@ -11,6 +11,7 @@ using UnityEditor;
 using UnityEditorInternal;
 using System.Reflection;
 using System.Collections.Generic;
+using mulova.unicore;
 
 namespace mulova.comunity
 {

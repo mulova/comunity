@@ -1,4 +1,4 @@
-﻿using mulova.comunity;
+﻿using mulova.unicore;
 
 public static class PlatformConfig
 {

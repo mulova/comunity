@@ -1,10 +1,10 @@
-﻿using System;
-using UnityEngine;
+﻿using mulova.unicore;
 using UnityEditor;
+using UnityEngine;
 
 namespace mulova.comunity
 {
-	[CustomPropertyDrawer(typeof(MaterialTexData))]
+    [CustomPropertyDrawer(typeof(MaterialTexData))]
 	public class MaterialTexDataDrawer : PropertyDrawerBase
 	{
 		protected override int GetLineCount(SerializedProperty p)

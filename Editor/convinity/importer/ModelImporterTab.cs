@@ -1,16 +1,12 @@
-﻿using UnityEditor;
+﻿using System.Collections.Generic;
+using mulova.unicore;
+using UnityEditor;
 using UnityEngine;
-using System.IO;
-using System.Collections.Generic;
-using System;
 using Object = UnityEngine.Object;
-using mulova.comunity;
-
-
 
 namespace convinity
 {
-	public class ModelImporterTab : EditorTab
+    public class ModelImporterTab : EditorTab
 	{
 		private static List<ModelImport> settings = new List<ModelImport>();
 		

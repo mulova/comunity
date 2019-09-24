@@ -1,15 +1,13 @@
 ﻿using System.Collections.Generic;
+using mulova.commons;
+using mulova.unicore;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using mulova.commons;
-using mulova.comunity;
-using UnityEditor.SceneManagement;
-using System;
-using System.Globalization;
 
-namespace convinity {
-	class ShaderSearchTab : SearchTab<ShaderSearchItem> {
+namespace convinity
+{
+    class ShaderSearchTab : SearchTab<ShaderSearchItem> {
 		
 		public ShaderSearchTab(TabbedEditorWindow window) : base("Shader", window) {
 		}

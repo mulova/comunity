@@ -6,22 +6,22 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
-using UnityEditor;
-using UnityEngine;
-using Object = UnityEngine.Object;
-using System.Text;
 using System.Reflection;
-using Nullable = mulova.commons.Nullable;
 using mulova.commons;
 using mulova.comunity;
+using mulova.unicore;
+using UnityEditor;
+using UnityEngine;
 using UnityEngine.Ex;
+using Nullable = mulova.commons.Nullable;
+using Object = UnityEngine.Object;
 
-namespace convinity {
-	/// <summary>
-	/// Find the null Object references 
-	/// </summary>
-	class NullRefTab : EditorTab {
+namespace convinity
+{
+    /// <summary>
+    /// Find the null Object references 
+    /// </summary>
+    class NullRefTab : EditorTab {
 		public readonly string EXCLUDE_DESC = "inspector_settings/null_ref_exclusion.bytes";
         private MemberInfoRegistry registry = new MemberInfoRegistry(MemberInfoRegistryEx.ObjectRefFilter);
 		private static TextAsset excludeDesc;

@@ -4,13 +4,13 @@
 // Copyright © 2013-2014 mulova@gmail.com
 //----------------------------------------------
 
-using UnityEditor;
-using UnityEngine;
 using mulova.comunity;
+using mulova.unicore;
+using UnityEditor;
 
-
-namespace convinity {
-	public class CheckerWindow : TabbedEditorWindow
+namespace convinity
+{
+    public class CheckerWindow : TabbedEditorWindow
 	{
 		[MenuItem("Tools/unilova/Etc/Checker")]
 		static public void CreateCheckerWindow()

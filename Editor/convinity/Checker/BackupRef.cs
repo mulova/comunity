@@ -5,25 +5,21 @@
 //----------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-
-
+using System.Text;
+using mulova.commons;
+using mulova.unicore;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using System.Text;
-using mulova.commons;
-using mulova.comunity;
 
-
-namespace convinity {
-	/// <summary>
-	/// path only: GameObject
-	/// path, comp: Component
-	/// path, comp, varName: Component Value
-	/// </summary>
-	[System.Serializable]
+namespace convinity
+{
+    /// <summary>
+    /// path only: GameObject
+    /// path, comp: Component
+    /// path, comp, varName: Component Value
+    /// </summary>
+    [System.Serializable]
 	public class BackupRef {
 		public bool asset;
 		private string objId;

@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using mulova.commons;
 using System.Text.Ex;
 using UnityEngine.Ex;
+using mulova.unicore;
 
 namespace mulova.comunity
 {

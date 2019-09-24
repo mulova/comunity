@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEditor;
 using System;
+using mulova.unicore;
 
 /**
 * Draw Enum Popup UI if the enum class source is set correctly

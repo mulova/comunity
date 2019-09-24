@@ -1,18 +1,18 @@
 ﻿using System;
-using UnityEngine;
-using System.Collections.Generic;
-using UnityEditor;
-using Object = UnityEngine.Object;
-using System.Reflection;
-using System.Linq;
 using System.Collections;
-using UnityEditor.SceneManagement;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using mulova.commons;
+using mulova.unicore;
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine;
 
 namespace mulova.comunity
 {
-//	[CustomPropertyDrawer(typeof(EnumClass))]
-	public abstract class EnumClassDrawer<T> : PropertyDrawerBase where T: class
+    //	[CustomPropertyDrawer(typeof(EnumClass))]
+    public abstract class EnumClassDrawer<T> : PropertyDrawerBase where T: class
 	{
 		protected override int GetLineCount(SerializedProperty p)
 		{

@@ -1,9 +1,9 @@
-﻿using UnityEditor;
+﻿using mulova.unicore;
+using UnityEditor;
 using UnityEngine;
-using Object = UnityEngine.Object;
-using mulova.comunity;
 
-namespace convinity {
+namespace convinity
+{
     public class AssetSearchWindow : TabbedEditorWindow
 	{
 		protected override void CreateTabs() {
