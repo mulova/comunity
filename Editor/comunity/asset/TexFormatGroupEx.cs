@@ -10,6 +10,7 @@ using mulova.commons;
 using System.Text.Ex;
 using UnityEngine.Ex;
 using mulova.unicore;
+using System.Ex;
 
 namespace mulova.comunity
 {
@@ -76,7 +77,7 @@ namespace mulova.comunity
 		public static TextureImporterFormat GetFormatFromLabel(Texture2D tex, TexFormatGroup group, bool alpha)
 		{
 			string[] labels = AssetDatabase.GetLabels(tex);
-			if (labels.IsNotEmpty())
+			if (!labels.IsEmpty())
 			{
 				foreach (string l in labels)
 				{

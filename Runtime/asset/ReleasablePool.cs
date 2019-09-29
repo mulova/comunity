@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using mulova.commons;
+using System.Collections.Generic.Ex;
 
 namespace mulova.comunity
 {
@@ -62,7 +63,7 @@ namespace mulova.comunity
         
         public void Release()
         {
-            if (releasables.IsNotEmpty())
+            if (!releasables.IsEmpty())
             {
                 foreach (IReleasable r in releasables)
                 {

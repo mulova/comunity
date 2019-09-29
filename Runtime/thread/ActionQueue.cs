@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Generic.Ex;
 using System.Ex;
 using mulova.commons;
 
@@ -18,7 +19,7 @@ namespace mulova.comunity
 
 		public void Update()
 		{
-			if (actions.IsNotEmpty())
+			if (!actions.IsEmpty())
 			{
 				foreach (Action a in actions)
 				{

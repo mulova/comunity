@@ -88,7 +88,7 @@ namespace mulova.comunity
 		{
 			Dictionary<string, string> customArgsDict = new Dictionary<string, string>();
 			string[] commandLineArgs = GetCommandLineArgs();
-			if (commandLineArgs.IsNotEmpty())
+			if (!commandLineArgs.IsEmpty())
 			{
 				
 				string[] customArgs = null;
@@ -98,7 +98,7 @@ namespace mulova.comunity
 				try
 				{
 					List<string> found = commandLineArgs.Filter(row => row.Contains(CUSTOM_ARGS_PREFIX));
-					if (found.IsNotEmpty())
+					if (!found.IsEmpty())
 					{
 						customArgsStr = found.Single();
 						customArgsStr = customArgsStr.Replace(CUSTOM_ARGS_PREFIX, "");

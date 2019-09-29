@@ -7,6 +7,7 @@ using System.Collections;
 using mulova.commons;
 using System.Text.Ex;
 using System.Ex;
+using System.Collections.Generic.Ex;
 
 namespace mulova.comunity {
 	/// <summary>
@@ -79,7 +80,7 @@ namespace mulova.comunity {
 		/// <param name="callback">Callback with actually loaded asset urls</param>
 		public void PreloadAll(IList<string> ids, Action<T[]> callback)
 		{
-            if (ids.IsNotEmpty())
+            if (!ids.IsEmpty())
             {
                 int c = ids.Count;
                 T[] assets = new T[ids.Count];

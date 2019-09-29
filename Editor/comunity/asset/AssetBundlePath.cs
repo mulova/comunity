@@ -174,12 +174,12 @@ namespace mulova.comunity
                 return;
             }
 #pragma warning disable 0162
-            if (_dirs.IsEmpty()||_rawDirs.IsEmpty())
-            {
-                // TODOM find
-                Debug.LogError("Why remove files?");
-                return;
-            }
+            //if (_dirs.IsEmpty()||_rawDirs.IsEmpty())
+            //{
+            //    // TODOM find
+            //    Debug.LogError("Why remove files?");
+            //    return;
+            //}
 #pragma warning restore 0162
             Save(PATH);
         }

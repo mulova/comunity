@@ -80,7 +80,7 @@ namespace mulova.comunity
         public bool IsEmpty()
         {
             bool empty = true;
-            if (textures.IsNotEmpty())
+            if (!textures.IsEmpty())
             {
                 foreach (AssetRef r in textures)
                 {

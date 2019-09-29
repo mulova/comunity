@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using Object = UnityEngine.Object;
 using mulova.commons;
+using System.Collections.Generic.Ex;
 
 namespace mulova.comunity
 {
@@ -58,7 +59,7 @@ namespace mulova.comunity
 					backup.Push (stack.Pop ());
 				}
 				stack.Pop ();
-				while (backup.NotEmpty()) {
+				while (!backup.Empty()) {
 					stack.Push (backup.Pop ());
 				}
 			} else {
