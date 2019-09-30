@@ -8,26 +8,27 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using convinity;
 using mulova.commons;
+using mulova.comunity;
 using mulova.unicore;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Ex;
 using Object = UnityEngine.Object;
 
-namespace mulova.comunity
+namespace convinity
 {
     class BackupTab : EditorTab {
 		
 		private static string backupName = "";
 		private FileInfo fileToLoad;
-        private MemberInfoRegistry registry = new MemberInfoRegistry(MemberInfoRegistryEx.ObjectRefFilter);
+        private UnityMemberInfoRegistry registry;
 		private DirectoryInfo dir;
 		private string sceneName;
 
 		public BackupTab(TabbedEditorWindow window) : base("Backup", window) {
-		}
+            registry = new UnityMemberInfoRegistry();
+        }
 
 		private DirectoryInfo GetDir() {
 			string currentSceneName = EditorAssetUtil.GetCurrentScene();

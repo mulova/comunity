@@ -15,7 +15,7 @@ namespace convinity
     class RefSearchTab : SearchTab<Object>
     {
         private Object searchObj;
-        private MemberInfoRegistry registry = new MemberInfoRegistry(MemberInfoRegistryEx.ObjectRefFilter);
+        private UnityMemberInfoRegistry registry = new UnityMemberInfoRegistry();
         private bool isScene;
 
         public RefSearchTab(TabbedEditorWindow window) : base("Ref Search", window)

@@ -4,13 +4,12 @@
 // Copyright © 2013-2014 mulova@gmail.com
 //----------------------------------------------
 
-using System;
 using System.Collections.Generic;
-using Object = UnityEngine.Object;
 
-namespace convinity {
+namespace convinity
+{
 
-	[System.Serializable]
+    [System.Serializable]
 	public class GameObjectRefs {
 		public string path;
 		public List<CompRefs> refs = new List<CompRefs>();
