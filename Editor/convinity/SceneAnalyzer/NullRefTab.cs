@@ -13,7 +13,6 @@ using mulova.unicore;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Ex;
-using Nullable = mulova.commons.Nullable;
 using Object = UnityEngine.Object;
 
 namespace convinity
@@ -142,7 +141,7 @@ namespace convinity
             }
             foreach (FieldInfo f in registry.GetFields(obj.GetType()))
             {
-                if (ReflectionUtil.GetAttribute<Nullable>(f) == null)
+                if (f.GetAttribute<NullableFieldAttribute>() == null)
                 {
                     object o = f.GetValue(obj);
                     if (o.IsNull())
