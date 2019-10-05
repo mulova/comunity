@@ -157,13 +157,14 @@ namespace convinity
 				}
             } else
             {
-                EditorTraversal.ForEachScene(roots => {
-                    SearchTransforms(searchObj, roots, store);
+                EditorTraversal.ForEachScene(scene => {
+                    var r = scene.GetRootGameObjects().Convert(o => o.transform);
+                    SearchTransforms(searchObj, r, store);
                     if (searchObj is GameObject)
                     {
                         foreach (Component c in (searchObj as GameObject).GetComponents<Component>())
                         {
-                            SearchTransforms(c, roots, store);
+                            SearchTransforms(c, r, store);
                         }
                     }
                     return null;
