@@ -5,9 +5,12 @@
         "mulova.unicore",
         "mulova.comunity",
         "reorderablelist",
-        "mulova.unicore.editor"
+        "mulova.unicore.editor",
+        "Unity.Addressables",
+        "Unity.Addressables.Editor",
+        "mulova.prebuild",
+        "mulova.builder"
     ],
-    "optionalUnityReferences": [],
     "includePlatforms": [
         "Editor"
     ],
@@ -16,5 +19,7 @@
     "overrideReferences": false,
     "precompiledReferences": [],
     "autoReferenced": true,
-    "defineConstraints": []
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
