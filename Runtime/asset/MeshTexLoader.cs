@@ -143,7 +143,7 @@ namespace mulova.comunity
 
         private void Interrupt()
         {
-            log.Info("Download for {0} INTERRUPTED", newUrl);
+            log.Debug("Download for {0} INTERRUPTED", newUrl);
             // remove pending if exists
             if (!newUrl.IsEmpty())
             {
@@ -193,7 +193,7 @@ namespace mulova.comunity
                     }
                     else
                     {
-                        log.Info("Can't access {0}", url);
+                        log.Debug("Can't access {0}", url);
                         Clear();
                     }
                 }
@@ -256,7 +256,7 @@ namespace mulova.comunity
         {
             if (t != null)
             {
-                log.Info("<{0}> set texture {1}", name, t.name);
+                log.Debug("<{0}> set texture {1}", name, t.name);
                 tex = t;
             }
             else

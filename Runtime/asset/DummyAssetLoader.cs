@@ -1,14 +1,15 @@
 ﻿using System;
-using UnityEngine;
 using System.Collections.Generic;
-using Object = UnityEngine.Object;
-using mulova.commons;
 using System.Ex;
+using UnityEngine;
+using ILogger = mulova.commons.ILogger;
+using Object = UnityEngine.Object;
 
-namespace mulova.comunity {
+namespace mulova.comunity
+{
     public class DummyAssetLoader : IAssetLoader
 	{
-        public static readonly Loggerx log = AssetCache.log;
+        public static readonly ILogger log = AssetCache.log;
 
         public void GetAssetBundle(string url, bool unload, Action<AssetBundle> callback)
         {

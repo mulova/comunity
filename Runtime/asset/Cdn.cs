@@ -8,6 +8,7 @@ using mulova.commons;
 using System.Text.Ex;
 using System.Collections.Generic.Ex;
 using mulova.unicore;
+using mulova.i18n;
 
 namespace mulova.comunity
 {

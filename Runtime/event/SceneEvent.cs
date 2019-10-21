@@ -2,12 +2,13 @@
 using System;
 using mulova.commons;
 using System.Text.Ex;
+using ILogger = mulova.commons.ILogger;
 
 namespace mulova.comunity
 {
     public class SceneEvent : SingletonBehaviour<SceneEvent>
     {
-        public static Loggerx eventLog = LogManager.GetLogger(typeof(SceneEvent));
+        public static ILogger eventLog = LogManager.GetLogger(typeof(SceneEvent));
         
         private readonly Dispatcher dispatcher0 = new Dispatcher(false);
         private readonly Dispatcher dispatcherOneShot0 = new Dispatcher(true);
@@ -34,7 +35,7 @@ namespace mulova.comunity
                 } catch (Exception ex) {
                     eventLog.Error(ex);
                 }
-                eventLog.Info("Generate Event {0}", eventId);
+                eventLog.Debug("Generate Event {0}", eventId);
             }
         }
         

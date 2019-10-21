@@ -4,6 +4,7 @@ using mulova.commons;
 using mulova.unicore;
 using UnityEditor;
 using UnityEngine;
+using mulova.i18n;
 
 namespace mulova.comunity
 {

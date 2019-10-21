@@ -8,7 +8,7 @@ namespace mulova.comunity
 {
     public class UnzipQueue
     {
-        public static readonly Loggerx log = LogManager.GetLogger(typeof(UnzipQueue));
+        public static readonly ILogger log = LogManager.GetLogger(typeof(UnzipQueue));
         public delegate void UnzipMethod(UnzipEntry e, int[] fileProcessed, out int fileCount);
         public UnzipMethod unzip;
         private int completeCount;
@@ -53,7 +53,7 @@ namespace mulova.comunity
         private int[] progress = new int[1];
         private void Unzip() {
             UnzipEntry current = queue.Peek();
-            log.Info("Extracting {0} at {1} ...", current.srcZip, current.targetDir);
+            log.Debug("Extracting {0} at {1} ...", current.srcZip, current.targetDir);
             progress[0] = 0;
             try {
                 totalProgress = 1;
@@ -82,7 +82,7 @@ namespace mulova.comunity
         }
         
         private void LogError(Exception e, string format, params object[] param) {
-            if (log.IsLoggable(LogLevel.ERROR))
+            if (log.IsLoggable(LogType.Error))
             {
                 Threading.InvokeLater(()=> {
                     log.Error(e, format, param);
@@ -96,7 +96,7 @@ namespace mulova.comunity
         
         private void LogDebug(string format, params object[] param)
         {
-            if (log.IsLoggable(LogLevel.DEBUG))
+            if (log.IsLoggable(LogType.Log))
             {
                 Threading.InvokeLater(()=> {
                     log.Debug(format, param);

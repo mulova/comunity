@@ -10,7 +10,9 @@ using mulova.preprocess;
 using mulova.unicore;
 using UnityEditor;
 using UnityEngine;
+using ILogger = mulova.commons.ILogger;
 using Object = UnityEngine.Object;
+using System.IO.Ex;
 
 namespace mulova.build.v1
 {
@@ -24,7 +26,7 @@ namespace mulova.build.v1
 		private string rootDir;
 		private TexFormatGroup texFormat;
 		private List<string> modList = new List<string>();
-		public static readonly Loggerx log = LogManager.GetLogger(typeof(AssetBuilderV1));
+		public static readonly ILogger log = LogManager.GetLogger(typeof(AssetBuilderV1));
 		public readonly BuildTarget buildTarget;
 
         private AssetBundlePath abPath = AssetBundlePath.inst;
@@ -168,8 +170,8 @@ namespace mulova.build.v1
                 }
 
 				assetMods.RemoveAll(m=> rawAssetMods.Contains(m));
-				log.Info("Modified raw assets ({0:D0})", rawAssetMods.Count);
-				log.Info("Modified assets ({0:D0})", assetMods.Count);
+				log.Debug("Modified raw assets ({0:D0})", rawAssetMods.Count);
+				log.Debug("Modified assets ({0:D0})", assetMods.Count);
 				string[] srcList = assetMods.ConvertAll(p => "Assets/"+p).ToArray();
 				// preprocess
 				var buildLog = BuildScript.PrebuildAll(ProcessStage.Verify);

@@ -8,7 +8,7 @@ namespace etc
 {
 	public static class AndroidAudioManager
 	{
-		public static readonly Loggerx log = LogManager.GetLogger(typeof(Android));
+		public static readonly ILogger log = LogManager.GetLogger(typeof(Android));
 		public const int STREAM_VOICE_CALL = 0;
 		/* The audio stream for system sounds */
 		public const int STREAM_SYSTEM = 1;

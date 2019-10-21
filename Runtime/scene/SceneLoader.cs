@@ -55,7 +55,7 @@ namespace mulova.comunity
                 BeginSceneLoading(sceneName);
             } else
             {
-                log.Info("Sceen loading is ignored. The same scene '{0}'is requested", sceneName);
+                log.Debug("Sceen loading is ignored. The same scene '{0}'is requested", sceneName);
             }
         }
 
@@ -89,7 +89,7 @@ namespace mulova.comunity
         
         private void BeginSceneLoading(string sceneName)
         {
-            log.Info("Loading Scene... {0}", sceneName);
+            log.Debug("Loading Scene... {0}", sceneName);
             preCallbacks.Call(sceneName);
             preOneshotCallbacks.Call(sceneName);
             preOneshotCallbacks = null;

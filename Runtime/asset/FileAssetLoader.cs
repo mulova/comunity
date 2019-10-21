@@ -9,6 +9,7 @@ using System.Text.Ex;
 using mulova.commons;
 using mulova.unicore;
 using UnityEngine;
+using ILogger = mulova.commons.ILogger;
 using Object = UnityEngine.Object;
 #if ASSETBUNDLE_MANAGER
 using AssetBundles;
@@ -64,7 +65,7 @@ namespace mulova.comunity
 #if WWW_MODULE
 		private MultiMap<string, Action<WWW>> callbacks = new MultiMap<string, Action<WWW>>();
 #endif
-        public static readonly Loggerx log = AssetCache.log;
+        public static readonly ILogger log = AssetCache.log;
 
         public FileAssetLoader()
         {
@@ -86,7 +87,7 @@ namespace mulova.comunity
         /// </summary>
         public void ClearCache(string dir)
         {
-            log.Info("Clear Cache Directory: {0}", dir);
+            log.Debug("Clear Cache Directory: {0}", dir);
             if (dir.Is(FileType.Zip))
             {
                 dir = PathUtil.DetachExt(dir);

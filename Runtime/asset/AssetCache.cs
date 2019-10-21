@@ -10,6 +10,7 @@ using System.Text.Ex;
 using mulova.commons;
 using mulova.unicore;
 using UnityEngine;
+using ILogger = mulova.commons.ILogger;
 using Object = UnityEngine.Object;
 
 namespace mulova.comunity
@@ -18,7 +19,7 @@ namespace mulova.comunity
     /// </summary>
     public class AssetCache
     {
-        public static Loggerx log = LogManager.GetLogger(typeof(AssetCache));
+        public static ILogger log = LogManager.GetLogger(typeof(AssetCache));
         public const int TIMEOUT = 20 * 1000;
         private IAssetLoader loader = new DummyAssetLoader();
         private LRUCache<Object> assetCache = new LRUCache<Object>(false);
@@ -32,7 +33,7 @@ namespace mulova.comunity
         {
             for (int i = 0; i < loaders.Length; ++i)
             {
-                log.Info("Set loader {0}: {1}", i, loaders[i].GetType().Name);
+                log.Debug("Set loader {0}: {1}", i, loaders[i].GetType().Name);
                 if (i+1 < loaders.Length)
                 {
                     loaders[i].SetFallback(loaders[i+1]);
@@ -122,7 +123,7 @@ namespace mulova.comunity
                 IdObject old = exclusiveCache.Get(alias);
                 if (old != null&&old.obj != asset)
                 {
-                    log.Info("Replacing asset cache: {0} -> {1}", old.id, url);
+                    log.Debug("Replacing asset cache: {0} -> {1}", old.id, url);
                     assetCache.Remove(old);
                     Object.Destroy(old.obj);
                 }

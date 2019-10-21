@@ -9,7 +9,8 @@
         "Unity.Addressables",
         "Unity.Addressables.Editor",
         "mulova.prebuild",
-        "mulova.builder"
+        "mulova.builder",
+        "mulova.i18n"
     ],
     "includePlatforms": [
         "Editor"

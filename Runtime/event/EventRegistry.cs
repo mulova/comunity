@@ -45,7 +45,7 @@ namespace mulova.comunity
         private static readonly Dispatcher<object> dispatcher1 = new Dispatcher<object>(false);
         private static readonly Dispatcher<object> dispatcherOneShot1 = new Dispatcher<object>(true);
         
-        public static Loggerx log = LogManager.GetLogger(typeof(EventRegistry));
+        public static ILogger log = LogManager.GetLogger(typeof(EventRegistry));
         
         public void RegisterEvents()
         {
@@ -103,7 +103,7 @@ namespace mulova.comunity
                 {
                     log.Error(ex);
                 }
-                log.Info("Generate Event {0}", eventId);
+                log.Debug("Generate Event {0}", eventId);
                 SceneEvent.SendEvent(eventId, data);
             }
         }

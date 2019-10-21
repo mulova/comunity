@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using mulova.commons;
 using System.Text.Ex;
 using System.Collections.Generic.Ex;
+using mulova.i18n;
 
 namespace mulova.comunity
 {

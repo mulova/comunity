@@ -66,7 +66,7 @@ namespace mulova.comunity
             if (keys.IsEmpty())
             {
                 ui.SetActive(false);
-                log.Info("InputBlocker Off");
+                log.Debug("InputBlocker Off");
             }
         }
         

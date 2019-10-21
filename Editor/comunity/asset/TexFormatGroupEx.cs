@@ -11,12 +11,13 @@ using System.Text.Ex;
 using UnityEngine.Ex;
 using mulova.unicore;
 using System.Ex;
+using ILogger = mulova.commons.ILogger;
 
 namespace mulova.comunity
 {
 	public static class TexFormatGroupEx
 	{
-		public static Loggerx log = LogManager.GetLogger(typeof(TexFormatGroup));
+		public static ILogger log = LogManager.GetLogger(typeof(TexFormatGroup));
 
 		public static TexFormatGroupData ToData(this TexFormatGroup format)
 		{

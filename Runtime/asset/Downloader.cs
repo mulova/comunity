@@ -528,7 +528,7 @@ namespace mulova.comunity
                                   {
                                       Cleanup();
 
-                                      if (log.IsLoggable(LogLevel.INFO) && filesDownloaded.Count > 0)
+                                      if (log.IsLoggable(LogType.Log) && filesDownloaded.Count > 0)
                                       {
                                           StringBuilder str = new StringBuilder(1024);
                                           str.Append("ChangeSet\n");
@@ -536,7 +536,7 @@ namespace mulova.comunity
                                           {
                                               str.Append("\t").Append(path).Append("\n");
                                           }
-                                          log.Info(str.ToString());
+                                          log.Debug(str.ToString());
                                       }
                                       ActionEx.CallAfterRelease(ref onComplete, GetException());
                                   });
@@ -601,7 +601,7 @@ namespace mulova.comunity
                 try
                 {
 #if UNITY_WEBGL
-                    log.Info("Download {0}", downloadSrcPath);
+                    log.Debug("Download {0}", downloadSrcPath);
                     webGL.DownloadFile(downloadSrcPath, new FileCallbackParam(downloadSrcPath, null));
 #else
                     LogDebug("Download {0}\n\tAt {1}", downloadSrcPath, downloadDstPath);
@@ -705,7 +705,7 @@ namespace mulova.comunity
 
         private void LogError(Exception e, string format, params object[] param)
         {
-            if (log.IsLoggable(LogLevel.ERROR))
+            if (log.IsLoggable(LogType.Error))
             {
                 Threading.InvokeLater(() =>
                                       {
@@ -717,7 +717,7 @@ namespace mulova.comunity
 
         private void LogWarn(string format, params object[] param)
         {
-            if (log.IsLoggable(LogLevel.WARN))
+            if (log.IsLoggable(LogType.Warning))
             {
                 Threading.InvokeLater(() =>
                                       {
@@ -729,7 +729,7 @@ namespace mulova.comunity
 
         private void LogDebug(string format, params object[] param)
         {
-            if (log.IsLoggable(LogLevel.DEBUG))
+            if (log.IsLoggable(LogType.Log))
             {
                 Threading.InvokeLater(() =>
                                       {

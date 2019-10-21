@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Collections;
-using System.IO;
+using ILogger = mulova.commons.ILogger;
 using Object = UnityEngine.Object;
-using mulova.commons;
 
 namespace mulova.comunity
 {
-	/// <summary>
-	/// TODOM AssetBundle version is not used.
-	/// </summary>
-	public class WebAssetLoader : IAssetLoader
+    /// <summary>
+    /// TODOM AssetBundle version is not used.
+    /// </summary>
+    public class WebAssetLoader : IAssetLoader
 	{
 		public readonly bool caching;
-		public static readonly Loggerx log = AssetCache.log;
+		public static readonly ILogger log = AssetCache.log;
 
 		public WebAssetLoader(bool caching)
 		{
@@ -182,7 +180,7 @@ namespace mulova.comunity
 				int version = Cdn.GetFileVersion(url);
 				filename = PathUtil.ReplaceExtension(filename, FileTypeEx.ASSET_BUNDLE);
 				string uri = PathUtil.Combine(parent, filename);
-				if (log.IsLoggable(LogLevel.DEBUG))
+				if (log.IsLoggable(LogType.Log))
 				{
 #pragma warning disable 0618
 					log.Debug("{0} (ver {1}): {2}", uri, version, Caching.IsVersionCached(uri, version)? "Cached": "Download & Cache");

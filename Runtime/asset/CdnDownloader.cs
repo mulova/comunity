@@ -59,7 +59,7 @@ namespace mulova.comunity
         /// <param name="callback">Callback.</param>
         public void Download(string verStr, Action<Exception> callback)
         {
-            log.Info("Downloading version {0}", verStr);
+            log.Debug("Downloading version {0}", verStr);
             
             step = DownloadStep.Null;
             
@@ -135,7 +135,7 @@ namespace mulova.comunity
 #if !UNITY_WEBGL
             listDownloader.unzipMethod = unzipMethod;
 #endif
-            log.Info("Downloading list files {0}", listFiles.Join(","));
+            log.Debug("Downloading list files {0}", listFiles.Join(","));
             listDownloader.BeginDownload(Cdn.Path, listFiles, e =>
                                          {
                 if (e == null)
@@ -197,7 +197,7 @@ namespace mulova.comunity
                 string file = string.Format("{0:D3}/patch_{0:D3}.txt", no);
 #endif
                 listFiles.Add(file);
-                log.Info("Listing patch file {0}", file);
+                log.Debug("Listing patch file {0}", file);
             }
             DownloadList(listFiles, callback);
         }
