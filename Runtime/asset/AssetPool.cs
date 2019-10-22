@@ -8,7 +8,6 @@ using mulova.commons;
 using System.Text.Ex;
 using System.Ex;
 using System.Collections.Generic.Ex;
-using ILogger = mulova.commons.ILogger;
 
 namespace mulova.comunity {
 	/// <summary>
@@ -19,8 +18,8 @@ namespace mulova.comunity {
 		private string urlFormat;
 		public LoadDelegate assetLoader;
 		public delegate void LoadDelegate(string key, Action<T> callback);
-        private ILogger _log;
-        public ILogger log
+        private ILog _log;
+        public ILog log
         {
             get
             {

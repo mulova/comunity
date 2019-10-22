@@ -10,7 +10,6 @@ using System.Text.Ex;
 using mulova.commons;
 using mulova.unicore;
 using UnityEngine;
-using ILogger = mulova.commons.ILogger;
 using Object = UnityEngine.Object;
 
 namespace mulova.comunity
@@ -19,7 +18,7 @@ namespace mulova.comunity
     /// </summary>
     public class AssetCache
     {
-        public static ILogger log = LogManager.GetLogger(typeof(AssetCache));
+        public static ILog log = LogManager.GetLogger(typeof(AssetCache));
         public const int TIMEOUT = 20 * 1000;
         private IAssetLoader loader = new DummyAssetLoader();
         private LRUCache<Object> assetCache = new LRUCache<Object>(false);

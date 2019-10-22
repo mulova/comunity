@@ -17,7 +17,7 @@ namespace mulova.comunity
     public static class SceneStack
     {
         private static Stack<string> sceneStack = new Stack<string>();
-        //public static readonly ILogger log = LogManager.GetLogger(typeof(SceneStack));
+        //public static readonly ILog log = LogManager.GetLogger(typeof(SceneStack));
         private static string _current = SceneManager.GetActiveScene().name;
         private static HashSet<string> exclude = new HashSet<string>();
         private static HashSet<string> visited = new HashSet<string>();

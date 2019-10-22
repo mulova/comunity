@@ -45,7 +45,7 @@ namespace mulova.comunity
         private static readonly Dispatcher<object> dispatcher1 = new Dispatcher<object>(false);
         private static readonly Dispatcher<object> dispatcherOneShot1 = new Dispatcher<object>(true);
         
-        public static ILogger log = LogManager.GetLogger(typeof(EventRegistry));
+        public static ILog log = LogManager.GetLogger(typeof(EventRegistry));
         
         public void RegisterEvents()
         {

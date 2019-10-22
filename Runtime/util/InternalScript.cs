@@ -2,16 +2,16 @@
 using UnityEngine;
 using mulova.commons;
 using UnityEngine.Ex;
-using ILogger = mulova.commons.ILogger;
+
 
 namespace mulova.comunity
 {
 	public class LogBehaviour : MonoBehaviour
 	{
-		private ILogger _log;
+		private ILog _log;
 		private Invoker invoker;
 
-		public ILogger log
+		public ILog log
 		{
 			get
 			{

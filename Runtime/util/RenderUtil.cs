@@ -7,6 +7,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using mulova.commons;
+using System;
 
 namespace mulova.comunity {
 	public class RenderUtil {
@@ -16,14 +17,14 @@ namespace mulova.comunity {
 		 * Shader를 map에서 기술된 대로 다른 Shader로 대치한다.
 		 * #@param matParams 특정 material 설정을 적용한다.
 		 */
-        public static void ReplaceShader(GameObject obj, Dictionary<string, string> map, params Apply<Material>[] matParams) {
+        public static void ReplaceShader(GameObject obj, Dictionary<string, string> map, params Action<Material>[] matParams) {
 			Renderer[] renderers = obj.GetComponentsInChildren<Renderer>(true);
 			foreach (Renderer r in renderers) {
 				foreach (Material m in r.materials) {
 					if (map.ContainsKey(m.shader.name)) {
 						m.shader = Shader.Find(map[m.shader.name]);
-						foreach (Apply<Material> a in matParams) {
-							a.Apply(m);
+						foreach (var a in matParams) {
+							a(m);
 						}
 					}
 				}

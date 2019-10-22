@@ -8,7 +8,7 @@ using System.Text.Ex;
 using mulova.commons;
 using mulova.unicore;
 using UnityEngine;
-using ILogger = mulova.commons.ILogger;
+
 using Object = UnityEngine.Object;
 
 namespace mulova.comunity
@@ -67,7 +67,7 @@ namespace mulova.comunity
 #if WWW_MODULE
 		private MultiMap<string, Action<WWW>> callbacks = new MultiMap<string, Action<WWW>>();
 #endif
-		public static readonly ILogger log = AssetCache.log;
+		public static readonly ILog log = AssetCache.log;
 
 		public StreamingAssetLoader()
 		{

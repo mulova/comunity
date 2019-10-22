@@ -10,13 +10,13 @@ using mulova.commons;
 using mulova.unicore;
 using UnityEngine;
 using UnityEngine.Ex;
-using ILogger = mulova.commons.ILogger;
+
 
 namespace mulova.comunity
 {
     public class MethodCall : MonoBehaviour
 	{
-		public static ILogger log = LogManager.GetLogger(typeof(MethodCall));
+		public static ILog log = LogManager.GetLogger(typeof(MethodCall));
 		public static readonly BindingFlags FLAGS = (BindingFlags.Public|BindingFlags.Instance|BindingFlags.FlattenHierarchy)&~BindingFlags.SetProperty&~BindingFlags.GetProperty;
 		public MonoBehaviour target;
 		public string methodName;

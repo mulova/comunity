@@ -528,7 +528,7 @@ namespace mulova.comunity
                                   {
                                       Cleanup();
 
-                                      if (log.IsLoggable(LogType.Log) && filesDownloaded.Count > 0)
+                                      if (log.IsLoggable(LogLevel.Log) && filesDownloaded.Count > 0)
                                       {
                                           StringBuilder str = new StringBuilder(1024);
                                           str.Append("ChangeSet\n");
@@ -551,7 +551,7 @@ namespace mulova.comunity
                 return null;
             }
             string[] ret = new string[2];
-            int index = path.LastIndexOf(VER_SEPARATOR);
+            int index = path.LastIndexOf(VER_SEPARATOR, StringComparison.Ordinal);
             if (index > 0)
             {
                 ret[0] = path.Substring(0, index);
@@ -705,7 +705,7 @@ namespace mulova.comunity
 
         private void LogError(Exception e, string format, params object[] param)
         {
-            if (log.IsLoggable(LogType.Error))
+            if (log.IsLoggable(LogLevel.Error))
             {
                 Threading.InvokeLater(() =>
                                       {
@@ -717,7 +717,7 @@ namespace mulova.comunity
 
         private void LogWarn(string format, params object[] param)
         {
-            if (log.IsLoggable(LogType.Warning))
+            if (log.IsLoggable(LogLevel.Warning))
             {
                 Threading.InvokeLater(() =>
                                       {
@@ -729,7 +729,7 @@ namespace mulova.comunity
 
         private void LogDebug(string format, params object[] param)
         {
-            if (log.IsLoggable(LogType.Log))
+            if (log.IsLoggable(LogLevel.Log))
             {
                 Threading.InvokeLater(() =>
                                       {

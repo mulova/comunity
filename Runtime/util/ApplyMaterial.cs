@@ -9,7 +9,7 @@ using mulova.commons;
 
 namespace mulova.comunity {
 
-    public class ApplyMaterialColor : Apply<Material> {
+    public class ApplyMaterialColor {
 		private string name;
 		private Color color;
 		
@@ -18,7 +18,7 @@ namespace mulova.comunity {
 			this.color = c;
 		}
 		
-		void Apply<Material>.Apply(Material target)
+		public void Apply(Material target)
 		{
 			target.SetColor(name, color);
 		}
@@ -26,7 +26,7 @@ namespace mulova.comunity {
 	}
 	
 	
-	public class ApplyMaterialFloat : Apply<Material> {
+	public class ApplyMaterialFloat {
 		private string name;
 		private float f;
 		
@@ -35,14 +35,14 @@ namespace mulova.comunity {
 			this.f = f;
 		}
 		
-		void Apply<Material>.Apply(Material target)
+		public void Apply(Material target)
 		{
 			target.SetFloat(name, f);
 		}
 	}
 	
 	
-	public class ApplyMaterialTexture : Apply<Material> {
+	public class ApplyMaterialTexture {
 		private string name;
 		private Texture tex;
 		
@@ -51,14 +51,14 @@ namespace mulova.comunity {
 			this.tex = tex;
 		}
 		
-		void Apply<Material>.Apply(Material target)
+		public void Apply(Material target)
 		{
 			target.SetTexture(name, tex);
 		}
 	}
 	
 	
-	public class ApplyMaterialVec4 : Apply<Material> {
+	public class ApplyMaterialVec4 {
 		private string name;
 		private Vector4 vec;
 		
@@ -67,7 +67,7 @@ namespace mulova.comunity {
 			this.vec = vec;
 		}
 		
-		void Apply<Material>.Apply(Material target)
+		public void Apply(Material target)
 		{
 			target.SetVector(name, vec);
 		}

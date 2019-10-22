@@ -7,7 +7,7 @@ using Object = UnityEngine.Object;
 using System.ComponentModel;
 using System.Collections;
 using mulova.commons;
-using ILogger = mulova.commons.ILogger;
+
 
 namespace mulova.comunity
 {
@@ -18,7 +18,7 @@ namespace mulova.comunity
     public class RemoteAssetLoader : IAssetLoader
     {
 
-        public static readonly ILogger log = AssetCache.log;
+        public static readonly ILog log = AssetCache.log;
         private RemotePathHashConverter pathConv = new RemotePathHashConverter();
         private MultiMap<string, Action<FileInfo>> callbacks = new MultiMap<string, Action<FileInfo>>();
 

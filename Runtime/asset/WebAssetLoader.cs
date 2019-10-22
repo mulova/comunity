@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using mulova.commons;
 using UnityEngine;
-using ILogger = mulova.commons.ILogger;
+
 using Object = UnityEngine.Object;
 
 namespace mulova.comunity
@@ -12,7 +13,7 @@ namespace mulova.comunity
     public class WebAssetLoader : IAssetLoader
 	{
 		public readonly bool caching;
-		public static readonly ILogger log = AssetCache.log;
+		public static readonly ILog log = AssetCache.log;
 
 		public WebAssetLoader(bool caching)
 		{
