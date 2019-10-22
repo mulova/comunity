@@ -22,8 +22,8 @@ namespace mulova.comunity {
 				if (singleton != instance)
 				{
 					if (!instance.CompareTag("EditorOnly")) {
-                        LogManager.GetLogger(typeof(T)).context = instance;
-						LogManager.GetLogger(typeof(T)).Warn("Destroying subsidiary {0}.{1} singleton instance.\nSet 'EditorOnly' tag if this is for test.", instance.transform.GetScenePath(), typeof(T).FullName);
+                        LogManager.GetLogger(nameof(T)).context = instance;
+						LogManager.GetLogger(nameof(T)).Warn("Destroying subsidiary {0}.{1} singleton instance.\nSet 'EditorOnly' tag if this is for test.", instance.transform.GetScenePath(), typeof(T).FullName);
 					}
 					if (Application.isPlaying) {
 						instance.gameObject.DestroyEx();

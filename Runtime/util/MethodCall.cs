@@ -16,7 +16,7 @@ namespace mulova.comunity
 {
     public class MethodCall : MonoBehaviour
 	{
-		public static ILog log = LogManager.GetLogger(typeof(MethodCall));
+		public static ILog log = LogManager.GetLogger(nameof(MethodCall));
 		public static readonly BindingFlags FLAGS = (BindingFlags.Public|BindingFlags.Instance|BindingFlags.FlattenHierarchy)&~BindingFlags.SetProperty&~BindingFlags.GetProperty;
 		public MonoBehaviour target;
 		public string methodName;

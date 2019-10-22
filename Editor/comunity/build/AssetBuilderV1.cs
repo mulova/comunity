@@ -25,7 +25,7 @@ namespace mulova.build.v1
 		private string rootDir;
 		private TexFormatGroup texFormat;
 		private List<string> modList = new List<string>();
-		public static readonly ILog log = LogManager.GetLogger(typeof(AssetBuilderV1));
+		public static readonly ILog log = LogManager.GetLogger(nameof(AssetBuilderV1));
 		public readonly BuildTarget buildTarget;
 
         private AssetBundlePath abPath = AssetBundlePath.inst;

@@ -8,7 +8,7 @@ namespace mulova.comunity
 {
     public class UnzipQueue
     {
-        public static readonly ILog log = LogManager.GetLogger(typeof(UnzipQueue));
+        public static readonly ILog log = LogManager.GetLogger(nameof(UnzipQueue));
         public delegate void UnzipMethod(UnzipEntry e, int[] fileProcessed, out int fileCount);
         public UnzipMethod unzip;
         private int completeCount;

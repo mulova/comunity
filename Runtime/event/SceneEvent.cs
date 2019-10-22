@@ -8,7 +8,7 @@ namespace mulova.comunity
 {
     public class SceneEvent : SingletonBehaviour<SceneEvent>
     {
-        public static ILog eventLog = LogManager.GetLogger(typeof(SceneEvent));
+        public static ILog eventLog = LogManager.GetLogger(nameof(SceneEvent));
         
         private readonly Dispatcher dispatcher0 = new Dispatcher(false);
         private readonly Dispatcher dispatcherOneShot0 = new Dispatcher(true);

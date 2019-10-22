@@ -18,7 +18,7 @@ namespace mulova.comunity
     /// </summary>
     public class AssetCache
     {
-        public static ILog log = LogManager.GetLogger(typeof(AssetCache));
+        public static ILog log = LogManager.GetLogger(nameof(AssetCache));
         public const int TIMEOUT = 20 * 1000;
         private IAssetLoader loader = new DummyAssetLoader();
         private LRUCache<Object> assetCache = new LRUCache<Object>(false);

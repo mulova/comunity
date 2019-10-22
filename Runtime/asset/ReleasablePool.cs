@@ -11,7 +11,7 @@ namespace mulova.comunity
         private static readonly List<IReleasablePool> pools = new List<IReleasablePool>();
         private static IReleasablePool def;
         private List<IReleasable> releasables;
-        public static readonly ILog log = LogManager.GetLogger(typeof(ILogger));
+        public static readonly ILog log = LogManager.GetLogger(nameof(ILogger));
         
         public static void Register(IReleasablePool p) {
             Assert.IsFalse(pools.Contains(p));

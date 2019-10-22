@@ -16,7 +16,7 @@ namespace mulova.comunity
 {
 	public static class TexFormatGroupEx
 	{
-		public static ILog log = LogManager.GetLogger(typeof(TexFormatGroup));
+		public static ILog log = LogManager.GetLogger(nameof(TexFormatGroup));
 
 		public static TexFormatGroupData ToData(this TexFormatGroup format)
 		{

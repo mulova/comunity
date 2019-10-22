@@ -10,7 +10,7 @@ namespace mulova.comunity
 	{
 		private List<Action> actions = new List<Action>();
 		private List<Action> actionsLater = new List<Action>();
-		public static readonly ILog log = LogManager.GetLogger(typeof(ActionQueue));
+		public static readonly ILog log = LogManager.GetLogger(nameof(ActionQueue));
 
 		public bool isEmpty
 		{

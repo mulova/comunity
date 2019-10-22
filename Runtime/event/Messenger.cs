@@ -26,7 +26,7 @@ namespace mulova.comunity
 {
     public static class Messenger
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(Messenger));
+        private static readonly ILog log = LogManager.GetLogger(nameof(Messenger));
         public static Dictionary<string, List<Action>> eventTable = new Dictionary<string, List<Action>>();
         public static Dictionary<string, List<Action>> oneShotEventTable = new Dictionary<string, List<Action>>();
         
@@ -123,7 +123,7 @@ namespace mulova.comunity
 // One parameter
     public static class Messenger<T>
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(Messenger));
+        private static readonly ILog log = LogManager.GetLogger(nameof(Messenger));
         public static Dictionary<string, List<Action<T>>> eventTable = new Dictionary<string, List<Action<T>>>();
         public static Dictionary<string, List<Action<T>>> oneShotEventTable = new Dictionary<string, List<Action<T>>>();
 
@@ -219,7 +219,7 @@ namespace mulova.comunity
 // Two parameters
     public static class Messenger<T, U>
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(Messenger));
+        private static readonly ILog log = LogManager.GetLogger(nameof(Messenger));
         public static Dictionary<string, List<Action<T,U>>> eventTable = new Dictionary<string, List<Action<T,U>>>();
         public static Dictionary<string, List<Action<T,U>>> oneShotEventTable = new Dictionary<string, List<Action<T,U>>>();
 
@@ -315,7 +315,7 @@ namespace mulova.comunity
 // Three parameters
     public static class Messenger<T, U, V>
     {
-        public static readonly ILog log = LogManager.GetLogger(typeof(Messenger));
+        public static readonly ILog log = LogManager.GetLogger(nameof(Messenger));
         public static Dictionary<string, List<Action<T,U,V>>> eventTable = new Dictionary<string, List<Action<T,U,V>>>();
         public static Dictionary<string, List<Action<T,U,V>>> oneShotEventTable = new Dictionary<string, List<Action<T,U,V>>>();
 
