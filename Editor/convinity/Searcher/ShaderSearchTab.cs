@@ -4,6 +4,7 @@ using mulova.unicore;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
+using System.Text.Ex;
 
 namespace convinity
 {
