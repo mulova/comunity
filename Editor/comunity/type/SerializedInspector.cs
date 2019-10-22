@@ -13,6 +13,7 @@ using Object = UnityEngine.Object;
 using mulova.commons;
 using System.Text.Ex;
 using System.Collections.Generic.Ex;
+using System.Ex;
 
 namespace mulova.comunity
 {
@@ -30,7 +31,7 @@ namespace mulova.comunity
         public SerializedInspector(SerializedObject obj) {
             this.obj = obj;
             BindingFlags flags = (BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy) & ~BindingFlags.SetProperty & ~BindingFlags.GetProperty;
-            List<FieldInfo> vars = ReflectionUtil.ListFields(obj.targetObject.GetType(), flags, null);
+            List<FieldInfo> vars = obj.targetObject.GetType().ListFields(flags, null);
             List<string> names = new List<string>();
             foreach (FieldInfo f in vars) {
                 names.Add(f.Name);

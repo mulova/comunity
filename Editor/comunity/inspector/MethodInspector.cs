@@ -5,6 +5,7 @@ using Object = UnityEngine.Object;
 using System.Reflection;
 using mulova.commons;
 using mulova.unicore;
+using System.Ex;
 
 namespace mulova.comunity
 {
@@ -33,7 +34,7 @@ namespace mulova.comunity
             if (o == null) {
                 methodList = null;
             } else {
-                List<MethodInfo> methods = ReflectionUtil.ListMethods(o.GetType(), MethodCall.FLAGS, excludeCompTypes);
+                List<MethodInfo> methods = o.GetType().ListMethods(MethodCall.FLAGS, excludeCompTypes);
                 List<MethodInfo> list = new List<MethodInfo>();
                 for (int i=0; i<methods.Count; i++) {
                     string name = methods[i].Name;

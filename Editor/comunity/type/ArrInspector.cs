@@ -273,7 +273,7 @@ namespace mulova.comunity
         }
         
         private T GetDefault() {
-            if (ReflectionUtil.GetAttribute<ConstructorAttribute>(typeof(T)) != null) {
+            if (typeof(T).GetAttribute<ConstructorAttribute>() != null) {
                 return (T)typeof(T).GetConstructor(new Type[0]).Invoke(null);
             } else {
                 return default(T);

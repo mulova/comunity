@@ -5,6 +5,7 @@ using Object = UnityEngine.Object;
 using System.Reflection;
 using mulova.commons;
 using mulova.unicore;
+using System.Ex;
 
 namespace mulova.comunity
 {
@@ -40,7 +41,7 @@ namespace mulova.comunity
                 propArr = null;
             } else if (this.type != type || fieldArr == null) {
                 this.type = type;
-                List<FieldInfo> fields = ReflectionUtil.ListFields(type, FIELD_BINDING, excludeDeclaringTypes);
+                List<FieldInfo> fields = type.ListFields(FIELD_BINDING, excludeDeclaringTypes);
                 List<FieldInfo> fList = new List<FieldInfo>();
                 foreach (FieldInfo f in fields) {
                     if (!excludeFieldNames.Contains(f.Name)) {
@@ -48,7 +49,7 @@ namespace mulova.comunity
                     }
                 }
                 fieldArr = fList.ToArray();
-                List<PropertyInfo> props = ReflectionUtil.ListProperty(type, PROPERTY_BINING, excludeDeclaringTypes);
+                List<PropertyInfo> props = type.ListProperty(PROPERTY_BINING, excludeDeclaringTypes);
                 List<PropertyInfo> pList = new List<PropertyInfo>();
                 foreach (PropertyInfo p in props) {
                     if (!excludeFieldNames.Contains(p.Name) && p.CanRead && p.CanWrite) {
