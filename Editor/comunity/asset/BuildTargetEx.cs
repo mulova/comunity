@@ -11,31 +11,33 @@ namespace mulova.comunity
 	{
 		public static RuntimePlatform ToRuntimePlatform(this UnityEditor.BuildTarget target)
 		{
-			switch (target)
-			{
-#if UNITY_2017_3_OR_NEWER
-			case UnityEditor.BuildTarget.StandaloneOSX:
-#else
-			case BuildTarget.StandaloneOSXUniversal:
-#endif
-				return RuntimePlatform.OSXPlayer;
-			case UnityEditor.BuildTarget.StandaloneWindows:
-			case UnityEditor.BuildTarget.StandaloneWindows64:
-				return RuntimePlatform.WindowsPlayer;
-			case UnityEditor.BuildTarget.iOS:
-				return RuntimePlatform.IPhonePlayer;
-			case UnityEditor.BuildTarget.Android:
-				return RuntimePlatform.Android;
-			case UnityEditor.BuildTarget.StandaloneLinux:
-			case UnityEditor.BuildTarget.StandaloneLinux64:
-			case UnityEditor.BuildTarget.StandaloneLinuxUniversal:
-				return RuntimePlatform.LinuxPlayer;
-			case UnityEditor.BuildTarget.WebGL:
-				return RuntimePlatform.WebGLPlayer;
-			default:
-				return RuntimePlatform.Android;
-			}
-		}
-	}
+            switch (target)
+            {
+                case UnityEditor.BuildTarget.StandaloneOSX:
+                    return RuntimePlatform.OSXPlayer;
+                case UnityEditor.BuildTarget.StandaloneWindows:
+                case UnityEditor.BuildTarget.StandaloneWindows64:
+                    return RuntimePlatform.WindowsPlayer;
+                case UnityEditor.BuildTarget.iOS:
+                    return RuntimePlatform.IPhonePlayer;
+                case UnityEditor.BuildTarget.Android:
+                    return RuntimePlatform.Android;
+                case UnityEditor.BuildTarget.StandaloneLinux64:
+                    return RuntimePlatform.LinuxPlayer;
+                case UnityEditor.BuildTarget.WebGL:
+                    return RuntimePlatform.WebGLPlayer;
+                case UnityEditor.BuildTarget.tvOS:
+                    return RuntimePlatform.tvOS;
+                case UnityEditor.BuildTarget.Switch:
+                    return RuntimePlatform.Switch;
+                case UnityEditor.BuildTarget.Lumin:
+                    return RuntimePlatform.Lumin;
+                case UnityEditor.BuildTarget.Stadia:
+                    return RuntimePlatform.Stadia;
+                default:
+                    return RuntimePlatform.Android;
+            }
+        }
+    }
 }
 
