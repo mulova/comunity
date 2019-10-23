@@ -97,7 +97,7 @@ namespace mulova.comunity
             GameObject obj = queue.Empty() ? null : queue.Dequeue();
             if (obj == null) 
             {
-                obj = elem.prefab.InstantiateEx ();
+                obj = Object.Instantiate(elem.prefab);
             }
             obj.transform.SetParent(parent);
             return obj;

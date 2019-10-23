@@ -27,7 +27,7 @@ namespace mulova.comunity {
 				} else {
                     GameObject o = instancePool.RemoveOne(url);
 					if (o == null) {
-						o = prefab.InstantiateEx();
+						o = Object.Instantiate(prefab);
 					} else {
 						o.transform.SetLocal(prefab.transform);
 					}

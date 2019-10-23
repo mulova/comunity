@@ -14,6 +14,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Ex;
 using Object = UnityEngine.Object;
+using System.Ex;
 
 namespace convinity
 {
@@ -144,7 +145,7 @@ namespace convinity
                 if (f.GetAttribute<NullableFieldAttribute>() == null)
                 {
                     object o = f.GetValue(obj);
-                    if (o.IsNull())
+                    if (o.UnityEquals(null))
                     {
                         nullRefs.Add(new NullRefData(obj, f));
                         break;

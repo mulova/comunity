@@ -273,11 +273,12 @@ namespace mulova.comunity
         }
         
         private T GetDefault() {
-            if (typeof(T).GetAttribute<ConstructorAttribute>() != null) {
-                return (T)typeof(T).GetConstructor(new Type[0]).Invoke(null);
-            } else {
-                return default(T);
+            var c = typeof(T).GetConstructor(new Type[0]);
+            if (c != null)
+            {
+                return (T)c.Invoke(null);
             }
+            return default(T);
         }
         
         private List<T> list = new List<T>();
