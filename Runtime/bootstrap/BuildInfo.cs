@@ -37,11 +37,11 @@ namespace mulova.comunity
 
         }
 
-        public static PropertiesReader prop
+        public static Properties prop
         {
             get
             {
-                PropertiesReader p = new PropertiesReader();
+                Properties p = new Properties();
                 TextAsset properties = Resources.Load<TextAsset>(FILE_NAME);
                 if (properties != null)
                 {
@@ -59,7 +59,7 @@ namespace mulova.comunity
     #if UNITY_EDITOR
         public static void Save()
         {
-            PropertiesReader p = prop;
+            Properties p = prop;
             p.Put(nameof(TYPE), TYPE);
             p.Put(nameof(STORE), STORE);
             p.Put(nameof(VERSION), VERSION);
@@ -77,7 +77,7 @@ namespace mulova.comunity
             Reload(prop);
         }
 
-        public static void Reload(PropertiesReader p)
+        public static void Reload(Properties p)
         {
             TYPE = p.GetString(nameof(TYPE), string.Empty);
     #if SERVICE_ALPHA

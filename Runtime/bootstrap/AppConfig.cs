@@ -92,9 +92,9 @@ namespace mulova.comunity
             Load();
         }
 
-        public static PropertiesReader GetReader(string path)
+        public static Properties GetReader(string path)
         {
-            PropertiesReader p = new PropertiesReader();
+            Properties p = new Properties();
             TextAsset properties = Resources.Load<TextAsset>(GetFilePath(path));
             if (properties != null)
             {
@@ -103,7 +103,7 @@ namespace mulova.comunity
             return p;
         }
 
-        public static PropertiesReader Load()
+        public static Properties Load()
         {
             var p = GetReader($"config/app_config_{configPostfix}");
             API_SERVER = p.GetString(nameof(API_SERVER), null);

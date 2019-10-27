@@ -14,7 +14,7 @@ namespace mulova.comunity
     /// </summary>
     public class GamePref
     {
-        private PropertiesReader pref;
+        private Properties pref;
         private readonly string prefPath;
         private bool flush;
 
@@ -23,8 +23,8 @@ namespace mulova.comunity
             this.flush = flushEverytime;
             prefPath = PathUtil.Combine(Platform.downloadPath, id);
             PlatformMethods.inst.SetNoBackupFlag(prefPath);
-            pref = new PropertiesReader();
-            if (PropertiesReader.Exists(prefPath))
+            pref = new Properties();
+            if (Properties.Exists(prefPath))
             {
                 pref.LoadFile(prefPath);
             }

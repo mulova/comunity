@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[ExecuteInEditMode]
+[ExecuteAlways]
 public class RenderDepth : MonoBehaviour
 {
 	[Range(0f, 3f)]

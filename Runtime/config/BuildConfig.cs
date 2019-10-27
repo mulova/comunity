@@ -44,11 +44,11 @@ namespace mulova.comunity
         public const string TARGET_LINUX = "linux";
         public const string TARGET_WEBGL = "webgl";
         
-        public static PropertiesReader config
+        public static Properties config
         {
             get
             {
-                PropertiesReader config = new PropertiesReader();
+                Properties config = new Properties();
                 config.LoadResource(FILE_NAME);
                 return config;
             }

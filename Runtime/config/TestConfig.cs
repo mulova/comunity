@@ -9,11 +9,11 @@ namespace mulova.comunity
     /// </summary>
     public static class TestConfig
     {
-        private static PropertiesReader map;
-        private static PropertiesReader Map {
+        private static Properties map;
+        private static Properties Map {
             get {
                 if (map == null) {
-                    map = new PropertiesReader();
+                    map = new Properties();
                     if (Platform.isDebug) {
                         map.LoadResource("test_config");
                     }

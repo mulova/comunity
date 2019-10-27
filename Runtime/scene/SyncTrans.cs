@@ -4,7 +4,7 @@ using UnityEngine.Ex;
 
 namespace mulova.comunity
 {
-    [ExecuteInEditMode]
+    [ExecuteAlways]
     public class SyncTrans : LogBehaviour
     {
         public Transform syncTarget;

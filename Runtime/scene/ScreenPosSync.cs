@@ -4,7 +4,7 @@ using UnityEngine.Ex;
 
 namespace mulova.comunity
 {
-    [ExecuteInEditMode]
+    [ExecuteAlways]
     public class ScreenPosSync : MonoBehaviour
     {
         public Transform srcObj;
