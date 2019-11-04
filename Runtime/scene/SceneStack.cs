@@ -34,7 +34,7 @@ namespace mulova.comunity
         
         public static void AddExclude(object ex)
         {
-            exclude.Add(ex.ToText());
+            exclude.Add(ex.ToString());
         }
 
         public static bool HasVisited(string scene)

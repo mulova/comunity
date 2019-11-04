@@ -47,7 +47,7 @@ namespace mulova.comunity
                 log.Warn("Loading Scene '{0}' is interrupted. ", scene);
                 return;
             }
-            string sceneName = scene.ToText();
+            string sceneName = scene.ToString();
             if (SceneManager.GetActiveScene().name != sceneName)
             {
                 InputBlocker.Show(this);
