@@ -57,7 +57,7 @@ namespace mulova.comunity
         /// <param name="prefabs">Prefabs.</param>
         public void SetObjectPrefabs(GameObject[] prefabs)
         {
-            prefabs.ForEachEx (p => SetObjectPrefab (p.name, p));
+            prefabs.ForEach(p => SetObjectPrefab (p.name, p));
         }
         
         /// <summary>
