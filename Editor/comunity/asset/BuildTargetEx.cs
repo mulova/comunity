@@ -32,8 +32,10 @@ namespace mulova.comunity
                     return RuntimePlatform.Switch;
                 case UnityEditor.BuildTarget.Lumin:
                     return RuntimePlatform.Lumin;
+#if UNITY_2020_1_OR_NEWER
                 case UnityEditor.BuildTarget.Stadia:
                     return RuntimePlatform.Stadia;
+#endif
                 default:
                     return RuntimePlatform.Android;
             }
