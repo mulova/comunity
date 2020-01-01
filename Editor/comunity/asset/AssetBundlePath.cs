@@ -228,7 +228,7 @@ namespace mulova.comunity
                 if (EditorUserBuildSettings.activeBuildTarget != BuildTarget.WebGL)
                 {
 					var json = JsonUtility.ToJson(this, true);
-					AssetUtil.WriteAllText(PATH, json);
+					AssetUtil.WriteAllText(PATH, json, Encoding.UTF8);
                     File.WriteAllText(PATH, json);
                 } else
                 {
