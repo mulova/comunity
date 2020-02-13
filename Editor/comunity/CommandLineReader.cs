@@ -97,7 +97,7 @@ namespace mulova.comunity
 				
 				try
 				{
-					List<string> found = commandLineArgs.Filter(row => row.Contains(CUSTOM_ARGS_PREFIX));
+					List<string> found = commandLineArgs.FindAll(row => row.Contains(CUSTOM_ARGS_PREFIX));
 					if (!found.IsEmpty())
 					{
 						customArgsStr = found.Single();

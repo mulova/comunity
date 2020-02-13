@@ -33,7 +33,7 @@ namespace mulova.comunity
 		{
 			if (loadAssetFunc == null)
 			{
-				Type t = ReflectionUtil.GetType("UnityEditor.AssetDatabase");
+				Type t = TypeEx.GetType("UnityEditor.AssetDatabase");
 				System.Reflection.MethodInfo m = t.GetMethod("LoadAssetAtPath", new Type[]{ typeof(string), typeof(Type) });
 				loadAssetFunc = (Func<string, Type, Object>)Delegate.CreateDelegate(t, m);
 			}

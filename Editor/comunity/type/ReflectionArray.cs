@@ -5,6 +5,7 @@
 //----------------------------------------------
 
 using System;
+using System.Ex;
 using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
@@ -65,12 +66,12 @@ namespace mulova.comunity
         public T[] Arr {
             get {
                 if (dynamicReference || arr == null) {
-                    arr = ReflectionUtil.GetFieldValue<T[]>(obj, variableName);
+                    arr = obj.GetFieldValue<T[]>(variableName);
                 }
                 return arr;
             } set {
                 arr = value;
-                ReflectionUtil.SetFieldValue<T[]>(obj, variableName, arr);
+                obj.SetFieldValue<T[]>(variableName, arr);
             }
         }
         
@@ -82,7 +83,7 @@ namespace mulova.comunity
             this.obj = obj;
             this.variableName = variableName;
             this.title = variableName;
-            this.arr = ReflectionUtil.GetFieldValue<T[]>(obj, variableName);
+            this.arr = obj.GetFieldValue<T[]>(variableName);
             if (arr == null) {
                 Arr = (T[])Array.CreateInstance(typeof(T), 0);
             }

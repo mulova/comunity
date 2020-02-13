@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Ex;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using mulova.commons;
 using mulova.unicore;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -28,9 +28,9 @@ namespace mulova.comunity
             {
                 return;
             }
-            T o = ReflectionUtil.GetFieldValue<T>(target, p.name);
+            T o = target.GetFieldValue<T>(p.name);
             if (PopupNullable(bound, p.displayName, ref o, values)) {
-                ReflectionUtil.SetFieldValue(target, p.name, o);
+                target.SetFieldValue(p.name, o);
                 p.serializedObject.ApplyModifiedProperties();
                 EditorUtil.SetDirty(p.serializedObject.targetObject);
                 EditorSceneManager.SaveOpenScenes();

@@ -5,6 +5,7 @@
 //----------------------------------------------
 
 using System;
+using System.Ex;
 using System.Text;
 using mulova.commons;
 using mulova.unicore;
@@ -52,7 +53,7 @@ namespace convinity
 				return null;
 			}
 			if (!string.IsNullOrEmpty(comp) && o is GameObject) {
-				Type type = ReflectionUtil.GetType(comp);
+				Type type = TypeEx.GetType(comp);
 				if (type != null) {
 					Component c = (o as GameObject).GetComponent(type);
 					return c;

@@ -1,5 +1,5 @@
 ﻿using System;
-using mulova.commons;
+using System.Ex;
 using mulova.unicore;
 using UnityEditor;
 using UnityEngine;
@@ -24,7 +24,7 @@ namespace mulova.comunity
             {
                 obj = new T();
             }
-            string str = ReflectionUtil.GetFieldValue<string>(obj, strVarName);
+            string str = obj.GetFieldValue<string>(strVarName);
             if (str == null)
             {
                 str = string.Empty;
@@ -33,14 +33,14 @@ namespace mulova.comunity
             changedObj = obj;
             if (newStr != str)
             {
-                ReflectionUtil.SetFieldValue(obj, strVarName, newStr);
+                obj.SetFieldValue(strVarName, newStr);
                 return true;
             }
-            Enum e = ReflectionUtil.GetFieldValue<Enum>(obj, enumVarName);
+            Enum e = obj.GetFieldValue<Enum>(enumVarName);
             Enum selE = EditorGUI.EnumPopup(r[1], e);
             if (e != selE)
             {
-                ReflectionUtil.SetFieldValue(obj, enumVarName, selE);
+                obj.SetFieldValue(enumVarName, selE);
                 return true;
             }
             return false;

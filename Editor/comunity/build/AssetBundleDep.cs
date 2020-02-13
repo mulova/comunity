@@ -250,7 +250,7 @@ namespace mulova.build
                 }
                 duplicates.AddAll(newAssets);
             });
-            return duplicates.Values.Filter(d => d.duplicate);
+            return duplicates.Values.FindAll(d => d.duplicate);
         }
     }
 }

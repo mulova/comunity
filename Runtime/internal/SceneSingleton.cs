@@ -3,6 +3,7 @@ using System.Collections;
 using System.Reflection;
 using UnityEngine.SceneManagement;
 using mulova.commons;
+using System.Ex;
 
 namespace mulova.comunity
 {
@@ -40,7 +41,7 @@ namespace mulova.comunity
             {
                 return true;
             }
-            System.Type type = ReflectionUtil.GetType("UnityEditor.EditorApplication");
+            System.Type type = TypeEx.GetType("UnityEditor.EditorApplication");
             PropertyInfo p = type.GetProperty("isPlayingOrWillChangePlaymode", BindingFlags.Static|BindingFlags.Public);
             MethodInfo method = p.GetGetMethod();
             bool isChange = (bool)method.Invoke(null, null);

@@ -5,9 +5,9 @@
 //----------------------------------------------
 
 using System;
+using System.Ex;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using UnityEditor;
 using mulova.commons;
 using mulova.unicore;
 
@@ -32,14 +32,14 @@ namespace mulova.comunity
         {
             float width = GetWidth();
             bool changed = false;
-            E e = ReflectionUtil.GetFieldValue<E>(o, enumVarName);
+            E e = o.GetFieldValue<E>(enumVarName);
             if (EditorGUILayoutUtil.PopupEnum<E>(null, ref e, GUILayout.MinWidth(width*0.3f))) {
-                ReflectionUtil.SetFieldValue<E>(o, enumVarName, e);
+                o.SetFieldValue<E>(enumVarName, e);
                 changed = true;
             }
-            O obj = ReflectionUtil.GetFieldValue<O>(o, objVarName);
+            O obj = o.GetFieldValue<O>(objVarName);
             if (EditorGUILayoutUtil.ObjectField<O>(ref obj, true, GUILayout.MinWidth(width*0.7f))) {
-                ReflectionUtil.SetFieldValue<O>(o, objVarName, obj);
+                o.SetFieldValue<O>(objVarName, obj);
                 changed = true;
             }
             return changed;

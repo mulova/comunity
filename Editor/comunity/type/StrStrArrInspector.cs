@@ -4,11 +4,10 @@
 // Copyright © 2013- mulova@gmail.com
 //----------------------------------------------
 
-using System;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using mulova.commons;
 using mulova.unicore;
+using System.Ex;
 
 namespace mulova.comunity
 {
@@ -36,27 +35,27 @@ namespace mulova.comunity
         {
             float width = GetWidth();
             bool changed = false;
-            string key = ReflectionUtil.GetFieldValue<string>(t, keyVar);
+            string key = t.GetFieldValue<string>(keyVar);
             if (keyPreset != null && keyPreset.Length > 0) {
                 if (EditorGUILayoutUtil.PopupNullable<string>(null, ref key, keyPreset, GUILayout.MinWidth(width/2))) {
-                    ReflectionUtil.SetFieldValue<string>(t, keyVar, key);
+                    t.SetFieldValue(keyVar, key);
                     changed = true;
                 }
             } else {
                 if (EditorGUILayoutUtil.TextField(null, ref key, GUILayout.MinWidth(width/2))) {
-                    ReflectionUtil.SetFieldValue<string>(t, keyVar, key);
+                    t.SetFieldValue(keyVar, key);
                     changed = true;
                 }
             }
-            string val = ReflectionUtil.GetFieldValue<string>(t, valVar);
+            string val = t.GetFieldValue<string>(valVar);
             if (valPreset != null && valPreset.Length > 0) {
                 if (EditorGUILayoutUtil.PopupNullable<string>(null, ref val, valPreset, GUILayout.MinWidth(width/2))) {
-                    ReflectionUtil.SetFieldValue(t, valVar, val);
+                    t.SetFieldValue(valVar, val);
                     changed = true;
                 }
             } else {
                 if (EditorGUILayoutUtil.TextField(null, ref val, GUILayout.MinWidth(width/2))) {
-                    ReflectionUtil.SetFieldValue(t, valVar, val);
+                    t.SetFieldValue(valVar, val);
                     changed = true;
                 }
             }

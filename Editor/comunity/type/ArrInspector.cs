@@ -97,7 +97,7 @@ namespace mulova.comunity
             this.fieldName = variableName;
             this.title = variableName;
             Numbering = true;
-            FieldInfo field = ReflectionUtil.GetField(obj, variableName);
+            FieldInfo field = obj.GetFieldInfo(variableName);
             if (field.DeclaringType.IsValueType && !field.DeclaringType.IsSerializable) {
                 //      if (!ReflectionUtil.IsAttributeDefined<System.SerializableAttribute>(obj, variableName)) {
                 Debug.LogError(obj.GetType().FullName+"."+variableName+" is not Serializable");
@@ -161,8 +161,8 @@ namespace mulova.comunity
             } else {
                 enumTypeSelector.SetBaseType(baseType);
             }
-            string enumTypeName = ReflectionUtil.GetFieldValue<string>(obj, enumTypeVar);
-            enumTypeSelector.SetSelected(ReflectionUtil.GetType(enumTypeName));
+            string enumTypeName = obj.GetFieldValue<string>(enumTypeVar);
+            enumTypeSelector.SetSelected(TypeEx.GetType(enumTypeName));
         }
         
         public TypeSelector GetTypeSelector() {
@@ -197,9 +197,9 @@ namespace mulova.comunity
                 type = enumTypeSelector.type;
                 if (changed && enumTypeFieldName != null) {
                     if (type != null) {
-                        ReflectionUtil.SetFieldValue<string>(obj, enumTypeFieldName, type.FullName);
+                        obj.SetFieldValue(enumTypeFieldName, type.FullName);
                     } else {
-                        ReflectionUtil.SetFieldValue<string>(obj, enumTypeFieldName, string.Empty);
+                        obj.SetFieldValue(enumTypeFieldName, string.Empty);
                     }
                     SetDirty();
                 }
@@ -225,7 +225,7 @@ namespace mulova.comunity
         }
         
         private T[] GetArray() {
-            T[] rows = ReflectionUtil.GetFieldValue<T[]>(obj, fieldName);
+            T[] rows = obj.GetFieldValue<T[]>(fieldName);
             if (rows == null) {
                 rows = new T[0];
             }
@@ -244,7 +244,7 @@ namespace mulova.comunity
                 Object o = obj as Object;
                 Undo.RecordObject(o, o.name);
             }
-            ReflectionUtil.SetFieldValue<T[]>(obj, fieldName, rows);
+            obj.SetFieldValue(fieldName, rows);
             SetDirty();
         }
         

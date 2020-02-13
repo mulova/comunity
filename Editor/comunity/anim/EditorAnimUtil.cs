@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using UnityEditor.Animations;
 using UnityEditor;
 using mulova.commons;
+using System.Ex;
 
 namespace mulova.comunity {
 	public static class EditorAnimUtil {
@@ -48,9 +49,9 @@ namespace mulova.comunity {
 		public static float GetAnimationWindowTime() {
 			if (AnimationMode.InAnimationMode()) {
 				if (EditorWindow.focusedWindow.GetType().Name == "AnimationWindow") {
-					object animEditor = ReflectionUtil.GetFieldValue<object>(EditorWindow.focusedWindow, "m_AnimEditor");
-					object animState = ReflectionUtil.GetFieldValue<object>(animEditor, "m_State");
-					return ReflectionUtil.GetFieldValue<float>(animState, "m_CurrentTime");
+					object animEditor = EditorWindow.focusedWindow.GetFieldValue<object>("m_AnimEditor");
+					object animState = animEditor.GetFieldValue<object>("m_State");
+					return animState.GetFieldValue<float>("m_CurrentTime");
 				}
 			}
 			return 0;

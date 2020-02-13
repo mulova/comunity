@@ -5,9 +5,9 @@
 //----------------------------------------------
 
 using System;
+using System.Ex;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using mulova.commons;
 using mulova.unicore;
 
 namespace mulova.comunity
@@ -28,14 +28,14 @@ namespace mulova.comunity
         {
             float width = GetWidth();
             bool changed = false;
-            string str = ReflectionUtil.GetFieldValue<string>(t, stringVar);
+            string str = t.GetFieldValue<string>(stringVar);
             if (DrawEnum(ref str, GUILayout.MinWidth(width/2))) {
-                ReflectionUtil.SetFieldValue<string>(t, stringVar, str);
+                t.SetFieldValue(stringVar, str);
                 changed = true;
             }
-            O obj = ReflectionUtil.GetFieldValue<O>(t, objVar);
+            O obj = t.GetFieldValue<O>(objVar);
             if (EditorGUILayoutUtil.ObjectField<O>(ref obj, allowSceneObj)) {
-                ReflectionUtil.SetFieldValue<O>(t, objVar, obj);
+                t.SetFieldValue<O>(objVar, obj);
                 changed = true;
             }
             return changed;
