@@ -14,7 +14,7 @@ namespace mulova.build
 	: AssetPostprocessor
 	#endif
 	{
-		[MenuItem("Assets/AssetBundles/Extract Labeled Common AssetBundles")]
+		[MenuItem("Assets/AssetBundles/Extract All Common AssetBundles")]
 		public static void ExtractCommonBundles()
 		{
 			AssetBundleDep dep = new AssetBundleDep();

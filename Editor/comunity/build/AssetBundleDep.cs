@@ -8,6 +8,7 @@ using mulova.unicore;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
+using System.Ex;
 
 namespace mulova.build
 {
@@ -80,6 +81,7 @@ namespace mulova.build
                         {
                             EditorUtility.DisplayProgressBar("Collecting Dependencies", names[i], i / (float)names.Length);
                             var p = AssetDatabase.GetAssetPathsFromAssetBundle(names[i]);
+                            Debug.LogFormat("Collecting dependency for {0}: {1}", names[i], p.Join(","));
                             var dep = AssetDatabase.GetDependencies(p, true);
                             _curDeps.AddAll(dep);
                         }
@@ -140,7 +142,11 @@ namespace mulova.build
 
             foreach (var p in assetPaths)
             {
-                SetAssetBundleName(p);
+                AssetImporter im = AssetImporter.GetAtPath(p);
+                if (im.assetBundleName.IsEmpty())
+                {
+                    SetAssetBundleName(p);
+                }
             }
         }
 
