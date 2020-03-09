@@ -113,7 +113,7 @@ namespace convinity
 							roots = new Transform[] { (root as GameObject).transform };
 						} else
 						{
-							roots = EditorSceneManager.GetActiveScene().GetRootGameObjects().Convert(o => o.transform);
+							roots = EditorSceneManager.GetActiveScene().GetRootGameObjects().ConvertAll(o => o.transform);
 						}
 						
 						SearchTransforms(searchObj, roots, store);
@@ -158,7 +158,7 @@ namespace convinity
             } else
             {
                 EditorTraversal.ForEachScene(scene => {
-                    var r = scene.GetRootGameObjects().Convert(o => o.transform);
+                    var r = scene.GetRootGameObjects().ConvertAll(o => o.transform);
                     SearchTransforms(searchObj, r, store);
                     if (searchObj is GameObject)
                     {

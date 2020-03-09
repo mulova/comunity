@@ -56,15 +56,15 @@ namespace mulova.build
 
             EditorGUIUtil.DrawSeparator();
 
-            if (GUILayout.Button("Find Duplicates"))
-            {
-                duplicates = AssetBundleDep.inst.FindDuplicateAssetBundles();
-            }
-            if (duplicates != null)
-            {
-				ListDrawer<AssetBundleDup> drawer = new ListDrawer<AssetBundleDup>(duplicates, new AssetBundleDupDrawer());
-                drawer.Draw();
-            }
+    //        if (GUILayout.Button("Find Duplicates"))
+    //        {
+    //            duplicates = AssetBundler.inst.FindDuplicateAssetBundles();
+    //        }
+    //        if (duplicates != null)
+    //        {
+				//ListDrawer<AssetBundleDup> drawer = new ListDrawer<AssetBundleDup>(duplicates, new AssetBundleDupDrawer());
+            //    drawer.Draw();
+            //}
 		}
 
 		public override void OnFooterGUI()

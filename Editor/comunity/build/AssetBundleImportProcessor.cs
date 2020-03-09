@@ -14,50 +14,6 @@ namespace mulova.build
 	: AssetPostprocessor
 	#endif
 	{
-		[MenuItem("Assets/AssetBundles/Extract All Common AssetBundles")]
-		public static void ExtractCommonBundles()
-		{
-			AssetBundleDep dep = new AssetBundleDep();
-			//dep.SetPathFilter(true, @"\.jpg$", @"\.png$", @"\.tga$");
-			dep.SetCommonAssetAsBundles(AssetDatabase.GetAllAssetPaths());
-		}
-
-		[MenuItem("Assets/AssetBundles/Extract Listed Common AssetBundles")]
-		public static void ReassignAssetBundleNames()
-		{
-			// Clear All AssetBundles
-			List<string> assets = new List<string>();
-			foreach (ObjRef dir in AssetBundlePath.inst.dirs)
-			{
-				string[] paths = EditorAssetUtil.ListAssetPaths(dir.path, FileType.All);
-				foreach (var p in paths)
-				{
-					if (AssetBundleDep.inst.IsAssetBundle(p))
-					{
-						assets.Add(p);
-					}
-				}
-			}
-            AssetBundleDep dep = new AssetBundleDep();
-            //dep.SetPathFilter(true, @"\.jpg$", @"\.png$", @"\.tga$");
-            dep.SetCommonAssetAsBundles(assets);
-		}
-
-        [MenuItem("Assets/AssetBundles/Assign AssetBundle Labels For Selection")]
-        public static void AssignAssetBundleNames()
-        {
-            // Clear All AssetBundles
-            AssetBundleDep dep = new AssetBundleDep();
-            var assets = EditorAssetUtil.ListAssets(Selection.objects);
-            var paths = new List<string>();
-            foreach (var a in assets)
-            {
-                paths.Add(AssetDatabase.GetAssetPath(a));
-            }
-            //dep.SetPathFilter(true, @"\.jpg$", @"\.png$", @"\.tga$");
-            dep.SetCommonAssetAsBundles(paths);
-        }
-
         static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
 		{
 			// changed AssetBundle names for moved assets
@@ -69,13 +25,13 @@ namespace mulova.build
 					var oldName = im.assetBundleName;
 					if (!oldName.IsEmpty() && p != "Assets/"+oldName)
 					{
-						AssetBundleDep.inst.SetAssetBundleName(p);
+						//AssetBundler.inst.SetAssetBundleName(p);
 						Debug.LogFormat("Change AssetBundle name {0} => {1}", oldName, im.assetBundleName);
 					}
 				}
 			}
 			
-			AssetBundleDep.inst.SetCommonAssetAsBundles(importedAssets);
+			//AssetBundler.inst.SetCommonAssetAsBundles(importedAssets);
 		}
 		
 		[MenuItem("Tools/unilova/Asset/Clear AssetBundles")]
@@ -85,7 +41,7 @@ namespace mulova.build
 			{
 				AssetDatabase.RemoveAssetBundleName(n, true);
 			}
-			AssetBundleDep.inst.Clear();
+			//AssetBundler.inst.Clear();
 		}
 	}
 }

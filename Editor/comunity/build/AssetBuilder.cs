@@ -10,7 +10,6 @@ namespace mulova.build
             {
                 AssetDatabase.RemoveAssetBundleName(n, true);
             }
-            AssetBundleDep.inst.Clear();
         }
     }
 }

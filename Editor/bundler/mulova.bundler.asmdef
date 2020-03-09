@@ -1,0 +1,19 @@
+{
+    "name": "mulova.bundler",
+    "references": [
+        "GUID:fb9b47fc427184aa2951643a25217cf0",
+        "GUID:5fce8f2e37ab14281a313f78da6424d6",
+        "GUID:1ef82591df2184372b7bb4b29430104b"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

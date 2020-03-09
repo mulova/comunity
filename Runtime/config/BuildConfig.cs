@@ -81,7 +81,7 @@ namespace mulova.comunity
             TEST = c.GetBool(nameof(TEST), false);
 
             string[] langs = LANGUAGE.SplitCSV();
-            SYSTEM_LANGUAGES = langs.Convert(l=>l.ParseEnum<SystemLanguage>(SystemLanguage.English));
+            SYSTEM_LANGUAGES = langs.ConvertAll(l=>l.ParseEnum<SystemLanguage>(SystemLanguage.English));
         }
 
         public static string GetPlatformName(this RuntimePlatform platform)
