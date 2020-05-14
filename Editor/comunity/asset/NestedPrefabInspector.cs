@@ -37,7 +37,7 @@ namespace mulova.comunity
 			}
 			GameObject rootPrefab = PrefabUtility.GetPrefabParent(nestedPrefab.gameObject) as GameObject;
 			EditorGUILayout.BeginHorizontal();
-			EditorGUIUtil.ObjectField<Object>("Folder", ref folder, false);
+			EditorGUIEx.ObjectField<Object>("Folder", ref folder, false);
 			GUI.enabled = folder != null;
 			if (GUILayout.Button("Create Prefab")) {
 				if (!nestedPrefab.IsLinked()) {
@@ -60,10 +60,10 @@ namespace mulova.comunity
 					PrefabUtility.DisconnectPrefabInstance(nestedPrefab.gameObject);
 				}
 			}
-			if (EditorGUIUtil.Toggle("Instantiate On Start", ref nestedPrefab.instantiateOnStart)) {
+			if (EditorGUIEx.Toggle("Instantiate On Start", ref nestedPrefab.instantiateOnStart)) {
 				EditorUtil.SetDirty(nestedPrefab);
 			}
-			if (EditorGUIUtil.Toggle("Destroy On Instantiation", ref nestedPrefab.destroyOnInstantiation)) {
+			if (EditorGUIEx.Toggle("Destroy On Instantiation", ref nestedPrefab.destroyOnInstantiation)) {
 				EditorUtil.SetDirty(nestedPrefab);
 			}
 		}

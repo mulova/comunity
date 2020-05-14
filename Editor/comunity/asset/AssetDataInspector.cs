@@ -46,7 +46,7 @@ namespace mulova.comunity {
 //					changed = true;
 //				}
 //				if (!info.IsUnderResources()) {
-//					changed |= EditorGUIUtil.PopupEnum<AssetType> (null, ref info.type, GUILayout.MinWidth (width * 0.2F));
+//					changed |= EditorGUIEx.PopupEnum<AssetType> (null, ref info.type, GUILayout.MinWidth (width * 0.2F));
 //					bool link = info.reference != null;
 //					if (GUILayout.Button (link ? "O" : "X", EditorStyles.toolbarButton, GUILayout.MinWidth (BTN_WIDTH))) {
 //						HardLink (info, !link);
@@ -54,7 +54,7 @@ namespace mulova.comunity {
 //					}
 //				}
 //			} else {
-//				changed |= EditorGUIUtil.PopupEnum<AssetType>(null, ref info.type, GUILayout.MinWidth(width*0.2F));
+//				changed |= EditorGUIEx.PopupEnum<AssetType>(null, ref info.type, GUILayout.MinWidth(width*0.2F));
 //			}
 //			EditorGUILayout.EndHorizontal();
 //			if (!showRef) {
@@ -72,7 +72,7 @@ namespace mulova.comunity {
 //			if (DrawEnumTypeSelector()) {
 //				changed = true;
 //			}
-//			if (EditorGUIUtil.PopupEnum<AssetType>(null, ref assetType, GUILayout.ExpandWidth(false))) {
+//			if (EditorGUIEx.PopupEnum<AssetType>(null, ref assetType, GUILayout.ExpandWidth(false))) {
 //				SetAssetType(assetType);
 //				changed = true;
 //			}
@@ -87,7 +87,7 @@ namespace mulova.comunity {
 //		protected override bool DrawFooter() {
 //			bool changed = false;
 //			EditorGUILayout.BeginHorizontal();
-//			EditorGUIUtil.PopupEnum<FileType>(null, ref fileType);
+//			EditorGUIEx.PopupEnum<FileType>(null, ref fileType);
 //			if (GUILayout.Button("Scan", EditorStyles.miniButton, GUILayout.ExpandWidth(false))) {
 //				scan();
 //				showRef = true;
@@ -101,7 +101,7 @@ namespace mulova.comunity {
 //				changed = true;
 //			}
 //			EditorGUILayout.EndHorizontal();
-//			EditorGUIUtil.Toggle("Show Ref", ref AssetDataArrInspector.showRef);
+//			EditorGUIEx.Toggle("Show Ref", ref AssetDataArrInspector.showRef);
 //			return changed;
 //		}
 //		

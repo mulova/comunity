@@ -36,12 +36,6 @@ public class RenderDepth : MonoBehaviour
 
 	private void Start()
 	{
-		if (!SystemInfo.supportsImageEffects)
-		{
-			print("System doesn't support image effects");
-			enabled = false;
-			return;
-		}
 		if (shader == null || !shader.isSupported)
 		{
 			enabled = false;

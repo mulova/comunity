@@ -64,9 +64,9 @@ namespace mulova.comunity
             string val = str;
             bool changed = false;
             if (enums == null || enums.Length == 0) {
-                changed |= EditorGUILayoutUtil.TextField(null, ref val, options);
+                changed |= EditorGUILayoutEx.TextField(null, ref val, options);
             } else {
-                changed |= EditorGUILayoutUtil.PopupNullable<string>(null, ref val, enums, options);
+                changed |= EditorGUILayoutEx.PopupNullable<string>(null, ref val, enums, options);
             }
             str = val;
             return changed;

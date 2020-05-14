@@ -55,10 +55,10 @@ namespace mulova.comunity
         }
         
         public bool DrawComponentPopup(ref GameObject obj, ref MonoBehaviour comp) {
-            bool changed = EditorGUILayoutUtil.ObjectField<GameObject>("GameObject", ref obj, true);
+            bool changed = EditorGUILayoutEx.ObjectField<GameObject>("GameObject", ref obj, true);
             if (obj != null) {
                 MonoBehaviour[] comps = obj.GetComponents<MonoBehaviour>();
-                changed |= EditorGUILayoutUtil.PopupNullable<MonoBehaviour>(null, ref comp, comps, ToStringScript);
+                changed |= EditorGUILayoutEx.PopupNullable<MonoBehaviour>(null, ref comp, comps, ToStringScript);
             }
             return changed;
         }
@@ -66,7 +66,7 @@ namespace mulova.comunity
         public bool DrawMethodPopup(Object obj, ref string methodName) {
             ListMethods(obj, methodName);
             if (methodList != null) {
-                if (EditorGUILayoutUtil.PopupNullable<MethodInfo>("Method Name", ref method, methodList, MethodToString)) {
+                if (EditorGUILayoutEx.PopupNullable<MethodInfo>("Method Name", ref method, methodList, MethodToString)) {
                     if (method == null) {
                         methodName = "";
                     } else {

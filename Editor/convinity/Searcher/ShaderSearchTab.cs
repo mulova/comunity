@@ -19,7 +19,7 @@ namespace convinity
 		
 		public override void OnHeaderGUI(List<ShaderSearchItem> found) {
 			EditorGUILayout.BeginHorizontal();
-			EditorGUILayoutUtil.TextField(null, ref shaderName);
+			EditorGUILayoutEx.TextField(null, ref shaderName);
 			if (GUILayout.Button("Search")) {
 				Search();
 			}

@@ -37,24 +37,24 @@ namespace mulova.comunity
             bool changed = false;
             string key = t.GetFieldValue<string>(keyVar);
             if (keyPreset != null && keyPreset.Length > 0) {
-                if (EditorGUILayoutUtil.PopupNullable<string>(null, ref key, keyPreset, GUILayout.MinWidth(width/2))) {
+                if (EditorGUILayoutEx.PopupNullable<string>(null, ref key, keyPreset, GUILayout.MinWidth(width/2))) {
                     t.SetFieldValue(keyVar, key);
                     changed = true;
                 }
             } else {
-                if (EditorGUILayoutUtil.TextField(null, ref key, GUILayout.MinWidth(width/2))) {
+                if (EditorGUILayoutEx.TextField(null, ref key, GUILayout.MinWidth(width/2))) {
                     t.SetFieldValue(keyVar, key);
                     changed = true;
                 }
             }
             string val = t.GetFieldValue<string>(valVar);
             if (valPreset != null && valPreset.Length > 0) {
-                if (EditorGUILayoutUtil.PopupNullable<string>(null, ref val, valPreset, GUILayout.MinWidth(width/2))) {
+                if (EditorGUILayoutEx.PopupNullable<string>(null, ref val, valPreset, GUILayout.MinWidth(width/2))) {
                     t.SetFieldValue(valVar, val);
                     changed = true;
                 }
             } else {
-                if (EditorGUILayoutUtil.TextField(null, ref val, GUILayout.MinWidth(width/2))) {
+                if (EditorGUILayoutEx.TextField(null, ref val, GUILayout.MinWidth(width/2))) {
                     t.SetFieldValue(valVar, val);
                     changed = true;
                 }

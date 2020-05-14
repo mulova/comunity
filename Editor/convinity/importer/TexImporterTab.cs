@@ -29,7 +29,7 @@ namespace convinity
 					EditorUI.BeginContents();
 					GUILayout.BeginHorizontal();
 					Object obj = AssetDatabase.LoadAssetAtPath(s.path, typeof(Object));
-					if (EditorGUILayoutUtil.ObjectField<Object>(ref obj, false)) {
+					if (EditorGUILayoutEx.ObjectField<Object>(ref obj, false)) {
 						if (obj != null) {
 							s.path = AssetDatabase.GetAssetPath(obj);
 						} else {
@@ -41,7 +41,7 @@ namespace convinity
 					}
 					GUILayout.EndHorizontal();
 					TextureImporterSettings setting = s.setting;
-					EditorGUILayoutUtil.Toggle("Apply", ref s.apply);
+					EditorGUILayoutEx.Toggle("Apply", ref s.apply);
 					GUI.enabled = s.apply;
                     TextureImporterType[] imTypes = new TextureImporterType[] { // remove deprecated
                         TextureImporterType.Default,
@@ -54,10 +54,10 @@ namespace convinity
                         TextureImporterType.Cookie,
                     };
                     var texType = s.setting.textureType;
-                    if (EditorGUILayoutUtil.PopupEnum<TextureImporterType>("Import Type", ref texType, imTypes)) {
+                    if (EditorGUILayoutEx.PopupEnum<TextureImporterType>("Import Type", ref texType, imTypes)) {
                         setting.ApplyTextureType(texType);
 					}
-                    EditorGUILayoutUtil.PopupEnum<TextureImporterFormat>("Texture Format", ref s.format);
+                    EditorGUILayoutEx.PopupEnum<TextureImporterFormat>("Texture Format", ref s.format);
 
                     if (s.setting.textureType == TextureImporterType.Sprite) {
 						DrawSpriteMenu(s);
@@ -85,7 +85,7 @@ namespace convinity
 						setting.normalMapFilter = (TextureImporterNormalFilter)EditorGUILayout.EnumPopup("Filter Mode", setting.normalMapFilter);
 						setting.npotScale = (TextureImporterNPOTScale)EditorGUILayout.EnumPopup("Non Power of 2", setting.npotScale);
 						int maxSize = s.maxTexSize;
-						if (EditorGUILayoutUtil.Popup<int>("Max Size", ref maxSize, new int[] { 32, 64, 128, 256, 512, 1024, 2048, 4096})) {
+						if (EditorGUILayoutEx.Popup<int>("Max Size", ref maxSize, new int[] { 32, 64, 128, 256, 512, 1024, 2048, 4096})) {
                             s.maxTexSize = maxSize;
 						}
 					}

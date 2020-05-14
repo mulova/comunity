@@ -48,11 +48,11 @@ namespace convinity
         {
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.BeginVertical();
-            if (EditorGUILayoutUtil.ObjectField<Object>("Root", ref root, true))
+            if (EditorGUILayoutEx.ObjectField<Object>("Root", ref root, true))
             {
                 SearchNullRefs();
             }
-            if (EditorGUILayoutUtil.ObjectField<TextAsset>("Exclude", ref excludeDesc, false))
+            if (EditorGUILayoutEx.ObjectField<TextAsset>("Exclude", ref excludeDesc, false))
             {
                 SetExcludes();
                 SearchNullRefs();

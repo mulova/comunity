@@ -29,7 +29,7 @@ namespace mulova.comunity
         
         public override bool DrawValue(int i, EnumWrapper w) {
             E e = (E)Enum.Parse(typeof(E), w.Enum.ToString());
-            if (EditorGUILayoutUtil.Popup<E>(ref e, preset, layout)) {
+            if (EditorGUILayoutEx.Popup<E>(ref e, preset, layout)) {
                 w.Enum = (Enum)Enum.Parse(typeof(E), e.ToString());
                 return true;
             }

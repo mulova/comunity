@@ -33,8 +33,8 @@ namespace mulova.build
 
 		public override void OnHeaderGUI()
 		{
-			EditorGUILayoutUtil.Popup<string>("Zone", ref selected, names);
-			EditorGUILayoutUtil.Popup<TexFormatGroup>("Texture Format", ref texFormat, TexFormatGroup.Values);
+			EditorGUILayoutEx.Popup<string>("Zone", ref selected, names);
+			EditorGUILayoutEx.Popup<TexFormatGroup>("Texture Format", ref texFormat, TexFormatGroup.Values);
 		}
 
 		private bool appendCleanSnapshot;
@@ -43,7 +43,7 @@ namespace mulova.build
 		{
 			EditorGUILayout.BeginHorizontal();
 			EditorGUILayout.BeginVertical();
-			EditorGUILayoutUtil.Toggle("Append Clean Snapshot", ref appendCleanSnapshot);
+			EditorGUILayoutEx.Toggle("Append Clean Snapshot", ref appendCleanSnapshot);
 			EditorGUILayout.EndVertical();
             if (GUILayout.Button("Build", GUILayout.Height(50)))
             {
@@ -54,7 +54,7 @@ namespace mulova.build
 
             path.DrawInspectorGUI();
 
-            EditorGUIUtil.DrawSeparator();
+            EditorGUIEx.DrawSeparator();
 
     //        if (GUILayout.Button("Find Duplicates"))
     //        {

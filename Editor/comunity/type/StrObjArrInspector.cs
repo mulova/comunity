@@ -34,7 +34,7 @@ namespace mulova.comunity
                 changed = true;
             }
             O obj = t.GetFieldValue<O>(objVar);
-            if (EditorGUILayoutUtil.ObjectField<O>(ref obj, allowSceneObj)) {
+            if (EditorGUILayoutEx.ObjectField<O>(ref obj, allowSceneObj)) {
                 t.SetFieldValue<O>(objVar, obj);
                 changed = true;
             }

@@ -27,7 +27,7 @@ namespace mulova.comunity
         {
             float width = GetWidth();
             if (preset != null) {
-                if (EditorGUILayoutUtil.PopupNullable<string>(null, ref obj, preset, GUILayout.MinWidth(width*0.4F))) {
+                if (EditorGUILayoutEx.PopupNullable<string>(null, ref obj, preset, GUILayout.MinWidth(width*0.4F))) {
                     this[i] = obj;
                     return true;
                 }

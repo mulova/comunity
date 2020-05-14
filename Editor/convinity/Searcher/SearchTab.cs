@@ -51,9 +51,9 @@ namespace convinity
         
         public override void OnHeaderGUI()
         {
-            EditorGUILayoutUtil.ObjectField<Object>("Root", ref root, true);
+            EditorGUILayoutEx.ObjectField<Object>("Root", ref root, true);
             OnHeaderGUI(found);
-            EditorGUILayoutUtil.DrawSeparator();
+            EditorGUILayoutEx.DrawSeparator();
         }
 
         public abstract void OnHeaderGUI(List<T> found);

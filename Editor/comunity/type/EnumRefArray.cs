@@ -22,7 +22,7 @@ namespace mulova.comunity
         }
         
         public override bool DrawValue(int i, E e) {
-            if (EditorGUILayoutUtil.Popup<E>(ref e, preset, layout)) {
+            if (EditorGUILayoutEx.Popup<E>(ref e, preset, layout)) {
                 this[i] = e;
                 return true;
             }

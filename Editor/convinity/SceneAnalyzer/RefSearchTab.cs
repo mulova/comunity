@@ -26,7 +26,7 @@ namespace convinity
         public override void OnHeaderGUI(List<Object> found)
         {
             EditorGUILayout.BeginHorizontal();
-            EditorGUILayoutUtil.ObjectField<Object>("Ref", ref searchObj, true);
+            EditorGUILayoutEx.ObjectField<Object>("Ref", ref searchObj, true);
             GUI.enabled = searchObj != null;
             if (GUILayout.Button("Search from Root"))
             {
@@ -49,7 +49,7 @@ namespace convinity
         public override void OnFooterGUI(List<Object> found)
         {
             EditorGUILayout.BeginHorizontal();
-            EditorGUILayoutUtil.ObjectField<Object>("Value", ref rhsObj, true);
+            EditorGUILayoutEx.ObjectField<Object>("Value", ref rhsObj, true);
             GUI.enabled = searchObj != null&&rhsObj != null&&searchObj.GetType() == rhsObj.GetType()&&allocInfo.Count > 0;
             if (GUILayout.Button("Allocate"))
             {

@@ -49,9 +49,9 @@ namespace convinity
 			EditorGUILayout.BeginHorizontal();
 			EditorGUILayout.BeginVertical();
 			bool changed = false;
-			changed |= EditorGUILayoutUtil.Toggle("Apply On Selection", ref applyOnSelection);
+			changed |= EditorGUILayoutEx.Toggle("Apply On Selection", ref applyOnSelection);
 			if (!applyOnSelection) {
-				changed |= EditorGUILayoutUtil.ObjectField<Transform>("Root", ref root, true);
+				changed |= EditorGUILayoutEx.ObjectField<Transform>("Root", ref root, true);
 			}
 			changed |= typeSelector.DrawSelector();
 			Type type = typeSelector.type;
@@ -112,31 +112,31 @@ namespace convinity
 
 			if (fieldType != null) {
 				if (fieldType == typeof(int)) {
-					EditorGUILayoutUtil.IntField("Value", ref intVal);
+					EditorGUILayoutEx.IntField("Value", ref intVal);
 					val = intVal;
 				} else if (fieldType == typeof(bool)) {
-					EditorGUILayoutUtil.Toggle("Value", ref boolVal);
+					EditorGUILayoutEx.Toggle("Value", ref boolVal);
 					val = boolVal;
 				} else if (fieldType == typeof(Vector2)) {
-					EditorGUILayoutUtil.Vector2Field("Value", ref vec2Val);
+					EditorGUILayoutEx.Vector2Field("Value", ref vec2Val);
 					val = vec2Val;
 				} else if (fieldType == typeof(Vector3)) {
-					EditorGUILayoutUtil.Vector3Field("Value", ref vec3Val);
+					EditorGUILayoutEx.Vector3Field("Value", ref vec3Val);
 					val = vec3Val;
 				} else if (fieldType == typeof(Vector4)) {
-					EditorGUILayoutUtil.Vector4Field("Value", ref vec4Val);
+					EditorGUILayoutEx.Vector4Field("Value", ref vec4Val);
 					val = vec4Val;
 				} else if (fieldType == typeof(Color)) {
-					EditorGUILayoutUtil.ColorField("Value", ref colorVal);
+					EditorGUILayoutEx.ColorField("Value", ref colorVal);
 					val = colorVal;
 				} else if (fieldType == typeof(string)) {
-					EditorGUILayoutUtil.TextField("Value", ref strVal);
+					EditorGUILayoutEx.TextField("Value", ref strVal);
 					val = strVal;
 				} else if (fieldType.IsEnum) {
-					EditorGUILayoutUtil.PopupEnum(fieldType, "Value", ref enumVal);
+					EditorGUILayoutEx.PopupEnum(fieldType, "Value", ref enumVal);
 					val = enumVal;
 				} else {
-					EditorGUILayoutUtil.ObjectField<Object>("Value", ref objVal, true);
+					EditorGUILayoutEx.ObjectField<Object>("Value", ref objVal, true);
 					val = objVal;
 					if (objVal != null) {
 						if (objVal is GameObject && !fieldType.IsInstanceOfType(val)) {

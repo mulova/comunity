@@ -18,7 +18,7 @@ namespace etc
 		private static TextAsset assetToDecompress;
 		void OnGUI() {
 			EditorGUILayout.BeginHorizontal();
-			EditorGUIUtil.ObjectField<TextAsset>(ref assetToCompress, false);
+			EditorGUIEx.ObjectField<TextAsset>(ref assetToCompress, false);
 			GUI.enabled = assetToCompress != null;
 			if (GUILayout.Button("Compress")) {
 				string src = AssetDatabase.GetAssetPath(assetToCompress);
@@ -34,7 +34,7 @@ namespace etc
 			EditorGUILayout.EndHorizontal();
 			GUI.enabled = true;
 			EditorGUILayout.BeginHorizontal();
-			EditorGUIUtil.ObjectField<TextAsset>(ref assetToDecompress, false);
+			EditorGUIEx.ObjectField<TextAsset>(ref assetToDecompress, false);
 			GUI.enabled = assetToDecompress != null;
 			if (GUILayout.Button("Decompress")) {
 				string src = AssetDatabase.GetAssetPath(assetToDecompress);

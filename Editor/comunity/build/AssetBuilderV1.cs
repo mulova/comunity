@@ -189,7 +189,6 @@ namespace mulova.build.v1
 				// build
 				GenerateRawAsset(rawAssetMods, outputDir);
 				GenerateAsset(assetMods, outputDir);
-				assetMods.AddRange(GenerateStreamingScene(outputDir));
 				AssetDatabase.SaveAssets();
 				modList.Clear();
 				modList.AddRange(assetMods);
@@ -287,27 +286,6 @@ namespace mulova.build.v1
 					throw new Exception("Invalid asset "+assetPath);
 				}
 			}
-		}
-
-		private List<string> GenerateStreamingScene(string outputDir)
-		{
-			List<string> paths = new List<string>();
-			if (BuildConfig.STREAMING_SCENE_FROM <= 0)
-			{
-				return paths;
-			}
-			BuildOptions option = BuildOptions.BuildAdditionalStreamedScenes | BuildOptions.StrictMode;
-			for (int i=BuildConfig.STREAMING_SCENE_FROM; i<EditorBuildSettings.scenes.Length; ++i)
-			{
-				EditorBuildSettingsScene scene = EditorBuildSettings.scenes[i];
-				if (scene.enabled)
-				{
-					string dstPath = GetOutputPath(outputDir, Path.GetFileNameWithoutExtension(scene.path)+FileTypeEx.ASSET_BUNDLE);
-					paths.Add(dstPath);
-					BuildPipeline.BuildStreamedSceneAssetBundle(new string[] { scene.path }, dstPath, buildTarget, option);
-				}
-			}
-			return paths;
 		}
 
 		private List<string> GetRawAssetMods(AssetSnapshot snapshot, string srcDir)

@@ -151,7 +151,7 @@ namespace mulova.comunity
             if (foldout)
             {
                 EditorUI.BeginContents();
-                Object[] drag = EditorGUILayoutUtil.DnD(EditorGUILayout.GetControlRect());
+                Object[] drag = EditorGUILayoutEx.DnD(EditorGUILayout.GetControlRect());
                 if (drag != null)
                 {
                     AddObjects(list, drag);
@@ -180,8 +180,8 @@ namespace mulova.comunity
             //    Debug.LogError("Why remove files?");
             //    return;
             //}
-#pragma warning restore 0162
             Save(PATH);
+#pragma warning restore 0162
         }
 
         public static AssetBundlePath Load(string path)

@@ -90,7 +90,7 @@ namespace mulova.build
             GUI.enabled = !autoIncrement;
             DrawInt("Bundle Version Code", BuildConfig.VERSION_CODE, ref versionCode);
             EditorGUI.indentLevel++;
-            if (EditorGUILayoutUtil.Toggle("Auto Increment", ref autoIncrement))
+            if (EditorGUILayoutEx.Toggle("Auto Increment", ref autoIncrement))
             {
                 if (autoIncrement)
                 {
@@ -119,7 +119,7 @@ namespace mulova.build
             {
                 EditorUI.BeginContents();
                 EditorGUILayout.BeginHorizontal();
-                if (EditorGUILayoutUtil.TextField("Prebuild Method", ref prebuildMethod))
+                if (EditorGUILayoutEx.TextField("Prebuild Method", ref prebuildMethod))
                 {
                     EditorPrefs.SetString(PREBUILD_METHOD_PREF, prebuildMethod);
                 }
@@ -136,12 +136,12 @@ namespace mulova.build
                     }
                 }
                 EditorGUILayout.EndHorizontal();
-                if (EditorGUILayoutUtil.TextArea("Prebuild Script", ref prebuildScript, GUILayout.Height(50)))
+                if (EditorGUILayoutEx.TextArea("Prebuild Script", ref prebuildScript, GUILayout.Height(50)))
                 {
                     EditorPrefs.SetString(PREBUILD_SCRIPT_PREF, prebuildScript);
                 }
                 EditorGUILayout.BeginHorizontal();
-                if (EditorGUILayoutUtil.TextField("Postbuild Method", ref postbuildMethod))
+                if (EditorGUILayoutEx.TextField("Postbuild Method", ref postbuildMethod))
                 {
                     EditorPrefs.SetString(POSTBUILD_METHOD_PREF, postbuildMethod);
                 }
@@ -158,7 +158,7 @@ namespace mulova.build
                         MarkError();
                     }
                     string result = prebuildOutput.GetResult();
-                    EditorGUILayoutUtil.TextArea("Prebuild Result", ref result, GUILayout.Height(100));
+                    EditorGUILayoutEx.TextArea("Prebuild Result", ref result, GUILayout.Height(100));
                     if (prebuildOutput.IsError())
                     {
                         ClearError();
@@ -196,7 +196,7 @@ namespace mulova.build
             {
                 MarkError();
             }
-            EditorGUILayoutUtil.TextField("Build Path", ref buildPath);
+            EditorGUILayoutEx.TextField("Build Path", ref buildPath);
             ClearError();
             
             if (GUILayout.Button("Browse", EditorStyles.toolbarButton, GUILayout.ExpandWidth(false)))
@@ -259,7 +259,7 @@ namespace mulova.build
                 EditorGUILayout.BeginHorizontal();
                 string patchSrcDir = EditorPrefs.GetString(PATCH_SRC_FOLDER, "Assets/");
                 string patchDstDir = EditorPrefs.GetString(PATCH_DST_FOLDER, "Assets/");
-                if (EditorGUILayoutUtil.TextField("Src", ref patchSrcDir))
+                if (EditorGUILayoutEx.TextField("Src", ref patchSrcDir))
                 {
                     EditorPrefs.SetString(PATCH_SRC_FOLDER, patchSrcDir);
                 }
@@ -270,7 +270,7 @@ namespace mulova.build
                 }
                 EditorGUILayout.EndHorizontal();
                 EditorGUILayout.BeginHorizontal();
-                if (EditorGUILayoutUtil.TextField("Dst", ref patchDstDir))
+                if (EditorGUILayoutEx.TextField("Dst", ref patchDstDir))
                 {
                     EditorPrefs.SetString(PATCH_DST_FOLDER, patchDstDir);
                 }
@@ -282,7 +282,7 @@ namespace mulova.build
                 EditorGUILayout.EndHorizontal();
                 string zipPath = EditorPrefs.GetString(PATCH_ZIP_PATH, "patch.zip");
                 EditorGUILayout.BeginHorizontal();
-                if (EditorGUILayoutUtil.TextField("Patch ZipFile", ref zipPath))
+                if (EditorGUILayoutEx.TextField("Patch ZipFile", ref zipPath))
                 {
                     EditorPrefs.SetString(PATCH_ZIP_PATH, zipPath);
                 }
@@ -398,11 +398,11 @@ namespace mulova.build
             if (!e1.Equals(e2))
             {
                 SetBackgroundColor(Color.red);
-                EditorGUILayoutUtil.PopupEnum(title, ref e2);
+                EditorGUILayoutEx.PopupEnum(title, ref e2);
                 ResetBackgroundColor();
             } else
             {
-                EditorGUILayoutUtil.PopupEnum(title, ref e2);
+                EditorGUILayoutEx.PopupEnum(title, ref e2);
             }
         }
         
@@ -411,11 +411,11 @@ namespace mulova.build
             if (i1 != i2)
             {
                 MarkError();
-                EditorGUILayoutUtil.IntField(title, ref i2);
+                EditorGUILayoutEx.IntField(title, ref i2);
                 ClearError();
             } else
             {
-                EditorGUILayoutUtil.IntField(title, ref i2, EditorStyles.toolbarTextField);
+                EditorGUILayoutEx.IntField(title, ref i2, EditorStyles.toolbarTextField);
             }
         }
         
@@ -424,11 +424,11 @@ namespace mulova.build
             if (s1 != s2)
             {
                 MarkError();
-                EditorGUILayoutUtil.TextField(title, ref s2, GUILayout.ExpandWidth(true));
+                EditorGUILayoutEx.TextField(title, ref s2, GUILayout.ExpandWidth(true));
                 ClearError();
             } else
             {
-                EditorGUILayoutUtil.TextField(title, ref s2, EditorStyles.toolbarTextField, GUILayout.ExpandWidth(true));
+                EditorGUILayoutEx.TextField(title, ref s2, EditorStyles.toolbarTextField, GUILayout.ExpandWidth(true));
             }
         }
         
@@ -442,11 +442,11 @@ namespace mulova.build
                 if (s1 != s2)
                 {
                     SetBackgroundColor(Color.red);
-                    EditorGUILayoutUtil.Popup<string>(title, ref s2, list);
+                    EditorGUILayoutEx.Popup<string>(title, ref s2, list);
                     ResetBackgroundColor();
                 } else
                 {
-                    EditorGUILayoutUtil.Popup<string>(title, ref s2, list);
+                    EditorGUILayoutEx.Popup<string>(title, ref s2, list);
                 }
             }
         }

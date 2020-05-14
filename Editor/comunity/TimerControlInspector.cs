@@ -39,10 +39,10 @@ namespace mulova.comunity
             bool changed = false;
             
             EditorGUILayout.BeginVertical();
-            changed |= EditorGUILayoutUtil.ObjectField<MethodCall>("Method", ref d.method, true);
-            changed |= EditorGUILayoutUtil.FloatField("Duration", ref d.duration);
-            changed |= EditorGUILayoutUtil.Toggle("Repeat", ref d.repeat);
-            changed |= EditorGUILayoutUtil.Toggle("Enabled", ref d.enabled);
+            changed |= EditorGUILayoutEx.ObjectField<MethodCall>("Method", ref d.method, true);
+            changed |= EditorGUILayoutEx.FloatField("Duration", ref d.duration);
+            changed |= EditorGUILayoutEx.Toggle("Repeat", ref d.repeat);
+            changed |= EditorGUILayoutEx.Toggle("Enabled", ref d.enabled);
             
             if (Application.isPlaying) {
                 float time = timer[i].RemainingTime;

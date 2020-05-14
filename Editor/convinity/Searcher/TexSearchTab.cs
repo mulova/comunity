@@ -105,7 +105,7 @@ namespace convinity
 			protected abstract bool FilterImpl(TextureImporter importer, Texture tex);
 			public void DrawInspector() {
 				EditorGUILayout.BeginHorizontal();
-				EditorGUILayoutUtil.Toggle(null, ref enabled, GUILayout.Width(40));
+				EditorGUILayoutEx.Toggle(null, ref enabled, GUILayout.Width(40));
 				DrawInspectorImpl();
 				EditorGUILayout.EndHorizontal();
 			}
@@ -124,7 +124,7 @@ namespace convinity
 				return tex.name.Contains(texName);
 			}
 			protected override void DrawInspectorImpl () {
-				EditorGUILayoutUtil.TextField("Name Filter", ref texName);
+				EditorGUILayoutEx.TextField("Name Filter", ref texName);
 			}
 		}
 
@@ -135,7 +135,7 @@ namespace convinity
 				return importer.textureType == texImportType;
 			}
 			protected override void DrawInspectorImpl () {
-				EditorGUILayoutUtil.PopupEnum<TextureImporterType>("Importer Type", ref texImportType);
+				EditorGUILayoutEx.PopupEnum<TextureImporterType>("Importer Type", ref texImportType);
 			}
 		}
 		class TexFormatFilter: TexFilter {
@@ -147,7 +147,7 @@ namespace convinity
 				return importer.GetFormat() == texImportFormat;
 			}
 			protected override void DrawInspectorImpl () {
-				EditorGUILayoutUtil.PopupEnum<TextureImporterFormat>("Importer Format", ref texImportFormat);
+				EditorGUILayoutEx.PopupEnum<TextureImporterFormat>("Importer Format", ref texImportFormat);
 			}
 		}
 		class TexFilterFilter: TexFilter {
@@ -157,7 +157,7 @@ namespace convinity
 				return importer.filterMode == filterMode;
 			}
 			protected override void DrawInspectorImpl () {
-				EditorGUILayoutUtil.PopupEnum<FilterMode>(null, ref filterMode);
+				EditorGUILayoutEx.PopupEnum<FilterMode>(null, ref filterMode);
 			}
 		}
 		class TexSizeFilter: TexFilter {
@@ -167,7 +167,7 @@ namespace convinity
 				return tex.width >= texSize || tex.height >= texSize;
 			}
 			protected override void DrawInspectorImpl () {
-				EditorGUILayoutUtil.Popup<int>(null, ref texSize, new int[] { 512, 1024, 2048, 4096 });
+				EditorGUILayoutEx.Popup<int>(null, ref texSize, new int[] { 512, 1024, 2048, 4096 });
 			}
 		}
 		
@@ -178,7 +178,7 @@ namespace convinity
 				return importer.compressionQuality <= compressed;
 			}
 			protected override void DrawInspectorImpl () {
-				EditorGUILayoutUtil.IntField("Compressed", ref compressed);
+				EditorGUILayoutEx.IntField("Compressed", ref compressed);
 			}
 		}
 		class TexReadableFilter: TexFilter {
@@ -188,7 +188,7 @@ namespace convinity
 				return importer.isReadable == texReadable;
 			}
 			protected override void DrawInspectorImpl () {
-				EditorGUILayoutUtil.Toggle("Readable", ref texReadable);
+				EditorGUILayoutEx.Toggle("Readable", ref texReadable);
 			}
 		}
 		class TexMipmapFilter: TexFilter {
@@ -198,7 +198,7 @@ namespace convinity
 				return importer.mipmapEnabled == texMipmap;
 			}
 			protected override void DrawInspectorImpl () {
-				EditorGUILayoutUtil.Toggle("Mipmap", ref texMipmap);
+				EditorGUILayoutEx.Toggle("Mipmap", ref texMipmap);
 			}
 		}
 		class TexNPOTFilter: TexFilter {
@@ -211,7 +211,7 @@ namespace convinity
 				return tex.IsPOT();
 			}
 			protected override void DrawInspectorImpl () {
-				EditorGUILayoutUtil.Toggle("NPOT", ref npot);
+				EditorGUILayoutEx.Toggle("NPOT", ref npot);
 			}
 		}
 

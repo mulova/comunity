@@ -14,7 +14,7 @@ namespace convinity
 		public ColliderSearchTab(TabbedEditorWindow window) : base("Collider", window)
 		{
 			cam = Camera.main;
-			SceneView.onSceneGUIDelegate += OnSceneGUI;
+			SceneView.duringSceneGui += OnSceneGUI;
 		}
 		
 		public override void OnHeaderGUI(List<Collider> found) {
@@ -23,7 +23,7 @@ namespace convinity
 			{
 				cam = cams[0];
 			}
-			EditorGUILayoutUtil.Popup<Camera>("Camera", ref cam, cams);
+			EditorGUILayoutEx.Popup<Camera>("Camera", ref cam, cams);
 		}
 		
 		protected override List<Collider> SearchResource()
@@ -49,7 +49,7 @@ namespace convinity
 		public override void OnFooterGUI(List<Collider> found) {}
 		
 		public override void OnDisable() {
-			SceneView.onSceneGUIDelegate -= OnSceneGUI;
+			SceneView.duringSceneGui -= OnSceneGUI;
 		}
 		
 		

@@ -33,12 +33,12 @@ namespace mulova.comunity
             float width = GetWidth();
             bool changed = false;
             E e = o.GetFieldValue<E>(enumVarName);
-            if (EditorGUILayoutUtil.PopupEnum<E>(null, ref e, GUILayout.MinWidth(width*0.3f))) {
+            if (EditorGUILayoutEx.PopupEnum<E>(null, ref e, GUILayout.MinWidth(width*0.3f))) {
                 o.SetFieldValue<E>(enumVarName, e);
                 changed = true;
             }
             O obj = o.GetFieldValue<O>(objVarName);
-            if (EditorGUILayoutUtil.ObjectField<O>(ref obj, true, GUILayout.MinWidth(width*0.7f))) {
+            if (EditorGUILayoutEx.ObjectField<O>(ref obj, true, GUILayout.MinWidth(width*0.7f))) {
                 o.SetFieldValue<O>(objVarName, obj);
                 changed = true;
             }

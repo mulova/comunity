@@ -57,7 +57,7 @@ namespace convinity
 			FileInfo[] files = GetDir().GetFiles();
 			if (files.Length > 0) {
 				EditorGUILayout.BeginHorizontal();
-				if (EditorGUILayoutUtil.PopupNullable("BackUp", ref fileToLoad, files, FileInfoToString)) {
+				if (EditorGUILayoutEx.PopupNullable("BackUp", ref fileToLoad, files, FileInfoToString)) {
 					if (fileToLoad != null) {
 						backupName = fileToLoad.Name;
 						Load();
@@ -87,12 +87,12 @@ namespace convinity
 		public override void OnFooterGUI() {
 			EditorGUILayout.BeginHorizontal();
 			EditorGUILayout.BeginVertical();
-			if (EditorGUILayoutUtil.ObjectField<GameObject>("Root", ref root, true)) {
+			if (EditorGUILayoutEx.ObjectField<GameObject>("Root", ref root, true)) {
 				if (root != null) {
 					backup = SearchRefs();
 				}
 			}
-			EditorGUILayoutUtil.TextField("Name", ref backupName);
+			EditorGUILayoutEx.TextField("Name", ref backupName);
 			EditorGUILayout.EndVertical();
 			GUI.enabled = !string.IsNullOrEmpty(backupName) && root != null;
 			if (GUILayout.Button("Save", GUILayout.Width(50), GUILayout.Height(40))) {

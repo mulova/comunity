@@ -62,10 +62,10 @@ namespace mulova.comunity
         
         
         public bool DrawComponentPopup(ref GameObject obj, ref MonoBehaviour comp) {
-            bool changed = EditorGUILayoutUtil.ObjectField<GameObject>("GameObject", ref obj, true);
+            bool changed = EditorGUILayoutEx.ObjectField<GameObject>("GameObject", ref obj, true);
             if (obj != null) {
                 MonoBehaviour[] comps = obj.GetComponents<MonoBehaviour>();
-                changed |= EditorGUILayoutUtil.PopupNullable<MonoBehaviour>(null, ref comp, comps, ToStringScript);
+                changed |= EditorGUILayoutEx.PopupNullable<MonoBehaviour>(null, ref comp, comps, ToStringScript);
             }
             return changed;
         }
@@ -73,7 +73,7 @@ namespace mulova.comunity
         public bool DrawFieldPopup(Type type, ref FieldInfo field) {
             ListFields(type);
             if (fieldArr != null) {
-                if (EditorGUILayoutUtil.PopupNullable<FieldInfo>("Field Name", ref field, fieldArr, FieldToString)) {
+                if (EditorGUILayoutEx.PopupNullable<FieldInfo>("Field Name", ref field, fieldArr, FieldToString)) {
                     return true;
                 }
             }
@@ -83,7 +83,7 @@ namespace mulova.comunity
         public bool DrawPropertyPopup(Type type, ref PropertyInfo prop) {
             ListFields(type);
             if (propArr != null) {
-                if (EditorGUILayoutUtil.PopupNullable<PropertyInfo>("Property Name", ref prop, propArr, PropertyToString)) {
+                if (EditorGUILayoutEx.PopupNullable<PropertyInfo>("Property Name", ref prop, propArr, PropertyToString)) {
                     return true;
                 }
             }

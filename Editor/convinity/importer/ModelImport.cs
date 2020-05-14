@@ -28,7 +28,7 @@ namespace convinity
 		public bool generateSecondaryUV;
 		public float globalScale = 1;
 		public bool importAnimation;
-		public bool importMaterials;
+		public ModelImporterMaterialImportMode materialImportMode;
 		public bool isBakeIKSupported;
 		public bool isReadable;
 		public bool isTangentImportSupported;
@@ -38,7 +38,8 @@ namespace convinity
 		public ModelImporterMeshCompression meshCompression;
 		public ModelImporterNormals importerNormals;
 		public float normalSmoothingAngle;
-		public bool optimizeMesh;
+		public bool optimizeMeshPolygons;
+		public bool optimizeMeshVertices;
 		public string[] referencedClips;
 		public float secondaryUVAngleDistortion;
 		public float secondaryUVAreaDistortion;
@@ -74,14 +75,15 @@ namespace convinity
 				importer.generateSecondaryUV = generateSecondaryUV;
 				importer.globalScale = globalScale;
 				importer.importAnimation = importAnimation;
-				importer.importMaterials = importMaterials;
+				importer.materialImportMode = materialImportMode;
 				importer.isReadable = isReadable;
 				importer.materialName = materialName;
 				importer.materialSearch = materialSearch;
 				importer.meshCompression = meshCompression;
 				importer.importNormals = importerNormals;
 				importer.normalSmoothingAngle = normalSmoothingAngle;
-				importer.optimizeMesh = optimizeMesh;
+				importer.optimizeMeshPolygons = optimizeMeshPolygons;
+				importer.optimizeMeshVertices = optimizeMeshVertices;
 //		importer.referencedClips;
 				importer.secondaryUVAngleDistortion = secondaryUVAngleDistortion;
 				importer.secondaryUVAreaDistortion = secondaryUVAreaDistortion;
