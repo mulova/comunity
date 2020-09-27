@@ -10,19 +10,19 @@ namespace mulova.comunity
 	public class TexFormatGroupData : EnumClass<TexFormatGroupData>
 	{
 		public static readonly TexFormatGroupData ASTC = new TexFormatGroupData("ASTC", 
-            TextureImporterFormat.ASTC_RGBA_4x4,
-            TextureImporterFormat.ASTC_RGBA_5x5,
-            TextureImporterFormat.ASTC_RGBA_6x6,
-            TextureImporterFormat.ASTC_RGBA_8x8,
-            TextureImporterFormat.ASTC_RGBA_10x10,
-            TextureImporterFormat.ASTC_RGBA_12x12,
-            TextureImporterFormat.ASTC_RGB_4x4,
-            TextureImporterFormat.ASTC_RGB_5x5,
-            TextureImporterFormat.ASTC_RGB_6x6,
-            TextureImporterFormat.ASTC_RGB_8x8,
-            TextureImporterFormat.ASTC_RGB_10x10,
-            TextureImporterFormat.ASTC_RGB_12x12
-            ) { rgba = TextureImporterFormat.ASTC_RGBA_8x8, rgb = TextureImporterFormat.ASTC_RGB_8x8};
+            TextureImporterFormat.ASTC_4x4,
+            TextureImporterFormat.ASTC_5x5,
+            TextureImporterFormat.ASTC_6x6,
+            TextureImporterFormat.ASTC_8x8,
+            TextureImporterFormat.ASTC_10x10,
+            TextureImporterFormat.ASTC_12x12,
+            TextureImporterFormat.ASTC_4x4,
+            TextureImporterFormat.ASTC_5x5,
+            TextureImporterFormat.ASTC_6x6,
+            TextureImporterFormat.ASTC_8x8,
+            TextureImporterFormat.ASTC_10x10,
+            TextureImporterFormat.ASTC_12x12
+            ) { rgba = TextureImporterFormat.ASTC_8x8, rgb = TextureImporterFormat.ASTC_8x8};
 		public static readonly TexFormatGroupData ETC2 = new TexFormatGroupData("ETC2",
             TextureImporterFormat.ETC2_RGBA8,
             TextureImporterFormat.ETC2_RGB4,

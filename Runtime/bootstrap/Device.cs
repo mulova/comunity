@@ -54,7 +54,7 @@ namespace mulova.comunity
                 {
                     return true;
                 }
-                return SystemInfo.SupportsTextureFormat(TextureFormat.ASTC_RGBA_8x8);
+                return SystemInfo.SupportsTextureFormat(TextureFormat.ASTC_8x8);
             }
         }
     }

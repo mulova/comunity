@@ -253,89 +253,90 @@ namespace mulova.build
         
         private void DrawPatch()
         {
-            if (EditorUI.DrawHeader("Patch"))
+            using (var area = new EditorUI.ContentArea("Patch"))
             {
-                EditorUI.BeginContents();
-                EditorGUILayout.BeginHorizontal();
-                string patchSrcDir = EditorPrefs.GetString(PATCH_SRC_FOLDER, "Assets/");
-                string patchDstDir = EditorPrefs.GetString(PATCH_DST_FOLDER, "Assets/");
-                if (EditorGUILayoutEx.TextField("Src", ref patchSrcDir))
+                if (area)
                 {
-                    EditorPrefs.SetString(PATCH_SRC_FOLDER, patchSrcDir);
-                }
-                if (GUILayout.Button("Browse"))
-                {
-                    patchSrcDir = EditorUtility.OpenFolderPanel("Source Folder", patchSrcDir, "");
-                    EditorPrefs.SetString(PATCH_SRC_FOLDER, patchSrcDir);
-                }
-                EditorGUILayout.EndHorizontal();
-                EditorGUILayout.BeginHorizontal();
-                if (EditorGUILayoutEx.TextField("Dst", ref patchDstDir))
-                {
-                    EditorPrefs.SetString(PATCH_DST_FOLDER, patchDstDir);
-                }
-                if (GUILayout.Button("Browse"))
-                {
-                    patchDstDir = EditorUtility.OpenFolderPanel("Destination Folder", patchDstDir, "");
-                    EditorPrefs.SetString(PATCH_DST_FOLDER, patchDstDir);
-                }
-                EditorGUILayout.EndHorizontal();
-                string zipPath = EditorPrefs.GetString(PATCH_ZIP_PATH, "patch.zip");
-                EditorGUILayout.BeginHorizontal();
-                if (EditorGUILayoutEx.TextField("Patch ZipFile", ref zipPath))
-                {
-                    EditorPrefs.SetString(PATCH_ZIP_PATH, zipPath);
-                }
-                GUI.enabled = Directory.Exists(patchSrcDir)&&Directory.Exists(patchDstDir)&&!zipPath.IsEmpty();
-                if (GUILayout.Button("Generate"))
-                {
-                    Dictionary<string, FileInfo> srcFiles = GetFiles(patchSrcDir);
-                    Dictionary<string, FileInfo> dstFiles = GetFiles(patchDstDir);
-                    Dictionary<string, FileInfo> added = new Dictionary<string, FileInfo>(dstFiles);
-                    Dictionary<string, FileInfo> removed = new Dictionary<string, FileInfo>(srcFiles);
-                    Dictionary<string, FileInfo> changed = new Dictionary<string, FileInfo>();
-                    foreach (KeyValuePair<string, FileInfo> pair in dstFiles)
+                    EditorGUILayout.BeginHorizontal();
+                    string patchSrcDir = EditorPrefs.GetString(PATCH_SRC_FOLDER, "Assets/");
+                    string patchDstDir = EditorPrefs.GetString(PATCH_DST_FOLDER, "Assets/");
+                    if (EditorGUILayoutEx.TextField("Src", ref patchSrcDir))
                     {
-                        if (removed.ContainsKey(pair.Key))
+                        EditorPrefs.SetString(PATCH_SRC_FOLDER, patchSrcDir);
+                    }
+                    if (GUILayout.Button("Browse"))
+                    {
+                        patchSrcDir = EditorUtility.OpenFolderPanel("Source Folder", patchSrcDir, "");
+                        EditorPrefs.SetString(PATCH_SRC_FOLDER, patchSrcDir);
+                    }
+                    EditorGUILayout.EndHorizontal();
+                    EditorGUILayout.BeginHorizontal();
+                    if (EditorGUILayoutEx.TextField("Dst", ref patchDstDir))
+                    {
+                        EditorPrefs.SetString(PATCH_DST_FOLDER, patchDstDir);
+                    }
+                    if (GUILayout.Button("Browse"))
+                    {
+                        patchDstDir = EditorUtility.OpenFolderPanel("Destination Folder", patchDstDir, "");
+                        EditorPrefs.SetString(PATCH_DST_FOLDER, patchDstDir);
+                    }
+                    EditorGUILayout.EndHorizontal();
+                    string zipPath = EditorPrefs.GetString(PATCH_ZIP_PATH, "patch.zip");
+                    EditorGUILayout.BeginHorizontal();
+                    if (EditorGUILayoutEx.TextField("Patch ZipFile", ref zipPath))
+                    {
+                        EditorPrefs.SetString(PATCH_ZIP_PATH, zipPath);
+                    }
+                    GUI.enabled = Directory.Exists(patchSrcDir)&&Directory.Exists(patchDstDir)&&!zipPath.IsEmpty();
+                    if (GUILayout.Button("Generate"))
+                    {
+                        Dictionary<string, FileInfo> srcFiles = GetFiles(patchSrcDir);
+                        Dictionary<string, FileInfo> dstFiles = GetFiles(patchDstDir);
+                        Dictionary<string, FileInfo> added = new Dictionary<string, FileInfo>(dstFiles);
+                        Dictionary<string, FileInfo> removed = new Dictionary<string, FileInfo>(srcFiles);
+                        Dictionary<string, FileInfo> changed = new Dictionary<string, FileInfo>();
+                        foreach (KeyValuePair<string, FileInfo> pair in dstFiles)
                         {
-                            using (var s1 = srcFiles.Get(pair.Key).Open(FileMode.Open))
+                            if (removed.ContainsKey(pair.Key))
                             {
-                                using (var s2 = pair.Value.Open(FileMode.Open))
+                                using (var s1 = srcFiles.Get(pair.Key).Open(FileMode.Open))
                                 {
-                                    string srcDigest = s1.ComputeHash();
-                                    string dstDigest = s2.ComputeHash();
-                                    if (srcDigest != dstDigest)
+                                    using (var s2 = pair.Value.Open(FileMode.Open))
                                     {
-                                        changed.Add(pair.Key, pair.Value);
+                                        string srcDigest = s1.ComputeHash();
+                                        string dstDigest = s2.ComputeHash();
+                                        if (srcDigest != dstDigest)
+                                        {
+                                            changed.Add(pair.Key, pair.Value);
+                                        }
                                     }
                                 }
+                                removed.Remove(pair.Key);
                             }
-                            removed.Remove(pair.Key);
                         }
-                    }
-                    foreach (string key in srcFiles.Keys)
-                    {
-                        added.Remove(key);
-                    }
-                    List<FileInfo> zipFiles = new List<FileInfo>(changed.Values);
-                    zipFiles.AddRange(added.Values);
-                    if (!zipFiles.IsEmpty())
-                    {
-                        List<string> removedRelative = new List<string>();
-                        foreach (FileInfo f in removed.Values)
+                        foreach (string key in srcFiles.Keys)
                         {
-                            removedRelative.Add(PathUtil.GetRelativePath(f.FullName, patchSrcDir));
+                            added.Remove(key);
                         }
-                        //                  zip.CreateZipAndList(zipPath, patchDstDir, zipFiles, false, removedRelative);
-                        EditorUtil.OpenExplorer(zipPath);
-                    } else
-                    {
-                        EditorUtility.DisplayDialog("Warning", "No difference", "OK");
+                        List<FileInfo> zipFiles = new List<FileInfo>(changed.Values);
+                        zipFiles.AddRange(added.Values);
+                        if (!zipFiles.IsEmpty())
+                        {
+                            List<string> removedRelative = new List<string>();
+                            foreach (FileInfo f in removed.Values)
+                            {
+                                removedRelative.Add(PathUtil.GetRelativePath(f.FullName, patchSrcDir));
+                            }
+                            //                  zip.CreateZipAndList(zipPath, patchDstDir, zipFiles, false, removedRelative);
+                            EditorUtil.OpenExplorer(zipPath);
+                        } else
+                        {
+                            EditorUtility.DisplayDialog("Warning", "No difference", "OK");
+                        }
                     }
+                    EditorGUILayout.EndHorizontal();
+                    GUI.enabled = true;
                 }
-                EditorGUILayout.EndHorizontal();
-                EditorUI.EndContents();
-                GUI.enabled = true;
             }
         }
         

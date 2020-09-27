@@ -32,12 +32,12 @@ namespace mulova.build
 
 		public override int GetHashCode()
 		{
-			return dup.id.GetHashCode();
+			return dup.assetGuid.GetHashCode();
 		}
 
 		public override string ToString()
 		{
-			return dup.id;
+			return dup.assetGuid;
 		}
     }
 }

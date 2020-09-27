@@ -147,23 +147,23 @@ namespace mulova.comunity
 
         private void DrawAssetDir(string title, List<ObjRef> list, bool raw)
         {
-            bool foldout = EditorUI.DrawHeader(title);
-            if (foldout)
+            using (var area = new EditorUI.ContentArea(title))
             {
-                EditorUI.BeginContents();
-                Object[] drag = EditorGUILayoutEx.DnD(EditorGUILayout.GetControlRect());
-                if (drag != null)
+                if (area)
                 {
-                    AddObjects(list, drag);
-                    SaveAuto();
+                    Object[] drag = EditorGUILayoutEx.DnD(EditorGUILayout.GetControlRect());
+                    if (drag != null)
+                    {
+                        AddObjects(list, drag);
+                        SaveAuto();
+                    }
+                    var drawer = new ObjRefListDrawer(list);
+                    drawer.allowSceneObject = false;
+                    if (drawer.Draw())
+                    {
+                        SaveAuto();
+                    }
                 }
-                var drawer = new ObjRefListDrawer(list);
-                drawer.allowSceneObject = false;
-                if (drawer.Draw())
-                {
-                    SaveAuto();
-                }
-                EditorUI.EndContents();
             }
         }
 

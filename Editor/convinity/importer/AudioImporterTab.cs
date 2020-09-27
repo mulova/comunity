@@ -27,27 +27,29 @@ namespace convinity
 		public override void OnInspectorGUI() {
 			AudioImport remove = null;
 			foreach (AudioImport s in settings) {
-				if (EditorUI.DrawHeader(s.path)) {
-					EditorUI.BeginContents();
-					GUILayout.BeginHorizontal();
-					Object obj = AssetDatabase.LoadAssetAtPath(s.path, typeof(Object));
-					if (EditorGUILayoutEx.ObjectField<Object>(ref obj, false)) {
-						if (obj != null) {
-							s.path = AssetDatabase.GetAssetPath(obj);
-						} else {
-							s.path = string.Empty;
+				using (var area = new EditorUI.ContentArea(s.path))
+                {
+					if (area)
+					{
+						GUILayout.BeginHorizontal();
+						Object obj = AssetDatabase.LoadAssetAtPath(s.path, typeof(Object));
+						if (EditorGUILayoutEx.ObjectField<Object>(ref obj, false)) {
+							if (obj != null) {
+								s.path = AssetDatabase.GetAssetPath(obj);
+							} else {
+								s.path = string.Empty;
+							}
 						}
+						if (GUILayout.Button("-", GUILayout.Width(20))) {
+							remove = s;
+						}
+						GUILayout.EndHorizontal();
+						EditorGUILayoutEx.Toggle("Apply", ref s.apply);
+						GUI.enabled = s.apply;
+						EditorGUILayoutEx.Toggle("Force To Mono", ref s.forceToMono);
+						GUI.enabled = true;
 					}
-					if (GUILayout.Button("-", GUILayout.Width(20))) {
-						remove = s;
-					}
-					GUILayout.EndHorizontal();
-					EditorGUILayoutEx.Toggle("Apply", ref s.apply);
-					GUI.enabled = s.apply;
-					EditorGUILayoutEx.Toggle("Force To Mono", ref s.forceToMono);
-					EditorUI.EndContents();
-					GUI.enabled = true;
-				}
+                }
 			}
 			if (remove != null) {
 				settings.Remove(remove);
